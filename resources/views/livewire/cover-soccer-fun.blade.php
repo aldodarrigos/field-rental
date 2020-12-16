@@ -10,6 +10,6 @@
     <x-slot name='image_height'>300p</x-slot>
     <x-slot name='bg'>blue</x-slot>
     <x-slot name='link'>/</x-slot>
-    <x-slot name='link_text'>Read more</x-slot>
+    <x-slot name='link_text'>Read more <i class="fas fa-plus text-xs"></i></x-slot>
     <x-slot name='tag'>Services</x-slot>
 </x-frontend.cards.big>

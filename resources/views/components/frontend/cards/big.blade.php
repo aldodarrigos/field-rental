@@ -11,7 +11,7 @@
         <div class="text-{{$sumary_color}} mb-6">
             {{$sumary}}
         </div>
-        <x-frontend.buttons.calltoaction link='{{$link}}' size='regular'>{{$link_text}} <i class="fas fa-caret-right"></i></x-frontend.buttons.calltoaction>
+        <x-frontend.buttons.calltoaction link='{{$link}}' size='regular'>{{$link_text}}</x-frontend.buttons.calltoaction>
         
     </div>
 </div>

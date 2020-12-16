@@ -16370,7 +16370,7 @@ video {
 }
 
 .text-6xl{
-  font-size: 6rem;
+  font-size: 4rem;
 }
 
 .text-2x1{
@@ -16395,6 +16395,10 @@ video {
 
 .text-4x5{
   font-size: 4.5rem;
+}
+
+.text-6x{
+  font-size: 6rem;
 }
 
 .text-7xl{
@@ -55549,7 +55553,7 @@ p{ margin-bottom: 1rem;
   }
 
   .sm\:text-6xl{
-    font-size: 6rem;
+    font-size: 4rem;
   }
 
   .sm\:text-2x1{
@@ -55574,6 +55578,10 @@ p{ margin-bottom: 1rem;
 
   .sm\:text-4x5{
     font-size: 4.5rem;
+  }
+
+  .sm\:text-6x{
+    font-size: 6rem;
   }
 
   .sm\:text-7xl{
@@ -94660,7 +94668,7 @@ p{ margin-bottom: 1rem;
   }
 
   .md\:text-6xl{
-    font-size: 6rem;
+    font-size: 4rem;
   }
 
   .md\:text-2x1{
@@ -94685,6 +94693,10 @@ p{ margin-bottom: 1rem;
 
   .md\:text-4x5{
     font-size: 4.5rem;
+  }
+
+  .md\:text-6x{
+    font-size: 6rem;
   }
 
   .md\:text-7xl{
@@ -133771,7 +133783,7 @@ p{ margin-bottom: 1rem;
   }
 
   .lg\:text-6xl{
-    font-size: 6rem;
+    font-size: 4rem;
   }
 
   .lg\:text-2x1{
@@ -133796,6 +133808,10 @@ p{ margin-bottom: 1rem;
 
   .lg\:text-4x5{
     font-size: 4.5rem;
+  }
+
+  .lg\:text-6x{
+    font-size: 6rem;
   }
 
   .lg\:text-7xl{
@@ -172882,7 +172898,7 @@ p{ margin-bottom: 1rem;
   }
 
   .xl\:text-6xl{
-    font-size: 6rem;
+    font-size: 4rem;
   }
 
   .xl\:text-2x1{
@@ -172907,6 +172923,10 @@ p{ margin-bottom: 1rem;
 
   .xl\:text-4x5{
     font-size: 4.5rem;
+  }
+
+  .xl\:text-6x{
+    font-size: 6rem;
   }
 
   .xl\:text-7xl{

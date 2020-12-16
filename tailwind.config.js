@@ -69,7 +69,7 @@ module.exports = {
                 '4x': '4rem',
                 '4x5': '4.5rem',
                 '5xl': '5rem',
-                '6xl': '6rem',
+                '6x': '6rem',
                 '7xl': '7rem',
             }
         },

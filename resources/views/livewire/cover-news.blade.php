@@ -1,6 +1,6 @@
 <div class="bg-gray">
 
-    <div class="w-11/12 mx-auto">
+    <div class="w-11/12 md:w-boxed mx-auto">
 
         <div class="mb-12 grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-12">
         
@@ -43,7 +43,7 @@
         </div>
     
         <div class="text-center">
-            <x-frontend.buttons.calltoaction link='/blog' size='regular'>Read more</x-frontend.buttons.calltoaction>
+            <x-frontend.buttons.calltoaction link='/blog' size='regular'>Read more <i class="fas fa-plus text-xs"></i></x-frontend.buttons.calltoaction>
         </div>
     </div>
     

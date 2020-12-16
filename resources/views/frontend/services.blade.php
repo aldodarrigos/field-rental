@@ -24,7 +24,7 @@
             </x-slot>
             <x-slot name='sumary_color'>gray</x-slot>
             <x-slot name='bg'>blue</x-slot>
-            <x-slot name='button_text'>Read more</x-slot>
+            <x-slot name='button_text'>Read more <i class="fas fa-plus text-xs pl-1"></i></x-slot>
             <x-slot name='button_link'>/service/xxx</x-slot>
         </x-frontend.cards.services>
         
@@ -35,7 +35,7 @@
             </x-slot>
             <x-slot name='sumary_color'>gray</x-slot>
             <x-slot name='bg'>blue</x-slot>
-            <x-slot name='button_text'>Read more</x-slot>
+            <x-slot name='button_text'>Read more <i class="fas fa-plus text-xs pl-1"></i></x-slot>
             <x-slot name='button_link'>/service/xxx</x-slot>
         </x-frontend.cards.services>
         
@@ -46,7 +46,7 @@
             </x-slot>
             <x-slot name='sumary_color'>gray</x-slot>
             <x-slot name='bg'>blue</x-slot>
-            <x-slot name='button_text'>Read more</x-slot>
+            <x-slot name='button_text'>Read more <i class="fas fa-plus text-xs pl-1"></i></x-slot>
             <x-slot name='button_link'>/service/xxx</x-slot>
         </x-frontend.cards.services>
         
@@ -57,7 +57,7 @@
             </x-slot>
             <x-slot name='sumary_color'>gray</x-slot>
             <x-slot name='bg'>blue</x-slot>
-            <x-slot name='button_text'>Read more</x-slot>
+            <x-slot name='button_text'>Read more <i class="fas fa-plus text-xs pl-1"></i></x-slot>
             <x-slot name='button_link'>/service/xxx</x-slot>
         </x-frontend.cards.services>
         
@@ -68,7 +68,7 @@
             </x-slot>
             <x-slot name='sumary_color'>gray</x-slot>
             <x-slot name='bg'>blue</x-slot>
-            <x-slot name='button_text'>Read more</x-slot>
+            <x-slot name='button_text'>Read more <i class="fas fa-plus text-xs pl-1"></i></x-slot>
             <x-slot name='button_link'>/service/xxx</x-slot>
         </x-frontend.cards.services>
         
@@ -79,7 +79,7 @@
             </x-slot>
             <x-slot name='sumary_color'>gray</x-slot>
             <x-slot name='bg'>blue</x-slot>
-            <x-slot name='button_text'>Read more</x-slot>
+            <x-slot name='button_text'>Read more <i class="fas fa-plus text-xs pl-1"></i></x-slot>
             <x-slot name='button_link'>/service/xxx</x-slot>
         </x-frontend.cards.services>
         
@@ -90,7 +90,7 @@
             </x-slot>
             <x-slot name='sumary_color'>gray</x-slot>
             <x-slot name='bg'>blue</x-slot>
-            <x-slot name='button_text'>Read more</x-slot>
+            <x-slot name='button_text'>Read more <i class="fas fa-plus text-xs pl-1"></i></x-slot>
             <x-slot name='button_link'>/service/xxx</x-slot>
         </x-frontend.cards.services>
         
@@ -101,7 +101,7 @@
             </x-slot>
             <x-slot name='sumary_color'>gray</x-slot>
             <x-slot name='bg'>blue</x-slot>
-            <x-slot name='button_text'>Read more</x-slot>
+            <x-slot name='button_text'>Read more <i class="fas fa-plus text-xs pl-1"></i></x-slot>
             <x-slot name='button_link'>/service/xxx</x-slot>
         </x-frontend.cards.services>
         
@@ -112,7 +112,7 @@
             </x-slot>
             <x-slot name='sumary_color'>gray</x-slot>
             <x-slot name='bg'>blue</x-slot>
-            <x-slot name='button_text'>Read more</x-slot>
+            <x-slot name='button_text'>Read more <i class="fas fa-plus text-xs pl-1"></i></x-slot>
             <x-slot name='button_link'>/service/xxx</x-slot>
         </x-frontend.cards.services>
 

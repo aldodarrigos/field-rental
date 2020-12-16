@@ -21,13 +21,14 @@
 
             <form class="mt-6">
 
-                <div class="flex justify-between gap-3">
+                <div class="flex justify-between gap-3 flex-col md:flex-row mb-2 md:mb-0">
 
-                  <span class="w-1/2">
+                  <span class="w-2/2 md:w-1/2">
                     <x-frontend.forms.input_text>
                         <x-slot name='type'>text</x-slot>
                         <x-slot name='label'>Firstname</x-slot>
                         <x-slot name='id'>firstname</x-slot>
+                        <x-slot name='default'></x-slot>
                         <x-slot name='placeholder'>John</x-slot>
                         <x-slot name='autocomplete'>off</x-slot>
                         <x-slot name='required'>on</x-slot>
@@ -37,11 +38,12 @@
                     </x-frontend.forms.input_text>
                   </span>
 
-                  <span class="w-1/2">
+                  <span class="w-2/2 md:w-1/2">
                     <x-frontend.forms.input_text>
                         <x-slot name='type'>text</x-slot>
                         <x-slot name='label'>Lastname</x-slot>
                         <x-slot name='id'>lastname</x-slot>
+                        <x-slot name='default'></x-slot>
                         <x-slot name='placeholder'>Doe</x-slot>
                         <x-slot name='autocomplete'>off</x-slot>
                         <x-slot name='required'>on</x-slot>
@@ -57,6 +59,7 @@
                     <x-slot name='type'>email</x-slot>
                     <x-slot name='label'>Email</x-slot>
                     <x-slot name='id'>email</x-slot>
+                    <x-slot name='default'></x-slot>
                     <x-slot name='placeholder'>john.doe@company.com</x-slot>
                     <x-slot name='autocomplete'>off</x-slot>
                     <x-slot name='required'>on</x-slot>
