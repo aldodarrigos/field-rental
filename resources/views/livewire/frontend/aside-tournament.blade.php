@@ -1,5 +1,8 @@
 <x-frontend.pieces.ad_frame title='Tournaments'>
 
+    <x-slot name='frame_icon'><i class="far fa-futbol"></i></x-slot>
+    <x-slot name='bg'>white</x-slot>
+
     <header class="grid grid-cols-12 gap-4 font-roboto">
         <div class="col-span-2 font-bold text-center">POS</div>
         <div class="col-span-5 font-bold">CLUB</div>

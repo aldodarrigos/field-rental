@@ -1,6 +1,6 @@
-<article class="bg-white rounded-r-md flex mb-6">
+<article class="bg-white rounded-md md:rounded-r-md flex flex-col md:flex-row mb-6">
     <header class="h-250p">
-        <a href="{{$link}}"><img class="object-cover w-full h-full rounded-l-md" src="{{$image}}" alt=""></a>
+        <a href="{{$link}}"><img class="object-cover w-full h-full rounded-t-md md:rounded-tr-none md:rounded-l-md" src="{{$image}}" alt=""></a>
     </header>
     <div class="px-6 py-5 ">
         <div class="font-roboto text-2x1 uppercase font-bold text-black leading-8 mb-3"><a href="{{$link}}" class="hover:text-red">{{$title}}</a></div>

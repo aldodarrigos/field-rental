@@ -16289,6 +16289,10 @@ video {
   height: 50px;
 }
 
+.h-70p{
+  height: 70px;
+}
+
 .h-80p{
   height: 80px;
 }
@@ -16299,6 +16303,10 @@ video {
 
 .h-120p{
   height: 120px;
+}
+
+.h-150p{
+  height: 150px;
 }
 
 .h-200p{
@@ -33624,6 +33632,10 @@ video {
   width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
+}
+
+.w-150p{
+  width: 150px;
 }
 
 .w-boxed{
@@ -55456,6 +55468,10 @@ p{ margin-bottom: 1rem;
     height: 50px;
   }
 
+  .sm\:h-70p{
+    height: 70px;
+  }
+
   .sm\:h-80p{
     height: 80px;
   }
@@ -55466,6 +55482,10 @@ p{ margin-bottom: 1rem;
 
   .sm\:h-120p{
     height: 120px;
+  }
+
+  .sm\:h-150p{
+    height: 150px;
   }
 
   .sm\:h-200p{
@@ -72791,6 +72811,10 @@ p{ margin-bottom: 1rem;
     width: -webkit-max-content;
     width: -moz-max-content;
     width: max-content;
+  }
+
+  .sm\:w-150p{
+    width: 150px;
   }
 
   .sm\:w-boxed{
@@ -94555,6 +94579,10 @@ p{ margin-bottom: 1rem;
     height: 50px;
   }
 
+  .md\:h-70p{
+    height: 70px;
+  }
+
   .md\:h-80p{
     height: 80px;
   }
@@ -94565,6 +94593,10 @@ p{ margin-bottom: 1rem;
 
   .md\:h-120p{
     height: 120px;
+  }
+
+  .md\:h-150p{
+    height: 150px;
   }
 
   .md\:h-200p{
@@ -111890,6 +111922,10 @@ p{ margin-bottom: 1rem;
     width: -webkit-max-content;
     width: -moz-max-content;
     width: max-content;
+  }
+
+  .md\:w-150p{
+    width: 150px;
   }
 
   .md\:w-boxed{
@@ -133654,6 +133690,10 @@ p{ margin-bottom: 1rem;
     height: 50px;
   }
 
+  .lg\:h-70p{
+    height: 70px;
+  }
+
   .lg\:h-80p{
     height: 80px;
   }
@@ -133664,6 +133704,10 @@ p{ margin-bottom: 1rem;
 
   .lg\:h-120p{
     height: 120px;
+  }
+
+  .lg\:h-150p{
+    height: 150px;
   }
 
   .lg\:h-200p{
@@ -150989,6 +151033,10 @@ p{ margin-bottom: 1rem;
     width: -webkit-max-content;
     width: -moz-max-content;
     width: max-content;
+  }
+
+  .lg\:w-150p{
+    width: 150px;
   }
 
   .lg\:w-boxed{
@@ -172753,6 +172801,10 @@ p{ margin-bottom: 1rem;
     height: 50px;
   }
 
+  .xl\:h-70p{
+    height: 70px;
+  }
+
   .xl\:h-80p{
     height: 80px;
   }
@@ -172763,6 +172815,10 @@ p{ margin-bottom: 1rem;
 
   .xl\:h-120p{
     height: 120px;
+  }
+
+  .xl\:h-150p{
+    height: 150px;
   }
 
   .xl\:h-200p{
@@ -190088,6 +190144,10 @@ p{ margin-bottom: 1rem;
     width: -webkit-max-content;
     width: -moz-max-content;
     width: max-content;
+  }
+
+  .xl\:w-150p{
+    width: 150px;
   }
 
   .xl\:w-boxed{

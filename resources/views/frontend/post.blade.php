@@ -11,11 +11,11 @@
 
 <x-frontend.pieces.section_header title='Blog' bread='latest News'></x-frontend.pieces.section_header>
 
-<div class="w-boxed mx-auto">
+<div class="w-11/12 md:w-boxed mx-auto">
 
     <div class="grid grid-cols-12 gap-6 py-8">
 
-        <main class="col-span-8 bg-white rounded-lg">
+        <main class="col-span-12 md:col-span-8 bg-white rounded-lg">
             
             <div class="h-400p">
                 <img class="object-cover w-full h-full rounded-t-lg" src="http://fc-united.axiomthemes.com/wp-content/uploads/2018/11/post-12-copyright-600x394.jpg" alt="">
@@ -63,7 +63,7 @@
 
         </main>
         
-        <aside class="col-span-4">
+        <aside class="col-span-12 md:col-span-4">
 
             <livewire:frontend.aside-ad></livewire:frontend.aside-ad>
             <livewire:frontend.aside-tournament></livewire:frontend.aside-tournament>

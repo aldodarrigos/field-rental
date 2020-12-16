@@ -1,5 +1,5 @@
-<div class="flex rounded-lg h-500p">
-    <div class="w-3/4">
+<div class="flex rounded-lg h-auto md:h-500p flex-col-reverse md:flex-row">
+    <div class="w-4/4 md:w-3/4 h-500p md:h-auto">
 
         <div id="map" class="h-500p w-full inline-block"></div>
 
@@ -167,7 +167,7 @@
         </script>
         
     </div>
-    <div class="w-1/4 bg-deepblue text-white px-20 py-16">
+    <div class="w-4/4 md:w-1/4 bg-deepblue text-white px-20 py-16">
         <div class="text-red uppercase font-roboto font-bold">{{$subtitle}}</div>    
         <div class="text-white font-roboto text-3xl uppercase font-bold leading-none mb-4 mt-2">{{$title}}</div>
         <div class="text-graytext mb-6">

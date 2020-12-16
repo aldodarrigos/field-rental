@@ -1,10 +1,9 @@
 <div class="bg-gray">
 
-    <div class="w-boxed mx-auto">
+    <div class="w-11/12 mx-auto">
 
-        <div class="mb-12 grid grid-cols-3 gap-x-6 gap-y-12">
-            
-
+        <div class="mb-12 grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-12">
+        
             <x-frontend.cards.post>
                 <x-slot name='image'>http://fc-united.axiomthemes.com/wp-content/uploads/2018/11/post-2-copyright-600x394.jpg</x-slot>
                 <x-slot name='title'>Effective Training Programs for Professional Players</x-slot>

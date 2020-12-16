@@ -22,15 +22,15 @@
 <div class="separation h-100p"></div>
 
 <div class="">
-    <div class="w-boxed mx-auto">
-        <div class="flex gap-8">
-            <div class="w-1/3">
+    <div class="w-11/12 md:w-boxed mx-auto">
+        <div class="flex gap-8 flex-col md:flex-row">
+            <div class="w-3/3 md:w-1/3">
                 <livewire:cover-soccer-tv></livewire:cover-soccer-tv>
             </div>
-            <div class="w-1/3">
+            <div class="w-3/3 md:w-1/3">
                 <livewire:cover-covid></livewire:cover-covid>
             </div>
-            <div class="w-1/3">
+            <div class="w-3/3 md:w-1/3">
                 <livewire:cover-soccer-fun></livewire:cover-soccer-fun>
             </div>
         </div>

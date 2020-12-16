@@ -40,10 +40,19 @@ class FrontendController extends Controller
         
     }
 
-    public function flields()
+    
+    public function service($slug = null)
     {
 
-        return view('frontend/flields', ['seo' => 'xxx']);
+        return view('frontend/service', ['seo' => 'xxx']);
+        
+    }
+
+
+    public function fields()
+    {
+
+        return view('frontend/fields', ['seo' => 'xxx']);
         
     }
 

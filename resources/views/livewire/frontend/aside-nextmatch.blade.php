@@ -1,4 +1,7 @@
 <x-frontend.pieces.ad_frame title='Next Match'>
+    
+    <x-slot name='frame_icon'><i class="far fa-futbol"></i></x-slot>
+    <x-slot name='bg'>white</x-slot>
 
     <div class="flex mb-4 border-b border-bluetext pb-4">
         <div class="w-1/3 text-center">

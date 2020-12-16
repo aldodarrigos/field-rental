@@ -1,5 +1,5 @@
 <div class="relative bg-cover" style="background-image: url('http://fc-united.axiomthemes.com/wp-content/uploads/2018/12/bg-1-copyright.jpg')">
-    <div class="w-boxed mx-auto flex">
+    <div class="w-11/12 md:w-boxed mx-auto flex flex-col md:flex-row">
         <div class="image w-3/5"></div>
         <div class="info w-2/5 py-40">
             <div class="text-red uppercase font-roboto font-bold">training</div>    

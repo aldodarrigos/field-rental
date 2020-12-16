@@ -1,4 +1,4 @@
-<nav>
+<nav class="hidden md:block">
     <ul class="flex gap-4">
         <x-frontend.buttons.navlink link='/'>Home</x-frontend.buttons.navlink>
         <x-frontend.buttons.navlink link='/about'>About</x-frontend.buttons.navlink>
