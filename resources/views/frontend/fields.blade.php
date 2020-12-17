@@ -26,7 +26,7 @@
         <x-slot name='video'>https://www.youtube.com/embed/e5lJg_ZO1C8</x-slot>
         <x-slot name='bg'>blue</x-slot>
         <x-slot name='link'>/</x-slot>
-        <x-slot name='link_text'>Rent a field <i class="far fa-calendar-alt text-md pl-1"></i></x-slot>
+        <x-slot name='link_text'>Book a field <i class="far fa-calendar-alt text-md pl-1"></i></x-slot>
     </x-frontend.pieces.big_show_dual_video>
 
     <div class="separation h-50p"></div>
@@ -50,8 +50,8 @@
             <x-slot name='image'>https://images.unsplash.com/photo-1531861218190-f90c89febf69</x-slot>
             <x-slot name='image_height'>250p</x-slot>
             <x-slot name='bg'>blue</x-slot>
-            <x-slot name='link'>/</x-slot>
-            <x-slot name='link_text'>Rent this field</x-slot>
+            <x-slot name='link'>/fieldsrental</x-slot>
+            <x-slot name='link_text'>Book now <i class="far fa-calendar-alt text-md pl-1"></i></x-slot>
             <x-slot name='tag'>7x7 players</x-slot>
         </x-frontend.cards.big>
 
@@ -72,8 +72,8 @@
             <x-slot name='image'>https://images.unsplash.com/photo-1505305976870-c0be1cd39939</x-slot>
             <x-slot name='image_height'>250p</x-slot>
             <x-slot name='bg'>blue</x-slot>
-            <x-slot name='link'>/</x-slot>
-            <x-slot name='link_text'>Rent this field</x-slot>
+            <x-slot name='link'>/fieldsrental</x-slot>
+            <x-slot name='link_text'>Book now <i class="far fa-calendar-alt text-md pl-1"></i></x-slot>
             <x-slot name='tag'>7x7 players</x-slot>
         </x-frontend.cards.big>
 
@@ -94,8 +94,8 @@
             <x-slot name='image'>https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d</x-slot>
             <x-slot name='image_height'>250p</x-slot>
             <x-slot name='bg'>blue</x-slot>
-            <x-slot name='link'>/</x-slot>
-            <x-slot name='link_text'>Rent this field</x-slot>
+            <x-slot name='link'>/fieldsrental</x-slot>
+            <x-slot name='link_text'>Book now <i class="far fa-calendar-alt text-md pl-1"></i></x-slot>
             <x-slot name='tag'>7x7 players</x-slot>
         </x-frontend.cards.big>
 
@@ -116,8 +116,8 @@
             <x-slot name='image'>https://images.unsplash.com/photo-1600066975952-912a81940822</x-slot>
             <x-slot name='image_height'>250p</x-slot>
             <x-slot name='bg'>blue</x-slot>
-            <x-slot name='link'>/</x-slot>
-            <x-slot name='link_text'>Rent this field</x-slot>
+            <x-slot name='link'>/fieldsrental</x-slot>
+            <x-slot name='link_text'>Book now <i class="far fa-calendar-alt text-md pl-1"></i></x-slot>
             <x-slot name='tag'>5x5 players</x-slot>
         </x-frontend.cards.big>
 
@@ -138,8 +138,8 @@
             <x-slot name='image'>https://images.unsplash.com/photo-1505305976870-c0be1cd39939</x-slot>
             <x-slot name='image_height'>250p</x-slot>
             <x-slot name='bg'>blue</x-slot>
-            <x-slot name='link'>/</x-slot>
-            <x-slot name='link_text'>Rent this field</x-slot>
+            <x-slot name='link'>/fieldsrental</x-slot>
+            <x-slot name='link_text'>Book now <i class="far fa-calendar-alt text-md pl-1"></i></x-slot>
             <x-slot name='tag'>5x5 players</x-slot>
         </x-frontend.cards.big>
 
@@ -161,7 +161,7 @@
             <x-slot name='image_height'>250p</x-slot>
             <x-slot name='bg'>blue</x-slot>
             <x-slot name='link'>/</x-slot>
-            <x-slot name='link_text'>Rent this field</x-slot>
+            <x-slot name='link_text'>Book now <i class="far fa-calendar-alt text-md pl-1"></i></x-slot>
             <x-slot name='tag'>5x5 players</x-slot>
         </x-frontend.cards.big>
 
@@ -182,8 +182,8 @@
             <x-slot name='image'>https://images.unsplash.com/photo-1508181382850-5b57cb8caa92</x-slot>
             <x-slot name='image_height'>250p</x-slot>
             <x-slot name='bg'>blue</x-slot>
-            <x-slot name='link'>/</x-slot>
-            <x-slot name='link_text'>Rent this field</x-slot>
+            <x-slot name='link'>/fieldsrental</x-slot>
+            <x-slot name='link_text'>Book now <i class="far fa-calendar-alt text-md pl-1"></i></x-slot>
             <x-slot name='tag'>5x5 players</x-slot>
         </x-frontend.cards.big>
 
@@ -204,8 +204,8 @@
             <x-slot name='image'>https://images.unsplash.com/photo-1531861218190-f90c89febf69</x-slot>
             <x-slot name='image_height'>250p</x-slot>
             <x-slot name='bg'>blue</x-slot>
-            <x-slot name='link'>/</x-slot>
-            <x-slot name='link_text'>Rent this field</x-slot>
+            <x-slot name='link'>/fieldsrental</x-slot>
+            <x-slot name='link_text'>Book now <i class="far fa-calendar-alt text-md pl-1"></i></x-slot>
             <x-slot name='tag'>5x5 players</x-slot>
         </x-frontend.cards.big>
 
@@ -226,8 +226,8 @@
             <x-slot name='image'>https://images.unsplash.com/photo-1510526292299-20af3f62d453</x-slot>
             <x-slot name='image_height'>250p</x-slot>
             <x-slot name='bg'>blue</x-slot>
-            <x-slot name='link'>/</x-slot>
-            <x-slot name='link_text'>Rent this field</x-slot>
+            <x-slot name='link'>/fieldsrental</x-slot>
+            <x-slot name='link_text'>Book now <i class="far fa-calendar-alt text-md pl-1"></i></x-slot>
             <x-slot name='tag'>5x5 players</x-slot>
         </x-frontend.cards.big>
 

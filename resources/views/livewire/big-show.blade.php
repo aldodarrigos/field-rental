@@ -39,7 +39,7 @@
             <div class="w-3/3 md:w-1/3 flex gap-4 border-0 md:border-r border-lines items-center">
                 <div class="text-bluetext text-3x5 font-bold leading-none pr-2 font-roboto">02</div>
                 <div class="w-full pr-4">
-                    <small class="text-red text-xs uppercase">Pick a flied</small>
+                    <small class="text-red text-xs uppercase">Pick a field</small>
                     <x-frontend.forms.input_select>
                         <x-slot name='label'>field</x-slot>
                         <x-slot name='id'>field</x-slot>
@@ -85,7 +85,7 @@
             <div class="w-3/3 md:w-1/3 flex gap-4 items-center">
                 <div class="text-bluetext text-3x5 font-bold leading-none pr-2 font-roboto">03</div>
                 <div class="w-full pr-4">
-                    <small class="text-red text-xs uppercase">Book and pay</small>
+                    <small class="text-red text-xs uppercase">Book your field</small>
                     <x-frontend.forms.input_text>
                         <x-slot name='type'>date</x-slot>
                         <x-slot name='label'></x-slot>
