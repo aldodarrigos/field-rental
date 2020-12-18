@@ -32,6 +32,7 @@ Route::get('covid-19-protocol', [FrontendController::class, 'covid'])->name('fro
 Route::get('fieldsrental', [FrontendController::class, 'fieldsrental'])->name('frontend.fieldsrental');
 Route::get('registration', [FrontendController::class, 'registration'])->name('frontend.registration');
 Route::get('shop', [FrontendController::class, 'shop'])->name('frontend.shop');
+Route::get('singup', [FrontendController::class, 'singup'])->name('frontend.singup');
 
 Route::get('payment', [PaymentController::class, 'payment'])->name('payment');
 Route::get('paypal/failed', [PaymentController::class, 'paypalFailed'])->name('payment.failed');

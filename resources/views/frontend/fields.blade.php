@@ -25,7 +25,7 @@
         </x-slot>
         <x-slot name='video'>https://www.youtube.com/embed/e5lJg_ZO1C8</x-slot>
         <x-slot name='bg'>blue</x-slot>
-        <x-slot name='link'>/</x-slot>
+        <x-slot name='link'>/fieldsrental</x-slot>
         <x-slot name='link_text'>Book a field <i class="far fa-calendar-alt text-md pl-1"></i></x-slot>
     </x-frontend.pieces.big_show_dual_video>
 

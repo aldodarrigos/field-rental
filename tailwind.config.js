@@ -62,8 +62,8 @@ module.exports = {
                 'boxed': '1140px',
             },
             fontSize: {
-                '2x1': '2rem',
-                '2x5': '2.3rem',
+                '2x': '2rem',
+                '2x5': '2.5rem',
                 '3x': '3rem',
                 '3x5': '3.5rem',
                 '4x': '4rem',

@@ -10,6 +10,6 @@
         <div class="text-graytext mb-6">
             {{$sumary}}
         </div>
-        <x-frontend.buttons.calltoaction link='/' size='regular'>{{$link_text}}</x-frontend.buttons.calltoaction>
+        <x-frontend.buttons.calltoaction link='{{$link}}' size='regular'>{{$link_text}}</x-frontend.buttons.calltoaction>
     </div>
 </div>

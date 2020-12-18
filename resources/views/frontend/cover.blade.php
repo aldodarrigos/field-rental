@@ -13,7 +13,9 @@
 
 <div class="separation h-50p"></div>
 
-<livewire:cover-about></livewire:cover-about>
+<div class="w-11/12 md:w-boxed mx-auto">
+    <livewire:cover-about></livewire:cover-about>
+</div>
 
 <div class="separation h-100p"></div>
 

@@ -77,7 +77,7 @@
                 </x-frontend.forms.textarea>
 
 
-                <button type="submit" class="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-blue shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none rounded-md">
+                <button type="submit" class="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-red shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none rounded-md">
                   SEND
                 </button>
 

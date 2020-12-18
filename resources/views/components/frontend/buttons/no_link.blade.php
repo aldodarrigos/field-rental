@@ -2,7 +2,6 @@
     $height = '2';
     $fontSize = 'sm';
     $px = '4';
-    $pointer = ($pointer == 'on')?'cursor-pointer':'';
 
     if($size == 'big'){
         $height = '3';

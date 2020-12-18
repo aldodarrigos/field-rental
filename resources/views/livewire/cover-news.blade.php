@@ -43,7 +43,7 @@
         </div>
     
         <div class="text-center">
-            <x-frontend.buttons.calltoaction link='/blog' size='regular'>Read more <i class="fas fa-plus text-xs"></i></x-frontend.buttons.calltoaction>
+            <x-frontend.buttons.calltoaction link='/news' size='regular'>More news <i class="fas fa-plus text-xs"></i></x-frontend.buttons.calltoaction>
         </div>
     </div>
     

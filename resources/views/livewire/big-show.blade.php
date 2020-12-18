@@ -8,14 +8,17 @@
                 <div class="text-red font-bold text-2x5 md:text-4x uppercase leading-none md:leading-1">Pre opening</div>
                 <div class="text-white font-bold text-3x md:text-6x uppercase leading-none mb-6">Be part of our <br> pre opening </div>
                 <div class="calltoaction">
-                    <x-frontend.buttons.calltoaction link='/' size='big' >Register <i class="fas fa-caret-right text-md pl-1"></i></x-frontend.buttons.calltoaction>
+                    <x-frontend.buttons.calltoaction link='/singup' size='big' >Sing Up <i class="fas fa-caret-right text-md pl-1"></i></x-frontend.buttons.calltoaction>
                 </div>
             </div>
 
         </div> 
-        
+
+        <form action="" id='auto-submit'>
+
         <div class="w-11/12 md:w-boxed flex flex-col md:flex-row gap-4 absolute z-20 bottom-0 left-0 right-0 ml-auto mr-auto mx-auto bg-deepblue text-white py-4 px-4 border-lines border-b-8 rounded-t-lg">
 
+            
             <div class="w-3/3 md:w-1/3 flex gap-4 border-0 md:border-r border-lines items-center ">
                 <div class="text-bluetext text-3x5 font-bold leading-none pr-2 font-roboto">01</div>
                 <div class="pr-4 w-full">
@@ -89,7 +92,7 @@
                     <x-frontend.forms.input_text>
                         <x-slot name='type'>date</x-slot>
                         <x-slot name='label'></x-slot>
-                        <x-slot name='id'>date</x-slot>
+                        <x-slot name='id'>big_show_date</x-slot>
                         <x-slot name='default'>2020-12-24</x-slot>
                         <x-slot name='placeholder'>Pick a Date</x-slot>
                         <x-slot name='autocomplete'>on</x-slot>
@@ -104,5 +107,13 @@
 
         </div>
 
+        </form>
+
     </div>
 </div>
+
+<script>
+    $("#big_show_date").change(function() {
+        $("form#auto-submit").submit();
+    });
+</script>

@@ -16373,12 +16373,12 @@ video {
   font-size: 4rem;
 }
 
-.text-2x1{
+.text-2x{
   font-size: 2rem;
 }
 
 .text-2x5{
-  font-size: 2.3rem;
+  font-size: 2.5rem;
 }
 
 .text-3x{
@@ -55556,12 +55556,12 @@ p{ margin-bottom: 1rem;
     font-size: 4rem;
   }
 
-  .sm\:text-2x1{
+  .sm\:text-2x{
     font-size: 2rem;
   }
 
   .sm\:text-2x5{
-    font-size: 2.3rem;
+    font-size: 2.5rem;
   }
 
   .sm\:text-3x{
@@ -94671,12 +94671,12 @@ p{ margin-bottom: 1rem;
     font-size: 4rem;
   }
 
-  .md\:text-2x1{
+  .md\:text-2x{
     font-size: 2rem;
   }
 
   .md\:text-2x5{
-    font-size: 2.3rem;
+    font-size: 2.5rem;
   }
 
   .md\:text-3x{
@@ -133786,12 +133786,12 @@ p{ margin-bottom: 1rem;
     font-size: 4rem;
   }
 
-  .lg\:text-2x1{
+  .lg\:text-2x{
     font-size: 2rem;
   }
 
   .lg\:text-2x5{
-    font-size: 2.3rem;
+    font-size: 2.5rem;
   }
 
   .lg\:text-3x{
@@ -172901,12 +172901,12 @@ p{ margin-bottom: 1rem;
     font-size: 4rem;
   }
 
-  .xl\:text-2x1{
+  .xl\:text-2x{
     font-size: 2rem;
   }
 
   .xl\:text-2x5{
-    font-size: 2.3rem;
+    font-size: 2.5rem;
   }
 
   .xl\:text-3x{
