@@ -13,7 +13,13 @@
         </div>
         <div class="opctions w-1/2 flex justify-end gap-2 text-sm ">
             <div class="item border-r border-graytext pr-3"><a href="">ENG <i class="fas fa-caret-down"></i></a></div>
-            <div class="uppercase pl-3"><a href="">My Account</a></div>
+            <div class="uppercase pl-3">
+                @if (isset(Auth::user()->name))
+                    <a href="/profile/dashboard">{{Auth::user()->name}}</a>
+                @else
+                    <a href="/user-login">My Account</a>
+                @endif
+            </div>
         </div>
     </div>
 </div>

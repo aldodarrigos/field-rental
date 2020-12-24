@@ -14,6 +14,10 @@ use PayPal\Api\RedirectUrls;
 use PayPal\Api\Transaction;
 use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Rest\ApiContext;
+
+use App\Models\Field;
+use App\Models\Reservation;
+use App\Models\User;
  
 class PaymentController extends Controller
 {
@@ -33,25 +37,119 @@ class PaymentController extends Controller
 
     }
 
-    public function payment()
+    public function fieldsrental(Request $request)
     {
+
+        $fields_select = Field::where('status', 1)->orderBy('name', 'ASC')->get();
+        $hot_hours = ['19:00', '20:00', '21:00', '22:00'];
+        $hours = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00'];
+        $hoursarray = array();
+
+        if($request->input('field')){
+            $field_id = $request->input('field');
+            $date = $request->input('date');
+            $field = Field::where('id', $field_id)->first();
+            $reservations = Reservation::where([
+                ['field_id', $field->id],
+                ['res_date', $date]
+            ])->get();
+
+        
+            foreach($hours as $item){
+
+                if((date('N', strtotime($date)) >= 6)){
+                    $price = $field->price_weekend;
+                }else{
+                    if(in_array($item, $hot_hours)){
+                        $price = $field->price_night;
+                    }else{
+                        $price = $field->price_regular;
+                    }
+                }
+
+                if($this->check_hours($item, $field->id, $date)){
+                    array_push($hoursarray, 
+                    ['hour' => $item, 
+                    'class' => 'reservedday',
+                    'price' => $price
+                    ]);
+                }else{
+                    array_push($hoursarray, [
+                        'hour' => $item, 
+                        'class' => 'dummyclass',
+                        'price' => $price
+                        ]);
+                }
+            }
+
+            $result = 1;
+
+        }else{
+            $field = 0;
+            $reservations = 0;
+            $date = 0;
+            $result = 0;
+        }
+
+
+
+        return view('frontend/payment/fieldsrental', ['result' => $result, 'field' => $field, 'date' => $date, 'fields_select' => $fields_select, 'reservations' => $reservations, 'hoursarray' => $hoursarray]);
+        
+    }
+
+    
+    public function check_hours($hour, $field, $date){
+
+        $reservations = Reservation::where([
+            ['field_id', $field],
+            ['res_date', $date]
+        ])->get();
+
+        foreach($reservations as $item){
+            if($hour == $item->hour){
+                return true;
+                break;
+            }
+        }
+    }
+
+    public function payment(Request $request)
+    {
+        $priceSelected = $request->input('priceSelected');
+        $hourSelected = $request->input('hourSelected');
+        $dateSelected = $request->input('dateSelected');
+        $fieldIdSelected = $request->input('fieldIdSelected');
+        $fieldSelectedName = $request->input('fieldSelectedName');
+
+        $description = $fieldSelectedName.' / '.$dateSelected.' / '.$hourSelected;
 
         // After Step 2
         $payer = new Payer();
         $payer->setPaymentMethod('paypal');
 
         $amount = new Amount();
-        $amount->setTotal('1.99');
+        $amount->setTotal($priceSelected);
         $amount->setCurrency('USD');
 
         $transaction = new Transaction();
         $transaction->setAmount($amount);
-        $transaction->setDescription('Descripción de prueba');
+        $transaction->setDescription($description);
+
+        $reservation_data = json_encode(array(
+            'user_id' => 1, 
+            'field_id' => $fieldIdSelected, 
+            'field_name' => $fieldSelectedName, 
+            'price' => $priceSelected, 
+            'date' => $dateSelected, 
+            'hour' => $hourSelected
+        ));
+        $transaction->setCustom($reservation_data);
 
         $callbackUrl = url('paypal/status');
+        $failedUrl = url('paypal/failed');
         $redirectUrls = new RedirectUrls();
         $redirectUrls->setReturnUrl($callbackUrl)
-            ->setCancelUrl($callbackUrl);
+            ->setCancelUrl($failedUrl);
 
         $payment = new Payment();
         $payment->setIntent('sale')
@@ -96,11 +194,39 @@ class PaymentController extends Controller
         //Execute the payment
         $result = $payment->execute($execution, $this->apiContext);
         //dd($result);
-
+        
         if($result->getState()==='approved'){
-            $status = 'Gracias el pago a través de Paypal se ha realizado con éxito';
-            return redirect('success')->with(['status' => $status]);
+
+            $response = json_decode($result);
+            $custom = json_decode($response->transactions[0]->custom);
+
+            /*
+            echo $response->id.'<br>';
+            echo $custom->user_id.'<br>';
+            echo $custom->field_id.'<br>';
+            echo $custom->field_name.'<br>';
+            echo $custom->price.'<br>';
+            echo $custom->date.'<br>';
+            echo $custom->hour.'<br>';
+            */
+            
+            $reservation = new Reservation();
+            $reservation->user_id = $custom->user_id;
+            $reservation->field_id = $custom->field_id;
+            $reservation->res_date = $custom->date;
+            $reservation->hour = $custom->hour;
+            $reservation->price = $custom->price;
+            $reservation->conf_code = $response->id;
+
+            $reservation->save();
+
+            //$reservation = Reservation::where('id', 5)->first();
+            $field = Field::where('id', $reservation->field_id)->first();
+            $user = User::where('id', $reservation->user_id)->first();
+
+            return redirect('paypal/success')->with(['reservation' => $reservation, 'field' => $field, 'user' => $user]);
         }
+        
     }
 
 
@@ -111,7 +237,12 @@ class PaymentController extends Controller
 
     public function paypalSuccess()
     {
-        //Está función será la que se ejecute si se cancela el pago, puedes redirigir a la vista anterior, mostrar un mensaje, etc
+
+        $reservation = Reservation::where('id', 5)->first();
+        $field = Field::where('id', $reservation->field_id)->first();
+        $user = User::where('id', $reservation->user_id)->first();
+
+        return view('frontend/payment/success', ['reservation' => $reservation, 'field' => $field, 'user' => $user]);
     }
 
 

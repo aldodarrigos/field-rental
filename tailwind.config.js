@@ -17,6 +17,7 @@ module.exports = {
                 25          : '25px',
                 30          : '30px',
                 '150p'      : '150px',
+                '200p'      : '200px',
                 'boxed'     : '1140px',
             },
             height: {

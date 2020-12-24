@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+
 class FrontendController extends Controller
 {
     
@@ -70,13 +71,6 @@ class FrontendController extends Controller
         
     }
 
-    public function fieldsrental()
-    {
-
-        return view('frontend/fieldsrental', ['seo' => 'xxx']);
-        
-    }
-
     public function registration()
     {
 
@@ -102,6 +96,13 @@ class FrontendController extends Controller
     {
 
         return view('frontend/shop', ['seo' => 'xxx']);
+        
+    }
+
+    public function login()
+    {
+
+        return view('frontend/user-login', ['seo' => 'xxx']);
         
     }
 

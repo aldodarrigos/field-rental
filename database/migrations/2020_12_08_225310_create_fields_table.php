@@ -22,7 +22,9 @@ class CreateFieldsTable extends Migration
             $table->string('img', 120)->nullable();
             $table->string('img_md', 120)->nullable();
             $table->string('img_sm', 120)->nullable();
-            $table->decimal('price', 10, 2)->nullable();
+            $table->decimal('price_regular', 10, 2)->nullable();
+            $table->decimal('price_night', 10, 2)->nullable();
+            $table->decimal('price_weekend', 10, 2)->nullable();
             $table->unsignedTinyInteger('tag_id')->default(0);
             $table->unsignedTinyInteger('status')->default(1);
             $table->timestamps();

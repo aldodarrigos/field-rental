@@ -1,0 +1,204 @@
+@extends('layouts.frontend')
+
+@section('content')
+
+@section('assets_down')
+
+    @parent
+    
+
+@endsection
+
+<x-frontend.pieces.section_header title='Fields' bread='Our fields'></x-frontend.pieces.section_header>
+
+
+<main class="w-11/12 md:w-boxed mx-auto">
+
+    <div class="separation h-50p"></div>
+
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+
+        <div class="col-span-6">
+            <form action="/fieldsrental" method="POST" id='bookform'>
+            {{ csrf_field() }}
+            <x-frontend.forms.input_select>
+                <x-slot name='label'>Players number</x-slot>
+                <x-slot name='id'>players_number</x-slot>
+                <x-slot name='height'>big</x-slot>
+                <x-slot name='bg'>light</x-slot>
+                <x-slot name='label_on_off'>on</x-slot>
+
+                <option value="0" selected>Players number --</option>
+                <option value="1">5 x 5</option>
+                <option value="2">7 x 7</option>
+            </x-frontend.forms.input_select>
+
+            <x-frontend.forms.input_select>
+                <x-slot name='label'>field</x-slot>
+                <x-slot name='id'>field</x-slot>
+                <x-slot name='height'>big</x-slot>
+                <x-slot name='bg'>light</x-slot>
+                <x-slot name='label_on_off'>on</x-slot>
+
+                <option value="0" selected>Pick a Field --</option>
+
+                @foreach ($fields_select as $item)
+                    <option value="{{$item->id}}">{{$item->name}}</option>
+                @endforeach
+
+            </x-frontend.forms.input_select>
+
+            <x-frontend.forms.input_text>
+                <x-slot name='type'>date</x-slot>
+                <x-slot name='label'>Pick a Date</x-slot>
+                <x-slot name='id'>date</x-slot>
+                <x-slot name='default'>{{date('Y-m-d')}}</x-slot>
+                <x-slot name='placeholder'>Pick a Date</x-slot>
+                <x-slot name='autocomplete'>on</x-slot>
+                <x-slot name='required'>on</x-slot>
+                <x-slot name='height'>big</x-slot>
+                <x-slot name='bg'>light</x-slot>
+                <x-slot name='label_on_off'>on</x-slot>
+            </x-frontend.forms.input_text>
+            
+            <div class="text-right py-4">
+                <x-frontend.buttons.form>
+                    <x-slot name='bg'>red</x-slot>
+                    <x-slot name='size'>big</x-slot>
+                    <x-slot name='text'>Check now <i class="fas fa-check text-md pl-1"></i></x-slot>
+                    <x-slot name='class'></x-slot>
+                    <x-slot name='id'></x-slot>
+                    <x-slot name='on_off'></x-slot>
+                </x-frontend.buttons.form>
+            </div>
+
+
+
+            </form>
+            
+            
+        </div>
+        <div class="col-span-6">
+            <form action="/payment" method="POST" id='bookform'>
+
+                {{ csrf_field() }}
+                
+
+
+                @if ($result == 1)
+
+                <input type="hidden" id="hourSelected" name='hourSelected' value=''>
+                <input type="hidden" id="priceSelected" name='priceSelected' value=''>
+                <input type="hidden" id="dateSelected" name='dateSelected' value='{{$date}}'>
+                <input type="hidden" id="fieldIdSelected" name='fieldIdSelected' value='{{$field->id}}'>
+                <input type="hidden" id="fieldSelectedName" name='fieldSelectedName' value='{{$field->name}}'>
+
+                @php
+                    if($field->tag_id == 1){
+                        $field_players_number = '5 x 5 Players';
+                    }else if($field->tag_id == 2){
+                        $field_players_number = '7 x 7 Players';
+                    }
+                @endphp
+    
+                <x-frontend.cards.field_booking>
+                
+                    <x-slot name='image'>{{$field->img_md}}</x-slot>
+                    <x-slot name='image_height'>250p</x-slot>
+                    <x-slot name='tag'>{{$field_players_number}}</x-slot>
+                    <x-slot name='bg'>blue</x-slot>
+    
+                    <x-slot name='subtitle'>{{$field_players_number}}</x-slot>
+                    <x-slot name='title'>{{$field->name}}</x-slot>
+                    <x-slot name='date'><span>Date:</span> {{$date}}</x-slot>
+                    <x-slot name='hour'><span>Hour:</span> <span id='day_hour'></span></x-slot>
+                    <x-slot name='price'><span>Price:</span> <span id='price'></span></x-slot>
+                    <x-slot name='title_color'>white</x-slot>
+    
+                    <x-slot name='sumary'>
+    
+                        <div class="inline-flex flex-wrap gap-2">
+
+                            @for ($i = 0; $i < count($hoursarray); $i++)
+                                @php
+                                    if($hoursarray[$i]['class'] == 'dummyclass'){
+                                        $color = 'red';
+                                        $pointer = 'cursor-pointer';
+                                        $decoration = '';
+                                    }else{
+                                        $color = 'graytext';
+                                        $pointer = 'cursor-not-allowed';
+                                        $decoration = 'line-through';
+                                    }
+                                @endphp
+                                <x-frontend.buttons.hour>
+                                    <x-slot name='bg'>{{$color}}</x-slot>
+                                    <x-slot name='text'>{{$hoursarray[$i]['hour']}}</x-slot>
+                                    <x-slot name='class'>{{$hoursarray[$i]['class']}}</x-slot>
+                                    <x-slot name='dataPrice'>{{$hoursarray[$i]['price']}}</x-slot>
+                                    <x-slot name='pointer'>{{$pointer}}</x-slot>
+                                    <x-slot name='decoration'>{{$decoration}}</x-slot>
+                                </x-frontend.buttons.hour>
+                            @endfor
+             
+                        </div>
+    
+                        <script>
+    
+                            $(document).ready(function() {
+                                $('#buttonrental').prop('disabled', true);
+                            });
+    
+                            $(".dummyclass").click(function(){
+                                $(".dummyclass").removeClass('bg-info');
+                                $(this).toggleClass("bg-info");
+                                let day = $(this).text();
+                                let price = $(this).data("price");
+                                $('#hourSelected').val(day);
+                                $('#day_hour').text(day);
+                                $('#price').text(price);
+                                $('#priceSelected').val(price);
+                                $('#buttonrental').toggleClass("bg-graytext");
+                                $('#buttonrental').toggleClass("bg-red");
+    
+                                if($('#hourSelected').val() != '') {
+                                    $('#buttonrental').prop('disabled', false);
+                                    $('#buttonrental').removeClass("bg-graytext");
+                                    $('#buttonrental').addClass("bg-red");
+                                }else{
+                                    $('#buttonrental').prop('disabled', true);
+                                    $('#buttonrental').addClass("bg-graytext");
+                                    $('#buttonrental').removeClass("bg-red");
+                                }
+                            });
+                        </script>
+    
+    
+                    </x-slot>
+                    <x-slot name='sumary_color'>white</x-slot>
+     
+                    <x-slot name='button_link'></x-slot>
+                    <x-slot name='button_text'>Confirm and Pay with <span class="text-warning">PayPal</span> <i class="far fa-credit-card"></i></x-slot>
+                    <x-slot name='button_size'>big</x-slot>
+    
+                
+                </x-frontend.cards.field_booking>
+                    
+                @endif
+            </form>
+
+
+        </div>
+
+
+
+    </div>
+    
+
+    <div class="separation h-50p"></div>
+
+</main>
+
+@endsection
+
+

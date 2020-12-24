@@ -51,34 +51,15 @@
                         <x-slot name='label_on_off'>off</x-slot>
 
                         <option value="0" selected>Pick a Field --</option>
-
-                        <option value="125">9.- Azteca / Weekend</option>
-                        <option value="125">9.- Azteca / Night</option>
-                        <option value="110">9.- Azteca / Day</option>
-                        <option value="125">8.- Allianz Arena / Weekend</option>
-                        <option value="125">8.- Allianz Arena / Night</option>
-                        <option value="110">8.- Allianz Arena / Day</option>
-                        <option value="125">7.- Soccer City / Weekend</option>
-                        <option value="125">7.- Soccer City / Night</option>
-                        <option value="110">7.- Soccer City / Day</option>
-                        <option value="100">6.- Camp Nou / Weekend</option>
-                        <option value="100">6.- Camp Nou / Night</option>
-                        <option value="85">6.- Camp Nou / Day</option>
-                        <option value="100">5.- Bombonera / Weekend</option>
-                        <option value="100">5.- Bombonera / Night</option>
-                        <option value="85">5.- Bombonera / Day</option>
-                        <option value="100">4.- San Siro / Weekend</option>
-                        <option value="100">4.- San Siro / Night</option>
-                        <option value="85">4.- San Siro / Day</option>
-                        <option value="100">3.- Maracana / Weekend</option>
-                        <option value="100">3.- Maracana / Night</option>
-                        <option value="85">3.- Maracana / Day</option>
-                        <option value="100">2.- Da Luz / Weekend</option>
-                        <option value="100">2.- Da Luz / Night</option>
-                        <option value="85">2.- Da Luz / Day</option>
-                        <option value="100">1.- Wembley / Weekend</option>
-                        <option value="100">1.- Wembley/Night</option>
-                        <option value="85">1.- Wembley / Day</option>
+                        <option value="125">Azteca</option>
+                        <option value="125">Allianz Arena</option>
+                        <option value="125">Soccer City</option>
+                        <option value="100">Camp Nou</option>
+                        <option value="100">Bombonera</option>
+                        <option value="100">San Siro</option>
+                        <option value="100">Maracana</option>
+                        <option value="100">Da Luz</option>
+                        <option value="100">Wembley</option>
 
                     </x-frontend.forms.input_select>
                     

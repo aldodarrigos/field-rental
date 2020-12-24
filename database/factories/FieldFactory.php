@@ -31,7 +31,9 @@ class FieldFactory extends Factory
             'img'  => 'https://source.unsplash.com/random/1080x700',
             'img_md'  => 'https://source.unsplash.com/random/720x480',
             'img_sm'  => 'https://source.unsplash.com/random/250x166',
-            'price'  => $this->faker->randomElement(['100', '85', '125']),
+            'price_regular'  => $this->faker->randomElement(['1', '2', '3']),
+            'price_night'  => $this->faker->randomElement(['1', '2', '3']),
+            'price_weekend'  => $this->faker->randomElement(['1', '2', '3']),
             'tag_id'  => $this->faker->randomElement(['1', '2', '3']),
             'status'  => '1',
         ];
