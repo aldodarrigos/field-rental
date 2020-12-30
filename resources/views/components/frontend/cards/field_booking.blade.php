@@ -12,17 +12,26 @@
             {{$sumary}}
         </div>
 
-        <div class="">
-            <x-frontend.buttons.form>
-                <x-slot name='bg'>graytext</x-slot>
-                <x-slot name='size'>{{$button_size}}</x-slot>
-                <x-slot name='text'>{{$button_text}}</x-slot>
-                <x-slot name='class'></x-slot>
-                <x-slot name='id'>buttonrental</x-slot>
-                <x-slot name='on_off'></x-slot>
-            </x-frontend.buttons.form>
-            <img class="w-200p" src="https://www.goodtimesguitar.com/uploads/paypal-button-300x171.png" alt="">
-        </div>
+        @if (isset(Auth::user()->name))
+            
+            <div class="">
+                <x-frontend.buttons.form>
+                    <x-slot name='bg'>graytext</x-slot>
+                    <x-slot name='size'>{{$button_size}}</x-slot>
+                    <x-slot name='text'>{{$button_text}}</x-slot>
+                    <x-slot name='class'></x-slot>
+                    <x-slot name='id'>buttonrental</x-slot>
+                    <x-slot name='on_off'></x-slot>
+                </x-frontend.buttons.form>
+                <img class="w-200p" src="https://www.goodtimesguitar.com/uploads/paypal-button-300x171.png" alt="">
+            </div>
+
+        @else
+
+            <div>Please <a href="/user-login" class="font-bold text-red">login</a> to your account to complete booking or <a href="" class="font-bold text-red">create</a> a new account</div>
+            
+        @endif
+
 
         
         

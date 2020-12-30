@@ -120,6 +120,7 @@ class PaymentController extends Controller
         $dateSelected = $request->input('dateSelected');
         $fieldIdSelected = $request->input('fieldIdSelected');
         $fieldSelectedName = $request->input('fieldSelectedName');
+        $userIdLogin = $request->input('userIdLogin');
 
         $description = $fieldSelectedName.' / '.$dateSelected.' / '.$hourSelected;
 
@@ -136,7 +137,7 @@ class PaymentController extends Controller
         $transaction->setDescription($description);
 
         $reservation_data = json_encode(array(
-            'user_id' => 1, 
+            'user_id' => $userIdLogin, 
             'field_id' => $fieldIdSelected, 
             'field_name' => $fieldSelectedName, 
             'price' => $priceSelected, 

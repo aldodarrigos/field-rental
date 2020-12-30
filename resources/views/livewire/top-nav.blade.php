@@ -17,7 +17,7 @@
                 @if (isset(Auth::user()->name))
                     <a href="/profile/dashboard">{{Auth::user()->name}}</a>
                 @else
-                    <a href="/user-login">My Account</a>
+                    <a href="/user-login">Login</a>
                 @endif
             </div>
         </div>

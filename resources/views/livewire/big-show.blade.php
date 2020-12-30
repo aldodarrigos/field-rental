@@ -14,7 +14,7 @@
 
         </div> 
 
-        <form action="" id='auto-submit'>
+        <form action="/fieldsrental" id='auto-submit'>
 
         <div class="w-11/12 md:w-boxed flex flex-col md:flex-row gap-4 absolute z-20 bottom-0 left-0 right-0 ml-auto mr-auto mx-auto bg-deepblue text-white py-4 px-4 border-lines border-b-8 rounded-t-lg">
 
@@ -25,8 +25,8 @@
                     <small class="text-red text-xs uppercase">Players number</small>
                     <div>                    
                         <x-frontend.forms.input_select>
-                            <x-slot name='label'>player_number</x-slot>
-                            <x-slot name='id'>player_number</x-slot>
+                            <x-slot name='label'>players_number</x-slot>
+                            <x-slot name='id'>players_number</x-slot>
                             <x-slot name='height'>slim</x-slot>
                             <x-slot name='bg'>dark</x-slot>
                             <x-slot name='label_on_off'>off</x-slot>
@@ -70,18 +70,21 @@
                 <div class="text-bluetext text-3x5 font-bold leading-none pr-2 font-roboto">03</div>
                 <div class="w-full pr-4">
                     <small class="text-red text-xs uppercase">Book your field</small>
-                    <x-frontend.forms.input_text>
-                        <x-slot name='type'>date</x-slot>
-                        <x-slot name='label'></x-slot>
-                        <x-slot name='id'>big_show_date</x-slot>
-                        <x-slot name='default'>2020-12-24</x-slot>
-                        <x-slot name='placeholder'>Pick a Date</x-slot>
-                        <x-slot name='autocomplete'>on</x-slot>
-                        <x-slot name='required'>on</x-slot>
-                        <x-slot name='height'>slim</x-slot>
-                        <x-slot name='bg'>dark</x-slot>
-                        <x-slot name='label_on_off'>off</x-slot>
-                    </x-frontend.forms.input_text>
+                    <div class="flex">
+                        <x-frontend.forms.input_text>
+                            <x-slot name='type'>date</x-slot>
+                            <x-slot name='label'></x-slot>
+                            <x-slot name='id'>date</x-slot>
+                            <x-slot name='default'>{{date('Y-m-d')}}</x-slot>
+                            <x-slot name='placeholder'>Pick a Date</x-slot>
+                            <x-slot name='autocomplete'>on</x-slot>
+                            <x-slot name='required'>on</x-slot>
+                            <x-slot name='height'>slim</x-slot>
+                            <x-slot name='bg'>dark</x-slot>
+                            <x-slot name='label_on_off'>off</x-slot>
+                        </x-frontend.forms.input_text>
+                        <span id='alt_check' class='bg-red h-36p font-roboto text-gray ml-2 font-bold rounded mt-2 py-2 px-2 cursor-pointer uppercase text-sm hover:bg-blue ease-in-out duration-300'>Check</span>
+                    </div>
                     
                 </div>
             </div>
@@ -94,7 +97,31 @@
 </div>
 
 <script>
-    $("#big_show_date").change(function() {
+    $("#date").change(function() {
         $("form#auto-submit").submit();
     });
+    $("#alt_check").click(function() {
+        $("form#auto-submit").submit();
+    });
+
+    $('#players_number').change(function() {
+        playersNumId = $(this).val();
+        
+        $.ajax({
+        url: "/fields_x_players/"+playersNumId,
+        type: "GET",
+        success: function(data){
+
+            $('#field').html(data)
+
+        }
+    });
+
+    })
+
+
+
+
+
+
 </script>

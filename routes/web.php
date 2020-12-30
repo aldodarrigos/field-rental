@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\PaymentController;
 use App\Http\Controllers\Frontend\UserController;
+use App\Http\Controllers\Frontend\FieldsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,7 @@ Route::get('contact', [FrontendController::class, 'contact'])->name('frontend.co
 Route::get('covid-19-protocol', [FrontendController::class, 'covid'])->name('frontend.covid');
 
 Route::get('user-login', [UserController::class, 'login'])->name('frontend.login');
+Route::post('user-authenticate', [UserController::class, 'authenticate'])->name('authenticate');
 Route::get('profile/dashboard', [UserController::class, 'dashboard'])->name('frontend.user.dashboard');
 
 Route::get('registration', [FrontendController::class, 'registration'])->name('frontend.registration');
@@ -46,6 +48,21 @@ Route::get('paypal/failed', [PaymentController::class, 'paypalFailed'])->name('p
 Route::get('paypal/status', [PaymentController::class, 'payPalStatus'])->name('payment.status');
 Route::get('paypal/success', [PaymentController::class, 'paypalSuccess'])->name('payment.success');
 
+//AJAX FUNCTIONS
+Route::get('fields_x_players/{slug?}', [FieldsController::class, 'fields_x_players']);
+
+
+Route::get('dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
+
+/*
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+*/
+
+Route::group(['middleware' => 'login'], function () {
+
+
+});

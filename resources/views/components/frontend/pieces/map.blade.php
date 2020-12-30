@@ -12,7 +12,7 @@
             function init() {
             
                 var mapOptions = {
-                    zoom: 14,
+                    zoom: 17,
                     center: new google.maps.LatLng('29.8143293','-95.8252876'), 
                     styles: [
     {

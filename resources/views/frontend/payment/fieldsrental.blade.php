@@ -28,9 +28,22 @@
                 <x-slot name='bg'>light</x-slot>
                 <x-slot name='label_on_off'>on</x-slot>
 
+                @php
+                if(isset($_GET['players_number'])){
+                    $x5selected = ($_GET['players_number'] == 1)?'selected':'';
+                    $x7selected = ($_GET['players_number'] == 2)?'selected':'';
+                }else{
+                    $x5selected = '';
+                    $x7selected = '';
+                }
+
+                
+   
+                @endphp
+
                 <option value="0" selected>Players number --</option>
-                <option value="1">5 x 5</option>
-                <option value="2">7 x 7</option>
+                <option value="1" {{$x5selected}}>5 x 5</option>
+                <option value="2" {{$x7selected}}>7 x 7</option>
             </x-frontend.forms.input_select>
 
             <x-frontend.forms.input_select>
@@ -43,16 +56,33 @@
                 <option value="0" selected>Pick a Field --</option>
 
                 @foreach ($fields_select as $item)
-                    <option value="{{$item->id}}">{{$item->name}}</option>
+                    @php
+                    if(isset($_GET['field'])){
+                        $selected = ($_GET['field'] == $item->id)?'selected':'';
+                    }else{
+                        $selected = '';
+                    }
+                        
+                    @endphp
+                    <option value="{{$item->id}}" {{$selected}}>{{$item->name}}</option>
                 @endforeach
 
             </x-frontend.forms.input_select>
+
+            @php
+                if(isset($_GET['field'])){
+                    $default_date = ($_GET['field']!=null)?$_GET['date']:date('Y-m-d');
+                }else{
+                    $default_date = date('Y-m-d');
+                }
+                
+            @endphp
 
             <x-frontend.forms.input_text>
                 <x-slot name='type'>date</x-slot>
                 <x-slot name='label'>Pick a Date</x-slot>
                 <x-slot name='id'>date</x-slot>
-                <x-slot name='default'>{{date('Y-m-d')}}</x-slot>
+                <x-slot name='default'>{{$default_date}}</x-slot>
                 <x-slot name='placeholder'>Pick a Date</x-slot>
                 <x-slot name='autocomplete'>on</x-slot>
                 <x-slot name='required'>on</x-slot>
@@ -79,11 +109,10 @@
             
         </div>
         <div class="col-span-6">
+  
             <form action="/payment" method="POST" id='bookform'>
 
                 {{ csrf_field() }}
-                
-
 
                 @if ($result == 1)
 
@@ -92,6 +121,12 @@
                 <input type="hidden" id="dateSelected" name='dateSelected' value='{{$date}}'>
                 <input type="hidden" id="fieldIdSelected" name='fieldIdSelected' value='{{$field->id}}'>
                 <input type="hidden" id="fieldSelectedName" name='fieldSelectedName' value='{{$field->name}}'>
+                <input type="hidden" id="fieldSelectedName" name='fieldSelectedName' value='{{$field->name}}'>
+                @if (isset(Auth::user()->name))
+                    <input type="hidden" id="userIdLogin" name='userIdLogin' value='{{Auth::user()->id}}'>
+                @else
+                    <input type="hidden" id="userIdLogin" name='userIdLogin' value='0'>
+                @endif
 
                 @php
                     if($field->tag_id == 1){
@@ -198,6 +233,25 @@
     <div class="separation h-50p"></div>
 
 </main>
+
+<script>
+
+    $('#players_number').change(function() {
+        playersNumId = $(this).val();
+        
+        $.ajax({
+            url: "/fields_x_players/"+playersNumId,
+            type: "GET",
+            success: function(data){
+
+                $('#field').html(data)
+
+            }
+        });
+
+    })
+
+</script>
 
 @endsection
 
