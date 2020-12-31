@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Auth;
 
 use Closure;
 
-class Login
+class Admin
 {
     /**
      * Handle an incoming request.
@@ -17,21 +17,10 @@ class Login
     public function handle($request, Closure $next)
     {
         //return $next($request);
-        /*
-        if (auth()->check())
+        if (Auth::user()->role == 2)
         return $next($request);
-    
-        return redirect('/login');
-        */
-
         
-        /*
-        if (Auth::user()->role == 1)
-        return redirect('/');
-        
-
-        return redirect('/profile/dashboard');
-        */
+        return redirect('/user-login');
 
     }
 }

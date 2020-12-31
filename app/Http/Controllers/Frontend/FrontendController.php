@@ -106,11 +106,4 @@ class FrontendController extends Controller
         
     }
 
-    public function singup()
-    {
-
-        return view('frontend/singup', ['seo' => 'xxx']);
-        
-    }
-
 }

@@ -5,7 +5,9 @@ use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\PaymentController;
 use App\Http\Controllers\Frontend\UserController;
 use App\Http\Controllers\Frontend\FieldsController;
-
+use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Backend\ReservationController;
+use App\Providers\RouteServiceProvider;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,12 +35,12 @@ Route::get('contact', [FrontendController::class, 'contact'])->name('frontend.co
 Route::get('covid-19-protocol', [FrontendController::class, 'covid'])->name('frontend.covid');
 
 Route::get('user-login', [UserController::class, 'login'])->name('frontend.login');
+Route::get('singup', [UserController::class, 'singup'])->name('frontend.singup');
 Route::post('user-authenticate', [UserController::class, 'authenticate'])->name('authenticate');
 Route::get('profile/dashboard', [UserController::class, 'dashboard'])->name('frontend.user.dashboard');
 
-Route::get('registration', [FrontendController::class, 'registration'])->name('frontend.registration');
 Route::get('shop', [FrontendController::class, 'shop'])->name('frontend.shop');
-Route::get('singup', [FrontendController::class, 'singup'])->name('frontend.singup');
+
 
 Route::get('fieldsrental', [PaymentController::class, 'fieldsrental'])->name('frontend.fieldsrental');
 Route::post('fieldsrental', [PaymentController::class, 'fieldsrental'])->name('frontend.fieldsrental');
@@ -62,7 +64,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 */
 
-Route::group(['middleware' => 'login'], function () {
-
+Route::middleware(['admin'])->group(function () {
+    Route::get('backend/dashboard', [DashboardController::class, 'index'])->name('backend.dashboard');
+    Route::resource('backend/reservations', ReservationController::class);
 
 });

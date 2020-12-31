@@ -18,105 +18,43 @@
 
     <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
 
-        <div class="col-span-12 md:col-span-6">
-            <form action="" method="POST" id='bookform'>
-
-            <div class="flex gap-4 flex-col md:flex-row mb-2">
-                
-                <div class="w-2/2 md:w-1/2">
-                    <x-frontend.forms.input_text>
-                        <x-slot name='type'>input</x-slot>
-                        <x-slot name='label'>Name</x-slot>
-                        <x-slot name='id'>name</x-slot>
-                        <x-slot name='default'></x-slot>
-                        <x-slot name='placeholder'>Name</x-slot>
-                        <x-slot name='autocomplete'>off</x-slot>
-                        <x-slot name='required'>on</x-slot>
-                        <x-slot name='height'>big</x-slot>
-                        <x-slot name='bg'>light</x-slot>
-                        <x-slot name='label_on_off'>on</x-slot>
-                    </x-frontend.forms.input_text>
-                </div>
-                <div class="w-2/2 md:w-1/2">
-                    <x-frontend.forms.input_text>
-                        <x-slot name='type'>input</x-slot>
-                        <x-slot name='label'>Last Name</x-slot>
-                        <x-slot name='id'>lastname</x-slot>
-                        <x-slot name='default'></x-slot>
-                        <x-slot name='placeholder'>Last name</x-slot>
-                        <x-slot name='autocomplete'>off</x-slot>
-                        <x-slot name='required'>on</x-slot>
-                        <x-slot name='height'>big</x-slot>
-                        <x-slot name='bg'>light</x-slot>
-                        <x-slot name='label_on_off'>on</x-slot>
-                    </x-frontend.forms.input_text>
-                </div>
-            
-            </div>  
-            
-            <div class="mb-4">
-                <x-frontend.forms.input_text>
-                    <x-slot name='type'>email</x-slot>
-                    <x-slot name='label'>Email</x-slot>
-                    <x-slot name='id'>email</x-slot>
-                    <x-slot name='default'></x-slot>
-                    <x-slot name='placeholder'>johndoe@mail.com</x-slot>
-                    <x-slot name='autocomplete'>off</x-slot>
-                    <x-slot name='required'>on</x-slot>
-                    <x-slot name='height'>big</x-slot>
-                    <x-slot name='bg'>light</x-slot>
-                    <x-slot name='label_on_off'>on</x-slot>
-                </x-frontend.forms.input_text>
-            </div>
-            
-            <div class="mb-4">
-                <x-frontend.forms.input_text>
-                    <x-slot name='type'>password</x-slot>
-                    <x-slot name='label'>Password</x-slot>
-                    <x-slot name='id'>password</x-slot>
-                    <x-slot name='default'></x-slot>
-                    <x-slot name='placeholder'></x-slot>
-                    <x-slot name='autocomplete'>off</x-slot>
-                    <x-slot name='required'>on</x-slot>
-                    <x-slot name='height'>big</x-slot>
-                    <x-slot name='bg'>light</x-slot>
-                    <x-slot name='label_on_off'>on</x-slot>
-                </x-frontend.forms.input_text>
-            </div>
-            
-            <div class="mb-4">
-                <x-frontend.forms.input_text>
-                    <x-slot name='type'>password</x-slot>
-                    <x-slot name='label'>Confirm password</x-slot>
-                    <x-slot name='id'>password_confirm</x-slot>
-                    <x-slot name='default'></x-slot>
-                    <x-slot name='placeholder'></x-slot>
-                    <x-slot name='autocomplete'>off</x-slot>
-                    <x-slot name='required'>on</x-slot>
-                    <x-slot name='height'>big</x-slot>
-                    <x-slot name='bg'>light</x-slot>
-                    <x-slot name='label_on_off'>on</x-slot>
-                </x-frontend.forms.input_text>
-            </div>
-
-
-            <div class="text-right py-4">
-                <x-frontend.buttons.form>
-                    <x-slot name='bg'>red</x-slot>
-                    <x-slot name='size'>big</x-slot>
-                    <x-slot name='text'>Sing Up <i class="fas fa-caret-right"></i></x-slot>
-                    <x-slot name='class'></x-slot>
-                    <x-slot name='id'></x-slot>
-                </x-frontend.buttons.form>
-
-     
-            </div>
-            </form>
-            
-            
-        </div>
         <div class="col-span-6">
 
+            <form method="POST" action="{{ route('register') }}">
+                @csrf
+    
+                <div>
+                    <x-jet-label for="name" value="{{ __('Name') }}" />
+                    <x-jet-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+                </div>
+    
+                <div class="mt-4">
+                    <x-jet-label for="email" value="{{ __('Email') }}" />
+                    <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
+                </div>
+    
+                <div class="mt-4">
+                    <x-jet-label for="password" value="{{ __('Password') }}" />
+                    <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
+                </div>
+    
+                <div class="mt-4">
+                    <x-jet-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
+                    <x-jet-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
+                </div>
+    
+                <div class="flex items-center justify-end mt-4">
+                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('frontend.login') }}">
+                        {{ __('Already registered?') }}
+                    </a>
+    
+                    <x-jet-button class="ml-4">
+                        {{ __('Register') }}
+                    </x-jet-button>
+                </div>
+            </form>
+
+            
         </div>
 
 
