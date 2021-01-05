@@ -42,8 +42,8 @@
                 @endphp
 
                 <option value="0" selected>Players number --</option>
-                <option value="1" {{$x5selected}}>5 x 5</option>
-                <option value="2" {{$x7selected}}>7 x 7</option>
+                <option value="1" {{$x5selected}}>5 x 5 players (6 x 6)</option>
+                <option value="2" {{$x7selected}}>7 x 7 players (9 x 9)</option>
             </x-frontend.forms.input_select>
 
             <x-frontend.forms.input_select>
@@ -130,9 +130,9 @@
 
                 @php
                     if($field->tag_id == 1){
-                        $field_players_number = '5 x 5 Players';
+                        $field_players_number = '5 x 5 Players (6 x 6)';
                     }else if($field->tag_id == 2){
-                        $field_players_number = '7 x 7 Players';
+                        $field_players_number = '7 x 7 Players (9 x 9)';
                     }
                 @endphp
     
