@@ -236,6 +236,7 @@ class PaymentController extends Controller
         //Está función será la que se ejecute si se cancela el pago, puedes redirigir a la vista anterior, mostrar un mensaje, etc
     }
 
+    /*
     public function paypalSuccess()
     {
 
@@ -245,6 +246,7 @@ class PaymentController extends Controller
 
         return view('frontend/payment/success', ['reservation' => $reservation, 'field' => $field, 'user' => $user]);
     }
+    */
 
 
 
