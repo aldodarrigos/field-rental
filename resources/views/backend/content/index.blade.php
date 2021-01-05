@@ -46,10 +46,10 @@
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>Booking</h2>
+        <h2>Content</h2>
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="/reservations">Dashboard</a>
+                <a href="/content">Dashboard</a>
             </li>
         </ol>
     </div>
@@ -63,9 +63,9 @@
         <div class="col-lg-12">
         <div class="ibox ">
             <div class="ibox-title">
-                <h5>Booking history</h5>
+                <h5>Content</h5>
                 <div class="ibox-tools">
-                    <a href="" class="btn btn-primary btn-xs">New Booking</a>
+                    <a href="/content/create" class="btn btn-primary btn-xs">New Content</a>
                 </div>
             </div>
             <div class="ibox-content">
@@ -74,40 +74,41 @@
             <table class="table table-striped table-bordered table-hover dataTables-example" >
             <thead>
             <tr>
+                <th>Shortcut</th>
+                <th>Title</th>
+                <th>Subtitle</th>
+                <th>Link</th>
+                <th>Flag</th>
+                <th>Group</th>
+                <th>Update</th>
                 <th>Status</th>
-                <th>Field</th>
-                <th>User</th>
-                <th>Email</th>
-                <th>Price</th>
-                <th>Booking</th>
-                <th>RegDate</th>
-                <th>Paypal</th>
             </tr>
             </thead>
             <tbody>
 
-                @foreach ($reservations as $reservation)
+                @foreach ($records as $record)
 
                     @php
-                    $date = new DateTime($reservation->res_date);
-                    $now = new DateTime();
-                    $status = 'Pending';
-                    $status_color = 'info';
-                    if($date < $now) {
-                        $status = 'Finished';
-                        $status_color = 'default';
+
+                    $status = 'UnPublish';
+                    $status_color = 'default';
+                    $flag = ($record->flag == 1)?'Flagged':'';
+                    if($record->content_status == 1) {
+                        $status = 'Publish';
+                        $status_color = 'info';
                     }
+
                     @endphp
 
                     <tr class="gradeX">
-                        <td><span class="btn btn-{{$status_color}} btn-xs">{{$status}}</span></td>
-                        <td>{{$reservation->field_name}}</td>
-                        <td><strong>{{$reservation->user_name}}</strong></td>
-                        <td>{{$reservation->user_email}}</td>
-                        <td>${{$reservation->price}}</td>
-                        <td class="center text-{{$status_color}}">{!!$reservation->res_date.' <strong>'.$reservation->hour.'</strong>'!!}</td>
-                        <td class="center">{{$reservation->created_at}}</td>
-                        <td class="center">{{$reservation->res_code}}</td>
+                        <td><a href="/content/{{$record->id}}/edit">{{$record->short_title}}</a></td>
+                        <td><strong>{{$record->title}}</strong></td>
+                        <td>{{$record->subtitle}}</td>
+                        <td>{{$record->link}}</td>
+                        <td>{{$flag}}</td>
+                        <td>{{$record->group_name}}</td>
+                        <td class="center">{{$record->updated_at}}</td>
+                        <td class="center"><span class="btn btn-{{$status_color}} btn-xs">{{$status}}</span></td>
                     </tr>
 
                 @endforeach

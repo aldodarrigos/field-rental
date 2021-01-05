@@ -7,6 +7,7 @@ use App\Http\Controllers\Frontend\UserController;
 use App\Http\Controllers\Frontend\FieldsController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\ReservationController;
+use App\Http\Controllers\Backend\ContentController;
 use App\Providers\RouteServiceProvider;
 /*
 |--------------------------------------------------------------------------
@@ -67,5 +68,6 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::middleware(['admin'])->group(function () {
     Route::get('backend/dashboard', [DashboardController::class, 'index'])->name('backend.dashboard');
     Route::resource('backend/reservations', ReservationController::class);
+    Route::resource('content', ContentController::class);
 
 });

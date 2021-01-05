@@ -23,8 +23,8 @@
                 <a href="/backend/reservations"><i class="fas fa-book"></i> <span class="nav-label">Booking</span> </a>
             </li>
 
-            <li class='{{$reservations_active}}'>
-                <a href="/backend/content"><i class="fas fa-feather-alt"></i> <span class="nav-label">Content</span> </a>
+            <li class=''>
+                <a href="/content"><i class="fas fa-feather-alt"></i> <span class="nav-label">Content</span> </a>
             </li>
             <li>
                 <a href="/backend/fields"><i class="fas fa-vector-square"></i> <span class="nav-label">Fields</span> </a>

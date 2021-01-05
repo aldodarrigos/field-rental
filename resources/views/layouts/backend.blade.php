@@ -26,9 +26,8 @@
         <div class="row border-bottom">
             @include('partials.backend.topnav')
         </div>
-        <div class="wrapper wrapper-content animated fadeInRight">
 
-            @yield('content')
+        @yield('content')
 
         </div>
 
