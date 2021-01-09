@@ -16,7 +16,7 @@ class CreateContentTable extends Migration
         Schema::create('content', function (Blueprint $table) {
             $table->mediumIncrements('id');
             $table->string('title', 200)->nullable();
-            $table->string('short_title', 120)->unique();
+            $table->string('shortcut', 120)->unique();
             $table->string('subtitle', 200)->nullable();
             $table->text('content')->nullable();
             $table->string('img', 120)->nullable();

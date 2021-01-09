@@ -42,11 +42,16 @@ class PaymentController extends Controller
 
         $fields_select = Field::where('status', 1)->orderBy('name', 'ASC')->get();
         $hot_hours = ['19:00', '20:00', '21:00', '22:00'];
-        $hours = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00'];
+        $hours = ['10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00'];
         $hoursarray = array();
+
+        $players_number = '';
+        $field_id = '';
+        $date = '';
 
         if($request->input('field')){
             $field_id = $request->input('field');
+            $players_number = $request->input('players_number');
             $date = $request->input('date');
             $field = Field::where('id', $field_id)->first();
             $reservations = Reservation::where([
@@ -93,7 +98,7 @@ class PaymentController extends Controller
 
 
 
-        return view('frontend/payment/fieldsrental', ['result' => $result, 'field' => $field, 'date' => $date, 'fields_select' => $fields_select, 'reservations' => $reservations, 'hoursarray' => $hoursarray]);
+        return view('frontend/payment/fieldsrental', ['result' => $result, 'field' => $field, 'field_id' => $field_id, 'date' => $date, 'fields_select' => $fields_select, 'reservations' => $reservations, 'hoursarray' => $hoursarray, 'players_number' => $players_number]);
         
     }
 

@@ -1,4 +1,4 @@
-@props(['link' => '/', 'size' => 'regular'])
+@props(['link' => '', 'size' => 'regular'])
 
 @php
     $height = '2';

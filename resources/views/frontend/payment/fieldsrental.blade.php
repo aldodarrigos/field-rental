@@ -6,7 +6,6 @@
 
     @parent
     
-
 @endsection
 
 <x-frontend.pieces.section_header title='Fields' bread='Our fields'></x-frontend.pieces.section_header>
@@ -32,16 +31,17 @@
                 if(isset($_GET['players_number'])){
                     $x5selected = ($_GET['players_number'] == 1)?'selected':'';
                     $x7selected = ($_GET['players_number'] == 2)?'selected':'';
+                }else if($players_number != ''){
+                    $x5selected = ($players_number == 1)?'selected':'';
+                    $x7selected = ($players_number == 2)?'selected':'';
                 }else{
                     $x5selected = '';
                     $x7selected = '';
                 }
 
-                
-   
                 @endphp
 
-                <option value="0" selected>Players number --</option>
+                <option value="0">All fields --</option>
                 <option value="1" {{$x5selected}}>5 x 5 players (6 x 6)</option>
                 <option value="2" {{$x7selected}}>7 x 7 players (9 x 9)</option>
             </x-frontend.forms.input_select>
@@ -53,18 +53,19 @@
                 <x-slot name='bg'>light</x-slot>
                 <x-slot name='label_on_off'>on</x-slot>
 
-                <option value="0" selected>Pick a Field --</option>
+                <option value="" selected>Pick a Field --</option>
 
                 @foreach ($fields_select as $item)
                     @php
                     if(isset($_GET['field'])){
                         $selected = ($_GET['field'] == $item->id)?'selected':'';
+                    }else if($field_id != ''){
+                        $selected = ($field_id == $item->id)?'selected':'';
                     }else{
                         $selected = '';
                     }
-                        
                     @endphp
-                    <option value="{{$item->id}}" {{$selected}}>{{$item->name}}</option>
+                    <option value="{{$item->id}}" {{$selected}}>{{$item->number.'. '.$item->name}}</option>
                 @endforeach
 
             </x-frontend.forms.input_select>
@@ -72,6 +73,8 @@
             @php
                 if(isset($_GET['field'])){
                     $default_date = ($_GET['field']!=null)?$_GET['date']:date('Y-m-d');
+                }else if($date != ''){
+                    $default_date = $date;
                 }else{
                     $default_date = date('Y-m-d');
                 }
@@ -97,7 +100,7 @@
                     <x-slot name='size'>big</x-slot>
                     <x-slot name='text'>Check now <i class="fas fa-check text-md pl-1"></i></x-slot>
                     <x-slot name='class'></x-slot>
-                    <x-slot name='id'></x-slot>
+                    <x-slot name='id'>checknow</x-slot>
                     <x-slot name='on_off'></x-slot>
                 </x-frontend.buttons.form>
             </div>
@@ -145,10 +148,9 @@
     
                     <x-slot name='subtitle'>{{$field_players_number}}</x-slot>
                     <x-slot name='title'>{{$field->name}}</x-slot>
-                    <x-slot name='date'><span>Date:</span> {{$date}}</x-slot>
-                    <x-slot name='hour'><span>Hour:</span> <span id='day_hour'></span></x-slot>
-                    <x-slot name='price'><span>Price:</span> <span id='price'></span></x-slot>
-                    <x-slot name='title_color'>white</x-slot>
+                    <x-slot name='date'>{{$date}}</x-slot>
+                    <x-slot name='hour'><span id='day_hour'></span></x-slot>
+                    <x-slot name='price'><span id='price'></span></x-slot>
     
                     <x-slot name='sumary'>
     
@@ -175,6 +177,15 @@
                                     <x-slot name='decoration'>{{$decoration}}</x-slot>
                                 </x-frontend.buttons.hour>
                             @endfor
+  
+                            <x-frontend.buttons.hour>
+                                <x-slot name='bg'>info</x-slot>
+                                <x-slot name='text'><i class="fas fa-broom"></i></x-slot>
+                                <x-slot name='class'>clean</x-slot>
+                                <x-slot name='dataPrice'></x-slot>
+                                <x-slot name='pointer'>cursor-pointer</x-slot>
+                                <x-slot name='decoration'></x-slot>
+                            </x-frontend.buttons.hour>
              
                         </div>
     
@@ -182,6 +193,8 @@
     
                             $(document).ready(function() {
                                 $('#buttonrental').prop('disabled', true);
+                                $('#day_hour').text('-----');
+                                $('#price').text('-----');
                             });
     
                             $(".dummyclass").click(function(){
@@ -193,6 +206,27 @@
                                 $('#day_hour').text(day);
                                 $('#price').text(price);
                                 $('#priceSelected').val(price);
+                                $('#buttonrental').toggleClass("bg-graytext");
+                                $('#buttonrental').toggleClass("bg-red");
+    
+                                if($('#hourSelected').val() != '') {
+                                    $('#buttonrental').prop('disabled', false);
+                                    $('#buttonrental').removeClass("bg-graytext");
+                                    $('#buttonrental').addClass("bg-red");
+                                }else{
+                                    $('#buttonrental').prop('disabled', true);
+                                    $('#buttonrental').addClass("bg-graytext");
+                                    $('#buttonrental').removeClass("bg-red");
+                                }
+                            });
+
+                            $("#clean").click(function(){
+                                $(".dummyclass").removeClass('bg-info');
+          
+                                $('#hourSelected').val('');
+                                $('#day_hour').text('-----');
+                                $('#price').text('-----');
+                                $('#priceSelected').val('');
                                 $('#buttonrental').toggleClass("bg-graytext");
                                 $('#buttonrental').toggleClass("bg-red");
     
@@ -219,7 +253,23 @@
                 
                 </x-frontend.cards.field_booking>
                     
+                @else
+
+                    <x-frontend.pieces.ad_frame title='Our Fields'>
+                        <x-slot name='frame_icon'></x-slot>
+                        <x-slot name='bg'>white</x-slot>
+                    
+                        <img class="max-w-full rounded-md" src="https://xava.pro/storage/offtopic/kisc-fields.webp" usemap="#workmap">
+                        <map name="workmap">
+                            <area shape="rect" coords="84,14,155,90" alt="Computer" href="computer.htm">
+                          </map>
+                        
+                    </x-frontend.pieces.ad_frame>
+
+                    
                 @endif
+
+                
             </form>
 
 

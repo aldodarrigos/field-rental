@@ -29,10 +29,15 @@ class FieldsController extends Controller
 
     public function fields_x_players($players = 1)
     {
-        $fields = Field::where('tag_id', $players)->orderBy('name', 'ASC')->get();
+        if($players == 1 or $players == 2){
+            $fields = Field::where('tag_id', $players)->orderBy('name', 'ASC')->get();
+        }else{
+            $fields = Field::where('status', 1)->orderBy('name', 'ASC')->get();
+        }
+        
         $options = '<option value="0" selected="">Pick a Field --</option>';
         foreach($fields as $field){
-            $options .= '<option value="'.$field->id.'">'.$field->name.'</option>';
+            $options .= '<option value="'.$field->id.'">'.$field->number.'. '.$field->name.'</option>';
         }
         return $options;
         

@@ -8,7 +8,11 @@
                 <div class="text-red font-bold text-2x5 md:text-4x uppercase leading-none md:leading-1">Pre opening</div>
                 <div class="text-white font-bold text-3x md:text-6x uppercase leading-none mb-6">Be part of our <br> pre opening </div>
                 <div class="calltoaction">
-                    <x-frontend.buttons.calltoaction link='/singup' size='big' >Sing Up <i class="fas fa-caret-right text-md pl-1"></i></x-frontend.buttons.calltoaction>
+                    <x-frontend.buttons.link>
+                        <x-slot name='link'>/singup</x-slot>
+                        <x-slot name='size'>big</x-slot>
+                        Sing Up <i class="fas fa-caret-right text-md pl-1"></i>
+                    </x-frontend.buttons.link>
                 </div>
             </div>
 
@@ -50,17 +54,12 @@
                         <x-slot name='bg'>dark</x-slot>
                         <x-slot name='label_on_off'>off</x-slot>
 
-                        <option value="0" selected>Pick a Field --</option>
-                        <option value="125">Azteca</option>
-                        <option value="125">Allianz Arena</option>
-                        <option value="125">Soccer City</option>
-                        <option value="100">Camp Nou</option>
-                        <option value="100">Bombonera</option>
-                        <option value="100">San Siro</option>
-                        <option value="100">Maracana</option>
-                        <option value="100">Da Luz</option>
-                        <option value="100">Wembley</option>
+                        <option value="0" selected>All fields --</option>
 
+                        @foreach ($all_fields as $item)
+                        <option value="{{$item->id}}">{{$item->name}}</option>
+                        @endforeach
+                        
                     </x-frontend.forms.input_select>
                     
                 </div>

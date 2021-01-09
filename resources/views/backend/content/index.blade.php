@@ -16,7 +16,7 @@
                 pageLength: 25,
                 responsive: true,
                 dom: '<"html5buttons"B>lTfgitp',
-                "order": [[ 5, "desc" ]],
+                "order": [[ 6, "desc" ]],
                 buttons: [
                     { extend: 'copy'},
                     {extend: 'csv'},
@@ -101,7 +101,7 @@
                     @endphp
 
                     <tr class="gradeX">
-                        <td><a href="/content/{{$record->id}}/edit">{{$record->short_title}}</a></td>
+                        <td><a href="/content/{{$record->id}}/edit">{{$record->shortcut}}</a></td>
                         <td><strong>{{$record->title}}</strong></td>
                         <td>{{$record->subtitle}}</td>
                         <td>{{$record->link}}</td>

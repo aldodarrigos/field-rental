@@ -17,6 +17,8 @@ class Service extends Model
         'img', 
         'img_md', 
         'img_sm', 
+        'sort', 
+        'flag', 
         'status'
     ];
 

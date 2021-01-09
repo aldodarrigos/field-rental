@@ -23,20 +23,25 @@
                 <a href="/backend/reservations"><i class="fas fa-book"></i> <span class="nav-label">Booking</span> </a>
             </li>
 
-            <li class=''>
-                <a href="/content"><i class="fas fa-feather-alt"></i> <span class="nav-label">Content</span> </a>
+            <li>
+                <a href="/content"><i class="fas fa-feather-alt"></i> <span class="nav-label">Content</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="/content">Dashboard</a></li>
+                    <li><a href="/content-groups">Groups</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="/backend-fields"><i class="fas fa-vector-square"></i> <span class="nav-label">Fields</span> </a>
             </li>
             <li>
-                <a href="/backend/fields"><i class="fas fa-vector-square"></i> <span class="nav-label">Fields</span> </a>
+                <a href="/backend-services"><i class="far fa-folder"></i> <span class="nav-label">Services</span> </a>
             </li>
             <li>
-                <a href="/backend/services"><i class="far fa-folder"></i> <span class="nav-label">Services</span> </a>
+                <a href="/backend-news"><i class="fas fa-rss"></i> <span class="nav-label">News</span> </a>
             </li>
             <li>
-                <a href="/backend/news"><i class="fas fa-rss"></i> <span class="nav-label">News</span> </a>
-            </li>
-            <li>
-                <a href="/backend/gallery"><i class="far fa-images"></i> <span class="nav-label">Gallery</span> </a>
+                <a href="/gallery"><i class="far fa-images"></i> <span class="nav-label">Gallery</span> </a>
             </li>
             <li>
                 <a href="#"><i class="fas fa-tag"></i> <span class="nav-label">Categories</span><span class="fa arrow"></span></a>
@@ -47,7 +52,7 @@
                 </ul>
             </li>
             <li>
-                <a href="/backend/users"><i class="fas fa-users"></i> <span class="nav-label">Users</span> </a>
+                <a href="/backend-users"><i class="fas fa-users"></i> <span class="nav-label">Users</span> </a>
             </li>
         </ul>
 

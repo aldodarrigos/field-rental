@@ -1,0 +1,1 @@
+<a href='{{$link}}' class='font-roboto bg-red font-semibold uppercase text-white text-sm px-2 py-1 hover:bg-blue hover:text-white rounded ease-in-out duration-300'>{{$slot}}</a>

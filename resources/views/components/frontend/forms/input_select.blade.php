@@ -20,7 +20,18 @@
         }
     @endphp
     
-    <select id="{{$id}}" name="{{$id}}" class="block w-full py-{{$py}} px-2 mt-2 text-{{$t_color}} bg-{{$bgc}} focus:outline-none focus:bg-gray-300 focus:shadow-inner border border-bluetext rounded-{{$round}}">
+    <select id="{{$id}}" name="{{$id}}" class="block w-full py-{{$py}} px-2 mt-2 text-{{$t_color}} bg-{{$bgc}} focus:outline-none focus:bg-gray-300 focus:shadow-inner border border-bluetext rounded-{{$round}}" required data-required-message="Please fill out this field.">
     {{$slot}}
     </select>
+
+    <script>
+        
+        $('#checknow').on('click', function() {
+            $('#{{$id}}').on('invalid', function() {
+                this.setCustomValidity($(this).data("required-message"));
+            });
+        });
+
+
+    </script>
 </div>

@@ -8,6 +8,10 @@ use App\Http\Controllers\Frontend\FieldsController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\ReservationController;
 use App\Http\Controllers\Backend\ContentController;
+use App\Http\Controllers\Backend\ContentGroupsController;
+use App\Http\Controllers\Backend\FieldsBackController;
+use App\Http\Controllers\Backend\ServicesBackController;
+use App\Http\Controllers\Backend\NewsbackController;
 use App\Providers\RouteServiceProvider;
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +33,7 @@ Route::get('/', [FrontendController::class, 'index'])->name('frontend.cover');
 Route::get('about', [FrontendController::class, 'about'])->name('frontend.about');
 Route::get('services', [FrontendController::class, 'services'])->name('frontend.services');
 Route::get('service/{slug?}', [FrontendController::class, 'service'])->name('frontend.service');
-Route::get('fields', [FrontendController::class, 'fields'])->name('frontend.fields');
+//Route::get('fields', [FrontendController::class, 'fields'])->name('frontend.fields');
 Route::get('news', [FrontendController::class, 'news'])->name('frontend.news');
 Route::get('post/{slug?}', [FrontendController::class, 'post'])->name('frontend.post');
 Route::get('contact', [FrontendController::class, 'contact'])->name('frontend.contact');
@@ -69,5 +73,10 @@ Route::middleware(['admin'])->group(function () {
     Route::get('backend/dashboard', [DashboardController::class, 'index'])->name('backend.dashboard');
     Route::resource('backend/reservations', ReservationController::class);
     Route::resource('content', ContentController::class);
+    Route::resource('content-groups', ContentGroupsController::class);
+    Route::resource('backend-fields', FieldsBackController::class);
+    Route::resource('backend-services', ServicesBackController::class);
+    Route::resource('backend-news', NewsbackController::class);
+    Route::post('services-sort', [ServicesBackController::class, 'sort'])->name('backend.services.sort');
 
 });

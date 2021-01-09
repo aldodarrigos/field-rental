@@ -1,13 +1,29 @@
 <div class="rounded-lg">
-    <div class="h-{{$image_height}} relative">
-        <img class="object-cover w-full h-full rounded-t-lg" src="{{$image}}" alt="">
-    </div>
-    <div class="bg-{{$bg}} text-white px-10 py-7 rounded-b-lg min-h-400p">
-        <div class="text-red uppercase font-roboto font-bold">{{$subtitle}}</div>    
-        <h1 class="text-{{$title_color}} font-roboto text-2x5 uppercase font-bold leading-none mb-4 mt-2">{{$title}}</h1>
-        <div class="text-{{$title_color}} font-roboto text-2xl uppercase font-bold leading-none mb-4 mt-2">{{$date}}</div>
-        <div class="text-{{$title_color}} font-roboto text-2xl uppercase font-bold leading-none mb-4 mt-2">{{$hour}}</div>
-        <div class="text-{{$title_color}} font-roboto text-2xl uppercase font-bold leading-none mb-4 mt-2">{{$price}}</div>
+
+
+
+    <div class="bg-{{$bg}} text-white px-10 py-7 rounded-lg min-h-400p">
+
+        <div class="">
+            <div class="text-red uppercase font-roboto font-bold">{{$subtitle}}</div>    
+            <h1 class="text-white font-roboto text-2x5 uppercase font-bold leading-none mb-2">{{$title}}</h1>
+            <div class="grid grid-cols-3 mb-4">
+                <div class="">
+                    <div class="font-roboto text-lg uppercase font-bold leading-none mb-2 mt-2">Date</div>
+                    <div class="font-roboto text-xl uppercase font-bold leading-none mb-2 mt-2 text-warning">{{$date}}</div>
+                </div>
+                <div class="">
+                    <div class="font-roboto text-lg uppercase font-bold leading-none mb-2 mt-2">Hour</div>
+                    <div class="font-roboto text-xl uppercase font-bold leading-none mb-2 mt-2 text-warning">{{$hour}}</div>
+                </div>
+                <div class="">
+                    <div class="font-roboto text-lg uppercase font-bold leading-none mb-2 mt-2">Price</div>
+                    <div class="font-roboto text-xl uppercase font-bold leading-none mb-2 mt-2 text-warning">{{$price}}</div>
+                </div>
+
+            </div>
+        </div>
+
         <div class="text-{{$sumary_color}} mb-6">
             {{$sumary}}
         </div>

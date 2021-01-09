@@ -19,7 +19,7 @@ class ContentController extends Controller
     public function index()
     {
         $records = DB::table('content')
-        ->select(DB::raw('content.id, content.title, content.short_title, content.subtitle, content.link, content.flag, content.status as content_status, content_groups.name as group_name, content.updated_at'))
+        ->select(DB::raw('content.id, content.title, content.shortcut, content.subtitle, content.link, content.flag, content.status as content_status, content_groups.name as group_name, content.updated_at'))
         ->leftJoin('content_groups', 'content.group_id', '=', 'content_groups.id')
         ->orderBy('content.updated_at', 'desc')
         ->get();
@@ -56,9 +56,11 @@ class ContentController extends Controller
     {
         $content = new Content();
 
+        $flag = ($request->input('flag'))?1:0;
+
         $content->title = $request->input('title');
         $content->subtitle = $request->input('subtitle');
-        $content->short_title = $request->input('short_title');
+        $content->shortcut = $request->input('shortcut');
         $content->content = $request->input('content');
         $content->img = $request->input('img');
         
@@ -66,7 +68,7 @@ class ContentController extends Controller
         $content->video = $request->input('video');
         $content->group_id = $request->input('group_id');
 
-        $content->flag = $request->input('flag');
+        $content->flag = $flag;
         $content->status = $request->input('status');
         $content->save();
 
@@ -109,7 +111,7 @@ class ContentController extends Controller
 
         $content->title = $request->input('title');
         $content->subtitle = $request->input('subtitle');
-        $content->short_title = $request->input('short_title');
+        $content->shortcut = $request->input('shortcut');
         $content->content = $request->input('content');
         $content->img = $request->input('img');
         

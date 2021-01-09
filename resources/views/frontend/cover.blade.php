@@ -9,43 +9,29 @@
 
 @endsection
 
-<livewire:big-show></livewire:big-show>
+<livewire:frontend.cover-bigshow></livewire:frontend.cover-bigshow>
 
 <div class="separation h-50p"></div>
 
 <div class="w-11/12 md:w-boxed mx-auto">
-    <livewire:cover-about></livewire:cover-about>
+    <livewire:frontend.cover-about></livewire:frontend.cover-about>
 </div>
 
 <div class="separation h-100p"></div>
 
-<livewire:cover-services></livewire:cover-services>
+<livewire:frontend.cover-services></livewire:frontend.cover-services>
 
 <div class="separation h-100p"></div>
 
-<div class="">
-    <div class="w-11/12 md:w-boxed mx-auto">
-        <div class="flex gap-8 flex-col md:flex-row">
-            <div class="w-3/3 md:w-1/3">
-                <livewire:cover-soccer-tv></livewire:cover-soccer-tv>
-            </div>
-            <div class="w-3/3 md:w-1/3">
-                <livewire:cover-covid></livewire:cover-covid>
-            </div>
-            <div class="w-3/3 md:w-1/3">
-                <livewire:cover-soccer-fun></livewire:cover-soccer-fun>
-            </div>
-        </div>
-    </div>
-</div>
+<livewire:frontend.cover-cards-highlights></livewire:frontend.cover-cards-highlights>
 
 <div class="separation h-100p"></div>
 
-<livewire:cover-soccer-academy></livewire:cover-soccer-academy>
+<livewire:frontend.cover-soccer-academy></livewire:frontend.cover-soccer-academy>
 
 <div class="separation h-100p"></div>
 
-<livewire:cover-news></livewire:cover-news>
+<livewire:frontend.cover-news></livewire:frontend.cover-news>
 
 <div class="separation h-100p"></div>
 

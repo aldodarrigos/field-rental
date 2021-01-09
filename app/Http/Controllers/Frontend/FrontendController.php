@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\Frontend;
-
+use App\Models\{Content, Service, Post};
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use DB;
 
 class FrontendController extends Controller
 {
@@ -29,15 +30,18 @@ class FrontendController extends Controller
 
     public function about()
     {
+        $vision = Content::where('shortcut', 'about.vision')->first();
+        $mision = Content::where('shortcut', 'about.mision')->first();
+        $values = Content::where('shortcut', 'about.values')->first();
 
-        return view('frontend/about', ['seo' => 'xxx']);
+        return view('frontend/about', ['seo' => 'xxx', 'vision' => $vision, 'mision' => $mision, 'values' => $values]);
         
     }
 
     public function services()
     {
-
-        return view('frontend/services', ['seo' => 'xxx']);
+        $services = Service::where('status', 1)->orderBy('sort', 'ASC')->get();
+        return view('frontend/services', ['seo' => 'xxx', 'services' => $services]);
         
     }
 
@@ -59,8 +63,15 @@ class FrontendController extends Controller
 
     public function news()
     {
+        $posts = DB::table('posts')
+        ->select(DB::raw('posts.id, posts.title, posts.slug, posts.sumary, posts.img_md, posts.pub_date, tags.name as tag_name, tags.slug as tag_slug'))
+        ->leftJoin('tags', 'posts.tag_id', '=', 'tags.id')
+        ->where('posts.status', 1)
+        ->orderBy('posts.pub_date', 'desc')
+        ->limit(5)
+        ->get();
 
-        return view('frontend/news', ['seo' => 'xxx']);
+        return view('frontend/news', ['seo' => 'xxx', 'posts' => $posts]);
         
     }
 

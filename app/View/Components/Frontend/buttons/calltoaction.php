@@ -4,7 +4,7 @@ namespace App\View\Components\Frontend\buttons;
 
 use Illuminate\View\Component;
 
-class redsm extends Component
+class calltoaction extends Component
 {
     /**
      * Create a new component instance.
@@ -23,6 +23,6 @@ class redsm extends Component
      */
     public function render()
     {
-        return view('components.frontend.buttons.redsm');
+        return view('components.frontend.buttons.calltoaction');
     }
 }

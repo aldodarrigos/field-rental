@@ -22,5 +22,5 @@
     <label for="{{$id}}" class="block text-xs font-semibold text-gray-600 uppercase">{{$label}}</label>
     @endif
     
-    <input id="{{$id}}" type="{{$type}}" name="{{$id}}" placeholder="{{$placeholder}}" autocomplete="{{$autocomplete}}" value='{{$default}}' class="block w-full px-3 py-{{$py}} mt-2 text-{{$t_color}} bg-{{$bgc}} px-2 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner border border-bluetext rounded-{{$round}}" {{$required}}>
+    <input id="{{$id}}" type="{{$type}}" name="{{$id}}" placeholder="{{$placeholder}}" autocomplete="{{$autocomplete}}" value='{{$default}}' class="block w-full px-3 py-{{$py}} mt-2 text-{{$t_color}} bg-{{$bgc}} px-2 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner border border-bluetext rounded-{{$round}}"  {{$required}}>
 </div>

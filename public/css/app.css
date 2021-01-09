@@ -16301,6 +16301,10 @@ video {
   height: 80px;
 }
 
+.h-90p{
+  height: 90px;
+}
+
 .h-100p{
   height: 100px;
 }
@@ -16319,6 +16323,10 @@ video {
 
 .h-250p{
   height: 250px;
+}
+
+.h-270p{
+  height: 270px;
 }
 
 .h-300p{
@@ -33640,6 +33648,10 @@ video {
   width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
+}
+
+.w-80p{
+  width: 80px;
 }
 
 .w-150p{
@@ -55492,6 +55504,10 @@ p{ margin-bottom: 1rem;
     height: 80px;
   }
 
+  .sm\:h-90p{
+    height: 90px;
+  }
+
   .sm\:h-100p{
     height: 100px;
   }
@@ -55510,6 +55526,10 @@ p{ margin-bottom: 1rem;
 
   .sm\:h-250p{
     height: 250px;
+  }
+
+  .sm\:h-270p{
+    height: 270px;
   }
 
   .sm\:h-300p{
@@ -72831,6 +72851,10 @@ p{ margin-bottom: 1rem;
     width: -webkit-max-content;
     width: -moz-max-content;
     width: max-content;
+  }
+
+  .sm\:w-80p{
+    width: 80px;
   }
 
   .sm\:w-150p{
@@ -94615,6 +94639,10 @@ p{ margin-bottom: 1rem;
     height: 80px;
   }
 
+  .md\:h-90p{
+    height: 90px;
+  }
+
   .md\:h-100p{
     height: 100px;
   }
@@ -94633,6 +94661,10 @@ p{ margin-bottom: 1rem;
 
   .md\:h-250p{
     height: 250px;
+  }
+
+  .md\:h-270p{
+    height: 270px;
   }
 
   .md\:h-300p{
@@ -111954,6 +111986,10 @@ p{ margin-bottom: 1rem;
     width: -webkit-max-content;
     width: -moz-max-content;
     width: max-content;
+  }
+
+  .md\:w-80p{
+    width: 80px;
   }
 
   .md\:w-150p{
@@ -133738,6 +133774,10 @@ p{ margin-bottom: 1rem;
     height: 80px;
   }
 
+  .lg\:h-90p{
+    height: 90px;
+  }
+
   .lg\:h-100p{
     height: 100px;
   }
@@ -133756,6 +133796,10 @@ p{ margin-bottom: 1rem;
 
   .lg\:h-250p{
     height: 250px;
+  }
+
+  .lg\:h-270p{
+    height: 270px;
   }
 
   .lg\:h-300p{
@@ -151077,6 +151121,10 @@ p{ margin-bottom: 1rem;
     width: -webkit-max-content;
     width: -moz-max-content;
     width: max-content;
+  }
+
+  .lg\:w-80p{
+    width: 80px;
   }
 
   .lg\:w-150p{
@@ -172861,6 +172909,10 @@ p{ margin-bottom: 1rem;
     height: 80px;
   }
 
+  .xl\:h-90p{
+    height: 90px;
+  }
+
   .xl\:h-100p{
     height: 100px;
   }
@@ -172879,6 +172931,10 @@ p{ margin-bottom: 1rem;
 
   .xl\:h-250p{
     height: 250px;
+  }
+
+  .xl\:h-270p{
+    height: 270px;
   }
 
   .xl\:h-300p{
@@ -190200,6 +190256,10 @@ p{ margin-bottom: 1rem;
     width: -webkit-max-content;
     width: -moz-max-content;
     width: max-content;
+  }
+
+  .xl\:w-80p{
+    width: 80px;
   }
 
   .xl\:w-150p{

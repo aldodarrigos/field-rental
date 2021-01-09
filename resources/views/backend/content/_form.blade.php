@@ -15,7 +15,7 @@
 
             <div class="form-group ">
                 <label >Shortcut</label>
-                <input type="text" name='short_title' class="form-control" @if(!empty($content->short_title)) value="{{$content->short_title}}" @endif>
+                <input type="text" name='shortcut' class="form-control" @if(!empty($content->shortcut)) value="{{$content->shortcut}}" @endif>
             </div>
             
             <div class="form-group ">
@@ -119,11 +119,13 @@
                 </div>
             </div>
 
+            <div class="hr-line-dashed"></div>
 
             <button type="submit" class="btn btn-w-m btn-success">Save</button>
             @if(!empty($put))
             <input type="hidden" name="_method" value="PUT">
             @endif
+            <a href="/content" class="btn btn-w-m btn-default"><i class="fas fa-undo-alt"></i> Return</a>
         </div>
 
     </div>

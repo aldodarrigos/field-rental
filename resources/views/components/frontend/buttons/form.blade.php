@@ -22,4 +22,4 @@
     }
 @endphp
 
-<button type="submit" id='{{$id}}' class='{{$class}} bg-{{$bg}} font-roboto text-gray font-bold rounded py-{{$height}} px-{{$px}} uppercase text-{{$fontSize}} hover:bg-deepblue ease-in-out duration-300' >{{$text}}</button>
+<button type="submit" id='{{$id}}' class='{{$class}} bg-{{$bg}} font-roboto text-gray font-bold rounded py-{{$height}} px-{{$px}} uppercase text-{{$fontSize}} hover:bg-deepblue ease-in-out duration-300'>{{$text}}</button>
