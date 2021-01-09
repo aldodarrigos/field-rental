@@ -265,7 +265,6 @@
                           </map>
                         
                     </x-frontend.pieces.ad_frame>
-
                     
                 @endif
 

@@ -1,7 +1,5 @@
 <div class="rounded-lg">
 
-
-
     <div class="bg-{{$bg}} text-white px-10 py-7 rounded-lg min-h-400p">
 
         <div class="">
@@ -48,9 +46,5 @@
             
         @endif
 
-
-        
-        
-        
     </div>
 </div>
