@@ -134,7 +134,7 @@
                                         $status = 'Publish';
                                         $status_color = 'info';
                                     }
-                                    $flag = ($record->flag == 1)?'Flagged':'';
+                                    $flag = ($record->flag == 1)?'In Cover':'';
 
                                     @endphp
 

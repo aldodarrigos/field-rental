@@ -94,7 +94,7 @@ class ContentGroupsController extends Controller
         $group->status = $request->input('status');
         $group->save();
 
-        return redirect('content-groups/'.$id.'/edit');
+        return redirect('content-groups/'.$id.'/edit')->with('success', 'Successful update!');
 
     }
 

@@ -6,7 +6,7 @@
     <ul class="nav navbar-top-links navbar-right">
 
         <li class="dropdown">
-            <a class="dropdown-toggle count-info" href="/">
+            <a class="dropdown-toggle count-info" href="/" target='_blank'>
                 Go to website
             </a>
         </li>

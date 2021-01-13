@@ -1,5 +1,13 @@
 @php
     $reservations_active = ($url == 'reservations')?'active':'';
+    $content_active = ($url == 'content')?'active':'';
+    $fields_active = ($url == 'fields')?'active':'';
+    $services_active = ($url == 'services')?'active':'';
+    $news_active = ($url == 'news')?'active':'';
+    $gallery_active = ($url == 'gallery')?'active':'';
+    $menu_active = ($url == 'menu')?'active':'';
+    $settings_active = ($url == 'settings')?'active':'';
+    $users_active = ($url == 'users')?'active':'';
 @endphp
 
 <nav class="navbar-default navbar-static-side" role="navigation">
@@ -20,10 +28,10 @@
             </li>
 
             <li class='{{$reservations_active}}'>
-                <a href="/backend/reservations"><i class="fas fa-book"></i> <span class="nav-label">Booking</span> </a>
+                <a href="/backend-booking"><i class="fas fa-book"></i> <span class="nav-label">Booking</span> </a>
             </li>
 
-            <li>
+            <li class="{{$content_active}}">
                 <a href="/content"><i class="fas fa-feather-alt"></i> <span class="nav-label">Content</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="/content">Dashboard</a></li>
@@ -31,28 +39,36 @@
                 </ul>
             </li>
 
-            <li>
+            <li class="{{$fields_active}}">
                 <a href="/backend-fields"><i class="fas fa-vector-square"></i> <span class="nav-label">Fields</span> </a>
             </li>
-            <li>
+
+            <li class="{{$services_active}}">
                 <a href="/backend-services"><i class="far fa-folder"></i> <span class="nav-label">Services</span> </a>
             </li>
-            <li>
-                <a href="/backend-news"><i class="fas fa-rss"></i> <span class="nav-label">News</span> </a>
-            </li>
-            <li>
-                <a href="/gallery"><i class="far fa-images"></i> <span class="nav-label">Gallery</span> </a>
-            </li>
-            <li>
-                <a href="#"><i class="fas fa-tag"></i> <span class="nav-label">Categories</span><span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse">
-                    <li><a href="graph_flot.html">Flot Charts</a></li>
-                    <li><a href="graph_morris.html">Morris.js Charts</a></li>
 
+            <li class="{{$news_active}}">
+                <a href="/backend-news"><i class="fas fa-rss"></i> <span class="nav-label">News</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="/backend-news">Posts</a></li>
+                    <li><a href="/backend-tags">Tags</a></li>
                 </ul>
             </li>
-            <li>
+
+            <li class="{{$gallery_active}}">
+                <a href="/gallery"><i class="far fa-images"></i> <span class="nav-label">Gallery</span> </a>
+            </li>
+
+            <li class="{{$menu_active}}">
+                <a href="/menu"><i class="fas fa-bars"></i> <span class="nav-label">Menu</span> </a>
+            </li>
+
+            <li class="{{$users_active}}">
                 <a href="/backend-users"><i class="fas fa-users"></i> <span class="nav-label">Users</span> </a>
+            </li>
+
+            <li class="{{$settings_active}}">
+                <a href="/settings"><i class="fas fa-sliders-h"></i> <span class="nav-label">Settings</span> </a>
             </li>
         </ul>
 

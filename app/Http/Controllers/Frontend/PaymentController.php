@@ -41,8 +41,9 @@ class PaymentController extends Controller
     {
 
         $fields_select = Field::where('status', 1)->orderBy('name', 'ASC')->get();
-        $hot_hours = ['19:00', '20:00', '21:00', '22:00'];
+        $hot_hours = ['18:00', '19:00', '20:00', '21:00', '22:00'];
         $hours = ['10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00'];
+        //$hours = ['10:00'=>'10 AM', '11:00'=>'11 AM', '12:00'=>'12 AM', '13:00'=>'1 PM', '14:00'=>'2 PM', '15:00'=>'3 PM', '16:00'=>'4 PM', '17:00'=>'5 PM', '18:00'=>'6 PM', '19:00'=>'7 PM', '20:00'=>'8 PM', '21:00'=>'9 PM', '22:00'=>'10 PM'];
         $hoursarray = array();
 
         $players_number = '';
@@ -124,6 +125,7 @@ class PaymentController extends Controller
         $hourSelected = $request->input('hourSelected');
         $dateSelected = $request->input('dateSelected');
         $fieldIdSelected = $request->input('fieldIdSelected');
+        $fieldShortName = $request->input('fieldShortName');
         $fieldSelectedName = $request->input('fieldSelectedName');
         $userIdLogin = $request->input('userIdLogin');
 
@@ -144,6 +146,7 @@ class PaymentController extends Controller
         $reservation_data = json_encode(array(
             'user_id' => $userIdLogin, 
             'field_id' => $fieldIdSelected, 
+            'field_short_name' => $fieldShortName, 
             'field_name' => $fieldSelectedName, 
             'price' => $priceSelected, 
             'date' => $dateSelected, 
@@ -217,7 +220,9 @@ class PaymentController extends Controller
             */
             
             $reservation = new Reservation();
+            $code = str_replace( array( '-', ':' ), '', $custom->field_short_name.$custom->date.$custom->hour); 
             $reservation->user_id = $custom->user_id;
+            $reservation->code = $code;
             $reservation->field_id = $custom->field_id;
             $reservation->res_date = $custom->date;
             $reservation->hour = $custom->hour;

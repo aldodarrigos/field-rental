@@ -21,7 +21,7 @@
             <form action="/fieldsrental" method="POST" id='bookform'>
             {{ csrf_field() }}
             <x-frontend.forms.input_select>
-                <x-slot name='label'>Players number</x-slot>
+                <x-slot name='label'>Field Type</x-slot>
                 <x-slot name='id'>players_number</x-slot>
                 <x-slot name='height'>big</x-slot>
                 <x-slot name='bg'>light</x-slot>
@@ -42,8 +42,8 @@
                 @endphp
 
                 <option value="0">All fields --</option>
-                <option value="1" {{$x5selected}}>5 x 5 players (6 x 6)</option>
-                <option value="2" {{$x7selected}}>7 x 7 players (9 x 9)</option>
+                <option value="1" {{$x5selected}}>5 vs 5 players (6 vs 6)</option>
+                <option value="2" {{$x7selected}}>7 vs 7 players (9 vs 9)</option>
             </x-frontend.forms.input_select>
 
             <x-frontend.forms.input_select>
@@ -123,7 +123,7 @@
                 <input type="hidden" id="priceSelected" name='priceSelected' value=''>
                 <input type="hidden" id="dateSelected" name='dateSelected' value='{{$date}}'>
                 <input type="hidden" id="fieldIdSelected" name='fieldIdSelected' value='{{$field->id}}'>
-                <input type="hidden" id="fieldSelectedName" name='fieldSelectedName' value='{{$field->name}}'>
+                <input type="hidden" id="fieldShortName" name='fieldShortName' value='{{$field->short_name}}'>
                 <input type="hidden" id="fieldSelectedName" name='fieldSelectedName' value='{{$field->name}}'>
                 @if (isset(Auth::user()->name))
                     <input type="hidden" id="userIdLogin" name='userIdLogin' value='{{Auth::user()->id}}'>
@@ -133,9 +133,9 @@
 
                 @php
                     if($field->tag_id == 1){
-                        $field_players_number = '5 x 5 Players (6 x 6)';
+                        $field_players_number = '5 vs 5 Players (6 vs 6)';
                     }else if($field->tag_id == 2){
-                        $field_players_number = '7 x 7 Players (9 x 9)';
+                        $field_players_number = '7 vs 7 Players (9 vs 9)';
                     }
                 @endphp
     
@@ -167,11 +167,28 @@
                                         $pointer = 'cursor-not-allowed';
                                         $decoration = 'line-through';
                                     }
+                                    if($hoursarray[$i]['hour'] == '8:00'){ $hour_fix = '8 AM'; }
+                                    else if ($hoursarray[$i]['hour'] == '9:00'){ $hour_fix = '9 AM'; }
+                                    else if ($hoursarray[$i]['hour'] == '10:00'){ $hour_fix = '10 AM'; }
+                                    else if ($hoursarray[$i]['hour'] == '11:00'){ $hour_fix = '11 AM'; }
+                                    else if ($hoursarray[$i]['hour'] == '12:00'){ $hour_fix = '12 AM'; }
+                                    else if ($hoursarray[$i]['hour'] == '13:00'){ $hour_fix = '1 PM'; }
+                                    else if ($hoursarray[$i]['hour'] == '14:00'){ $hour_fix = '2 PM'; }
+                                    else if ($hoursarray[$i]['hour'] == '15:00'){ $hour_fix = '3 PM'; }
+                                    else if ($hoursarray[$i]['hour'] == '16:00'){ $hour_fix = '4 PM'; }
+                                    else if ($hoursarray[$i]['hour'] == '17:00'){ $hour_fix = '5 PM'; }
+                                    else if ($hoursarray[$i]['hour'] == '18:00'){ $hour_fix = '6 PM'; }
+                                    else if ($hoursarray[$i]['hour'] == '19:00'){ $hour_fix = '7 PM'; }
+                                    else if ($hoursarray[$i]['hour'] == '20:00'){ $hour_fix = '8 PM'; }
+                                    else if ($hoursarray[$i]['hour'] == '21:00'){ $hour_fix = '9 PM'; }
+                                    else if ($hoursarray[$i]['hour'] == '22:00'){ $hour_fix = '10 PM'; }
+
                                 @endphp
                                 <x-frontend.buttons.hour>
                                     <x-slot name='bg'>{{$color}}</x-slot>
-                                    <x-slot name='text'>{{$hoursarray[$i]['hour']}}</x-slot>
+                                    <x-slot name='text'>{{$hour_fix}}</x-slot>
                                     <x-slot name='class'>{{$hoursarray[$i]['class']}}</x-slot>
+                                    <x-slot name='dataHour'>{{$hoursarray[$i]['hour']}}</x-slot>
                                     <x-slot name='dataPrice'>{{$hoursarray[$i]['price']}}</x-slot>
                                     <x-slot name='pointer'>{{$pointer}}</x-slot>
                                     <x-slot name='decoration'>{{$decoration}}</x-slot>
@@ -182,6 +199,7 @@
                                 <x-slot name='bg'>info</x-slot>
                                 <x-slot name='text'><i class="fas fa-broom"></i></x-slot>
                                 <x-slot name='class'>clean</x-slot>
+                                <x-slot name='dataHour'></x-slot>
                                 <x-slot name='dataPrice'></x-slot>
                                 <x-slot name='pointer'>cursor-pointer</x-slot>
                                 <x-slot name='decoration'></x-slot>
@@ -202,7 +220,8 @@
                                 $(this).toggleClass("bg-info");
                                 let day = $(this).text();
                                 let price = $(this).data("price");
-                                $('#hourSelected').val(day);
+                                let hour = $(this).data("hour");
+                                $('#hourSelected').val(hour);
                                 $('#day_hour').text(day);
                                 $('#price').text(price);
                                 $('#priceSelected').val(price);
@@ -247,7 +266,7 @@
                     <x-slot name='sumary_color'>white</x-slot>
      
                     <x-slot name='button_link'></x-slot>
-                    <x-slot name='button_text'>Confirm and Pay with <span class="text-warning">PayPal</span> <i class="far fa-credit-card"></i></x-slot>
+                    <x-slot name='button_text'>Confirm and Pay <i class="far fa-credit-card"></i></x-slot>
                     <x-slot name='button_size'>big</x-slot>
     
                 

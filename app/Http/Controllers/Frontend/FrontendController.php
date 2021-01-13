@@ -49,7 +49,8 @@ class FrontendController extends Controller
     public function service($slug = null)
     {
 
-        return view('frontend/service', ['seo' => 'xxx']);
+        $service = Service::where('slug', $slug)->first();
+        return view('frontend/service', ['seo' => 'xxx', 'service' => $service]);
         
     }
 

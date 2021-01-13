@@ -11,22 +11,19 @@
 
     <div class="row">
 
-        <div class="col-md-6">
+        <div class="col-md-8">
 
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="form-group ">
-                        <label >Name</label>
-                        <input type="text" name='name' class="form-control" @if(!empty($content->name)) value="{{$content->name}}" @endif>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group ">
-                        <label >Number</label>
-                        <input type="text" name='number' class="form-control" @if(!empty($content->number)) value="{{$content->number}}" @endif>
-                    </div>
-                </div>
+            <div class="form-group ">
+                <label >Title</label>
+                <input type="text" name='title' class="form-control" @if(!empty($content->title)) value="{{$content->title}}" @endif required>
             </div>
+
+            @if ($form == 'update')
+                <div class="form-group ">
+                    <label>Slug</label>
+                    <input type="text" name='slug' class="form-control" @if(!empty($content->slug)) value="{{$content->slug}}" @endif>
+                </div>
+            @endif
 
             <div class="form-group ">
                 <label >Sumary</label>
@@ -35,83 +32,94 @@
 
             <div class="form-group ">
                 <label >Content</label>
-                <textarea name="content" class="form-control" rows="8">@if(!empty($content->content)){{$content->content}} @endif</textarea>
+                <textarea name="content" class="form-control summernote" rows="15">@if(!empty($content->content)){{$content->content}} @endif</textarea>
             </div>
 
         </div>
 
-        <div class="col-md-6">
-            
-            <div class="row">
-                
-                <div class="col-md-4">
-                    <div class="form-group ">
-                        <label>Price regular</label>
-                        <input type="text" name='price_regular' class="form-control" @if(!empty($content->price_regular)) value="{{$content->price_regular}}" @endif>
-                    </div>
-                </div>
+        <div class="col-md-4">
 
-                <div class="col-md-4">
-                    <div class="form-group ">
-                        <label>Price Night</label>
-                        <input type="text" name='price_night' class="form-control" @if(!empty($content->price_night)) value="{{$content->price_night}}" @endif>
-                    </div>
-                </div>
+            <div class="form-group ">
+                <label>Image Large</label>
+                <input type="text" name='img' class="form-control" @if(!empty($content->img)) value="{{$content->img}}" @endif>
+            </div>
 
-                <div class="col-md-4">
-                    <div class="form-group ">
-                        <label>Price Weekend</label>
-                        <input type="text" name='price_weekend' class="form-control" @if(!empty($content->price_weekend)) value="{{$content->price_weekend}}" @endif>
-                    </div>
-                </div>
+            <div class="form-group ">
+                <label>Image Medium</label>
+                <input type="text" name='img_md' class="form-control" @if(!empty($content->img_md)) value="{{$content->img_md}}" @endif>
+            </div>
 
+            <div class="form-group ">
+                <label>Image Small</label>
+                <input type="text" name='img_sm' class="form-control" @if(!empty($content->img_sm)) value="{{$content->img_sm}}" @endif>
             </div>
 
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group ">
-                        <label for='group'>Players Number</label>
+                        <label for='group'>Tags</label>
                         <select class="form-control m-b" name="tag_id">
 
                             <option value='0'>--SELECT--</option>
-                            @if ($form == 'update')
-                                @if ($content->tag_id == 1)
-                                    <option value='1' selected>5 x 5 players (6 x 6)</option>
-                                    <option value='2'>7 x 7 players (9 x 9)</option>
-                                @else
-                                    <option value='1'>5 x 5 players (6 x 6)</option>
-                                    <option value='2' selected>7 x 7 players (9 x 9)</option>
-                                @endif
-                            @else
-                                <option value='1'>5 x 5 players (6 x 6)</option>
-                                <option value='2'>7 x 7 players (9 x 9)</option>
-                            @endif
-                            
+                            @foreach ($tags as $tag)
+
+                                @php
+                                    if($form == 'update'){
+                                        $selected = ($content->tag_id == $tag->id)?'selected':'';
+                                    }else{
+                                        $selected = '';
+                                    }
+                                @endphp
+
+                                <option value='{{$tag->id}}' {{$selected}}>{{$tag->name}}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
 
                 <div class="col-md-6">
+
                     <div class="form-group ">
+                        <label >Pub Date</label>
 
-                        <label for='group'>Status</label>
-                        <select class="form-control m-b" name="status">
-                            @if ($form == 'update')
-                                @if ($content->status == 1)
-                                    <option value='1' selected>Published</option>
-                                    <option value='0'>Unpublish</option>
-                                @else
-                                    <option value='1'>Published</option>
-                                    <option value='0' selected>Unpublish</option>
-                                @endif
+
+                        <div class="input-group date">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" name='pub_date' 
+                            @if (!empty($content->pub_date))
+                                value="{{$content->pub_date}}"
                             @else
-                                <option value='1'>Published</option>
-                                <option value='0'>Unpublish</option>
+                                value="{{date('Y-m-d')}}"
                             @endif
+                            >
+                        </div>
 
-                        </select>
+                        
                     </div>
+
+
+
+
                 </div>
+            </div>
+
+            <div class="form-group ">
+
+                <label for='group'>Status</label>
+                <select class="form-control m-b" name="status">
+                    @if ($form == 'update')
+                        @if ($content->status == 1)
+                            <option value='1' selected>Published</option>
+                            <option value='0'>Unpublish</option>
+                        @else
+                            <option value='1'>Published</option>
+                            <option value='0' selected>Unpublish</option>
+                        @endif
+                    @else
+                        <option value='1'>Published</option>
+                        <option value='0'>Unpublish</option>
+                    @endif
+
+                </select>
             </div>
 
 
@@ -119,7 +127,7 @@
             @if(!empty($put))
             <input type="hidden" name="_method" value="PUT">
             @endif
-            <a href="/backend-fields" class="btn btn-w-m btn-default"><i class="fas fa-undo-alt"></i> Return</a>
+            <a href="/backend-news" class="btn btn-w-m btn-default"><i class="fas fa-undo-alt"></i> Return</a>
         </div>
 
     </div>

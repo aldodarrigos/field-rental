@@ -65,7 +65,7 @@
             <div class="ibox-title">
                 <h5>Booking history</h5>
                 <div class="ibox-tools">
-                    <a href="" class="btn btn-primary btn-xs">New Booking</a>
+                    <a href="/backend-booking/create" class="btn btn-primary btn-xs">New Booking</a>
                 </div>
             </div>
             <div class="ibox-content">
@@ -80,8 +80,7 @@
                 <th>Email</th>
                 <th>Price</th>
                 <th>Booking</th>
-                <th>RegDate</th>
-                <th>Paypal</th>
+                <th>Note</th>
             </tr>
             </thead>
             <tbody>
@@ -100,14 +99,13 @@
                     @endphp
 
                     <tr class="gradeX">
-                        <td><span class="btn btn-{{$status_color}} btn-xs">{{$status}}</span></td>
+                        <td><span class="text-{{$status_color}}"><i class="fas fa-circle"></i></span> {{$reservation->code}}</td>
                         <td>{{$reservation->field_name}}</td>
                         <td><strong>{{$reservation->user_name}}</strong></td>
                         <td>{{$reservation->user_email}}</td>
                         <td>${{$reservation->price}}</td>
                         <td class="center text-{{$status_color}}">{!!$reservation->res_date.' <strong>'.$reservation->hour.'</strong>'!!}</td>
-                        <td class="center">{{$reservation->created_at}}</td>
-                        <td class="center">{{$reservation->res_code}}</td>
+                        <td class="center"><a href="/backend-booking/{{$reservation->id}}" class="btn btn-success btn-xs">Details</a></td>
                     </tr>
 
                 @endforeach

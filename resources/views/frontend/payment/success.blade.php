@@ -44,6 +44,7 @@
                 <x-slot name='price'>{{$reservation->price}}</x-slot>
                 <x-slot name='user'>{{$user->name}}</x-slot>
                 <x-slot name='paypalcode'>{{$reservation->conf_code}}</x-slot>
+                <x-slot name='code'>{{$reservation->code}}</x-slot>
                 
 
             

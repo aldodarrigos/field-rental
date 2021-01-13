@@ -108,7 +108,7 @@ class ServicesBackController extends Controller
         $service->status = $request->input('status');
         $service->save();
 
-        return redirect('backend-services/'.$id.'/edit');
+        return redirect('backend-services/'.$id.'/edit')->with('success', 'Successful update!');
 
     }
 

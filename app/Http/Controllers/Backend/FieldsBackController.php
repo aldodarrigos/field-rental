@@ -57,6 +57,7 @@ class FieldsBackController extends Controller
         $content->name = $name;
         $content->slug = $slug_input;
         
+        $content->short_name = $request->input('short_name');
         $content->sumary = $request->input('sumary');
         $content->content = $request->input('content');
 
@@ -108,7 +109,8 @@ class FieldsBackController extends Controller
 
         $content->name = $name;
         $content->slug = $slug_input;
-        
+        $content->short_name = $request->input('short_name');
+
         $content->sumary = $request->input('sumary');
         $content->content = $request->input('content');
 
@@ -121,7 +123,7 @@ class FieldsBackController extends Controller
         $content->status = $request->input('status');
         $content->save();
 
-        return redirect('backend-fields/'.$id.'/edit');
+        return redirect('backend-fields/'.$id.'/edit')->with('success', 'Successful update!');
 
     }
 

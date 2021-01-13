@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\{Field};
+use App\Models\{Post, Tag};
 use DB;
 use Illuminate\Support\Str;
 //use GuzzleHttp\Client;
@@ -18,9 +18,15 @@ class NewsBackController extends Controller
      */
     public function index()
     {
-        $records = Field::all();
+        $records = Post::all();
 
-        $url = "fields";
+        $records = DB::table('posts')
+        ->select(DB::raw('posts.id, posts.title, tags.name as tag_name, posts.pub_date, posts.status'))
+        ->leftJoin('tags', 'posts.tag_id', '=', 'tags.id')
+        ->orderBy('posts.pub_date', 'desc')
+        ->get();
+
+        $url = "news";
         
         return view('backend/news/index', ['records' => $records, 'url' => $url]);
 
@@ -34,11 +40,12 @@ class NewsBackController extends Controller
     public function create()
     {
 
-        $action = route('backend-fields.store');
-        $url = "fields";
+        $action = route('backend-news.store');
+        $tags = Tag::where('status', 1)->orderBy('name', 'ASC')->get();
+        $url = "news";
         $form = 'new';
 
-        return view('backend/fields/create', ['action' => $action, 'url' => $url, 'form' => $form]);
+        return view('backend/news/create', ['action' => $action, 'url' => $url, 'form' => $form, 'tags' => $tags]);
     }
     
     /**
@@ -49,27 +56,27 @@ class NewsBackController extends Controller
      */
     public function store(Request $request)
     {
-        $content = new Field();
+        $post = new Post();
 
-        $name = $request->input('name');
-        $slug_input = Str::of($name)->slug('-');
+        $title = $request->input('title');
+        $slug_input = Str::of($title)->slug('-');
 
-        $content->name = $name;
-        $content->slug = $slug_input;
+        $post->title = $title;
+        $post->slug = $slug_input;
         
-        $content->sumary = $request->input('sumary');
-        $content->content = $request->input('content');
+        $post->sumary = $request->input('sumary');
+        $post->content = $request->input('content');
 
-        $content->price_regular = $request->input('price_regular');
-        $content->price_night = $request->input('price_night');
-        $content->price_weekend = $request->input('price_weekend');
-        $content->number = $request->input('number');
+        $post->img = $request->input('img');
+        $post->img_md = $request->input('img_md');
+        $post->img_sm = $request->input('img_sm');
 
-        $content->tag_id = $request->input('tag_id');
-        $content->status = $request->input('status');
-        $content->save();
+        $post->tag_id = $request->input('tag_id');
+        $post->pub_date = $request->input('pub_date');
+        $post->status = $request->input('status');
+        $post->save();
 
-        return redirect('backend-fields');
+        return redirect('backend-news');
     }
 
     /**
@@ -81,14 +88,15 @@ class NewsBackController extends Controller
     public function edit($id)
     {
         
-        $action = route('backend-fields.update', $id);
-        $content = Field::find($id);
+        $action = route('backend-news.update', $id);
+        $tags = Tag::where('status', 1)->orderBy('name', 'ASC')->get();
+        $content = Post::find($id);
         $put = True;
         $form = 'update';
 
-        $url = "fields";
+        $url = "news";
 
-        return view('backend/fields/update', ['content' => $content, 'action' => $action, 'url' => $url, 'put' => $put,  'form' => $form]);
+        return view('backend/news/update', ['content' => $content, 'action' => $action, 'url' => $url, 'put' => $put,  'form' => $form, 'tags' => $tags]);
     }
 
     /**
@@ -101,27 +109,24 @@ class NewsBackController extends Controller
     public function update(Request $request, $id)
     {
 
-        $content = Field::find($id);
+        $post = Post::find($id);
 
-        $name = $request->input('name');
-        $slug_input = Str::of($name)->slug('-');
-
-        $content->name = $name;
-        $content->slug = $slug_input;
+        $post->title = $request->input('title');
+        $post->slug = $request->input('slug');
         
-        $content->sumary = $request->input('sumary');
-        $content->content = $request->input('content');
+        $post->sumary = $request->input('sumary');
+        $post->content = $request->input('content');
 
-        $content->price_regular = $request->input('price_regular');
-        $content->price_night = $request->input('price_night');
-        $content->price_weekend = $request->input('price_weekend');
-        $content->number = $request->input('number');
+        $post->img = $request->input('img');
+        $post->img_md = $request->input('img_md');
+        $post->img_sm = $request->input('img_sm');
 
-        $content->tag_id = $request->input('tag_id');
-        $content->status = $request->input('status');
-        $content->save();
+        $post->tag_id = $request->input('tag_id');
+        $post->pub_date = $request->input('pub_date');
+        $post->status = $request->input('status');
+        $post->save();
 
-        return redirect('backend-fields/'.$id.'/edit');
+        return redirect('backend-news/'.$id.'/edit')->with('success', 'Successful update!');
 
     }
 

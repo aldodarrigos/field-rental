@@ -123,7 +123,7 @@ class ContentController extends Controller
         $content->status = $request->input('status');
         $content->save();
 
-        return redirect('content/'.$id.'/edit');
+        return redirect('content/'.$id.'/edit')->with('success', 'Successful update!');
 
     }
 

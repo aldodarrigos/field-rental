@@ -30,6 +30,10 @@
                 <div class="font-roboto text-lg uppercase font-bold leading-none mb-2 mt-2">PayPal Code</div>
                 <div class="font-roboto text-xl uppercase font-bold leading-none mb-2 mt-2 text-warning">{{$paypalcode}}</div>
             </div>
+            <div class="mt-4">
+                <div class="font-roboto text-lg uppercase font-bold leading-none mb-2 mt-2">Reservation Code</div>
+                <div class="font-roboto text-xl uppercase font-bold leading-none mb-2 mt-2 text-warning">{{$code}}</div>
+            </div>
 
         </div>
     </div>

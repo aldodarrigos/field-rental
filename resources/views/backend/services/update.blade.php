@@ -6,6 +6,19 @@
 
     @parent
 
+    <link href="{{asset('inspinia/css/plugins/summernote/summernote-bs4.css')}}" rel="stylesheet">
+
+    <!-- SUMMERNOTE -->
+    <script src="{{asset('inspinia/js/plugins/summernote/summernote-bs4.js')}}"></script>
+
+    <script>
+        $(document).ready(function(){
+
+            $('.summernote').summernote('content');
+
+        });
+    </script>
+
 @endsection
 
 

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\{Reservation};
+use App\Models\{Reservation, Field};
 use DB;
 use Illuminate\Support\Str;
 use GuzzleHttp\Client;
@@ -19,7 +19,7 @@ class ReservationController extends Controller
     public function index()
     {
         $reservations = DB::table('reservations')
-        ->select(DB::raw('reservations.id, users.name as user_name, users.email as user_email, fields.name as field_name, reservations.hour as hour, reservations.res_date as res_date, reservations.price as price, reservations.conf_code as res_code, reservations.created_at as created_at'))
+        ->select(DB::raw('reservations.id, reservations.code, users.name as user_name, users.email as user_email, fields.name as field_name, reservations.hour as hour, reservations.res_date as res_date, reservations.price as price, reservations.conf_code as res_code, reservations.created_at as created_at'))
         ->leftJoin('users', 'reservations.user_id', '=', 'users.id')
         ->leftJoin('fields', 'reservations.field_id', '=', 'fields.id')
         ->orderBy('reservations.created_at', 'desc')
@@ -36,14 +36,87 @@ class ReservationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
 
-        $tags = Tag::where('group_id', 1)->get();
-        $action = route('backend-posts.store');
-        $url = "posts";
+        $fields = Field::where('status', 1)->orderBy('number', 'ASC')->get();
+        $action = route('backend-booking.store');
+        $url = "reservations";
 
-        return view('backend.posts.create')->with(compact('action', 'tags', 'url'));
+        $hot_hours = ['18:00', '19:00', '20:00', '21:00', '22:00'];
+        $hours = ['10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00'];
+        $hoursarray = array();
+        
+        $players_number = '';
+        $field_id = '';
+        $date = '';
+
+        if($request->input('field')){
+
+            $field_id = $request->input('field');
+            $players_number = $request->input('players_number');
+            $date = $request->input('date');
+            $field = Field::where('id', $field_id)->first();
+
+            $reservations = Reservation::where([
+                ['field_id', $field->id],
+                ['res_date', $date]
+            ])->get();
+
+            foreach($hours as $item){
+
+                if((date('N', strtotime($date)) >= 6)){
+                    $price = $field->price_weekend;
+                }else{
+                    if(in_array($item, $hot_hours)){
+                        $price = $field->price_night;
+                    }else{
+                        $price = $field->price_regular;
+                    }
+                }
+
+                if($this->check_hours($item, $field->id, $date)){
+                    array_push($hoursarray, 
+                    ['hour' => $item, 
+                    'class' => 'reservedday',
+                    'price' => $price
+                    ]);
+                }else{
+                    array_push($hoursarray, [
+                        'hour' => $item, 
+                        'class' => 'dummyclass',
+                        'price' => $price
+                        ]);
+                }
+            }
+
+            $result = 1;
+
+
+        }else{
+            $field = 0;
+            $reservations = 0;
+            $date = 0;
+            $result = 0;
+        }
+
+
+        return view('backend/reservations/create', ['action' => $action, 'url' => $url, 'result' => $result, 'field' => $field, 'field_id' => $field_id, 'date' => $date, 'fields' => $fields, 'reservations' => $reservations, 'hoursarray' => $hoursarray, 'players_number' => $players_number]);
+    }
+
+    public function check_hours($hour, $field, $date){
+
+        $reservations = Reservation::where([
+            ['field_id', $field],
+            ['res_date', $date]
+        ])->get();
+
+        foreach($reservations as $item){
+            if($hour == $item->hour){
+                return true;
+                break;
+            }
+        }
     }
     
     /**
@@ -53,30 +126,23 @@ class ReservationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+        $booking = new Reservation();
+        $short_name =$request->input('fieldShortName');
+        $date =$request->input('dateSelected');
+        $hour =$request->input('hourSelected');
+        $code = str_replace( array( '-', ':' ), '', $short_name.$date.$hour); 
 
-        
-        $title = $request->input('title');
-        $slug_input = $request->input('slug');
-        $slug = ($slug_input = "")?$slug_input:Str::of($title)->slug('-');
-        
+        $booking->code = $code;
+        $booking->user_id = $request->input('userIdLogin');
+        $booking->field_id = $request->input('fieldIdSelected');
+        $booking->res_date = $date;
+        $booking->hour = $hour;
+        $booking->price = $request->input('priceSelected');
+        $booking->note = $request->input('note');
+        $booking->save();
 
-        $post = new Post();
-
-        $post->title = $title;
-        $post->slug = $slug;
-        $post->sumary = $request->input('sumary');
-        $post->content = $request->input('content');
-        $post->img = $request->input('img');
-        $post->img_med = $request->input('img_med');
-        $post->img_tiny = $request->input('img_tiny');
-        $post->youtube = $request->input('youtube');
-        $post->tag_id = $request->input('tag_id');
-        $post->pub_date = $request->input('pub_date');
-        $post->status = $request->input('status');
-        $post->save();
-
-        return redirect('backend-posts');
+        return redirect('backend-booking');
     }
 
     /**
@@ -88,13 +154,13 @@ class ReservationController extends Controller
     public function edit($id)
     {
         
-        $action = route('backend-posts.update', $id);
+        $action = route('backend-booking.update', $id);
         $post = Post::find($id);
         $tags = Tag::where('group_id', 1)->get();
 
         $url = "posts";
 
-        return view('backend/posts/update')->with(compact('post', 'tags', 'action', 'url'));
+        return view('backend/reservations/update')->with(compact('post', 'tags', 'action', 'url'));
     }
 
     /**
@@ -122,8 +188,24 @@ class ReservationController extends Controller
         $post->status = $request->input('status');
         $post->save();
 
-        return redirect('backend-posts/'.$id.'/edit');
+        return redirect('backend-posts/'.$id.'/edit')->with('success', 'Successful update!');
 
+    }
+
+    public function show($id)
+    {
+
+        $reservation = DB::table('reservations')
+        ->select(DB::raw('reservations.id, reservations.code, reservations.code, users.name as user_name, users.email as user_email, fields.name as field_name, reservations.hour as hour, reservations.res_date as res_date, reservations.price as price, reservations.conf_code as res_code, reservations.created_at as created_at, reservations.note'))
+        ->leftJoin('users', 'reservations.user_id', '=', 'users.id')
+        ->leftJoin('fields', 'reservations.field_id', '=', 'fields.id')
+        ->where('reservations.id', $id)
+        ->orderBy('reservations.created_at', 'desc')
+        ->first();
+
+        $url = "reservations";
+
+        return view('backend/reservations/show', ['reservation' => $reservation, 'url' => $url]);
     }
 
     /**

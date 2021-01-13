@@ -23,9 +23,10 @@
                 <textarea name="sumary" class="form-control" rows="4">@if(!empty($content->sumary)){{$content->sumary}} @endif</textarea>
             </div>
 
+
             <div class="form-group ">
                 <label >Content</label>
-                <textarea name="content" class="form-control" rows="8">@if(!empty($content->content)){{$content->content}} @endif</textarea>
+                <textarea name="content" class="form-control summernote" rows="8">@if(!empty($content->content)){{$content->content}} @endif</textarea>
             </div>
 
         </div>
@@ -68,10 +69,10 @@
                 <div class="col-md-4">
                     <div class="i-checks mt-4">
                         @if ($form == 'new')
-                            <label> <input type="checkbox" name='flag' value="1"> Flag</label>
+                            <label> <input type="checkbox" name='flag' value="1"> In Cover</label>
                         @else
                             @php $flagchecked = ($content->flag == 1)?'checked':''; @endphp
-                            <label> <input type="checkbox" name='flag' value="1" {{$flagchecked}}> Flag</label>
+                            <label> <input type="checkbox" name='flag' value="1" {{$flagchecked}}> In Cover</label>
                         @endif
                     </div>
                 </div>

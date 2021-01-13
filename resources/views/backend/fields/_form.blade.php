@@ -14,13 +14,19 @@
         <div class="col-md-6">
 
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-7">
                     <div class="form-group ">
                         <label >Name</label>
                         <input type="text" name='name' class="form-control" @if(!empty($content->name)) value="{{$content->name}}" @endif>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
+                    <div class="form-group ">
+                        <label >Short Name</label>
+                        <input type="text" name='short_name' class="form-control" @if(!empty($content->short_name)) value="{{$content->short_name}}" @endif>
+                    </div>
+                </div>
+                <div class="col-md-2">
                     <div class="form-group ">
                         <label >Number</label>
                         <input type="text" name='number' class="form-control" @if(!empty($content->number)) value="{{$content->number}}" @endif>
@@ -76,15 +82,15 @@
                             <option value='0'>--SELECT--</option>
                             @if ($form == 'update')
                                 @if ($content->tag_id == 1)
-                                    <option value='1' selected>5 x 5 players (6 x 6)</option>
-                                    <option value='2'>7 x 7 players (9 x 9)</option>
+                                    <option value='1' selected>5 vs 5 players (6 vs 6)</option>
+                                    <option value='2'>7 vs 7 players (9 vs 9)</option>
                                 @else
-                                    <option value='1'>5 x 5 players (6 x 6)</option>
-                                    <option value='2' selected>7 x 7 players (9 x 9)</option>
+                                    <option value='1'>5 vs 5 players (6 vs 6)</option>
+                                    <option value='2' selected>7 vs 7 players (9 vs 9)</option>
                                 @endif
                             @else
-                                <option value='1'>5 x 5 players (6 x 6)</option>
-                                <option value='2'>7 x 7 players (9 x 9)</option>
+                                <option value='1'>5 vs 5 players (6 vs 6)</option>
+                                <option value='2'>7 vs 7 players (9 vs 9)</option>
                             @endif
                             
                         </select>

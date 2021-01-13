@@ -26,7 +26,7 @@
             <div class="w-3/3 md:w-1/3 flex gap-4 border-0 md:border-r border-lines items-center ">
                 <div class="text-bluetext text-3x5 font-bold leading-none pr-2 font-roboto">01</div>
                 <div class="pr-4 w-full">
-                    <small class="text-red text-xs uppercase">Players number</small>
+                    <small class="text-red text-xs uppercase">Field Type</small>
                     <div>                    
                         <x-frontend.forms.input_select>
                             <x-slot name='label'>players_number</x-slot>
@@ -36,8 +36,8 @@
                             <x-slot name='label_on_off'>off</x-slot>
     
                             <option value="0" selected>Players number --</option>
-                            <option value="1">5 x 5</option>
-                            <option value="2">7 x 7</option>
+                            <option value="1">5 vs 5 players (6 vs 6)</option>
+                            <option value="2">7 vs 7 players (9 vs 9)</option>
                         </x-frontend.forms.input_select>
                     </div>
                 </div>
