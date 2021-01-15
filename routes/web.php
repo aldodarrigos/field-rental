@@ -11,7 +11,7 @@ use App\Http\Controllers\Backend\ContentController;
 use App\Http\Controllers\Backend\ContentGroupsController;
 use App\Http\Controllers\Backend\FieldsBackController;
 use App\Http\Controllers\Backend\ServicesBackController;
-use App\Http\Controllers\Backend\NewsbackController;
+use App\Http\Controllers\Backend\NewsBackController;
 use App\Http\Controllers\Backend\MenuController;
 use App\Http\Controllers\Backend\TagsbackController;
 use App\Http\Controllers\Backend\GalleryController;
@@ -84,7 +84,7 @@ Route::middleware(['admin'])->group(function () {
     Route::resource('content-groups', ContentGroupsController::class);
     Route::resource('backend-fields', FieldsBackController::class);
     Route::resource('backend-services', ServicesBackController::class);
-    Route::resource('backend-news', NewsbackController::class);
+    Route::resource('backend-news', NewsBackController::class);
     Route::resource('backend-tags', TagsbackController::class);
     Route::resource('gallery', GalleryController::class);
     Route::resource('settings', SettingsController::class);
