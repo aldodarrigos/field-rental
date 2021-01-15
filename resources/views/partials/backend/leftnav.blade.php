@@ -8,6 +8,7 @@
     $menu_active = ($url == 'menu')?'active':'';
     $settings_active = ($url == 'settings')?'active':'';
     $users_active = ($url == 'users')?'active':'';
+    $slides_active = ($url == 'slides')?'active':'';
 @endphp
 
 <nav class="navbar-default navbar-static-side" role="navigation">
@@ -59,17 +60,20 @@
                 <a href="/gallery"><i class="far fa-images"></i> <span class="nav-label">Gallery</span> </a>
             </li>
 
-            <li class="{{$menu_active}}">
-                <a href="/menu"><i class="fas fa-bars"></i> <span class="nav-label">Menu</span> </a>
-            </li>
-
             <li class="{{$users_active}}">
-                <a href="/backend-users"><i class="fas fa-users"></i> <span class="nav-label">Users</span> </a>
+                <a href="/users"><i class="fas fa-users"></i> <span class="nav-label">Users</span> </a>
             </li>
 
-            <li class="{{$settings_active}}">
-                <a href="/settings"><i class="fas fa-sliders-h"></i> <span class="nav-label">Settings</span> </a>
+            
+            <li class="{{$slides_active}}">
+                <a href="/backend-news"><i class="fas fa-sliders-h"></i> <span class="nav-label">Settings</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="/settings/1/edit">Global settings</a></li>
+                    <li><a href="/menu">Menu</a></li>
+                    <li><a href="/slides">SlideShow</a></li>
+                </ul>
             </li>
+
         </ul>
 
     </div>

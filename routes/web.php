@@ -15,6 +15,9 @@ use App\Http\Controllers\Backend\NewsbackController;
 use App\Http\Controllers\Backend\MenuController;
 use App\Http\Controllers\Backend\TagsbackController;
 use App\Http\Controllers\Backend\GalleryController;
+use App\Http\Controllers\Backend\SettingsController;
+use App\Http\Controllers\Backend\UsersController;
+use App\Http\Controllers\Backend\SlidesController;
 use App\Providers\RouteServiceProvider;
 /*
 |--------------------------------------------------------------------------
@@ -75,6 +78,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::middleware(['admin'])->group(function () {
     Route::get('backend/dashboard', [DashboardController::class, 'index'])->name('backend.dashboard');
     Route::resource('backend-booking', ReservationController::class);
+    Route::get('calendar', [ReservationController::class, 'calendar'])->name('backend.calendar');
+    Route::get('get-reservations', [ReservationController::class, 'get_reservations'])->name('backend.get-reservations');
     Route::resource('content', ContentController::class);
     Route::resource('content-groups', ContentGroupsController::class);
     Route::resource('backend-fields', FieldsBackController::class);
@@ -82,9 +87,14 @@ Route::middleware(['admin'])->group(function () {
     Route::resource('backend-news', NewsbackController::class);
     Route::resource('backend-tags', TagsbackController::class);
     Route::resource('gallery', GalleryController::class);
+    Route::resource('settings', SettingsController::class);
+    Route::resource('slides', SlidesController::class);
+    Route::post('slides-sort', [SlidesController::class, 'sort'])->name('backend.slides.sort');
+    Route::resource('users', UsersController::class);
     Route::get('delete-file/{id?}', [GalleryController::class, 'destroy'])->name('backend.gallery.delete');
     Route::resource('menu', MenuController::class);
     Route::post('menu-sort', [MenuController::class, 'sort'])->name('backend.menu.sort');
     Route::post('services-sort', [ServicesBackController::class, 'sort'])->name('backend.services.sort');
+    
 
 });

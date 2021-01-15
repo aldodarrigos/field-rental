@@ -65,6 +65,7 @@
             <div class="ibox-title">
                 <h5>Booking history</h5>
                 <div class="ibox-tools">
+                    <a href="/calendar" class="btn btn-xs btn-success text-white" style='color: #fff!Important;'>Calendar <i class="far fa-calendar-alt"></i></a>
                     <a href="/backend-booking/create" class="btn btn-primary btn-xs">New Booking</a>
                 </div>
             </div>

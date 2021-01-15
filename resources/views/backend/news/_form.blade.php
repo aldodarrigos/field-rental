@@ -81,8 +81,6 @@
 
                     <div class="form-group ">
                         <label >Pub Date</label>
-
-
                         <div class="input-group date">
                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" name='pub_date' 
                             @if (!empty($content->pub_date))
@@ -92,12 +90,7 @@
                             @endif
                             >
                         </div>
-
-                        
                     </div>
-
-
-
 
                 </div>
             </div>

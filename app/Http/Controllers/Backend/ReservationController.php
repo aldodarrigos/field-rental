@@ -219,17 +219,36 @@ class ReservationController extends Controller
         //
     }
 
-    public function get_tags_api($url, $token, $id_group){
+    public function calendar(){
 
-        $client = new Client([
-            'base_uri' => $url,
-            'timeout'  => 10.0,
-            'headers' => ['Content-Type'=> 'application/json', "Authorization"=> "Bearer ".$token.""]
-        ]);
+        $reservations = Reservation::all();
+        $url = 'reservations';
 
-        $response_tag = $client->request('GET', 'api/tags-group/'.$id_group);
-        $tags =  json_decode($response_tag->getBody()->getContents());
+        return view('backend/reservations/calendar', ['reservations' => $reservations, 'url' => $url]);
+    }
 
-        return $tags;
+    public function get_reservations()
+    {
+        $array = [];
+        //$reservations = Reservation::orderBy('res_date', 'DESC')->get();
+
+        $reservations = DB::table('reservations')
+        ->select(DB::raw('reservations.id, reservations.code, users.name as user_name, fields.name as field_name, fields.short_name as field_short_name, reservations.hour, reservations.res_date'))
+        ->leftJoin('users', 'reservations.user_id', '=', 'users.id')
+        ->leftJoin('fields', 'reservations.field_id', '=', 'fields.id')
+        ->orderBy('reservations.res_date', 'desc')
+        ->get();
+        
+        $options = '<option value="0" selected="">Pick a Field --</option>';
+        foreach($reservations as $item){
+            array_push($array, array(
+                'title' => $item->user_name.' - '.$item->field_short_name, 
+                'start' => $item->res_date.' '.$item->hour,
+                'url' => '/backend-booking/'.$item->id,
+                'note' => $item->field_name.' - '.$item->res_date.' - '.$item->hour.' - '.$item->code,
+            ));
+        }
+        return $array;
+        
     }
 }

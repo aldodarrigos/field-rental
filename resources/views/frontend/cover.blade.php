@@ -13,6 +13,7 @@
 
 <div class="separation h-50p"></div>
 
+
 <div class="w-11/12 md:w-boxed mx-auto">
     <livewire:frontend.cover-about></livewire:frontend.cover-about>
 </div>
