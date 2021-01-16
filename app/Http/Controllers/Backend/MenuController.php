@@ -21,7 +21,7 @@ class MenuController extends Controller
         $records = Menu::orderBy('sort', 'ASC')->get();
         $records_active = Menu::where('status', 1)->orderBy('sort', 'ASC')->get();
 
-        $url = "menu";
+        $url = "settings";
         
         return view('backend/menu/index', ['records' => $records, 'records_active' => $records_active, 'url' => $url]);
 
@@ -35,7 +35,7 @@ class MenuController extends Controller
     public function create()
     {
         $action = route('menu.store');
-        $url = "menu";
+        $url = "settings";
         $form = 'new';
 
         return view('backend/menu/create', ['action' => $action, 'url' => $url, 'form' => $form]);
@@ -73,7 +73,7 @@ class MenuController extends Controller
         $put = True;
         $form = 'update';
 
-        $url = "menu";
+        $url = "settings";
 
         return view('backend/menu/update', ['content' => $content, 'action' => $action, 'url' => $url, 'put' => $put,  'form' => $form]);
     }

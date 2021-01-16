@@ -2,7 +2,7 @@
     <div class="w-full md:w-boxed mx-auto flex items-center h-90 px-4 md:px-0">
         <div class="logo w-2/4 md:w-1/4">
             <a href="/" class="flex gap-1">
-                <div class="logo"><img class="w-11" src="https://secureservercdn.net/198.71.233.96/4m9.9fa.myftpupload.com/wp-content/uploads/2020/12/cropped-Logo-KISC-Soccer.png" alt=""></div>
+                <div class="logo"><img class="w-11" src="https://xava.pro/storage/offtopic/kisc-logo-200.webp" alt=""></div>
                 <div class="font-roboto">
                     <div class="text-2x5 font-extrabold leading-none text-white uppercase">Kisc</div>
                     <div class="subtitle text-red font-bold text-sm leading-none">Sports Complex</div>

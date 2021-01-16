@@ -24,7 +24,7 @@
 
 <body class="bg-gray">
 
-    <livewire:top-nav></livewire:top-nav>
+    <livewire:frontend.top-nav></livewire:frontend.top-nav>
     @include('partials.frontend.mainnav')
 
     @yield('content')

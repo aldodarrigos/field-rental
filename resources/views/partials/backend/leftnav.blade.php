@@ -16,12 +16,12 @@
         <ul class="nav metismenu" id="side-menu">
 
             <li class="nav-header">
-                <div class="dropdown profile-element">
-                    <img alt="image" class="rounded-circle" src="https://www.shareicon.net/data/256x256/2016/07/26/802008_man_512x512.png" style='width: 60px;'>
-                    <a data-toggle="dropdown" class="dropdown-toggle" href="#" style='display: inline-block;'>
-                        <span class="block m-t-xs font-bold">{{Auth::user()->name}}</span>
+                <div class="dropdown profile-element" style="display: flex; grid-gap: .5rem;">
+                    <img alt="image" class="" src="https://xava.pro/storage/offtopic/kisc-logo-200.webp" style='width: 40px; height: 40px;'>
+                    <span style='display: inline-block;'>
+                        <span class="block m-t-xs font-bold text-white">{{Auth::user()->name}}</span>
                         <span class="text-muted text-xs block">Admin</span>
-                    </a>
+                    </span>
                 </div>
                 <div class="logo-element">
                     KSC
@@ -65,7 +65,7 @@
             </li>
 
             
-            <li class="{{$slides_active}}">
+            <li class="{{$settings_active}}">
                 <a href="/backend-news"><i class="fas fa-sliders-h"></i> <span class="nav-label">Settings</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="/settings/1/edit">Global settings</a></li>

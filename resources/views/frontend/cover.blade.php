@@ -36,7 +36,7 @@
 
 <div class="separation h-100p"></div>
 
-@include('partials.frontend.map')
+<livewire:frontend.map></livewire:frontend.map>
 
 @endsection
 

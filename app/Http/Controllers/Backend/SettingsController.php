@@ -61,6 +61,7 @@ class SettingsController extends Controller
         $setting->youtube = $request->input('youtube');
         $setting->location = $request->input('location');
         $setting->open = $request->input('open');
+        $setting->open_admin = $request->input('open_admin');
         $setting->email = $request->input('email');
         $setting->phone_1 = $request->input('phone_1');
         $setting->phone_2 = $request->input('phone_2');
@@ -111,6 +112,8 @@ class SettingsController extends Controller
         $setting->youtube = $request->input('youtube');
         $setting->location = $request->input('location');
         $setting->open = $request->input('open');
+        $setting->open_admin = $request->input('open_admin');
+        $setting->season = $request->input('season');
         $setting->email = $request->input('email');
         $setting->phone_1 = $request->input('phone_1');
         $setting->phone_2 = $request->input('phone_2');

@@ -36,9 +36,19 @@
 
                     <div class="col-md-6">
 
-                        <div class="form-group ">
-                            <label >Site name</label>
-                            <input type="text" name='site_name' class="form-control" value="{{$settings->site_name}}" autocomplete="off">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="form-group ">
+                                    <label >Site name</label>
+                                    <input type="text" name='site_name' class="form-control" value="{{$settings->site_name}}" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group ">
+                                    <label >Email</label>
+                                    <input type="text" name='email' class="form-control" value="{{$settings->email}}" autocomplete="off">
+                                </div>
+                            </div>
                         </div>
 
                         <div class="form-group ">
@@ -57,18 +67,38 @@
                         </div>
 
                         <div class="row">
+
                             <div class="col-md-6">
                                 <div class="form-group ">
-                                    <label >Email</label>
-                                    <input type="text" name='email' class="form-control" value="{{$settings->email}}" autocomplete="off">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group ">
-                                    <label >Open</label>
+                                    <label>Fields rental time</label>
                                     <input type="text" name='open' class="form-control" value="{{$settings->open}}" autocomplete="off">
                                 </div>
                             </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group ">
+                                    <label>Admin time</label>
+                                    <input type="text" name='open_admin' class="form-control" value="{{$settings->open_admin}}" autocomplete="off">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group ">
+
+                                    <label for='group'>Season</label>
+                                    <select class="form-control m-b" name="season">
+                                        @if ($settings->season == 1)
+                                            <option value='1' selected>Summer</option>
+                                            <option value='2'>Winter</option>
+                                        @else
+                                            <option value='1'>Summer</option>
+                                            <option value='2' selected>Winter</option>
+                                        @endif
+                    
+                                    </select>
+                                </div>
+                            </div>
+
                         </div>
 
                     </div>

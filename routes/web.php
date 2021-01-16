@@ -45,7 +45,7 @@ Route::get('post/{slug?}', [FrontendController::class, 'post'])->name('frontend.
 Route::get('contact', [FrontendController::class, 'contact'])->name('frontend.contact');
 Route::get('covid-19-protocol', [FrontendController::class, 'covid'])->name('frontend.covid');
 
-Route::get('user-login', [UserController::class, 'login'])->name('frontend.login');
+Route::get('singin', [UserController::class, 'login'])->name('frontend.login');
 Route::get('singup', [UserController::class, 'singup'])->name('frontend.singup');
 Route::post('user-authenticate', [UserController::class, 'authenticate'])->name('authenticate');
 Route::get('profile/dashboard', [UserController::class, 'dashboard'])->name('frontend.user.dashboard');

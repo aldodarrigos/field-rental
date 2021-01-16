@@ -21,7 +21,7 @@ class SlidesController extends Controller
         $records = Slide::orderBy('sort', 'ASC')->get();
         $records_order = Slide::where('status', 1)->orderBy('sort', 'ASC')->get();
 
-        $url = "slides";
+        $url = "settings";
         
         return view('backend/slides/index', ['records' => $records, 'records_order' => $records_order, 'url' => $url]);
 
@@ -36,7 +36,7 @@ class SlidesController extends Controller
     {
 
         $action = route('slides.store');
-        $url = "slides";
+        $url = "settings";
         $form = 'new';
 
         return view('backend/slides/create', ['action' => $action, 'url' => $url, 'form' => $form]);
@@ -77,7 +77,7 @@ class SlidesController extends Controller
         $put = True;
         $form = 'update';
 
-        $url = "slides";
+        $url = "settings";
 
         return view('backend/slides/update', ['content' => $content, 'action' => $action, 'url' => $url, 'put' => $put,  'form' => $form]);
     }
