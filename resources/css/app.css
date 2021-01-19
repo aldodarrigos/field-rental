@@ -19,4 +19,7 @@ p{ margin-bottom: 1rem;}
     top: 0;
     width: 100%;
 }
+.content ol, ul {
+    list-style: none;
+}
 

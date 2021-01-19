@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>KatyISC</title>
+    <title>KatyISC | Sports Complex</title>
     
     <link href="{{asset('fontawesome/css/all.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">

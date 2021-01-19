@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Frontend;
-use App\Models\{Content, Service, Setting, Tag};
+use App\Models\{Content, Service, Setting, Tag, Post};
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -33,8 +33,9 @@ class FrontendController extends Controller
         $vision = Content::where('shortcut', 'about.vision')->first();
         $mision = Content::where('shortcut', 'about.mision')->first();
         $values = Content::where('shortcut', 'about.values')->first();
+        $fields = Content::where('id', 10)->first();
 
-        return view('frontend/about', ['seo' => 'xxx', 'vision' => $vision, 'mision' => $mision, 'values' => $values]);
+        return view('frontend/about', ['seo' => 'xxx', 'vision' => $vision, 'mision' => $mision, 'values' => $values, 'fields' => $fields]);
         
     }
 
@@ -95,7 +96,14 @@ class FrontendController extends Controller
     public function post($slug = null)
     {
 
-        return view('frontend/post', ['seo' => 'xxx']);
+
+        $post = DB::table('posts')
+        ->select(DB::raw('posts.id, posts.title, posts.slug, posts.content, posts.img, posts.img_md, posts.pub_date, tags.name as tag_name, tags.slug as tag_slug'))
+        ->leftJoin('tags', 'posts.tag_id', '=', 'tags.id')
+        ->where('posts.slug', $slug)
+        ->first();
+
+        return view('frontend/post', ['seo' => 'xxx', 'post' => $post]);
         
     }
 

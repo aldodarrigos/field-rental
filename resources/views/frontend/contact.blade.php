@@ -115,7 +115,7 @@
                     function init() {
                         
                         var mapOptions = {
-                            zoom: 17,
+                            zoom: 13,
                             center: new google.maps.LatLng('{{$setting->latitude}}','{{$setting->longitude}}'), 
                             };
             

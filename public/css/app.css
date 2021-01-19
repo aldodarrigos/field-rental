@@ -40049,6 +40049,10 @@ p{ margin-bottom: 1rem;
   width: 100%;
 }
 
+.content ol, ul {
+  list-style: none;
+}
+
 @media (min-width: 640px){
   .sm\:container{
     width: 100%;

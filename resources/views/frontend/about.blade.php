@@ -13,23 +13,18 @@
 
 <div class="separation h-50p"></div>
 
-<div class="flex rounded-lg h-auto flex-col-reverse md:flex-row w-11/12 md:w-boxed mx-auto">
+<div class="content flex rounded-lg h-auto flex-col-reverse md:flex-row w-11/12 md:w-boxed mx-auto">
     <div class="w-4/4 md:w-3/4">
-        <img class="max-w-full rounded-l-lg" src="https://xava.pro/storage/offtopic/kisc-fields.webp" alt="">
+        <img class="max-w-full rounded-l-lg" src="{{$fields->img}}" alt="">
     </div>
     <div class="w-4/4 md:w-1/4 bg-deepblue text-white px-10 py-10 rounded-r-lg">
-        <div class="text-red uppercase font-roboto font-bold">Sports Complex</div>    
-        <div class="text-white font-roboto text-3xl uppercase font-bold leading-none mb-4 mt-2">Our Fields</div>
-        <div class="text-graytext mb-6">
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Exercitationem voluptas amet aliquam. Perferendis magni assumenda ab natus nesciunt delectus ut.</p>
-            <ul class="list-disc mb-4">
-                <li>Lorem, ipsum dolor sit amet consectetur</li>
-                <li>Exercitationem voluptas amet aliquam.</li>
-                <li>Lorem, ipsum dolor sit amet consectetur</li>
-                <li>Exercitationem voluptas amet aliquam.</li>
-            </ul>
+        <div class="text-red uppercase font-roboto font-bold">{{$fields->subtitle}}</div>    
+        <div class="text-white font-roboto text-3xl uppercase font-bold leading-none mb-4 mt-2">{{$fields->title}}</div>
+        <div class="text-graytext mb-6 list-disc">
 
-            <a href="/fieldsrental" class="bg-red font-roboto text-gray font-bold rounded py-2 px-4 uppercase text-sm hover:bg-deepblue ease-in-out duration-300">Book now <i class="far fa-calendar-alt text-md pl-1"></i></a>
+            {!!$fields->content!!}
+
+            <a href="/fieldsrental" class="bg-red font-roboto text-gray font-bold rounded py-2 px-4 uppercase text-sm hover:bg-deepblue ease-in-out duration-300">Book now <i class="far fa-calendar-alt text-md pl-1 mt-6"></i></a>
         </div>
     </div>
 </div>

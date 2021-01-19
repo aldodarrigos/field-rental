@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>KISC | Sport Complex</title>
+    <title>KatyISC | Admin</title>
     
     <link href="{{asset('inspinia/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('fontawesome/css/all.css')}}" rel="stylesheet">
