@@ -18,8 +18,8 @@
                 <input type="text" name='name' class="form-control" @if(!empty($content->name)) value="{{$content->name}}" @endif>
             </div>
 
-            <div class="form-group ">
-                <label >Sumary</label>
+            <div class="form-group tooltip-wrap">
+                <label >Sumary <i class="fas fa-question-circle text-muted" data-toggle="tooltip" data-placement="top" title="Sumary field must have 120 characters max."></i></label>
                 <textarea name="sumary" class="form-control" rows="4">@if(!empty($content->sumary)){{$content->sumary}} @endif</textarea>
             </div>
 
@@ -33,14 +33,14 @@
 
         <div class="col-md-6">
 
-            <div class="form-group ">
-                <label>Image Large</label>
+            <div class="form-group tooltip-wrap">
+                <label>Image Large <i class="fas fa-question-circle text-muted" data-toggle="tooltip" data-placement="top" title="Image URLs must have 120 characters max."></i></label> 
                 <input type="text" name='img' class="form-control" @if(!empty($content->img)) value="{{$content->img}}" @endif>
             </div>
 
-            <div class="form-group ">
-                <label>Image Medium</label>
-                <input type="text" name='price_night' class="form-control" @if(!empty($content->img_md)) value="{{$content->img_md}}" @endif>
+            <div class="form-group tooltip-wrap">
+                <label>Image Medium <i class="fas fa-question-circle text-muted" data-toggle="tooltip" data-placement="top" title="Image URLs must have 120 characters max."></i></label> 
+                <input type="text" name='img_md' class="form-control" @if(!empty($content->img_md)) value="{{$content->img_md}}" @endif>
             </div>
 
             <div class="row">

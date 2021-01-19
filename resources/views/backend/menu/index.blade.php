@@ -11,6 +11,18 @@
     <script>
         $(document).ready(function(){
 
+            $('.delete').hide();
+
+            $('.btn-delete').click(function() {
+                let idlink = $(this).data('id');
+                $('.delete').hide();
+                $('.del-'+idlink).fadeIn();
+            });
+
+            $('.close_confirm').click(function() {
+                $('.delete').hide();
+            });
+
             var updateOutput = function (e) {
                 var list = e.length ? e : $(e.target),
                         output = list.data('order');
@@ -61,7 +73,7 @@
         <h2>Menu</h2>
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="/content-groups">Dashboard</a>
+                <a href="/menu">Dashboard</a>
             </li>
         </ol>
     </div>
@@ -72,7 +84,7 @@
 <div class="wrapper wrapper-content animated fadeInRight">
 
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-7">
             <div class="ibox ">
                 <div class="ibox-title">
                     <h5>Menu Links</h5>
@@ -89,6 +101,7 @@
                                 <th>Name</th>
                                 <th>Url</th>
                                 <th>Status</th>
+                                <th>Delete</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -110,6 +123,10 @@
                                         <td><a href="/menu/{{$record->id}}/edit">{{$record->name}}</a></td>
                                         <td>{{$record->slug}}</td>
                                         <td class="center"><span class="btn btn-{{$status_color}} btn-xs">{{$status}}</span></td>
+                                        <td class="center">
+                                            <button class="btn btn-danger btn-xs btn-delete" data-id='{{$record->id}}'>Delete</button>
+                                            <div class="delete del-{{$record->id}}">Delete? <a href="/delete-menu/{{$record->id}}">Yes</a> / <a href="#" class='close_confirm' role="button">No</a></div>
+                                        </td>
                                     </tr>
 
                                 @endforeach

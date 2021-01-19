@@ -42,6 +42,7 @@ Route::get('services/{slug?}', [FrontendController::class, 'service'])->name('fr
 //Route::get('fields', [FrontendController::class, 'fields'])->name('frontend.fields');
 Route::get('news', [FrontendController::class, 'news'])->name('frontend.news');
 Route::get('post/{slug?}', [FrontendController::class, 'post'])->name('frontend.post');
+Route::get('tags/{slug?}', [FrontendController::class, 'tags'])->name('frontend.tags');
 Route::get('contact', [FrontendController::class, 'contact'])->name('frontend.contact');
 Route::get('covid-19-protocol', [FrontendController::class, 'covid'])->name('frontend.covid');
 
@@ -51,7 +52,6 @@ Route::post('user-authenticate', [UserController::class, 'authenticate'])->name(
 Route::get('profile/dashboard', [UserController::class, 'dashboard'])->name('frontend.user.dashboard');
 
 Route::get('shop', [FrontendController::class, 'shop'])->name('frontend.shop');
-
 
 Route::get('fieldsrental', [PaymentController::class, 'fieldsrental'])->name('frontend.fieldsrental');
 Route::post('fieldsrental', [PaymentController::class, 'fieldsrental'])->name('frontend.fieldsrental');
@@ -94,7 +94,6 @@ Route::middleware(['admin'])->group(function () {
     Route::get('delete-file/{id?}', [GalleryController::class, 'destroy'])->name('backend.gallery.delete');
     Route::resource('menu', MenuController::class);
     Route::post('menu-sort', [MenuController::class, 'sort'])->name('backend.menu.sort');
+    Route::get('delete-menu/{id?}', [MenuController::class, 'destroy'])->name('backend.menu.delete');
     Route::post('services-sort', [ServicesBackController::class, 'sort'])->name('backend.services.sort');
-    
-
 });

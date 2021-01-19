@@ -30,7 +30,7 @@
 
             <div class="form-group ">
                 <label >Content</label>
-                <textarea name="content" class="form-control" rows="8">@if(!empty($content->content)){{$content->content}} @endif</textarea>
+                <textarea name="content" class="form-control summernote" rows="8">@if(!empty($content->content)){{$content->content}} @endif</textarea>
             </div>
 
         </div>

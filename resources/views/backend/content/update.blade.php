@@ -6,6 +6,28 @@
 
     @parent
 
+    <link href="{{asset('inspinia/css/plugins/iCheck/custom.css')}}" rel="stylesheet">
+    <link href="{{asset('inspinia/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css')}}" rel="stylesheet">
+    <link href="{{asset('inspinia/css/plugins/summernote/summernote-bs4.css')}}" rel="stylesheet">
+
+    <script src="{{asset('inspinia/js/plugins/iCheck/icheck.min.js')}}"></script>
+    <script src="{{asset('inspinia/js/plugins/summernote/summernote-bs4.js')}}"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+
+            
+            $('.summernote').summernote({
+                height: 300
+            });
+
+        });
+    </script>
+
 @endsection
 
 <div class="row wrapper border-bottom white-bg page-heading">

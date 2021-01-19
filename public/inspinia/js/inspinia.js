@@ -122,7 +122,7 @@ $(document).ready(function () {
     });
 
     // Tooltips demo
-    $('.tooltip-demo').tooltip({
+    $('.tooltip-wrap').tooltip({
         selector: "[data-toggle=tooltip]",
         container: "body"
     });

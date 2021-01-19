@@ -9,7 +9,7 @@
 
 @endsection
 
-<x-frontend.pieces.section_header title='News' bread='latest News'></x-frontend.pieces.section_header>
+<x-frontend.pieces.section_header title='{{$tag->name}}' bread='{{$tag->name}} posts'></x-frontend.pieces.section_header>
 
 <div class="w-11/12 md:w-boxed mx-auto">
 

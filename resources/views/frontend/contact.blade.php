@@ -91,11 +91,12 @@
                 <x-slot name='frame_icon'><i class="fas fa-map-marker-alt"></i></x-slot>
                 <x-slot name='bg'>blue</x-slot>
 
-                <div class="text-xl text-red font-bold leading-none mb-1">2029 Pecan Ln Katy Texas</div>
-                <div class="text-base text-gray font-semibold mb-1">09:00am - 06:00pm (Admin)</div>
-                <div class="text-base text-gray font-semibold mb-1">info@katyisc.com</div>
-                <div class="text-base text-gray font-semibold mb-1">+1 (910) 574-5865</div>
-                <div class="text-base text-gray font-semibold mb-1">+1 (832) 282-8030</div>
+                <div class="text-lg text-red font-bold mb-2">{{$setting->location}}</div>
+                <div class="text-base text-white font-semibold mb-1">{{$setting->open_admin}}</div>
+                <div class="text-base text-white font-semibold mb-1">{{$setting->open}}</div>
+                <div class="text-base text-white font-semibold mb-1">{{$setting->email}}</div>
+                <div class="text-base text-white font-semibold mb-1">{{$setting->phone_1}}</div>
+                <div class="text-base text-white font-semibold mb-1">{{$setting->phone_2}}</div>
                 
             </x-frontend.pieces.ad_frame>
 
@@ -112,155 +113,18 @@
                     google.maps.event.addDomListener(window, 'load', init);
                     
                     function init() {
-                    
+                        
                         var mapOptions = {
-                            zoom: 14,
-                            center: new google.maps.LatLng('29.8143293','-95.8252876'), 
-                            styles: [
-            {
-                "elementType": "geometry",
-                "stylers": [
-                    {
-                        "hue": "#ff4400"
-                    },
-                    {
-                        "saturation": -68
-                    },
-                    {
-                        "lightness": -4
-                    },
-                    {
-                        "gamma": 0.72
-                    }
-                ]
-            },
-            {
-                "featureType": "road",
-                "elementType": "labels.icon"
-            },
-            {
-                "featureType": "landscape.man_made",
-                "elementType": "geometry",
-                "stylers": [
-                    {
-                        "hue": "#0077ff"
-                    },
-                    {
-                        "gamma": 3.1
-                    }
-                ]
-            },
-            {
-                "featureType": "water",
-                "stylers": [
-                    {
-                        "hue": "#00ccff"
-                    },
-                    {
-                        "gamma": 0.44
-                    },
-                    {
-                        "saturation": -33
-                    }
-                ]
-            },
-            {
-                "featureType": "poi.park",
-                "stylers": [
-                    {
-                        "hue": "#44ff00"
-                    },
-                    {
-                        "saturation": -23
-                    }
-                ]
-            },
-            {
-                "featureType": "water",
-                "elementType": "labels.text.fill",
-                "stylers": [
-                    {
-                        "hue": "#007fff"
-                    },
-                    {
-                        "gamma": 0.77
-                    },
-                    {
-                        "saturation": 65
-                    },
-                    {
-                        "lightness": 99
-                    }
-                ]
-            },
-            {
-                "featureType": "water",
-                "elementType": "labels.text.stroke",
-                "stylers": [
-                    {
-                        "gamma": 0.11
-                    },
-                    {
-                        "weight": 5.6
-                    },
-                    {
-                        "saturation": 99
-                    },
-                    {
-                        "hue": "#0091ff"
-                    },
-                    {
-                        "lightness": -86
-                    }
-                ]
-            },
-            {
-                "featureType": "transit.line",
-                "elementType": "geometry",
-                "stylers": [
-                    {
-                        "lightness": -48
-                    },
-                    {
-                        "hue": "#ff5e00"
-                    },
-                    {
-                        "gamma": 1.2
-                    },
-                    {
-                        "saturation": -23
-                    }
-                ]
-            },
-            {
-                "featureType": "transit",
-                "elementType": "labels.text.stroke",
-                "stylers": [
-                    {
-                        "saturation": -64
-                    },
-                    {
-                        "hue": "#ff9100"
-                    },
-                    {
-                        "lightness": 16
-                    },
-                    {
-                        "gamma": 0.47
-                    },
-                    {
-                        "weight": 2.7
-                    }
-                ]
-            }
-        ] };
-                    
+                            zoom: 17,
+                            center: new google.maps.LatLng('{{$setting->latitude}}','{{$setting->longitude}}'), 
+                            };
+            
                         var mapElement = document.getElementById('map');
                         var map = new google.maps.Map(mapElement, mapOptions);
                         var marker = new google.maps.Marker({
-                            position: new google.maps.LatLng('29.8143293','-95.8252876'),
+                            position: new google.maps.LatLng('{{$setting->latitude}}','{{$setting->longitude}}'),
                             map: map,
-                            title: 'Snazzy!'
+                            title: '{{$setting->location}}'
                         });
                     }   
                     

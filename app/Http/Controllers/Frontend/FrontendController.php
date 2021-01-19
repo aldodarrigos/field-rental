@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Frontend;
-use App\Models\{Content, Service, Post};
+use App\Models\{Content, Service, Setting, Tag};
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -76,6 +76,22 @@ class FrontendController extends Controller
         
     }
 
+    public function tags($slug = '')
+    {
+        $tag = Tag::where('slug', $slug)->first();
+        $posts = DB::table('posts')
+        ->select(DB::raw('posts.id, posts.title, posts.slug, posts.sumary, posts.img_md, posts.pub_date, tags.name as tag_name, tags.slug as tag_slug'))
+        ->leftJoin('tags', 'posts.tag_id', '=', 'tags.id')
+        ->where('posts.status', 1)
+        ->where('tags.slug', $slug)
+        ->orderBy('posts.pub_date', 'desc')
+        ->limit(5)
+        ->get();
+
+        return view('frontend/tags', ['seo' => 'xxx', 'posts' => $posts, 'tag' => $tag]);
+        
+    }
+
     public function post($slug = null)
     {
 
@@ -100,7 +116,8 @@ class FrontendController extends Controller
     public function contact()
     {
 
-        return view('frontend/contact', ['seo' => 'xxx']);
+        $setting = Setting::first();
+        return view('frontend/contact', ['seo' => 'xxx', 'setting' => $setting]);
         
     }
 

@@ -26,7 +26,7 @@
             @endif
 
             <div class="form-group ">
-                <label >Sumary</label>
+                <label >Sumary <small>(120 characters max.)</small></label>
                 <textarea name="sumary" class="form-control" rows="4">@if(!empty($content->sumary)){{$content->sumary}} @endif</textarea>
             </div>
 
@@ -39,18 +39,18 @@
 
         <div class="col-md-4">
 
-            <div class="form-group ">
-                <label>Image Large</label>
+            <div class="form-group">
+                <label>Image Large <small>(120 characters max.)</small></label>
                 <input type="text" name='img' class="form-control" @if(!empty($content->img)) value="{{$content->img}}" @endif>
             </div>
 
-            <div class="form-group ">
-                <label>Image Medium</label>
+            <div class="form-group">
+                <label>Image Medium <small>(120 characters max.)</small></label>
                 <input type="text" name='img_md' class="form-control" @if(!empty($content->img_md)) value="{{$content->img_md}}" @endif>
             </div>
 
-            <div class="form-group ">
-                <label>Image Small</label>
+            <div class="form-group">
+                <label>Image Small <small>(120 characters max.)</small></label>
                 <input type="text" name='img_sm' class="form-control" @if(!empty($content->img_sm)) value="{{$content->img_sm}}" @endif>
             </div>
 
@@ -115,6 +115,7 @@
                 </select>
             </div>
 
+            <div class="hr-line-dashed"></div>
 
             <button type="submit" class="btn btn-w-m btn-success">Save</button>
             @if(!empty($put))

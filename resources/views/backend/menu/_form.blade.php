@@ -18,8 +18,8 @@
                 <input type="text" name='name' class="form-control" @if(!empty($content->name)) value="{{$content->name}}" @endif>
             </div>
 
-            <div class="form-group ">
-                <label >Url</label>
+            <div class="form-group tooltip-wrap">
+                <label>Url <i class="fas fa-question-circle text-muted" data-toggle="tooltip" data-placement="top" title="Internal URLs must start with /"></i></label>
                 <input type="text" name='slug' class="form-control" @if(!empty($content->slug)) value="{{$content->slug}}" @endif>
             </div>
 

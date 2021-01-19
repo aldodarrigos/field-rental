@@ -51,8 +51,12 @@ class MenuController extends Controller
     {
         $menu = new Menu();
 
+        $last_menu = Menu::orderBy('sort', 'desc')->first();
+        $sort = $last_menu->sort + 1;
+
         $menu->name = $request->input('name');
         $menu->slug = $request->input('slug');
+        $menu->sort = $sort;
         $menu->status = $request->input('status');
         $menu->save();
 
@@ -107,7 +111,10 @@ class MenuController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $menu = Menu::find($id);
+        $menu->delete();
+
+        return redirect('menu')->with('success','Menu deleted.');
     }
 
     public function sort()

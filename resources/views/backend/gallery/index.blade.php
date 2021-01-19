@@ -9,12 +9,7 @@
     <link href="{{asset('inspinia/css/plugins/dataTables/datatables.min.css')}}" rel="stylesheet">
     <script src="{{asset('inspinia/js/plugins/dataTables/datatables.min.js')}}"></script>
     <script src="{{asset('inspinia/js/plugins/dataTables/dataTables.bootstrap4.min.js')}}"></script>
-
-    
     <link href="{{asset('inspinia/css/plugins/toastr/toastr.min.css')}}" rel="stylesheet">
-
-    <!-- Toastr style -->
-    
 
     <script>
         $(document).ready(function(){
@@ -75,67 +70,65 @@
 
 @endsection
 
-    <div class="row wrapper border-bottom white-bg page-heading">
-        <div class="col-lg-10">
-            <h2>Gallery</h2>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                    <a href="/gallery">Dashboard</a>
-                </li>
-            </ol>
-        </div>
-        <div class="col-lg-2">
-
-        </div>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Gallery</h2>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="/gallery">Dashboard</a>
+            </li>
+        </ol>
     </div>
-    <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="col-lg-2">
 
-        <div class="row">
-            <div class="col-md-10">
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
 
-                <form method="post" action="{{$action}}" class="form" accept-charset="UTF-8" enctype="multipart/form-data">
-                            
-                    {{ csrf_field() }}
+    <div class="row">
+        <div class="col-md-10">
 
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group ">
-                                <style>
-                                    .btn-file{
-                                        clip: rect(0, 0, 0, 0);
-                                        height: 1px;
-                                        overflow: hidden;
-                                        padding: 0;
-                                        position: absolute !important;
-                                        white-space: nowrap;
-                                        width: 1px;
-                                    }
-                                    .label-file{
-                                        margin-bottom: 0;
-                                        padding-right: 2rem;
-                                        padding-left: 2rem;
-                                    }
-                                </style>
-         
-                                <input type="file" id="file" name="file" class="btn-md btn-file">
-                                <label for="file" class="btn btn-large btn-primary label-file">Select file</label>
-                                <button type="submit" class="btn btn-w-m btn-success"><i class="fas fa-cloud-upload-alt"></i> Upload</button>
-                            </div>
-                        </div>
-                        <div class="col-md-8">
-                            
+            <form method="post" action="{{$action}}" class="form" accept-charset="UTF-8" enctype="multipart/form-data">
+                        
+                {{ csrf_field() }}
+
+                <div class="row">
+                    <div class="col-md-4">
+                        
+                        <div class="form-group ">
+                            <style>
+                                .btn-file{
+                                    clip: rect(0, 0, 0, 0);
+                                    height: 1px;
+                                    overflow: hidden;
+                                    padding: 0;
+                                    position: absolute !important;
+                                    white-space: nowrap;
+                                    width: 1px;
+                                }
+                                .label-file{
+                                    margin-bottom: 0;
+                                    padding-right: 2rem;
+                                    padding-left: 2rem;
+                                }
+                            </style>
+        
+                            <input type="file" id="file" name="file" class="btn-md btn-file">
+                            <label for="file" class="btn btn-large btn-primary label-file">Select file</label>
+                            <button type="submit" class="btn btn-w-m btn-success"><i class="fas fa-cloud-upload-alt"></i> Upload</button>
                         </div>
                     </div>
-
-                    
-                            
-                    
-                </form>
-            </div>
-            <div class="col-lg-10">
+                    <div class="col-md-8 text-right">
+                        <small>Max file size: 500Kb | Image formats permited: .jpg, .jpeg, .png, .webp</small>
+                    </div>
+                </div>
+            </form>
+            
+        </div>
+        <div class="col-lg-10">
             <div class="ibox ">
                 <div class="ibox-title">
-                    <h5>Tags</h5>
+                    <h5>Upload Image </h5>
                     <div class="ibox-tools">
                         
                     </div>
@@ -175,18 +168,18 @@
         </div>
     </div>
 </div>
-<button type="button" class="btn btn-primary" id="showtoast">Show Toast</button>
-    <!-- Toast notifications -->
-    <div style="position: absolute; top: 20px; right: 20px;">
 
-        <div class="toast toast1 toast-bootstrap" role="alert" aria-live="assertive" aria-atomic="true">
+<!-- Toast notifications -->
+<div style="position: absolute; bottom: 20px; right: 20px;">
 
-            <div class="toast-body">
-                <strong>Selected text was copied.</strong>
-            </div>
+    <div class="toast toast1 toast-bootstrap" role="alert" aria-live="assertive" aria-atomic="true">
+
+        <div class="toast-body">
+            <strong>Selected text was copied.</strong>
         </div>
-
     </div>
+
+</div>
 
 @endsection
 

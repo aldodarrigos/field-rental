@@ -18,7 +18,7 @@ class FieldsBackController extends Controller
      */
     public function index()
     {
-        $records = Field::all();
+        $records = Field::orderBy('number', 'asc')->get();
 
         $url = "fields";
         
