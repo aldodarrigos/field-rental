@@ -18,6 +18,9 @@ use PayPal\Rest\ApiContext;
 use App\Models\Field;
 use App\Models\Reservation;
 use App\Models\User;
+
+use App\Mail\BookingMailable;
+use Illuminate\Support\Facades\Mail;
  
 class PaymentController extends Controller
 {
@@ -235,6 +238,8 @@ class PaymentController extends Controller
             $field = Field::where('id', $reservation->field_id)->first();
             $user = User::where('id', $reservation->user_id)->first();
 
+            $success = $this->successbooking($user->email, $reservation->id);
+
             return redirect('paypal/success')->with(['reservation' => $reservation, 'field' => $field, 'user' => $user]);
         }
         
@@ -256,6 +261,14 @@ class PaymentController extends Controller
         */
         
         return view('frontend/payment/success');
+    }
+
+    public function successbooking($contact = null, $bookId = null)
+    {
+
+        $correo = new BookingMailable($contact, $bookId);
+        Mail::to($contact)->send($correo);
+        
     }
 
 

@@ -18,7 +18,11 @@ use App\Http\Controllers\Backend\GalleryController;
 use App\Http\Controllers\Backend\SettingsController;
 use App\Http\Controllers\Backend\UsersController;
 use App\Http\Controllers\Backend\SlidesController;
+use App\Http\Controllers\SendmailController;
 use App\Providers\RouteServiceProvider;
+
+use App\Mail\BookingMailable;
+use Illuminate\Support\Facades\Mail;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -44,6 +48,7 @@ Route::get('news', [FrontendController::class, 'news'])->name('frontend.news');
 Route::get('post/{slug?}', [FrontendController::class, 'post'])->name('frontend.post');
 Route::get('tags/{slug?}', [FrontendController::class, 'tags'])->name('frontend.tags');
 Route::get('contact', [FrontendController::class, 'contact'])->name('frontend.contact');
+Route::post('contact', [FrontendController::class, 'contact'])->name('frontend.contact.send');
 Route::get('covid-19-protocol', [FrontendController::class, 'covid'])->name('frontend.covid');
 
 Route::get('singin', [UserController::class, 'login'])->name('frontend.login');
@@ -63,7 +68,6 @@ Route::get('paypal/success', [PaymentController::class, 'paypalSuccess'])->name(
 
 //AJAX FUNCTIONS
 Route::get('fields_x_players/{slug?}', [FieldsController::class, 'fields_x_players']);
-
 
 Route::get('dashboard', function () {
     return view('dashboard');
