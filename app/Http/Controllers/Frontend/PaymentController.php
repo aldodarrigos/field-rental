@@ -15,9 +15,7 @@ use PayPal\Api\Transaction;
 use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Rest\ApiContext;
 
-use App\Models\Field;
-use App\Models\Reservation;
-use App\Models\User;
+use App\Models\{Field, Reservation, User, Content};
 
 use App\Mail\BookingMailable;
 use Illuminate\Support\Facades\Mail;
@@ -42,7 +40,7 @@ class PaymentController extends Controller
 
     public function fieldsrental(Request $request)
     {
-
+        $map = Content::where('id', 11)->first();
         $fields_select = Field::where('status', 1)->orderBy('name', 'ASC')->get();
         $hot_hours = ['18:00', '19:00', '20:00', '21:00', '22:00'];
         $hours = ['10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00'];
@@ -102,7 +100,7 @@ class PaymentController extends Controller
 
 
 
-        return view('frontend/payment/fieldsrental', ['result' => $result, 'field' => $field, 'field_id' => $field_id, 'date' => $date, 'fields_select' => $fields_select, 'reservations' => $reservations, 'hoursarray' => $hoursarray, 'players_number' => $players_number]);
+        return view('frontend/payment/fieldsrental', ['result' => $result, 'field' => $field, 'field_id' => $field_id, 'date' => $date, 'fields_select' => $fields_select, 'reservations' => $reservations, 'hoursarray' => $hoursarray, 'players_number' => $players_number, 'map' => $map]);
         
     }
 

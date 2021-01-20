@@ -274,11 +274,11 @@
                     
                 @else
 
-                    <x-frontend.pieces.ad_frame title='Our Fields'>
+                    <x-frontend.pieces.ad_frame title='{{$map->title}}'>
                         <x-slot name='frame_icon'></x-slot>
                         <x-slot name='bg'>white</x-slot>
                     
-                        <img class="max-w-full rounded-md" src="https://xava.pro/storage/offtopic/kisc-fields.webp" usemap="#workmap">
+                        <img class="max-w-full rounded-md" src="{{$map->img}}" usemap="#workmap">
                         <map name="workmap">
                             <area shape="rect" coords="84,14,155,90" alt="Computer" href="computer.htm">
                           </map>
