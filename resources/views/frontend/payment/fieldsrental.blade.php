@@ -26,11 +26,17 @@
                 <x-slot name='height'>big</x-slot>
                 <x-slot name='bg'>light</x-slot>
                 <x-slot name='label_on_off'>on</x-slot>
-
+                
                 @php
+                
                 if(isset($_GET['players_number'])){
-                    $x5selected = ($_GET['players_number'] == 1)?'selected':'';
-                    $x7selected = ($_GET['players_number'] == 2)?'selected':'';
+                    if($_GET['players_number']!=0){
+                        $x5selected = ($_GET['players_number'] == 1)?'selected':'';
+                        $x7selected = ($_GET['players_number'] == 2)?'selected':'';
+                    }else{
+                        $x5selected = ($_GET['field_type'] == 1)?'selected':'';
+                        $x7selected = ($_GET['field_type'] == 2)?'selected':'';
+                    }
                 }else if($players_number != ''){
                     $x5selected = ($players_number == 1)?'selected':'';
                     $x7selected = ($players_number == 2)?'selected':'';

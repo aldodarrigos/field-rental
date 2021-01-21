@@ -137,13 +137,14 @@
                             <option value="0" selected>All fields --</option>
     
                             @foreach ($all_fields as $item)
-                            <option value="{{$item->id}}">{{$item->name}}</option>
+                            <option value="{{$item->id}}" data-type='{{$item->tag_id}}'>{{$item->number.'. '.$item->name}}</option>
                             @endforeach
-                            
                         </x-frontend.forms.input_select>
                         
                     </div>
                 </div>
+
+                <input type="hidden" id='field_type' name="field_type" value=''>
     
                 <div class="w-3/3 md:w-1/3 flex gap-4 items-center">
                     <div class="text-bluetext text-3x5 font-bold leading-none pr-2 font-roboto">03</div>
@@ -170,7 +171,7 @@
     
             </div>
     
-            </form>
+        </form>
 
 
     </div>
@@ -183,6 +184,12 @@
     $("#alt_check").click(function() {
         $("form#auto-submit").submit();
     });
+
+    $('#field').change(function() {
+        let type = $(this).find(':selected').data('type');
+        $('#field_type').val(type);
+        console.log(type);
+    })
 
     $('#players_number').change(function() {
         playersNumId = $(this).val();
