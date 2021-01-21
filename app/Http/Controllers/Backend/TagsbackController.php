@@ -56,7 +56,7 @@ class TagsbackController extends Controller
         $tag->status = $request->input('status');
         $tag->save();
 
-        return redirect('tags');
+        return redirect('backend-tags');
     }
 
     /**

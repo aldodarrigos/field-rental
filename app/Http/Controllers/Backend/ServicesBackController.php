@@ -56,7 +56,6 @@ class ServicesBackController extends Controller
         $service->sumary = $request->input('sumary');
         $service->content = $request->input('content');
         $service->img = $request->input('img');
-        $service->img_md = $request->input('img_md');
         $service->flag = $request->input('flag');
         $service->status = $request->input('status');
         $service->save();
@@ -103,7 +102,6 @@ class ServicesBackController extends Controller
         $service->sumary = $request->input('sumary');
         $service->content = $request->input('content');
         $service->img = $request->input('img');
-        $service->img_md = $request->input('img_md');
         $service->flag = $request->input('flag');
         $service->status = $request->input('status');
         $service->save();

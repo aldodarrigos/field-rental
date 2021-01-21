@@ -11,7 +11,7 @@
 
     <div class="row">
 
-        <div class="col-md-6">
+        <div class="col-md-8">
 
             <div class="form-group ">
                 <label>Name</label>
@@ -23,24 +23,18 @@
                 <textarea name="sumary" class="form-control" rows="4">@if(!empty($content->sumary)){{$content->sumary}} @endif</textarea>
             </div>
 
-
             <div class="form-group ">
                 <label >Content</label>
-                <textarea name="content" class="form-control summernote" rows="8">@if(!empty($content->content)){{$content->content}} @endif</textarea>
+                <textarea name="content" class="form-control summernote" rows="15">@if(!empty($content->content)){{$content->content}} @endif</textarea>
             </div>
 
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-4">
 
             <div class="form-group tooltip-wrap">
-                <label>Image Large <i class="fas fa-question-circle text-muted" data-toggle="tooltip" data-placement="top" title="Image URLs must have 120 characters max."></i></label> 
+                <label>Image <i class="fas fa-question-circle text-muted" data-toggle="tooltip" data-placement="top" title="Image URLs must have 120 characters max."></i></label> 
                 <input type="text" name='img' class="form-control" @if(!empty($content->img)) value="{{$content->img}}" @endif>
-            </div>
-
-            <div class="form-group tooltip-wrap">
-                <label>Image Medium <i class="fas fa-question-circle text-muted" data-toggle="tooltip" data-placement="top" title="Image URLs must have 120 characters max."></i></label> 
-                <input type="text" name='img_md' class="form-control" @if(!empty($content->img_md)) value="{{$content->img_md}}" @endif>
             </div>
 
             <div class="row">

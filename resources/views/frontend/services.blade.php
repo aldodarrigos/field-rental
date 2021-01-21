@@ -20,7 +20,7 @@
         @foreach ($services as $service)
 
             <x-frontend.cards.services>
-                <x-slot name='image'>{{$service->img_md}}</x-slot>
+                <x-slot name='image'>{{$service->img}}</x-slot>
                 <x-slot name='title'>{{$service->name}}</x-slot>
                 <x-slot name='sumary'>{{$service->sumary}}</x-slot>
                 <x-slot name='sumary_color'>gray</x-slot>

@@ -6,7 +6,7 @@
         
             @foreach ($posts as $post)
                 <x-frontend.cards.post>
-                    <x-slot name='image'>{{$post->img_md}}</x-slot>
+                    <x-slot name='image'>{{$post->img}}</x-slot>
                     <x-slot name='title'>{{$post->title}}</x-slot>
                     <x-slot name='link'>/post/{{$post->slug}}</x-slot>
                     <x-slot name='date'>{{$post->pub_date}}</x-slot>

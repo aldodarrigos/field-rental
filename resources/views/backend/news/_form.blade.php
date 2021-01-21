@@ -44,16 +44,6 @@
                 <input type="text" name='img' class="form-control" @if(!empty($content->img)) value="{{$content->img}}" @endif>
             </div>
 
-            <div class="form-group">
-                <label>Image Medium <small>(120 characters max.)</small></label>
-                <input type="text" name='img_md' class="form-control" @if(!empty($content->img_md)) value="{{$content->img_md}}" @endif>
-            </div>
-
-            <div class="form-group">
-                <label>Image Small <small>(120 characters max.)</small></label>
-                <input type="text" name='img_sm' class="form-control" @if(!empty($content->img_sm)) value="{{$content->img_sm}}" @endif>
-            </div>
-
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group ">

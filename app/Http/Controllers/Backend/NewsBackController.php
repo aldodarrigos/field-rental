@@ -68,8 +68,6 @@ class NewsBackController extends Controller
         $post->content = $request->input('content');
 
         $post->img = $request->input('img');
-        $post->img_md = $request->input('img_md');
-        $post->img_sm = $request->input('img_sm');
 
         $post->tag_id = $request->input('tag_id');
         $post->pub_date = $request->input('pub_date');
@@ -118,8 +116,6 @@ class NewsBackController extends Controller
         $post->content = $request->input('content');
 
         $post->img = $request->input('img');
-        $post->img_md = $request->input('img_md');
-        $post->img_sm = $request->input('img_sm');
 
         $post->tag_id = $request->input('tag_id');
         $post->pub_date = $request->input('pub_date');
