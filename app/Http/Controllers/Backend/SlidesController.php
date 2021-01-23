@@ -55,8 +55,12 @@ class SlidesController extends Controller
         $slide->subtitle = $request->input('subtitle');
         $slide->title = $request->input('title');
         $slide->img = $request->input('img');
+        $slide->img_mob = $request->input('img_mob');
         $slide->link_text = $request->input('link_text');
         $slide->link_url = $request->input('link_url');
+        $slide->no_button = $request->input('no_button');
+        $slide->bottom = $request->input('bottom');
+        $slide->shadow = $request->input('shadow');
         $slide->status = $request->input('status');
         $slide->save();
 
@@ -94,11 +98,21 @@ class SlidesController extends Controller
 
         $slide = Slide::find($id);
 
+        $no_button = ($request->input('no_button'))?1:0;
+        $bottom = ($request->input('bottom'))?1:0;
+        $shadow = ($request->input('shadow'))?1:0;
+        $no_title = ($request->input('no_title'))?1:0;
+
         $slide->subtitle = $request->input('subtitle');
         $slide->title = $request->input('title');
+        $slide->no_title = $no_title;
         $slide->img = $request->input('img');
+        $slide->img_mob = $request->input('img_mob');
         $slide->link_text = $request->input('link_text');
         $slide->link_url = $request->input('link_url');
+        $slide->no_button = $no_button;
+        $slide->bottom = $bottom;
+        $slide->shadow = $shadow;
         $slide->status = $request->input('status');
         $slide->save();
 

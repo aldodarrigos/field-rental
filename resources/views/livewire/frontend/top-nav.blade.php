@@ -1,4 +1,4 @@
-<div class="bg-deepblue text-graytext fixed w-full z-30">
+<div class="bg-deepblue text-graytext fixed w-full z-30 top-0">
     <div class="w-full md:w-boxed max-w-boxed mx-auto h-40 flex items-center px-4 sm:px-0">
         <div class="social flex gap-2 w-2/5 md:w-1/2">
             <div class="border border-lines w-25 h-25 rounded flex items-center justify-center hover:bg-blue">

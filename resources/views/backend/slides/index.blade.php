@@ -138,7 +138,7 @@
                                     @endphp
 
                                     <tr class="gradeX">
-                                        <td>{{$record->id}}</td>
+                                        <td><a href="/slides/{{$record->id}}/edit">{{$record->id}}</a></td>
                                         <td><a href="/slides/{{$record->id}}/edit">{{$record->title}}</a></td>
                                         <td>{{$record->subtitle}}</td>
                                         <td class="center"><span class="btn btn-{{$status_color}} btn-xs">{{$status}}</span></td>

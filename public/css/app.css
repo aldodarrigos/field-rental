@@ -16333,6 +16333,10 @@ video {
   height: 300px;
 }
 
+.h-380p{
+  height: 380px;
+}
+
 .h-400p{
   height: 400px;
 }
@@ -26714,6 +26718,13 @@ video {
   left: 20rem;
 }
 
+.inset-94{
+  top: 22rem;
+  right: 22rem;
+  bottom: 22rem;
+  left: 22rem;
+}
+
 .inset-96{
   top: 24rem;
   right: 24rem;
@@ -27260,6 +27271,16 @@ video {
 .inset-x-80{
   right: 20rem;
   left: 20rem;
+}
+
+.inset-y-94{
+  top: 22rem;
+  bottom: 22rem;
+}
+
+.inset-x-94{
+  right: 22rem;
+  left: 22rem;
 }
 
 .inset-y-96{
@@ -28096,6 +28117,22 @@ video {
 
 .left-80{
   left: 20rem;
+}
+
+.top-94{
+  top: 22rem;
+}
+
+.right-94{
+  right: 22rem;
+}
+
+.bottom-94{
+  bottom: 22rem;
+}
+
+.left-94{
+  left: 22rem;
 }
 
 .top-96{
@@ -55556,6 +55593,10 @@ p{ margin-bottom: 1rem;
     height: 300px;
   }
 
+  .sm\:h-380p{
+    height: 380px;
+  }
+
   .sm\:h-400p{
     height: 400px;
   }
@@ -65937,6 +65978,13 @@ p{ margin-bottom: 1rem;
     left: 20rem;
   }
 
+  .sm\:inset-94{
+    top: 22rem;
+    right: 22rem;
+    bottom: 22rem;
+    left: 22rem;
+  }
+
   .sm\:inset-96{
     top: 24rem;
     right: 24rem;
@@ -66483,6 +66531,16 @@ p{ margin-bottom: 1rem;
   .sm\:inset-x-80{
     right: 20rem;
     left: 20rem;
+  }
+
+  .sm\:inset-y-94{
+    top: 22rem;
+    bottom: 22rem;
+  }
+
+  .sm\:inset-x-94{
+    right: 22rem;
+    left: 22rem;
   }
 
   .sm\:inset-y-96{
@@ -67319,6 +67377,22 @@ p{ margin-bottom: 1rem;
 
   .sm\:left-80{
     left: 20rem;
+  }
+
+  .sm\:top-94{
+    top: 22rem;
+  }
+
+  .sm\:right-94{
+    right: 22rem;
+  }
+
+  .sm\:bottom-94{
+    bottom: 22rem;
+  }
+
+  .sm\:left-94{
+    left: 22rem;
   }
 
   .sm\:top-96{
@@ -94691,6 +94765,10 @@ p{ margin-bottom: 1rem;
     height: 300px;
   }
 
+  .md\:h-380p{
+    height: 380px;
+  }
+
   .md\:h-400p{
     height: 400px;
   }
@@ -105072,6 +105150,13 @@ p{ margin-bottom: 1rem;
     left: 20rem;
   }
 
+  .md\:inset-94{
+    top: 22rem;
+    right: 22rem;
+    bottom: 22rem;
+    left: 22rem;
+  }
+
   .md\:inset-96{
     top: 24rem;
     right: 24rem;
@@ -105618,6 +105703,16 @@ p{ margin-bottom: 1rem;
   .md\:inset-x-80{
     right: 20rem;
     left: 20rem;
+  }
+
+  .md\:inset-y-94{
+    top: 22rem;
+    bottom: 22rem;
+  }
+
+  .md\:inset-x-94{
+    right: 22rem;
+    left: 22rem;
   }
 
   .md\:inset-y-96{
@@ -106454,6 +106549,22 @@ p{ margin-bottom: 1rem;
 
   .md\:left-80{
     left: 20rem;
+  }
+
+  .md\:top-94{
+    top: 22rem;
+  }
+
+  .md\:right-94{
+    right: 22rem;
+  }
+
+  .md\:bottom-94{
+    bottom: 22rem;
+  }
+
+  .md\:left-94{
+    left: 22rem;
   }
 
   .md\:top-96{
@@ -133826,6 +133937,10 @@ p{ margin-bottom: 1rem;
     height: 300px;
   }
 
+  .lg\:h-380p{
+    height: 380px;
+  }
+
   .lg\:h-400p{
     height: 400px;
   }
@@ -144207,6 +144322,13 @@ p{ margin-bottom: 1rem;
     left: 20rem;
   }
 
+  .lg\:inset-94{
+    top: 22rem;
+    right: 22rem;
+    bottom: 22rem;
+    left: 22rem;
+  }
+
   .lg\:inset-96{
     top: 24rem;
     right: 24rem;
@@ -144753,6 +144875,16 @@ p{ margin-bottom: 1rem;
   .lg\:inset-x-80{
     right: 20rem;
     left: 20rem;
+  }
+
+  .lg\:inset-y-94{
+    top: 22rem;
+    bottom: 22rem;
+  }
+
+  .lg\:inset-x-94{
+    right: 22rem;
+    left: 22rem;
   }
 
   .lg\:inset-y-96{
@@ -145589,6 +145721,22 @@ p{ margin-bottom: 1rem;
 
   .lg\:left-80{
     left: 20rem;
+  }
+
+  .lg\:top-94{
+    top: 22rem;
+  }
+
+  .lg\:right-94{
+    right: 22rem;
+  }
+
+  .lg\:bottom-94{
+    bottom: 22rem;
+  }
+
+  .lg\:left-94{
+    left: 22rem;
   }
 
   .lg\:top-96{
@@ -172961,6 +173109,10 @@ p{ margin-bottom: 1rem;
     height: 300px;
   }
 
+  .xl\:h-380p{
+    height: 380px;
+  }
+
   .xl\:h-400p{
     height: 400px;
   }
@@ -183342,6 +183494,13 @@ p{ margin-bottom: 1rem;
     left: 20rem;
   }
 
+  .xl\:inset-94{
+    top: 22rem;
+    right: 22rem;
+    bottom: 22rem;
+    left: 22rem;
+  }
+
   .xl\:inset-96{
     top: 24rem;
     right: 24rem;
@@ -183888,6 +184047,16 @@ p{ margin-bottom: 1rem;
   .xl\:inset-x-80{
     right: 20rem;
     left: 20rem;
+  }
+
+  .xl\:inset-y-94{
+    top: 22rem;
+    bottom: 22rem;
+  }
+
+  .xl\:inset-x-94{
+    right: 22rem;
+    left: 22rem;
   }
 
   .xl\:inset-y-96{
@@ -184724,6 +184893,22 @@ p{ margin-bottom: 1rem;
 
   .xl\:left-80{
     left: 20rem;
+  }
+
+  .xl\:top-94{
+    top: 22rem;
+  }
+
+  .xl\:right-94{
+    right: 22rem;
+  }
+
+  .xl\:bottom-94{
+    bottom: 22rem;
+  }
+
+  .xl\:left-94{
+    left: 22rem;
   }
 
   .xl\:top-96{

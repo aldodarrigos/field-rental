@@ -156,7 +156,7 @@
                     <x-slot name='title'>{{$field->name}}</x-slot>
                     <x-slot name='date'>{{$date}}</x-slot>
                     <x-slot name='hour'><span id='day_hour'></span></x-slot>
-                    <x-slot name='price'><span id='price'></span></x-slot>
+                    <x-slot name='price'>$<span id='price'></span></x-slot>
     
                     <x-slot name='sumary'>
     

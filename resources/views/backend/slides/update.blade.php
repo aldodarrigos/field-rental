@@ -6,6 +6,21 @@
 
     @parent
 
+    <link href="{{asset('inspinia/css/plugins/iCheck/custom.css')}}" rel="stylesheet">
+    <link href="{{asset('inspinia/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css')}}" rel="stylesheet">
+
+    <script src="{{asset('inspinia/js/plugins/iCheck/icheck.min.js')}}"></script>
+
+    <script>
+        $(document).ready(function () {
+            
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
+    </script>
+
 @endsection
 
 <div class="row wrapper border-bottom white-bg page-heading">
@@ -27,21 +42,17 @@
 
 <div class="wrapper wrapper-content animated fadeInRight">
 
-    <div class="row">
-        <div class="col-lg-6">
-            <div class="ibox ">
-                <div class="ibox-title">
-                    <h5>Update Slide</h5>
-                    <div class="ibox-tools">
-        
-                    </div>
-                </div>
-                <div class="ibox-content">
+    <div class="ibox ">
+        <div class="ibox-title">
+            <h5>Update Slide</h5>
+            <div class="ibox-tools">
 
-                    @include('backend.slides._form')
-
-                </div>
             </div>
+        </div>
+        <div class="ibox-content">
+
+            @include('backend.slides._form')
+
         </div>
     </div>
 

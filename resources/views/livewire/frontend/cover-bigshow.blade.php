@@ -1,86 +1,28 @@
-<style>
+<script type="text/javascript" src="{{asset('slideshow/slider.min.js')}}"></script>
+<link rel="stylesheet" type="text/css" href="{{asset('slideshow/slider.min.css')}}" />
 
-    .left, .right{
-        position: absolute;
-        top: 50%;
-        height: 100%;
-        font-size: 30px;
-        color: #fff;
-        cursor: pointer;
-    }
 
-    .left{
-        left: 5%;
-        z-index: 20;
-    }
-    .right{
-        right: 5%;
-        z-index: 20;
-    }
-
-</style>
-
-<script>
-    $(document).ready(function(){
-
-        var imgItems = $('.slider li').length; // Numero de Slides
-        var imgPos = 1;
-    
-        $('.slider li').hide(); // Ocultanos todos los slides
-        $('.slider li:first').show(); // Mostramos el primer slide
-    
-        // Ejecutamos todas las funciones
-        $('.right span').click(nextSlider);
-        $('.left span').click(prevSlider);
-    
-        setInterval(function(){
-            nextSlider();
-        }, 7000);
-    
-        // FUNCIONES =========================================================
-    
-        function nextSlider(){
-            if( imgPos >= imgItems){imgPos = 1;} 
-            else {imgPos++;}
-    
-            $('.pagination li').css({'color': '#858585'});
-            $('.pagination li:nth-child(' + imgPos +')').css({'color': '#CD6E2E'});
-    
-            $('.slider li').hide(); // Ocultamos todos los slides
-            $('.slider li:nth-child('+ imgPos +')').fadeIn(1000); // Mostramos el Slide seleccionado
-    
-        }
-    
-        function prevSlider(){
-            if( imgPos <= 1){imgPos = imgItems;} 
-            else {imgPos--;}
-    
-            $('.pagination li').css({'color': '#858585'});
-            $('.pagination li:nth-child(' + imgPos +')').css({'color': '#CD6E2E'});
-    
-            $('.slider li').hide(); // Ocultamos todos los slides
-            $('.slider li:nth-child('+ imgPos +')').fadeIn(1000); // Mostramos el Slide seleccionado
-        }
-    
-    });
-
-</script>
 
 <div class="bg-blue mt-50">
-    <div class=" h-screen relative">
+    <div class="relative" style='height: calc(100vh - 90px);margin-top: 90px;'>
  
         <div class="slideshow overflow-hidden w-full relative h-full">
             
-            <ul class="slider overflow-hidden">
+            <ul class="slider overflow-hidden" id='slider'>
 
                 @foreach ($slides as $slide)
 
                     <x-frontend.pieces.slide>
                         <x-slot name='img'>{{$slide->img}}</x-slot>
+                        <x-slot name='img_mob'>{{$slide->img_mob}}</x-slot>
                         <x-slot name='subtitle'>{{$slide->subtitle}}</x-slot>
                         <x-slot name='title'>{{$slide->title}}</x-slot>
+                        <x-slot name='no_title'>{{$slide->no_title}}</x-slot>
                         <x-slot name='button_text'>{{$slide->link_text}}</x-slot>
                         <x-slot name='button_link'>{{$slide->link_url}}</x-slot>
+                        <x-slot name='no_button'>{{$slide->no_button}}</x-slot>
+                        <x-slot name='no_shadow'>{{$slide->shadow}}</x-slot>
+                        <x-slot name='bottom'>{{$slide->bottom}}</x-slot>
                     </x-frontend.forms.slide> 
 
                 @endforeach
@@ -100,7 +42,7 @@
         
         <form action="/fieldsrental" id='auto-submit'>
 
-            <div class="w-11/12 md:w-boxed flex flex-col md:flex-row gap-4 absolute z-20 bottom-0 left-0 right-0 ml-auto mr-auto mx-auto bg-deepblue text-white py-4 px-4 border-lines border-b-8 rounded-t-lg">
+            <div class="w-11/12 md:w-boxed flex flex-col md:flex-row gap1 md:gap-4 absolute z-20 bottom-0 left-0 right-0 ml-auto mr-auto mx-auto bg-deepblue text-white py-1 md:py-4 px-4 border-lines border-b-0 md:border-b-8 rounded-t-lg">
     
                 
                 <div class="w-3/3 md:w-1/3 flex gap-4 border-0 md:border-r border-lines items-center ">
