@@ -11,7 +11,7 @@
     <div class="caption absolute w-full h-full top-0 left-0 z-20">
 
         <div class="w-boxed mx-auto ">
-            <div class="bigtext absolute top-16 md:top-1/6 w-full md:w-1/2 z-20 px-4 sm:px-0">
+            <div class="bigtext absolute top-16 md:top-1/6 w-full md:w-1/2 z-20 px-4 sm:px-0 text-center md:text-left">
                 @if ($no_title == '1')
                 <div class="text-red font-bold text-2x5 md:text-4x uppercase leading-none md:leading-1">{{$subtitle}}</div>
                 @endif
