@@ -1,7 +1,14 @@
 <script type="text/javascript" src="{{asset('slideshow/slider.min.js')}}"></script>
 <link rel="stylesheet" type="text/css" href="{{asset('slideshow/slider.min.css')}}" />
 
-
+<script type="text/javascript">
+    $(window).on("load", function() {
+        $("#slider").slider({
+        speed  : 1000,     // How long the slide animation transition lasts for in millisecond
+        delay  : 6000      // How long the slide will be displayed for in milliseconds
+        });
+    });
+</script>
 
 <div class="bg-blue mt-50">
     <div class="relative" style='height: calc(100vh - 90px);margin-top: 90px;'>
