@@ -123,8 +123,9 @@ class FrontendController extends Controller
 
     public function covid()
     {
+        $content = Content::where('group_id', 4)->orderBy('order', 'ASC')->get();
 
-        return view('frontend/covid', ['seo' => 'xxx']);
+        return view('frontend/covid', ['seo' => 'xxx', 'content' => $content]);
         
     }
 

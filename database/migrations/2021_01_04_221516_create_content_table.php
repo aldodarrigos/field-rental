@@ -23,7 +23,7 @@ class CreateContentTable extends Migration
             $table->string('link', 120)->nullable();
             $table->string('video', 20)->nullable();
             $table->unsignedTinyInteger('group_id')->default(0);
-            $table->unsignedTinyInteger('order')->default(0);
+            $table->unsignedTinyInteger('order')->default(1);
             $table->unsignedTinyInteger('flag')->default(0);
             $table->unsignedTinyInteger('status')->default(1);
             $table->timestamps();

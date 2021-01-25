@@ -19,7 +19,7 @@ class ContentController extends Controller
     public function index()
     {
         $records = DB::table('content')
-        ->select(DB::raw('content.id, content.title, content.shortcut, content.subtitle, content.link, content.flag, content.status as content_status, content_groups.name as group_name, content.updated_at'))
+        ->select(DB::raw('content.id, content.title, content.shortcut, content.subtitle, content.link, content.flag, content.status as content_status, content_groups.name as group_name, content.updated_at, content.order, content.icon'))
         ->leftJoin('content_groups', 'content.group_id', '=', 'content_groups.id')
         ->orderBy('content.updated_at', 'desc')
         ->get();
@@ -57,6 +57,7 @@ class ContentController extends Controller
         $content = new Content();
 
         $flag = ($request->input('flag'))?1:0;
+        $order = ($request->input('order') != null)?$request->input('order'):1;
 
         $content->title = $request->input('title');
         $content->subtitle = $request->input('subtitle');
@@ -67,6 +68,9 @@ class ContentController extends Controller
         $content->link = $request->input('link');
         $content->video = $request->input('video');
         $content->group_id = $request->input('group_id');
+
+        $content->order = $order;
+        $content->icon = $request->input('icon');
 
         $content->flag = $flag;
         $content->status = $request->input('status');
@@ -119,6 +123,9 @@ class ContentController extends Controller
         $content->video = $request->input('video');
         $content->group_id = $request->input('group_id');
 
+        $content->order = $request->input('order');
+        $content->icon = $request->input('icon');
+
         $content->flag = $flag;
         $content->status = $request->input('status');
         $content->save();
@@ -138,17 +145,4 @@ class ContentController extends Controller
         //
     }
 
-    public function get_tags_api($url, $token, $id_group){
-
-        $client = new Client([
-            'base_uri' => $url,
-            'timeout'  => 10.0,
-            'headers' => ['Content-Type'=> 'application/json', "Authorization"=> "Bearer ".$token.""]
-        ]);
-
-        $response_tag = $client->request('GET', 'api/tags-group/'.$id_group);
-        $tags =  json_decode($response_tag->getBody()->getContents());
-
-        return $tags;
-    }
 }

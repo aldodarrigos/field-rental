@@ -119,6 +119,22 @@
                 </div>
             </div>
 
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group ">
+                        <label>Icon</label>
+                        <input type="text" name='icon' class="form-control" @if(!empty($content->icon)) value="{{$content->icon}}" @endif>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group ">
+                        <label for='video'>Order</label>
+                        <input type="text" name='order' class="form-control" @if(!empty($content->order)) value="{{$content->order}}" @endif>
+                    </div>
+                </div>
+            </div>
+
             <div class="hr-line-dashed"></div>
 
             <button type="submit" class="btn btn-w-m btn-success">Save</button>

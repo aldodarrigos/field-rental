@@ -20,6 +20,7 @@ class Content extends Model
         'video', 
         'group_id', 
         'order', 
+        'icon', 
         'flag', 
         'status'
     ];

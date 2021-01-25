@@ -11,5 +11,6 @@
             </x-frontend.buttons.tagslink>
             <span class="text-sm text-black font-bold">{{$date}}</span>
         </div>
+        <div class="text-graytext text-sm">{{$sumary}}</div>
     </div>
 </article>
