@@ -2,16 +2,18 @@
 <link rel="stylesheet" type="text/css" href="{{asset('slideshow/slider.min.css')}}" />
 
 <script type="text/javascript">
-    $(window).on("load", function() {
+    $( document ).ready(function() {
+
         $("#slider").slider({
         speed  : 1000,     // How long the slide animation transition lasts for in millisecond
         delay  : 6000,      // How long the slide will be displayed for in milliseconds
-        pagination  : false
         });
+
     });
 </script>
 
 <div class="bg-blue mt-50">
+
     <div class="relative" style='height: calc(100vh - 90px);margin-top: 90px;'>
  
         <div class="slideshow overflow-hidden w-full relative h-full">
