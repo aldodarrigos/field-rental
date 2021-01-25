@@ -15,7 +15,7 @@ use PayPal\Api\Transaction;
 use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Rest\ApiContext;
 
-use App\Models\{Field, Reservation, User, Content};
+use App\Models\{Field, Reservation, User, Content, Setting};
 
 use App\Mail\BookingMailable;
 use Illuminate\Support\Facades\Mail;
@@ -98,9 +98,9 @@ class PaymentController extends Controller
             $result = 0;
         }
 
+        $setting = Setting::first();
 
-
-        return view('frontend/payment/fieldsrental', ['result' => $result, 'field' => $field, 'field_id' => $field_id, 'date' => $date, 'fields_select' => $fields_select, 'reservations' => $reservations, 'hoursarray' => $hoursarray, 'players_number' => $players_number, 'map' => $map]);
+        return view('frontend/payment/fieldsrental', ['result' => $result, 'field' => $field, 'field_id' => $field_id, 'date' => $date, 'fields_select' => $fields_select, 'reservations' => $reservations, 'hoursarray' => $hoursarray, 'players_number' => $players_number, 'map' => $map, 'setting' => $setting]);
         
     }
 

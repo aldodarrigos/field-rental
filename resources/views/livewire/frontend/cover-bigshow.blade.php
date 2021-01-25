@@ -5,7 +5,8 @@
     $(window).on("load", function() {
         $("#slider").slider({
         speed  : 1000,     // How long the slide animation transition lasts for in millisecond
-        delay  : 6000      // How long the slide will be displayed for in milliseconds
+        delay  : 6000,      // How long the slide will be displayed for in milliseconds
+        pagination  : false
         });
     });
 </script>

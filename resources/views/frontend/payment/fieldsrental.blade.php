@@ -100,7 +100,7 @@
                 <x-slot name='label_on_off'>on</x-slot>
             </x-frontend.forms.input_text>
             
-            <div class="text-right py-4">
+            <div class="text py-4">
                 <x-frontend.buttons.form>
                     <x-slot name='bg'>red</x-slot>
                     <x-slot name='size'>big</x-slot>
@@ -160,16 +160,16 @@
     
                     <x-slot name='sumary'>
     
-                        <div class="inline-flex flex-wrap gap-2">
+                        <div class="inline-flex flex-wrap gap-2 mb-4">
 
                             @for ($i = 0; $i < count($hoursarray); $i++)
                                 @php
                                     if($hoursarray[$i]['class'] == 'dummyclass'){
-                                        $color = 'red';
+                                        $color = 'bg-info';
                                         $pointer = 'cursor-pointer';
                                         $decoration = '';
                                     }else{
-                                        $color = 'graytext';
+                                        $color = 'bg-graytext';
                                         $pointer = 'cursor-not-allowed';
                                         $decoration = 'line-through';
                                     }
@@ -202,8 +202,8 @@
                             @endfor
   
                             <x-frontend.buttons.hour>
-                                <x-slot name='bg'>info</x-slot>
-                                <x-slot name='text'><i class="fas fa-broom"></i></x-slot>
+                                <x-slot name='bg'>bg-info</x-slot>
+                                <x-slot name='text'><i class="fas fa-sync"></i></x-slot>
                                 <x-slot name='class'>clean</x-slot>
                                 <x-slot name='dataHour'></x-slot>
                                 <x-slot name='dataPrice'></x-slot>
@@ -211,6 +211,16 @@
                                 <x-slot name='decoration'></x-slot>
                             </x-frontend.buttons.hour>
              
+                        </div>
+
+                        <div class="flex gap-x-4 text-xs mb-2">
+                            <div><span><i class="fas fa-circle text-info"></i></span> Available</div>
+                            <div><span><i class="fas fa-circle text-red"></i></span> Selected</div>
+                            <div><span><i class="fas fa-circle text-graytext"></i></span> Not available</div>
+                        </div>
+
+                        <div class="text-xs">
+                            <p>If you want to book more than 1 hour please contact: <strong>{{$setting->phone_1}}</strong></p>
                         </div>
     
                         <script>
@@ -222,8 +232,10 @@
                             });
     
                             $(".dummyclass").click(function(){
-                                $(".dummyclass").removeClass('bg-info');
-                                $(this).toggleClass("bg-info");
+                                $(".dummyclass").removeClass('bg-red');
+                                $(".dummyclass").addClass('bg-info');
+                                $(this).addClass("bg-red");
+                                $(this).removeClass("bg-info");
                                 let day = $(this).text();
                                 let price = $(this).data("price");
                                 let hour = $(this).data("hour");
@@ -246,7 +258,8 @@
                             });
 
                             $("#clean").click(function(){
-                                $(".dummyclass").removeClass('bg-info');
+                                $(".dummyclass").removeClass('bg-red');
+                                $(".dummyclass").addClass('bg-info');
           
                                 $('#hourSelected').val('');
                                 $('#day_hour').text('-----');
