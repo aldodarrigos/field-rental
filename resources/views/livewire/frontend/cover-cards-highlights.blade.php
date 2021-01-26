@@ -3,7 +3,7 @@
         <div class="flex gap-8 flex-col md:flex-row">
             @foreach ($content as $content)
 
-                <div class="w-3/3 md:w-1/3">
+                <div class="w-3/3 md:w-1/3 bg-blue rounded-lg">
                     <x-frontend.cards.cover_highlight>
                         <x-slot name='subtitle'>{{$content->subtitle}}</x-slot>
                         <x-slot name='title'>{{$content->title}}</x-slot>

@@ -16,7 +16,7 @@
                 <div class="text-red font-bold text-2x5 md:text-4x uppercase leading-none md:leading-1">{{$subtitle}}</div>
                 @endif
                 @if ($no_title == '1')
-                <div class="text-white font-bold text-3x md:text-6x uppercase leading-none mb-6">{{$title}}</div>
+                <div class="text-white font-extrabold text-3x md:text-6x uppercase leading-none mb-6 font-nunito">{{$title}}</div>
                 @endif
                 <div class="calltoaction">
                     @if ($no_button == '1')

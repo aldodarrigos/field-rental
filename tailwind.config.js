@@ -12,6 +12,7 @@ module.exports = {
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
                 roboto: ["Roboto Condensed", "sans-serif"],
+                nunito: ["Nunito Sans", "sans-serif"]
             },
             width: {
                 25          : '25px',
@@ -38,6 +39,7 @@ module.exports = {
                 '250p': '250px',
                 '270p': '270px',
                 '300p': '300px',
+                '360p': '360px',
                 '380p': '380px',
                 '400p': '400px',
                 '500p': '500px',

@@ -20,6 +20,13 @@
 
         <div class="col-span-12">
 
+            @if ($message = Session::get('success'))
+            <div class="alert alert-success alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>	
+                    <strong>{{ $message }}</strong>
+            </div>
+            @endif
+
             <div class="profile flex gap-4 mb-6">
                 <div class="info">
                     <div class="name text-2x font-bold flex">{{Auth::user()->name}} 
