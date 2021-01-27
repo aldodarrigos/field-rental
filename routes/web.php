@@ -5,6 +5,8 @@ use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\PaymentController;
 use App\Http\Controllers\Frontend\UserController;
 use App\Http\Controllers\Frontend\FieldsController;
+use App\Http\Controllers\Frontend\TournamentsController;
+
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\ReservationController;
 use App\Http\Controllers\Backend\ContentController;
@@ -18,6 +20,8 @@ use App\Http\Controllers\Backend\GalleryController;
 use App\Http\Controllers\Backend\SettingsController;
 use App\Http\Controllers\Backend\UsersController;
 use App\Http\Controllers\Backend\SlidesController;
+use App\Http\Controllers\Backend\TournamentsBackController;
+
 use App\Http\Controllers\SendmailController;
 use App\Providers\RouteServiceProvider;
 
@@ -55,6 +59,10 @@ Route::get('singin', [UserController::class, 'login'])->name('frontend.login');
 Route::get('singup', [UserController::class, 'singup'])->name('frontend.singup');
 Route::post('user-authenticate', [UserController::class, 'authenticate'])->name('authenticate');
 Route::get('profile/dashboard', [UserController::class, 'dashboard'])->name('frontend.user.dashboard');
+
+Route::get('tournaments/{slug?}', [TournamentsController::class, 'tournaments'])->name('frontend.tournaments');
+Route::get('registration/{id?}/{slug?}', [TournamentsController::class, 'registration'])->name('frontend.tournaments.registration');
+Route::post('registration/submit', [TournamentsController::class, 'submit'])->name('tournaments.registration.submit');
 
 Route::get('shop', [FrontendController::class, 'shop'])->name('frontend.shop');
 
@@ -100,4 +108,7 @@ Route::middleware(['admin'])->group(function () {
     Route::post('menu-sort', [MenuController::class, 'sort'])->name('backend.menu.sort');
     Route::get('delete-menu/{id?}', [MenuController::class, 'destroy'])->name('backend.menu.delete');
     Route::post('services-sort', [ServicesBackController::class, 'sort'])->name('backend.services.sort');
+    Route::resource('backend-tournaments', TournamentsBackController::class);
+    Route::get('tournament-registrations/{id?}', [TournamentsBackController::class, 'registration'])->name('backend.tournament-registrations');
+    Route::get('tournament-registration/{id?}', [TournamentsBackController::class, 'registration_detail'])->name('backend.tournament-registration');
 });

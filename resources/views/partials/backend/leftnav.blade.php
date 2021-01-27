@@ -9,6 +9,7 @@
     $settings_active = ($url == 'settings')?'active':'';
     $users_active = ($url == 'users')?'active':'';
     $slides_active = ($url == 'slides')?'active':'';
+    $tournaments_active = ($url == 'tournaments')?'active':'';
 @endphp
 
 <nav class="navbar-default navbar-static-side" role="navigation">
@@ -46,6 +47,14 @@
 
             <li class="{{$services_active}}">
                 <a href="/backend-services"><i class="far fa-folder"></i> <span class="nav-label">Services</span> </a>
+            </li>
+
+            <li class="{{$tournaments_active}}">
+                <a href="/backend-tournaments"><i class="fas fa-trophy"></i> <span class="nav-label">Tournaments</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="/backend-tournaments">Tournaments</a></li>
+                    <li><a href="/backend-categories">Categories</a></li>
+                </ul>
             </li>
 
             <li class="{{$news_active}}">

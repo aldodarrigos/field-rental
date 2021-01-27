@@ -165,11 +165,11 @@
                             @for ($i = 0; $i < count($hoursarray); $i++)
                                 @php
                                     if($hoursarray[$i]['class'] == 'dummyclass'){
-                                        $color = 'bg-info';
+                                        $color = 'bg-green';
                                         $pointer = 'cursor-pointer';
                                         $decoration = '';
                                     }else{
-                                        $color = 'bg-graytext';
+                                        $color = 'bg-red';
                                         $pointer = 'cursor-not-allowed';
                                         $decoration = 'line-through';
                                     }
@@ -202,7 +202,7 @@
                             @endfor
   
                             <x-frontend.buttons.hour>
-                                <x-slot name='bg'>bg-info</x-slot>
+                                <x-slot name='bg'>bg-green</x-slot>
                                 <x-slot name='text'><i class="fas fa-sync"></i></x-slot>
                                 <x-slot name='class'>clean</x-slot>
                                 <x-slot name='dataHour'></x-slot>
@@ -214,9 +214,9 @@
                         </div>
 
                         <div class="flex gap-x-4 text-xs mb-2">
-                            <div><span><i class="fas fa-circle text-info"></i></span> Available</div>
-                            <div><span><i class="fas fa-circle text-red"></i></span> Selected</div>
-                            <div><span><i class="fas fa-circle text-graytext"></i></span> Not available</div>
+                            <div><span><i class="fas fa-circle text-green"></i></span> Available</div>
+                            <div><span><i class="fas fa-circle text-warning"></i></span> Selected</div>
+                            <div><span><i class="fas fa-circle text-red"></i></span> Not available</div>
                         </div>
 
                         <div class="text-xs">
@@ -232,10 +232,15 @@
                             });
     
                             $(".dummyclass").click(function(){
-                                $(".dummyclass").removeClass('bg-red');
-                                $(".dummyclass").addClass('bg-info');
-                                $(this).addClass("bg-red");
-                                $(this).removeClass("bg-info");
+                                $(".dummyclass").removeClass('bg-warning');
+                                $(".dummyclass").addClass('bg-green');
+                                $(".dummyclass").addClass('text-gray');
+                                $(".dummyclass").removeClass('text-black');
+
+                                $(this).addClass("bg-warning");
+                                $(this).removeClass("bg-green");
+                                $(this).removeClass("text-gray");
+                                $(this).addClass("text-black");
                                 let day = $(this).text();
                                 let price = $(this).data("price");
                                 let hour = $(this).data("hour");
@@ -258,8 +263,8 @@
                             });
 
                             $("#clean").click(function(){
-                                $(".dummyclass").removeClass('bg-red');
-                                $(".dummyclass").addClass('bg-info');
+                                $(".dummyclass").removeClass('bg-warning');
+                                $(".dummyclass").addClass('bg-green');
           
                                 $('#hourSelected').val('');
                                 $('#day_hour').text('-----');

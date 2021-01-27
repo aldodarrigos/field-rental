@@ -68,6 +68,7 @@ module.exports = {
                 'info': '#23c6c8',
                 'warning': '#f8ac59',
                 'danger': '#ec4758',
+                'green': '#3bca3b',
             },
             maxWidth: {
                 'boxed': '1140px',
