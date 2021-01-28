@@ -16,7 +16,10 @@
                 pageLength: 25,
                 responsive: true,
                 dom: '<"html5buttons"B>lTfgitp',
-                "order": [[ 6, "desc" ]],
+                "order": [[ 3, "desc" ]],
+                columnDefs: [
+                    { "targets": [2,4,5], "orderable": false }
+                ],
                 buttons: [
                     { extend: 'copy'},
                     {extend: 'csv'},
@@ -76,6 +79,7 @@
                                 <tr>
                                     <th>id</th>
                                     <th>Name</th>
+                                    <th>Link</th>
                                     <th>Create</th>
                                     <th>Status</th>
                                     <th>Registration</th>
@@ -98,12 +102,17 @@
 
                                     <tr class="gradeX">
                                         <td><strong>{{$record->id}}</strong></td>
-                                        <td><a href="/backend-tournaments/{{$record->id}}/edit">{{$record->name}}</a></td>
+                                        <td>
+                                            <a href="/backend-tournaments/{{$record->id}}/edit">{{$record->name}}</a>
+                                        </td>
+                                        <td>
+                                            <a href="/tournaments/{{$record->slug}}" class="" target='_blank'> <i class="fas fa-external-link-alt"></i> Link</a>
+                                        </td>
                                         <td><strong>{{date('Y-m-d', strtotime( $record->created_at) )}}</strong></td>
                                         <td class="center"><span class="btn btn-{{$status_color}} btn-xs">{{$status}}</span></td>
                                         <td><a href="/tournament-registrations/{{$record->id}}" class="btn btn-success btn-xs"> <i class="far fa-clipboard"></i> Registration</a> <a href="/registration/{{$record->id}}/{{$record->slug}}" class="btn btn-info btn-xs" target='_blank'> <i class="fas fa-external-link-alt"></i> Link</a></td>
                                     </tr>
-
+                                    
                                 @endforeach
 
                             </tbody>

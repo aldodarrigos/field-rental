@@ -53,7 +53,7 @@
                 <a href="/backend-tournaments"><i class="fas fa-trophy"></i> <span class="nav-label">Tournaments</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="/backend-tournaments">Tournaments</a></li>
-                    <li><a href="/backend-categories">Categories</a></li>
+                    <li><a href="/categories">Categories</a></li>
                 </ul>
             </li>
 

@@ -10,7 +10,7 @@
     
     <link href="{{asset('fontawesome/css/all.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-    <link rel="icon" type="image/png" href="{{asset('img/favicon.png')}}" sizes="32x32">
+    <link rel="icon" type="image/png" href="{{asset('img/favicon-32x32.png')}}" sizes="32x32">
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDw8jIYGfwQC1fUdni4PlUws3tQa21EjdM"></script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"

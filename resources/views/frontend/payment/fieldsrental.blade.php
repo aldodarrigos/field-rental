@@ -198,6 +198,7 @@
                                     <x-slot name='dataPrice'>{{$hoursarray[$i]['price']}}</x-slot>
                                     <x-slot name='pointer'>{{$pointer}}</x-slot>
                                     <x-slot name='decoration'>{{$decoration}}</x-slot>
+                                    <x-slot name='hover'></x-slot>
                                 </x-frontend.buttons.hour>
                             @endfor
   
@@ -209,6 +210,7 @@
                                 <x-slot name='dataPrice'></x-slot>
                                 <x-slot name='pointer'>cursor-pointer</x-slot>
                                 <x-slot name='decoration'></x-slot>
+                                <x-slot name='hover'>Clear</x-slot>
                             </x-frontend.buttons.hour>
              
                         </div>
@@ -265,6 +267,7 @@
                             $("#clean").click(function(){
                                 $(".dummyclass").removeClass('bg-warning');
                                 $(".dummyclass").addClass('bg-green');
+                                $(".dummyclass").addClass('text-gray');
           
                                 $('#hourSelected').val('');
                                 $('#day_hour').text('-----');

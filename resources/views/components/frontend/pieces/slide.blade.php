@@ -29,7 +29,7 @@
                 </div>
             </div>
             @if ($bottom == '1')
-                <div class="alt_button absolute bottom-94 md:bottom-72 left-1/4 right-1/4 md:left-1/3 md:right-1/3 text-center">
+                <div class="alt_button absolute top-2/4 md:bottom-72 left-1/4 right-1/4 md:left-1/3 md:right-1/3 text-center">
                     <x-frontend.buttons.link>
                         <x-slot name='link'>{{$button_link}}</x-slot>
                         <x-slot name='size'>big</x-slot>

@@ -39,14 +39,6 @@
         
             </ul>
         
-            <div class="left">
-                <span class="fa fa-chevron-left"></span>
-            </div>
-        
-            <div class="right">
-                <span class="fa fa-chevron-right"></span>
-            </div>
-        
         </div>
 
         
