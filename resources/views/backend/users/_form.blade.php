@@ -14,7 +14,7 @@
         <div class="col-md-6">
 
             <div class="row">
-
+                {{print_r($content)}}
                 <div class="col-md-6">
                     <div class="form-group ">
                         <label >Name</label>
