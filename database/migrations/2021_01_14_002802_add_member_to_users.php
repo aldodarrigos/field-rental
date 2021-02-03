@@ -22,6 +22,7 @@ class AddMemberToUsers extends Migration
             $table->unsignedTinyInteger('member')->default(0)->after('phone');
             $table->date('member_start')->nullable()->after('member');
             $table->date('member_finish')->nullable()->after('member_start');
+            $table->unsignedTinyInteger('status')->default(1)->after('member_finish');
 
         });
     }
