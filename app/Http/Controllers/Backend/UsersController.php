@@ -111,12 +111,12 @@ class UsersController extends Controller
 
         $user = User::find($id);
 
-        $password = $request->input('password');
+        $password = $request->input('passfrase');
 
         if($password != null){
 
-            $user->name = $request->input('name');
-            $user->email = $request->input('email');
+            $user->name = $request->input('nome');
+            $user->email = $request->input('mailtext');
             $user->password = Hash::make($password) ;;
             $user->role = $request->input('role');
             $user->ide = $request->input('ide');
@@ -131,8 +131,8 @@ class UsersController extends Controller
 
         }else{
 
-            $user->name = $request->input('name');
-            $user->email = $request->input('email');
+            $user->name = $request->input('nome');
+            $user->email = $request->input('mailtext');
             $user->role = $request->input('role');
             $user->ide = $request->input('ide');
             $user->born = $request->input('born');

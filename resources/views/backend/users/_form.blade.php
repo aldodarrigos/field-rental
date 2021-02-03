@@ -14,20 +14,20 @@
         <div class="col-md-6">
 
             <div class="row">
-                {{print_r($content)}}
+
                 <div class="col-md-6">
                     <div class="form-group ">
                         <label >Name</label>
-                        <input type="text" name='name' class="form-control" @if(!empty($content->name)) value="{{$content->name}}" @endif autocomplete='off'>
+                        <input type="text" name='nome' class="form-control" @if(!empty($content->name)) value="{{$content->name}}" @endif autocomplete='off'>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group ">
                         <label >Email</label>
-                        <input type="text" name='email' class="form-control" @if(!empty($content->email)) value="{{$content->email}}" @endif autocomplete='off' >
+                        <input type="text" name='mailtext' class="form-control" @if(!empty($content->email)) value="{{$content->email}}" @endif autocomplete='off' >
                     </div>
                 </div>
-
+                
             </div>
 
 
@@ -88,7 +88,7 @@
                 <div class="col-md-6">
                     <div class="form-group ">
                         <label>Password</label>
-                        <input type="password" name='password' class="form-control" value="" autocomplete="false">
+                        <input type="password" name='passfrase' class="form-control" value="" autocomplete="false">
                     </div>
                 </div>
                 <div class="col-md-6">
