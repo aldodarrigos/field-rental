@@ -20,7 +20,7 @@
     <div class="w-4/4 md:w-1/4 bg-deepblue text-white px-10 py-10 rounded-r-lg">
         <div class="text-red uppercase font-roboto font-bold">{{$fields->subtitle}}</div>    
         <div class="text-white font-roboto text-3xl uppercase font-bold leading-none mb-4 mt-2">{{$fields->title}}</div>
-        <div class="text-graytext mb-6 list-disc">
+        <div class="text-white mb-6 list-disc">
 
             {!!$fields->content!!}
 

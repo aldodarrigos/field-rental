@@ -24,8 +24,8 @@
                         </form>
                     </span>
                 @else
-                    <a href="/singin">Sing In</a> / 
-                    <a href="/singup" class="font-bold text-info">Sing Up</a>
+                    <a href="/signin">Sign In</a> / 
+                    <a href="/signup" class="font-bold text-info">Sign Up</a>
                 @endif
             </div>
         </div>

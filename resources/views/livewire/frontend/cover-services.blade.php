@@ -26,7 +26,7 @@
                 <div class="w-1/4 text-right"><i class="{{$icon}} text-4x5 text-black"></i></div>
                 <div class="w-3/4">
                     <div class="text-red uppercase text-base font-bold"><a href="/services/{{$service->slug}}">{{$service->name}}</a></div>
-                    <div class="text-graytext">{{$service->sumary}}</div>
+                    <div class="text-black">{{$service->sumary}}</div>
                 </div>
             </div>
 

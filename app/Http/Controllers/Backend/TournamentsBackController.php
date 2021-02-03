@@ -97,7 +97,11 @@ class TournamentsBackController extends Controller
 
         $content = Tournament::find($id);
 
-        $content->name = $request->input('name');
+        $name = $request->input('name');
+        $slug_input = Str::of($name)->slug('-');
+
+        $content->name = $name;
+        $content->slug = $slug_input;
         $content->sumary = $request->input('sumary');
         $content->content = $request->input('content');
         $content->img = $request->input('img');
