@@ -42,7 +42,7 @@
 
         @else
 
-            <div>Please <a href="/singin" class="font-bold text-red">login</a> to your account to complete booking or <a href="/singup" class="font-bold text-red">create</a> a new account</div>
+            <div>Please <a href="/signin" class="font-bold text-red">login</a> to your account to complete booking or <a href="/signup" class="font-bold text-red">create</a> a new account</div>
             
         @endif
 

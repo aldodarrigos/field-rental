@@ -222,7 +222,7 @@
                         </div>
 
                         <div class="text-xs">
-                            <p>If you want to book more than 1 hour please contact: <strong>{{$setting->phone_1}}</strong></p>
+                            <p>If you want to book more than 1 hour please contact: <strong>{{$setting->phone_1}}</strong>, <br> <strong>{{$setting->phone_2}}</strong></p>
                         </div>
     
                         <script>
