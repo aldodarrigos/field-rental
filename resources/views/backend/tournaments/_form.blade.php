@@ -9,6 +9,10 @@
 
     @csrf
 
+    <input type="hidden" id="token" value='{{csrf_token()}}'>
+    <input type="hidden" id="id_tournament" @if(!empty($content->id)) value="{{$content->id}}" @endif>
+
+
     <div class="row">
 
         <div class="col-md-8">
@@ -71,6 +75,35 @@
 
             <div class="hr-line-dashed"></div>
 
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group ">
+                        <label for='group'>Categories</label>
+                        <select class="form-control m-b" id="categories">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6 mt-2">
+                    <br>
+                    <span class="btn btn-w-m btn-success" id='add_category'>Add</span>
+                </div>
+
+                <div class="col-md-6">
+
+                    <table class="table table-striped margin bottom">
+     
+                        <tbody id='category_records'>
+                       
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+            
+
+            <div class="hr-line-dashed"></div>
+
             <button type="submit" class="btn btn-w-m btn-success">Save</button>
             @if(!empty($put))
             <input type="hidden" name="_method" value="PUT">
@@ -81,3 +114,4 @@
     </div>
 
 </form>
+

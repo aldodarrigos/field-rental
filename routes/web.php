@@ -21,6 +21,7 @@ use App\Http\Controllers\Backend\SettingsController;
 use App\Http\Controllers\Backend\UsersController;
 use App\Http\Controllers\Backend\SlidesController;
 use App\Http\Controllers\Backend\TournamentsBackController;
+use App\Http\Controllers\Backend\TournamentCatsController;
 use App\Http\Controllers\Backend\CategoriesController;
 
 use App\Http\Controllers\SendmailController;
@@ -112,6 +113,10 @@ Route::middleware(['admin'])->group(function () {
     Route::resource('backend-tournaments', TournamentsBackController::class);
     Route::get('tournament-registrations/{id?}', [TournamentsBackController::class, 'registration'])->name('backend.tournament-registrations');
     Route::get('tournament-registration/{id?}', [TournamentsBackController::class, 'registration_detail'])->name('backend.tournament-registration');
+    Route::get('get-categories/{id?}', [CategoriesController::class, 'get_categories']);
+    Route::get('get-categories-select/{id?}', [CategoriesController::class, 'get_categories_select']);
+
+    Route::resource('tournament-categories', TournamentCatsController::class);
 
     Route::resource('categories', CategoriesController::class);
 });

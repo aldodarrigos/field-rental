@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\{Category};
+use App\Models\{Category, Tournament_category};
 use DB;
 use Illuminate\Support\Str;
 //use GuzzleHttp\Client;
@@ -105,5 +105,46 @@ class CategoriesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function get_categories($id_tournament)
+    {
+
+        $categories = DB::table('tournament_categories')
+        ->select(DB::raw('tournament_categories.id, tournament_categories.category_id, categories.name'))
+        ->leftJoin('categories', 'tournament_categories.category_id', '=', 'categories.id')
+        ->where('tournament_categories.tournament_id', $id_tournament)
+        ->orderBy('categories.name', 'asc')
+        ->get();
+        
+        $records = '';
+        foreach($categories  as $item){
+            $records .= '                        
+            <tr>
+                <td class="">'.$item->name.'</td>
+                <td class="text-center"><a class="text-danger delete" data-id="'.$item->id.'">delete</a></td>
+            </tr>';
+        }
+        return $records;
+        
+    }
+
+    public function get_categories_select($id_tournament)
+    {
+
+        $categories_array = array();
+        $tournament_categories = Tournament_category::where('tournament_id', $id_tournament)->get();
+        foreach ($tournament_categories as $value) {
+            array_push($categories_array, $value->category_id);
+        }
+        $categories = Category::where('status', 1)->whereNotIn('id', $categories_array)->orderBy('name', 'desc')->get();
+        
+        $records = '<option value="0">-- SELECT --</option>';
+        foreach($categories  as $item){
+            $records .= '                        
+            <option value="'.$item->id.'">'.$item->name.'</option>';
+        }
+        return $records;
+        
     }
 }

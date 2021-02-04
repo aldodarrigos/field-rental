@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\{Tournament, Tournament_registration};
+use App\Models\{Tournament, Tournament_registration, Category, Tournament_category};
 use DB;
 use Illuminate\Support\Str;
 //use GuzzleHttp\Client;
@@ -77,12 +77,20 @@ class TournamentsBackController extends Controller
         
         $action = route('backend-tournaments.update', $id);
         $content = Tournament::find($id);
+
+        $categories_array = array();
+        $tournament_categories = Tournament_category::where('tournament_id', $id)->get();
+        foreach ($tournament_categories as $value) {
+            array_push($categories_array, $value->category_id);
+        }
+        $categories = Category::where('status', 1)->whereNotIn('id', $categories_array)->orderBy('name', 'desc')->get();
+
         $put = True;
         $form = 'update';
 
         $url = "tournaments";
 
-        return view('backend/tournaments/update', ['content' => $content, 'action' => $action, 'url' => $url, 'put' => $put,  'form' => $form]);
+        return view('backend/tournaments/update', ['content' => $content, 'action' => $action, 'url' => $url, 'put' => $put,  'form' => $form, 'categories' => $categories]);
     }
 
     /**

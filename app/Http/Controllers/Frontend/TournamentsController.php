@@ -25,7 +25,16 @@ class TournamentsController extends Controller
     {
 
         $tournament = Tournament::where('id', $id)->first();
-        $categories = Category::where('status', 1)->orderBy('id', 'ASC')->get();
+        //$categories = Category::where('status', 1)->orderBy('id', 'ASC')->get();
+
+        $categories = DB::table('tournament_categories')
+        ->select(DB::raw('tournament_categories.id, tournament_categories.category_id, categories.name'))
+        ->leftJoin('categories', 'tournament_categories.category_id', '=', 'categories.id')
+        ->where('tournament_categories.tournament_id', $id)
+        ->orderBy('categories.name', 'asc')
+        ->get();
+
+
         $setting = Setting::first();
 
         return view('frontend/tournaments/registration', ['seo' => 'xxx', 'tournament' => $tournament, 'setting' => $setting, 'categories' => $categories]);

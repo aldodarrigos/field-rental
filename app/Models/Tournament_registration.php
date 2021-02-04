@@ -16,6 +16,8 @@ class Tournament_registration extends Model
         'phone',
         'category_id',
         'team',
+        'number_players',
+        'gender',
         'message',
     ];
 }

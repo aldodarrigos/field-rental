@@ -117,7 +117,7 @@ class UsersController extends Controller
 
             $user->name = $request->input('nome');
             $user->email = $request->input('mailtext');
-            $user->password = Hash::make($password) ;;
+            $user->password = Hash::make($password);
             $user->role = $request->input('role');
             $user->ide = $request->input('ide');
             $user->born = $request->input('born');

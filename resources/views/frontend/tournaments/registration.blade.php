@@ -97,7 +97,7 @@
 
                             <option value="0">Select category</option>
                             @foreach ($categories as $category)
-                            <option value="{{$category->id}}">{{$category->name}}</option>
+                            <option value="{{$category->category_id}}">{{$category->name}}</option>
                             @endforeach
                             
                         </x-frontend.forms.input_select>
@@ -114,6 +114,37 @@
                             <x-slot name='bg'>light</x-slot>
                             <x-slot name='label_on_off'>on</x-slot>
                         </x-frontend.forms.input_text>
+
+                        <x-frontend.forms.input_text>
+                            <x-slot name='type'>text</x-slot>
+                            <x-slot name='label'>Players number</x-slot>
+                            <x-slot name='id'>number_players</x-slot>
+                            <x-slot name='default'></x-slot>
+                            <x-slot name='placeholder'>Players number</x-slot>
+                            <x-slot name='autocomplete'>off</x-slot>
+                            <x-slot name='required'>off</x-slot>
+                            <x-slot name='height'>big</x-slot>
+                            <x-slot name='bg'>light</x-slot>
+                            <x-slot name='label_on_off'>on</x-slot>
+                        </x-frontend.forms.input_text>
+
+                        <x-frontend.forms.input_select>
+                            <x-slot name='type'>text</x-slot>
+                            <x-slot name='label'>Gender</x-slot>
+                            <x-slot name='id'>gender</x-slot>
+                            <x-slot name='default'></x-slot>
+                            <x-slot name='placeholder'></x-slot>
+                            <x-slot name='autocomplete'>off</x-slot>
+                            <x-slot name='required'>off</x-slot>
+                            <x-slot name='height'>big</x-slot>
+                            <x-slot name='bg'>light</x-slot>
+                            <x-slot name='label_on_off'>on</x-slot>
+
+                            <option value="0">Select option</option>
+                            <option value="1">Girls</option>
+                            <option value="2">Boys</option>
+                            
+                        </x-frontend.forms.input_select>
 
                         <x-frontend.forms.textarea>
                             <x-slot name='label'>Message</x-slot>

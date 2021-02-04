@@ -15,7 +15,86 @@
             $('.summernote').summernote({
                 height: 300
             });
+
+            const token = $('#token').val();
+            let id = $('#id_tournament').val();
+
+            get_categories_select(id);
+            get_categories(id);
+
+            $('#add_category').click(function() {
+                let category_id = $('#categories').val();
+
+                $.ajax({
+                    url: "/tournament-categories",
+                    type:'POST',
+                    data: {
+                        '_token': token,
+                        'tournament_id': id,
+                        'category_id': category_id,
+                    },
+                    success:function(response){
+                        get_categories(id);
+                        get_categories_select(id);
+                    }//Response
+                })//Ajax
+
+            });
+
+
+            function get_categories_select(id_tournament){
+                $.ajax({
+                    url: "/get-categories-select/"+id_tournament,
+                    type:'GET',
+                    data: {
+                        '_token': token,
+                    },
+                    success:function(response){
+                        $('#categories').html(response);
+                    }//Response
+                })//Ajax
+            }
+
+
+            function get_categories(id_tournament){
+                $.ajax({
+                    url: "/get-categories/"+id_tournament,
+                    type:'GET',
+                    data: {
+                        '_token': token,
+                    },
+                    success:function(response){
+                        $('#category_records').html(response);
+                    }//Response
+                })//Ajax
+            }
+
+            $(document).on('click', '.delete', function() { 
+                let record = $(this).data('id');
+                console.log(record);
+
+                $.ajax({
+                    url: "/tournament-categories/"+record,
+                    type:'delete',
+                    data: {
+                        '_token': token,
+                    },
+                    success:function(response){
+                        get_categories(id);
+                        get_categories_select(id);
+                    }//Response
+                })//Ajax
+                
+                
+            });
+
+
+
+
         });
+
+        
+
     </script>
 
 @endsection
