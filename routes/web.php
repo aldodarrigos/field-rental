@@ -84,7 +84,7 @@ Route::get('dashboard', function () {
 })->name('dashboard');
 
 Route::get('/kidsleague', function () {
-    return redirect('/registration/2/kids-league');
+    return redirect()->route('frontend.tournaments.registration', ['id' => 2, 'slug' => 'kids-league']);
 });
 
 Route::get('/friendshipcup', function () {
