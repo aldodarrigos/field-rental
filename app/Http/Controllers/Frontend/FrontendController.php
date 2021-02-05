@@ -114,13 +114,6 @@ class FrontendController extends Controller
         
     }
 
-    public function registration()
-    {
-
-        return view('frontend/registration', ['seo' => 'xxx']);
-        
-    }
-
     public function covid()
     {
         $content = Content::where('group_id', 4)->orderBy('order', 'ASC')->get();

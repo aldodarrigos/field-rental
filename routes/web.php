@@ -83,7 +83,7 @@ Route::get('dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::get('cover', [FrontendController::class, 'kidsleague'])->name('frontend.kidsleague');
+Route::get('registration', [FrontendController::class, 'registration'])->name('frontend.registratio.link');
 Route::get('kidsleague', [FrontendController::class, 'kidsleague'])->name('frontend.kidsleague');
 Route::get('friendshipcup', [FrontendController::class, 'friendshipcup'])->name('frontend.friendshipcup');
 
