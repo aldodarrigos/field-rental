@@ -115,6 +115,7 @@ Route::middleware(['admin'])->group(function () {
     Route::get('tournament-registration/{id?}', [TournamentsBackController::class, 'registration_detail'])->name('backend.tournament-registration');
     Route::get('get-categories/{id?}', [CategoriesController::class, 'get_categories']);
     Route::get('get-categories-select/{id?}', [CategoriesController::class, 'get_categories_select']);
+    Route::post('categories-sort', [CategoriesController::class, 'sort'])->name('backend.categories.sort');
 
     Route::resource('tournament-categories', TournamentCatsController::class);
 

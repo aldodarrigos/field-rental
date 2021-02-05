@@ -19,10 +19,11 @@ class CategoriesController extends Controller
     public function index()
     {
         $records = Category::all();
+        $records_sort = Category::where('status', 1)->orderBy('sort', 'ASC')->get();
 
         $url = "tournaments";
         
-        return view('backend/categories/index', ['records' => $records, 'url' => $url]);
+        return view('backend/categories/index', ['records' => $records, 'url' => $url, 'records_sort' => $records_sort]);
 
     }
 
@@ -147,4 +148,23 @@ class CategoriesController extends Controller
         return $records;
         
     }
+
+    public function sort()
+    {
+        $order = $_POST["order"];
+        $order_array = json_decode($order, true);
+
+
+        for ($i=0; $i < count($order_array); $i++) { 
+            $category = Category::find($order_array[$i]['id']);
+            $category->sort = $i;
+            $category->save();
+        }
+
+        return $order_array[1]['id'];
+
+
+
+    }
+
 }

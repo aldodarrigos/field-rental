@@ -31,7 +31,7 @@ class TournamentsController extends Controller
         ->select(DB::raw('tournament_categories.id, tournament_categories.category_id, categories.name'))
         ->leftJoin('categories', 'tournament_categories.category_id', '=', 'categories.id')
         ->where('tournament_categories.tournament_id', $id)
-        ->orderBy('categories.name', 'asc')
+        ->orderBy('categories.sort', 'asc')
         ->get();
 
 
