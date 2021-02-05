@@ -84,7 +84,7 @@ Route::get('dashboard', function () {
 })->name('dashboard');
 
 Route::get('cover', [FrontendController::class, 'kidsleague'])->name('frontend.kidsleague');
-Route::get('kidsleague', [FrontendController::class, 'kidsleague'])->name('frontend.kidsleague');
+Route::get('kidsleaguex', [FrontendController::class, 'kidsleague'])->name('frontend.kidsleague');
 Route::get('friendshipcup', [FrontendController::class, 'friendshipcup'])->name('frontend.friendshipcup');
 
 
