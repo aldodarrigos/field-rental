@@ -83,11 +83,11 @@ Route::get('dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::get('/kidsleague', function () {
+Route::get('kidsleague', function () {
     return redirect()->route('frontend.tournaments.registration', ['id' => 2, 'slug' => 'kids-league']);
 });
 
-Route::get('/friendshipcup', function () {
+Route::get('friendshipcup', function () {
     return redirect('/registration/1/friendship-cup');
 });
 
