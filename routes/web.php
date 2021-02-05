@@ -83,6 +83,16 @@ Route::get('dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
+Route::get('/kidsleague', function () {
+    return redirect('/registration/2/kids-league');
+});
+
+Route::get('/friendshipcup', function () {
+    return redirect('/registration/1/friendship-cup');
+});
+
+
+
 /*
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
