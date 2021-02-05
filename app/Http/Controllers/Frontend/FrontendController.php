@@ -167,4 +167,18 @@ class FrontendController extends Controller
         
     }
 
+    public function kidsleague()
+    {
+
+        return redirect('/registration/2/kids-league');
+        
+    }
+
+    public function friendshipcup()
+    {
+
+        return redirect('/registration/1/friendship-cup');
+        
+    }
+
 }
