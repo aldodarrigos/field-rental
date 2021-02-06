@@ -9,7 +9,7 @@
 
 @endsection
 
-<x-frontend.pieces.section_header title='Covid-19 Protocol' bread='Safaty First'></x-frontend.pieces.section_header>
+<x-frontend.pieces.section_header title='Covid-19 Protocol' bread='Safety First'></x-frontend.pieces.section_header>
 
 
 <main class="w-11/12 md:w-boxed mx-auto">

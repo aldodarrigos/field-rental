@@ -87,7 +87,7 @@ class FrontendController extends Controller
         $tag = Tag::where('slug', $slug)->first();
 
         $posts = DB::table('posts')
-        ->select(DB::raw('posts.id, posts.title, posts.slug, posts.sumary, posts.img_md, posts.pub_date, tags.name as tag_name, tags.slug as tag_slug'))
+        ->select(DB::raw('posts.id, posts.title, posts.slug, posts.sumary, posts.img, posts.pub_date, tags.name as tag_name, tags.slug as tag_slug'))
         ->leftJoin('tags', 'posts.tag_id', '=', 'tags.id')
         ->where('posts.status', 1)
         ->where('tags.slug', $slug)
