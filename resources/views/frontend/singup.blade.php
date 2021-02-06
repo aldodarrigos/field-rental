@@ -9,7 +9,7 @@
 
 @endsection
 
-<x-frontend.pieces.section_header title='Fields' bread='Our fields'></x-frontend.pieces.section_header>
+<x-frontend.pieces.section_header title='Sign Up' bread='Registration'></x-frontend.pieces.section_header>
 
 
 <main class="w-11/12 md:w-boxed mx-auto">
