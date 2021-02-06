@@ -35,6 +35,6 @@ class BookingMailable extends Mailable
     {
         $reservation = Reservation::where('id', $this->bookId)->first();
         $field = Field::where('id', $reservation->field_id)->first();
-        return $this->view('emails.successbooking', ['reservation' => $reservation, 'field' => $field]);
+        return $this->view('frontend.emails.successbooking', ['reservation' => $reservation, 'field' => $field]);
     }
 }
