@@ -141,8 +141,8 @@
                             <x-slot name='label_on_off'>on</x-slot>
 
                             <option value="0">Select option</option>
-                            <option value="1">Girls</option>
-                            <option value="2">Boys</option>
+                            <option value="1">Female</option>
+                            <option value="2">Male</option>
                             
                         </x-frontend.forms.input_select>
 
