@@ -14,18 +14,15 @@ class FrontendController extends Controller
     public function index()
     {
 
-        //$last_record = Local::latest('id')->first();
+        $setting = Setting::first();
 
         //SEO =======================================
-        /*
-        $seo = $this->seo->get_seo('COVID-19 seguimiento mundial',
-        "https://sarstracker.com/storage/covid-19-wolrd-v2.jpg",
-        'Evolución diaria de casos de COVID19 a nivel mundial',
-        ""
-        );
-        */
+        $seo = ['title' => $setting->site_name, 
+                'sumary' => $setting->site_name, 
+                'image' => 'https://katyisc.com/storage/files/katyisc-sports-complex-share.webp'
+                ];
 
-        return view('frontend/cover', ['seo' => 'xxx']);
+        return view('frontend/cover', ['seo' => $seo]);
         
     }
 
@@ -36,14 +33,25 @@ class FrontendController extends Controller
         $values = Content::where('shortcut', 'about.values')->first();
         $fields = Content::where('id', 10)->first();
 
-        return view('frontend/about', ['seo' => 'xxx', 'vision' => $vision, 'mision' => $mision, 'values' => $values, 'fields' => $fields]);
+        $seo = ['title' => 'About | KISC, Sports complex', 
+        'sumary' => '', 
+        'image' => 'https://katyisc.com/storage/files/katyisc-sports-complex-share.webp'
+        ];
+
+        return view('frontend/about', ['seo' => $seo, 'vision' => $vision, 'mision' => $mision, 'values' => $values, 'fields' => $fields]);
         
     }
 
     public function services()
     {
         $services = Service::where('status', 1)->orderBy('sort', 'ASC')->get();
-        return view('frontend/services', ['seo' => 'xxx', 'services' => $services]);
+
+        $seo = ['title' => 'Services | KISC, Sports complex', 
+        'sumary' => '', 
+        'image' => 'https://katyisc.com/storage/files/katyisc-sports-complex-share.webp'
+        ];
+
+        return view('frontend/services', ['seo' => $seo, 'services' => $services]);
         
     }
 
@@ -52,15 +60,13 @@ class FrontendController extends Controller
     {
         $setting = Setting::first();
         $service = Service::where('slug', $slug)->first();
-        return view('frontend/service', ['seo' => 'xxx', 'service' => $service, 'setting' => $setting]);
-        
-    }
 
+        $seo = ['title' => $service->name.' | KISC, Sports complex', 
+        'sumary' => $service->sumary, 
+        'image' => $service->img
+        ];
 
-    public function fields()
-    {
-
-        return view('frontend/fields', ['seo' => 'xxx']);
+        return view('frontend/service', ['seo' => $seo, 'service' => $service, 'setting' => $setting]);
         
     }
 
@@ -77,7 +83,12 @@ class FrontendController extends Controller
         ->limit(5)
         ->get();
 
-        return view('frontend/news', ['seo' => 'xxx', 'posts' => $posts, 'setting' => $setting]);
+        $seo = ['title' => 'News | KISC, Sports complex', 
+        'sumary' => '', 
+        'image' => 'https://katyisc.com/storage/files/katyisc-sports-complex-share.webp'
+        ];
+
+        return view('frontend/news', ['seo' => $seo, 'posts' => $posts, 'setting' => $setting]);
         
     }
 
@@ -95,7 +106,12 @@ class FrontendController extends Controller
         ->limit(5)
         ->get();
 
-        return view('frontend/tags', ['seo' => 'xxx', 'posts' => $posts, 'tag' => $tag, 'setting' => $setting]);
+        $seo = ['title' => $tag->name.' | KISC, Sports complex', 
+        'sumary' => '', 
+        'image' => 'https://katyisc.com/storage/files/katyisc-sports-complex-share.webp'
+        ];
+
+        return view('frontend/tags', ['seo' => $seo, 'posts' => $posts, 'tag' => $tag, 'setting' => $setting]);
         
     }
 
@@ -105,12 +121,17 @@ class FrontendController extends Controller
         $setting = Setting::first();
 
         $post = DB::table('posts')
-        ->select(DB::raw('posts.id, posts.title, posts.slug, posts.content, posts.img, posts.img_md, posts.pub_date, tags.name as tag_name, tags.slug as tag_slug'))
+        ->select(DB::raw('posts.id, posts.title, posts.sumary, posts.slug, posts.content, posts.img, posts.img_md, posts.pub_date, tags.name as tag_name, tags.slug as tag_slug'))
         ->leftJoin('tags', 'posts.tag_id', '=', 'tags.id')
         ->where('posts.slug', $slug)
         ->first();
 
-        return view('frontend/post', ['seo' => 'xxx', 'post' => $post, 'setting' => $setting]);
+        $seo = ['title' => $post->title.' | KISC, Sports complex', 
+        'sumary' => $post->sumary, 
+        'image' => $post->img
+        ];
+
+        return view('frontend/post', ['seo' => $seo, 'post' => $post, 'setting' => $setting]);
         
     }
 
@@ -118,7 +139,12 @@ class FrontendController extends Controller
     {
         $content = Content::where('group_id', 4)->orderBy('order', 'ASC')->get();
 
-        return view('frontend/covid', ['seo' => 'xxx', 'content' => $content]);
+        $seo = ['title' => 'Covid-19 Protocols | KISC, Sports complex', 
+        'sumary' => '', 
+        'image' => 'https://katyisc.com/storage/files/katyisc-sports-complex-share.webp'
+        ];
+
+        return view('frontend/covid', ['seo' => $seo, 'content' => $content]);
         
     }
 
@@ -135,7 +161,13 @@ class FrontendController extends Controller
         }else{
 
             $setting = Setting::first();
-            return view('frontend/contact', ['seo' => 'xxx', 'setting' => $setting]);
+
+            $seo = ['title' => 'Contact | KISC, Sports complex', 
+            'sumary' => '', 
+            'image' => 'https://katyisc.com/storage/files/katyisc-sports-complex-share.webp'
+            ];
+
+            return view('frontend/contact', ['seo' => $seo, 'setting' => $setting]);
         }
         
     }
@@ -150,13 +182,6 @@ class FrontendController extends Controller
     {
 
         return view('frontend/shop', ['seo' => 'xxx']);
-        
-    }
-
-    public function login()
-    {
-
-        return view('frontend/user-login', ['seo' => 'xxx']);
         
     }
 

@@ -100,7 +100,12 @@ class PaymentController extends Controller
 
         $setting = Setting::first();
 
-        return view('frontend/payment/fieldsrental', ['result' => $result, 'field' => $field, 'field_id' => $field_id, 'date' => $date, 'fields_select' => $fields_select, 'reservations' => $reservations, 'hoursarray' => $hoursarray, 'players_number' => $players_number, 'map' => $map, 'setting' => $setting]);
+        $seo = ['title' => 'Booking | KISC, Sports complex', 
+        'sumary' => 'Book now', 
+        'image' => 'https://katyisc.com/storage/files/katyisc-sports-complex-share.webp'
+        ];
+
+        return view('frontend/payment/fieldsrental', ['seo' => $seo, 'result' => $result, 'field' => $field, 'field_id' => $field_id, 'date' => $date, 'fields_select' => $fields_select, 'reservations' => $reservations, 'hoursarray' => $hoursarray, 'players_number' => $players_number, 'map' => $map, 'setting' => $setting]);
         
     }
 
@@ -257,8 +262,14 @@ class PaymentController extends Controller
         $field = Field::where('id', $reservation->field_id)->first();
         $user = User::where('id', $reservation->user_id)->first();
         */
+
         
-        return view('frontend/payment/success');
+        $seo = ['title' => 'Booking Success | KISC, Sports complex', 
+        'sumary' => '', 
+        'image' => 'https://katyisc.com/storage/files/katyisc-sports-complex-share.webp'
+        ];
+        
+        return view('frontend/payment/success', ['seo' => $seo]);
     }
 
     public function successbooking($contact = null, $bookId = null)

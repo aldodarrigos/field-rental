@@ -15,8 +15,11 @@ class UserController extends Controller
 
     public function login()
     {
-
-        return view('frontend/user-login', ['seo' => 'xxx']);
+        $seo = ['title' => 'Sign In | KISC, Sports complex', 
+            'sumary' => '', 
+            'image' => 'https://katyisc.com/storage/files/katyisc-sports-complex-share.webp'
+            ];
+        return view('frontend/user-login', ['seo' => $seo]);
         
     }
 
@@ -61,8 +64,11 @@ class UserController extends Controller
 
     public function singup()
     {
-
-        return view('frontend/singup', ['seo' => 'xxx']);
+        $seo = ['title' => 'Sign Up | KISC, Sports complex', 
+            'sumary' => '', 
+            'image' => 'https://katyisc.com/storage/files/katyisc-sports-complex-share.webp'
+            ];
+        return view('frontend/singup', ['seo' => $seo]);
         
     }
 
