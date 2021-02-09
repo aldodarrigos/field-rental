@@ -103,10 +103,11 @@
                                     <tr class="gradeX">
                                         <td><strong>{{$record->id}}</strong></td>
                                         <td>
-                                            <a href="/backend-tournaments/{{$record->id}}/edit">{{$record->name}}</a>
+                                            <a href="/backend-tournaments/{{$record->id}}/edit">{{$record->name}}</a> | 
+                                            <a href="/tournaments/{{$record->slug}}" class="text-info" target='_blank'> View in web</a>
                                         </td>
                                         <td>
-                                            <a href="/tournaments/{{$record->slug}}" class="" target='_blank'> <i class="fas fa-external-link-alt"></i> Link</a>
+    
                                         </td>
                                         <td><strong>{{date('Y-m-d', strtotime( $record->created_at) )}}</strong></td>
                                         <td class="center"><span class="btn btn-{{$status_color}} btn-xs">{{$status}}</span></td>

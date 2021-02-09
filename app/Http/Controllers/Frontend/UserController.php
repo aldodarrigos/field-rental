@@ -58,7 +58,12 @@ class UserController extends Controller
 
         $user = User::where('id', Auth::user()->id)->first();
 
-        return view('frontend/profile/dashboard', ['reservations' => $reservations, 'user' => $user]);
+        $seo = ['title' => 'User Dashboard | KISC, Sports complex', 
+        'sumary' => '', 
+        'image' => 'https://katyisc.com/storage/files/katyisc-sports-complex-share.webp'
+        ];
+
+        return view('frontend/profile/dashboard', ['seo' => $seo, 'reservations' => $reservations, 'user' => $user]);
         
     }
 

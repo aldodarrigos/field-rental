@@ -16,8 +16,13 @@ class TournamentsController extends Controller
 
         $tournament = Tournament::where('slug', $slug)->first();
         $setting = Setting::first();
+
+        $seo = ['title' => $tournament->name.' | KISC, Sports complex', 
+        'sumary' => $tournament->sumary, 
+        'image' => $tournament->img
+        ];
         
-        return view('frontend/tournaments/tournament', ['seo' => 'xxx', 'tournament' => $tournament, 'setting' => $setting]);
+        return view('frontend/tournaments/tournament', ['seo' => $seo, 'tournament' => $tournament, 'setting' => $setting]);
         
     }
     
@@ -34,10 +39,14 @@ class TournamentsController extends Controller
         ->orderBy('categories.sort', 'asc')
         ->get();
 
-
         $setting = Setting::first();
 
-        return view('frontend/tournaments/registration', ['seo' => 'xxx', 'tournament' => $tournament, 'setting' => $setting, 'categories' => $categories]);
+        $seo = ['title' => $tournament->name.' Registration | KISC, Sports complex', 
+        'sumary' => $tournament->sumary, 
+        'image' => $tournament->img
+        ];
+
+        return view('frontend/tournaments/registration', ['seo' => $seo, 'tournament' => $tournament, 'setting' => $setting, 'categories' => $categories]);
         
     }
 

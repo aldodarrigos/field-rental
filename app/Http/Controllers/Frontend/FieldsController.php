@@ -12,17 +12,6 @@ class FieldsController extends Controller
     public function index()
     {
 
-        //$last_record = Local::latest('id')->first();
-
-        //SEO =======================================
-        /*
-        $seo = $this->seo->get_seo('COVID-19 seguimiento mundial',
-        "https://sarstracker.com/storage/covid-19-wolrd-v2.jpg",
-        'Evolución diaria de casos de COVID19 a nivel mundial',
-        ""
-        );
-        */
-
         return view('frontend/cover', ['seo' => 'xxx']);
         
     }
