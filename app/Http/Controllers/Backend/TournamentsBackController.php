@@ -60,6 +60,7 @@ class TournamentsBackController extends Controller
         $content->content = $request->input('content');
         $content->img = $request->input('img');
         $content->price = $request->input('price');
+        $content->is_league = $request->input('is_league');
         $content->status = $request->input('status');
         $content->save();
 
@@ -114,6 +115,7 @@ class TournamentsBackController extends Controller
         $content->content = $request->input('content');
         $content->img = $request->input('img');
         $content->price = $request->input('price');
+        $content->is_league = $request->input('is_league');
         $content->status = $request->input('status');
         $content->save();
 

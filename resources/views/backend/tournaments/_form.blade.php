@@ -71,6 +71,27 @@
                     </div>
                 </div>
 
+                <div class="col-md-6">
+                    <div class="form-group ">
+                        <label for='group'>Type</label>
+                        <select class="form-control m-b" name="is_league">
+                            @if ($form == 'update')
+                                @if ($content->is_league == 1)
+                                    <option value='0'>Tournament</option>
+                                    <option value='1' selected>League</option>
+                                @else
+                                    <option value='0' selected>Tournament</option>
+                                    <option value='1' >League</option>
+                                @endif
+                            @else
+                                <option value='0' selected>Tournament</option>
+                                <option value='1'>League</option>
+                            @endif
+
+                        </select>
+                    </div>
+                </div>
+
             </div>
 
             <div class="hr-line-dashed"></div>

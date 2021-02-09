@@ -18,7 +18,7 @@
                 dom: '<"html5buttons"B>lTfgitp',
                 "order": [[ 3, "desc" ]],
                 columnDefs: [
-                    { "targets": [2,4,5], "orderable": false }
+                    { "targets": [4,5], "orderable": false }
                 ],
                 buttons: [
                     { extend: 'copy'},
@@ -79,10 +79,10 @@
                                 <tr>
                                     <th>id</th>
                                     <th>Name</th>
-                                    <th>Link</th>
+                                    <th>Type</th>
                                     <th>Create</th>
+                                    <th>Form</th>
                                     <th>Status</th>
-                                    <th>Registration</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -93,9 +93,18 @@
 
                                     $status = 'Inactive';
                                     $status_color = 'default';
+       
                                     if($record->status == 1) {
                                         $status = 'Active';
                                         $status_color = 'info';
+                                    }
+ 
+                                    $type = 'Tournament';
+                                    $slug = 'tournaments';
+
+                                    if($record->is_league == 1){
+                                        $type = 'League';
+                                        $slug = 'leagues';
                                     }
 
                                     @endphp
@@ -104,14 +113,19 @@
                                         <td><strong>{{$record->id}}</strong></td>
                                         <td>
                                             <a href="/backend-tournaments/{{$record->id}}/edit">{{$record->name}}</a> | 
-                                            <a href="/tournaments/{{$record->slug}}" class="text-info" target='_blank'> View in web</a>
+                                            <a href="/{{$slug}}/{{$record->slug}}" class="text-info" target='_blank'> View in web</a> 
                                         </td>
-                                        <td>
-    
-                                        </td>
+
+                                        <td>{{$type}}</td>
+
                                         <td><strong>{{date('Y-m-d', strtotime( $record->created_at) )}}</strong></td>
+                                        
+                                        <td> 
+                                            <a href="/tournament-registrations/{{$record->id}}" class="text-default"> Registration</a> /
+                                            <a href="/registration/{{$record->id}}/{{$record->slug}}" class="text-info" target='_blank'> View in web</a>
+                                        </td>
+
                                         <td class="center"><span class="btn btn-{{$status_color}} btn-xs">{{$status}}</span></td>
-                                        <td><a href="/tournament-registrations/{{$record->id}}" class="btn btn-success btn-xs"> <i class="far fa-clipboard"></i> Registration</a> <a href="/registration/{{$record->id}}/{{$record->slug}}" class="btn btn-info btn-xs" target='_blank'> <i class="fas fa-external-link-alt"></i> Link</a></td>
                                     </tr>
                                     
                                 @endforeach

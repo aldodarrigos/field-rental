@@ -11,7 +11,39 @@ use DB;
 class TournamentsController extends Controller
 {
     
-    public function tournaments($slug)
+    public function tournaments()
+    {
+
+        $posts = Tournament::where([['is_league', 0], ['status', 1]])->get();
+        $setting = Setting::first();
+        $title = 'Tournaments';
+
+        $seo = ['title' => 'Tournaments | KISC, Sports complex', 
+        'sumary' => '', 
+        'image' => 'https://katyisc.com/storage/files/katyisc-sports-complex-share.webp'
+        ];
+        
+        return view('frontend/tournaments/index', ['seo' => $seo, 'posts' => $posts, 'setting' => $setting, 'title' => $title]);
+        
+    }
+    
+    public function leagues()
+    {
+
+        $posts = Tournament::where([['is_league', 1], ['status', 1]])->get();
+        $setting = Setting::first();
+        $title = 'Leagues';
+
+        $seo = ['title' => 'Leagues | KISC, Sports complex', 
+        'sumary' => '', 
+        'image' => 'https://katyisc.com/storage/files/katyisc-sports-complex-share.webp'
+        ];
+        
+        return view('frontend/tournaments/index', ['seo' => $seo, 'posts' => $posts, 'setting' => $setting, 'title' => $title]);
+        
+    }
+    
+    public function tournament($slug)
     {
 
         $tournament = Tournament::where('slug', $slug)->first();

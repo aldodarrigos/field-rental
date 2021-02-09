@@ -18,6 +18,7 @@ class Tournament extends Model
         'img_md', 
         'price', 
         'tag_id', 
+        'is_league',
         'status'
     ];
 

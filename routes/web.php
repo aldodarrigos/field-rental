@@ -62,7 +62,10 @@ Route::get('signup', [UserController::class, 'singup'])->name('frontend.singup')
 Route::post('user-authenticate', [UserController::class, 'authenticate'])->name('authenticate');
 Route::get('profile/dashboard', [UserController::class, 'dashboard'])->name('frontend.user.dashboard');
 
-Route::get('tournaments/{slug?}', [TournamentsController::class, 'tournaments'])->name('frontend.tournaments');
+Route::get('tournaments', [TournamentsController::class, 'tournaments'])->name('frontend.tournaments');
+Route::get('leagues', [TournamentsController::class, 'leagues'])->name('frontend.leagues');
+Route::get('tournaments/{slug?}', [TournamentsController::class, 'tournament'])->name('frontend.tournament');
+Route::get('leagues/{slug?}', [TournamentsController::class, 'tournament'])->name('frontend.league');
 Route::get('registration/{id?}/{slug?}', [TournamentsController::class, 'registration'])->name('frontend.tournaments.registration');
 Route::post('registration/submit', [TournamentsController::class, 'submit'])->name('tournaments.registration.submit');
 
