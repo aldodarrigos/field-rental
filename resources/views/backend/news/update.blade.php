@@ -10,8 +10,6 @@
     <!-- Data picker -->
     <script src="{{asset('inspinia/js/plugins/datapicker/bootstrap-datepicker.js')}}"></script>
 
-    <link href="{{asset('summernote-0.8.18/summernote.css')}}" rel="stylesheet">
-    <script src="{{asset('summernote-0.8.18/summernote.js')}}"></script>
     
     <script>
 
@@ -28,19 +26,7 @@
 
         });
 
-        $('#summernote').summernote({
-          tabsize: 2,
-          height: 500,
-          toolbar: [
-            ['style', ['style']],
-            ['font', ['bold', 'underline', 'clear']],
-            ['color', ['color']],
-            ['para', ['ul', 'ol', 'paragraph']],
-            ['table', ['table']],
-            ['insert', ['link', 'picture', 'video']],
-            ['view', ['fullscreen', 'codeview', 'help']]
-          ]
-        });
+
     </script>
 
 @endsection

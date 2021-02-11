@@ -5,6 +5,18 @@
 </div>
 @endif
 
+<script src="https://cdn.tiny.cloud/1/dzfleo9tygdsp5cid8g065ra3rs1xtur3b7xjz44a5xsyajw/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+</head>
+<body>
+
+  <script>
+    tinymce.init({
+      selector: '#tiny',
+      plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+      toolbar_mode: 'floating',
+   });
+  </script>
+
 <form action="{{$action}}" method="POST"  id=''>
 
     @csrf
@@ -32,7 +44,7 @@
 
             <div class="form-group ">
                 <label >Content</label>
-                <textarea name="content" class="form-control summernote" id="summernote" rows="15">@if(!empty($content->content)){{$content->content}} @endif</textarea>
+                <textarea name="content" class="form-control" id="tiny" rows="15">@if(!empty($content->content)){{$content->content}} @endif</textarea>
             </div>
 
         </div>
