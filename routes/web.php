@@ -6,6 +6,7 @@ use App\Http\Controllers\Frontend\PaymentController;
 use App\Http\Controllers\Frontend\UserController;
 use App\Http\Controllers\Frontend\FieldsController;
 use App\Http\Controllers\Frontend\TournamentsController;
+use App\Http\Controllers\Frontend\ShopController;
 
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\ReservationController;
@@ -69,7 +70,8 @@ Route::get('leagues/{slug?}', [TournamentsController::class, 'tournament'])->nam
 Route::get('registration/{id?}/{slug?}', [TournamentsController::class, 'registration'])->name('frontend.tournaments.registration');
 Route::post('registration/submit', [TournamentsController::class, 'submit'])->name('tournaments.registration.submit');
 
-Route::get('shop', [FrontendController::class, 'shop'])->name('frontend.shop');
+Route::get('shop', [ShopController::class, 'index'])->name('frontend.shop');
+Route::get('shop/product/{slug?}', [ShopController::class, 'product'])->name('frontend.product');
 
 Route::get('fieldsrental', [PaymentController::class, 'fieldsrental'])->name('frontend.fieldsrental');
 Route::post('fieldsrental', [PaymentController::class, 'fieldsrental'])->name('frontend.fieldsrental');

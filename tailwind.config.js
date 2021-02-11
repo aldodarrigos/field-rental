@@ -59,6 +59,8 @@ module.exports = {
                 'black': '#1C2334',
                 'gray': '#F5F5F7',
                 'graytext': '#80838d',
+                'graylines': '#f0f0f0',
+                'grayhard': '#97a6ba',
                 'bluetext': '#7c859a40',
                 'white': '#fff',
                 'lines': '#2b334a',
@@ -74,6 +76,8 @@ module.exports = {
                 'boxed': '1140px',
             },
             fontSize: {
+                '1x3': '1.3rem',
+                '1x5': '1.5rem',
                 '2x': '2rem',
                 '2x5': '2.5rem',
                 '3x': '3rem',

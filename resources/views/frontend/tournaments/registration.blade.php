@@ -15,7 +15,7 @@
 
     <div class="grid grid-cols-12 gap-6 py-8">
 
-        <main class="col-span-8 md:col-span-8 bg-white rounded-lg">
+        <main class="col-span-12 md:col-span-8 bg-white rounded-lg">
             
             <div class="h-400p">
                 <img class="object-cover w-full h-full rounded-t-lg" src="{{$tournament->img}}" alt="">
