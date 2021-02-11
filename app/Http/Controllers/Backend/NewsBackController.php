@@ -107,6 +107,9 @@ class NewsBackController extends Controller
     public function update(Request $request, $id)
     {
 
+        echo $request->input('content');
+        exit();
+
         $post = Post::find($id);
 
         $post->title = $request->input('title');
