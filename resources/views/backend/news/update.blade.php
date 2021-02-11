@@ -6,22 +6,16 @@
 
     @parent
 
-    <link href="{{asset('inspinia/css/plugins/summernote/summernote-bs4.css')}}" rel="stylesheet">
     <link href="{{asset('inspinia/css/plugins/datapicker/datepicker3.css')}}" rel="stylesheet">
-
-    <!-- SUMMERNOTE -->
-    <script src="{{asset('inspinia/js/plugins/summernote/summernote-bs4.js')}}"></script>
-
     <!-- Data picker -->
     <script src="{{asset('inspinia/js/plugins/datapicker/bootstrap-datepicker.js')}}"></script>
 
+    <link href="{{asset('summernote-0.8.18/summernote.css')}}" rel="stylesheet">
+    <script src="{{asset('summernote-0.8.18/summernote.js')}}"></script>
+    
     <script>
+
         $(document).ready(function(){
-
-            $('.summernote').summernote({
-                height: 300
-            });
-
 
             var mem = $('.input-group.date').datepicker({
                 todayBtn: "linked",
@@ -32,6 +26,20 @@
                 format: 'yyyy-mm-dd'
             });
 
+        });
+
+        $('#summernote').summernote({
+          tabsize: 2,
+          height: 500,
+          toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture', 'video']],
+            ['view', ['fullscreen', 'codeview', 'help']]
+          ]
         });
     </script>
 
