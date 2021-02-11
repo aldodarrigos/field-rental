@@ -107,16 +107,13 @@ class NewsBackController extends Controller
     public function update(Request $request, $id)
     {
 
-        echo $request->input('content');
-        exit();
-
         $post = Post::find($id);
 
         $post->title = $request->input('title');
         $post->slug = $request->input('slug');
         
         $post->sumary = $request->input('sumary');
-        $post->content = $request->input('content');
+        $post->content = mb_convert_encoding($request->input('content'), 'HTML-ENTITIES', 'UTF-8') ;
 
         $post->img = $request->input('img');
 
