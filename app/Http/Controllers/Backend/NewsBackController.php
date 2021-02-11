@@ -109,11 +109,18 @@ class NewsBackController extends Controller
 
         $post = Post::find($id);
 
+        //you might want to write your validation code above
+        $editor_content=$request->input('content');
+        $dom = new \DomDocument('1.0', 'UTF-8');
+        libxml_use_internal_errors(true);
+        $dom->loadHtml($editor_content);
+        $editor_content_save= $dom->saveHTML();
+
         $post->title = $request->input('title');
         $post->slug = $request->input('slug');
         
         $post->sumary = $request->input('sumary');
-        $post->content = mb_convert_encoding($request->input('content'), 'HTML-ENTITIES', 'UTF-8') ;
+        $post->content = $editor_content_save;
 
         $post->img = $request->input('img');
 
