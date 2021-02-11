@@ -109,18 +109,11 @@ class NewsBackController extends Controller
 
         $post = Post::find($id);
 
-        //you might want to write your validation code above
-        $editor_content=$request->input('content');
-        $dom = new \DomDocument('1.0', 'UTF-8');
-        libxml_use_internal_errors(true);
-        $dom->loadHtml($editor_content);
-        $editor_content_save= $dom->saveHTML();
-
         $post->title = $request->input('title');
         $post->slug = $request->input('slug');
         
         $post->sumary = $request->input('sumary');
-        $post->content = $editor_content_save;
+        $post->content = $request->input('content');
 
         $post->img = $request->input('img');
 
@@ -132,7 +125,6 @@ class NewsBackController extends Controller
         return redirect('backend-news/'.$id.'/edit')->with('success', 'Successful update!');
 
     }
-    
 
     /**
      * Remove the specified resource from storage.
