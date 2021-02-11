@@ -99,7 +99,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 */
 
-Route::middleware(['admin'])->group(function () {
+Route::middleware(['admin', 'cors'])->group(function () {
     Route::get('backend/dashboard', [DashboardController::class, 'index'])->name('backend.dashboard');
     Route::resource('backend-booking', ReservationController::class);
     Route::get('calendar', [ReservationController::class, 'calendar'])->name('backend.calendar');
