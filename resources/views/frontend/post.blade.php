@@ -27,12 +27,29 @@
                     <a href="/tags/{{$post->tag_slug}}" class="font-roboto bg-red font-semibold uppercase text-white text-sm px-2 py-1 mr-2 hover:bg-blue hover:text-white rounded ease-in-out duration-300">{{$post->tag_name}}</a> 
                    <span class="text-sm text-black font-bold">{{$post->pub_date}}</span>
                </div>
+
+
     
-               <div>
+               <div id='post_content'>
 
                     {!!$post->content!!}
 
                </div>
+
+               <script>
+                    $('#post_content').each(function(){
+                        // Get the content
+                        var str = $(this).html();
+                        // Set the regex string
+                        var regex = /(https?:\/\/([-\w\.]+)+(:\d+)?(\/([\w\/_\.]*(\?\S+)?)?)?.(?:jpg|gif|png|webp))/ig
+
+                        // Replace plain text links by hyperlinks
+                        var replaced_text = str.replace(regex, "<img src='$1'>");
+                        // Echo link
+                        $(this).html(replaced_text);
+                    });
+
+            </script>
             </div>
 
         </main>
