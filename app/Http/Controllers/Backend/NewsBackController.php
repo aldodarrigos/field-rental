@@ -113,7 +113,7 @@ class NewsBackController extends Controller
         $post->slug = $request->input('slug');
         
         $post->sumary = $request->input('sumary');
-        $post->content = $request->input('content');
+        //$post->content = $request->input('content');
 
         $post->img = $request->input('img');
 
@@ -122,7 +122,7 @@ class NewsBackController extends Controller
         $post->status = $request->input('status');
         $post->save();
 
-        return redirect('backend-news')->with('success', 'Successful update!');
+        return redirect('backend-news/'.$id.'/edit')->with('success', 'Successful update!');
 
     }
 
