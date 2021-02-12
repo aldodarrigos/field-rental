@@ -12,7 +12,7 @@
     <div class="row">
 
         <div class="col-md-8">
-
+            <input type="hidden" name="id" value="{{$content->id}}">
             <div class="form-group ">
                 <label >Title</label>
                 <input type="text" name='title' class="form-control" @if(!empty($content->title)) value="{{$content->title}}" @endif required>
