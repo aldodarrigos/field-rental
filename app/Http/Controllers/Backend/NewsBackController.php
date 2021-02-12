@@ -108,7 +108,7 @@ class NewsBackController extends Controller
     {
 
         $post = Post::find($id);
-        $idx = $request->input('id');
+
         $post->title = $request->input('title');
         $post->slug = $request->input('slug');
         
@@ -122,7 +122,7 @@ class NewsBackController extends Controller
         $post->status = $request->input('status');
         $post->save();
 
-        return redirect('backend-news/'.$idx.'/edit')->with('success', 'Successful update!');
+        return redirect('backend-news/'.$id.'/edit')->with('success', 'Successful update!');
 
     }
 

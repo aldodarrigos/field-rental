@@ -12,7 +12,7 @@
     <div class="row">
 
         <div class="col-md-8">
-            <input type="hidden" name="id" value="{{$content->id}}">
+
             <div class="form-group ">
                 <label >Title</label>
                 <input type="text" name='title' class="form-control" @if(!empty($content->title)) value="{{$content->title}}" @endif required>
@@ -32,9 +32,7 @@
 
             <div class="form-group ">
                 <label >Content</label>
-                <textarea name="content" class="form-control summernote" rows="15">@if(!empty($content->content)) @php
-                    echo $content->content;
-                @endphp @endif</textarea>
+                <textarea name="content" class="form-control summernote" rows="15">@if(!empty($content->content)){{$content->content}} @endif</textarea>
             </div>
 
         </div>
