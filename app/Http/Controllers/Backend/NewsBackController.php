@@ -112,8 +112,8 @@ class NewsBackController extends Controller
         $post->title = $request->input('title');
         $post->slug = $request->input('slug');
         
-        $post->sumary = $request->input('sumary');
-        $post->content = $request->input('content');
+        $post->sumary = $request->input('sumary'); 
+        $post->content = clean($request->input('content')) ;
 
         $post->img = $request->input('img');
 
