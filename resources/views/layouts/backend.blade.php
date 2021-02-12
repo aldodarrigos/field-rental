@@ -22,21 +22,9 @@
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
 
-    <style>
-        .note-modal-backdrop{
-            display: none;
-        }
-    </style>
-
 </head>
 
 <body>
-
-    @php
-        header("Access-Control-Allow-Headers: Authorization, Content-Type");
-        header("Access-Control-Allow-Origin: *");
-        header('content-type: application/json; charset=utf-8');
-    @endphp
 
 <div id="wrapper">
 

@@ -106,14 +106,14 @@ class NewsBackController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $xxx = htmlspecialchars($request->input('content'));
+
         $post = Post::find($id);
 
         $post->title = $request->input('title');
         $post->slug = $request->input('slug');
         
         $post->sumary = $request->input('sumary');
-        $post->content = $xxx;
+        $post->content = $request->input('content');
 
         $post->img = $request->input('img');
 
@@ -121,7 +121,7 @@ class NewsBackController extends Controller
         $post->pub_date = $request->input('pub_date');
         $post->status = $request->input('status');
         $post->save();
-        
+
         return redirect('backend-news/'.$id.'/edit')->with('success', 'Successful update!');
 
     }
