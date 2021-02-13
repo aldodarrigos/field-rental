@@ -17,7 +17,7 @@
 
         <main class="col-span-12 md:col-span-8 bg-white rounded-lg">
             
-            <div class="h-400p">
+            <div class="h-auto md:h-400p">
                 <img class="object-cover w-full h-full rounded-t-lg" src="{{$tournament->img}}" alt="">
             </div>
 

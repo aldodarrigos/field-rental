@@ -17,7 +17,8 @@ module.exports = {
             width: {
                 25          : '25px',
                 30          : '30px',
-                '80p'      : '80px',
+                '40p'       : '40px',
+                '80p'       : '80px',
                 '150p'      : '150px',
                 '200p'      : '200px',
                 'boxed'     : '1140px',
@@ -61,6 +62,7 @@ module.exports = {
                 'graytext': '#80838d',
                 'graylines': '#f0f0f0',
                 'grayhard': '#97a6ba',
+                'graysoft': '#cfd8e3',
                 'bluetext': '#7c859a40',
                 'white': '#fff',
                 'lines': '#2b334a',

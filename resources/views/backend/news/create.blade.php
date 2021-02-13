@@ -18,7 +18,7 @@
         $(document).ready(function(){
 
             $('.summernote').summernote({
-                height: 300
+                height: 600
             });
 
             var mem = $('.input-group.date').datepicker({

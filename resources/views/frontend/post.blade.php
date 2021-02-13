@@ -5,6 +5,26 @@
 @section('assets_down')
 
     @parent
+
+    <script>
+        $(document).ready(function(){
+
+            $('#post_content').each(function(){
+                // Get the content
+                var str = $(this).html();
+                // Set the regex string
+
+
+                var regex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|].(?:jpg|gif|png|webp))/ig;
+
+                // Replace plain text links by hyperlinks
+                var replaced_text = str.replace(regex, "<img src='$1' class='max-w-full border-8 border-gray mx-auto'>");
+                // Echo link
+                $(this).html(replaced_text);
+            });
+        });
+    </script>
+
     
 @endsection
 
@@ -36,20 +56,7 @@
 
                </div>
 
-               <script>
-                    $('#post_content').each(function(){
-                        // Get the content
-                        var str = $(this).html();
-                        // Set the regex string
-                        var regex = /(https?:\/\/([-\w\.]+)+(:\d+)?(\/([\w\/_\.]*(\?\S+)?)?)?.(?:jpg|gif|png|webp))/ig
 
-                        // Replace plain text links by hyperlinks
-                        var replaced_text = str.replace(regex, "<img src='$1'>");
-                        // Echo link
-                        $(this).html(replaced_text);
-                    });
-
-            </script>
             </div>
 
         </main>

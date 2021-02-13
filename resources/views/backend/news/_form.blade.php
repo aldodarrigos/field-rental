@@ -25,19 +25,21 @@
                 </div>
             @endif
 
-            <div class="form-group ">
-                <label >Sumary <small>(120 characters max.)</small></label>
-                <textarea name="sumary" class="form-control" rows="4">@if(!empty($content->sumary)){{$content->sumary}} @endif</textarea>
-            </div>
+
 
             <div class="form-group ">
                 <label >Content</label>
-                <textarea name="content" class="form-control summernote" rows="15">@if(!empty($content->content)){{$content->content}} @endif</textarea>
+                <textarea name="content" class="form-control summernote" rows="30">@if(!empty($content->content)){{$content->content}} @endif</textarea>
             </div>
 
         </div>
 
         <div class="col-md-4">
+
+            <div class="form-group ">
+                <label >Sumary <small>(120 characters max.)</small></label>
+                <textarea name="sumary" class="form-control" rows="4">@if(!empty($content->sumary)){{$content->sumary}} @endif</textarea>
+            </div>
 
             <div class="form-group">
                 <label>Image Large <small>(120 characters max.)</small></label>
