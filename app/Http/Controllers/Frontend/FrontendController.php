@@ -42,33 +42,6 @@ class FrontendController extends Controller
         
     }
 
-    public function services()
-    {
-        $services = Service::where('status', 1)->orderBy('sort', 'ASC')->get();
-
-        $seo = ['title' => 'Services | KISC, Sports complex', 
-        'sumary' => '', 
-        'image' => 'https://katyisc.com/storage/files/katyisc-sports-complex-share.webp'
-        ];
-
-        return view('frontend/services', ['seo' => $seo, 'services' => $services]);
-        
-    }
-
-    
-    public function service($slug = null)
-    {
-        $setting = Setting::first();
-        $service = Service::where('slug', $slug)->first();
-
-        $seo = ['title' => $service->name.' | KISC, Sports complex', 
-        'sumary' => $service->sumary, 
-        'image' => $service->img
-        ];
-
-        return view('frontend/service', ['seo' => $seo, 'service' => $service, 'setting' => $setting]);
-        
-    }
 
     public function news()
     {
@@ -88,7 +61,7 @@ class FrontendController extends Controller
         'image' => 'https://katyisc.com/storage/files/katyisc-sports-complex-share.webp'
         ];
 
-        return view('frontend/news', ['seo' => $seo, 'posts' => $posts, 'setting' => $setting]);
+        return view('frontend/news', ['seo' => $seo, 'posts' => $posts]);
         
     }
 
@@ -111,7 +84,7 @@ class FrontendController extends Controller
         'image' => 'https://katyisc.com/storage/files/katyisc-sports-complex-share.webp'
         ];
 
-        return view('frontend/tags', ['seo' => $seo, 'posts' => $posts, 'tag' => $tag, 'setting' => $setting]);
+        return view('frontend/tags', ['seo' => $seo, 'posts' => $posts, 'tag' => $tag]);
         
     }
 
@@ -131,7 +104,7 @@ class FrontendController extends Controller
         'image' => $post->img
         ];
 
-        return view('frontend/post', ['seo' => $seo, 'post' => $post, 'setting' => $setting]);
+        return view('frontend/post', ['seo' => $seo, 'post' => $post]);
         
     }
 
@@ -167,7 +140,7 @@ class FrontendController extends Controller
             'image' => 'https://katyisc.com/storage/files/katyisc-sports-complex-share.webp'
             ];
 
-            return view('frontend/contact', ['seo' => $seo, 'setting' => $setting]);
+            return view('frontend/contact', ['seo' => $seo]);
         }
         
     }

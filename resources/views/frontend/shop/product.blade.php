@@ -5,16 +5,25 @@
 @section('assets_down')
 
     @parent
+
+    <!-- Add fancyBox -->
+    <link rel="stylesheet" href="{{asset('fancybox-2.1.7/source/jquery.fancybox.css?v=2.1.7')}}" type="text/css" media="screen" />
+    <script type="text/javascript" src="{{asset('fancybox-2.1.7/source/jquery.fancybox.pack.js?v=2.1.7')}}"></script>
+
+    <!-- Optionally add helpers - button, thumbnail and/or media -->
+    <link rel="stylesheet" href="{{asset('fancybox-2.1.7/source/helpers/jquery.fancybox-buttons.css?v=1.0.5')}}" type="text/css" media="screen" />
+    <script type="text/javascript" src="{{asset('fancybox-2.1.7/source/helpers/jquery.fancybox-buttons.js?v=1.0.5')}}"></script>
+    <script type="text/javascript" src="{{asset('fancybox-2.1.7/source/helpers/jquery.fancybox-media.js?v=1.0.6')}}"></script>
+
     <script>
         $(document).ready(function() {
+
+            $(".fancybox").fancybox();
 
             let product_status = $('#product_status').val();
 
             payment_on_off(product_status)
-
-
-
-                            
+            
             $( "#up" ).click(function() {
                 let number = $('#quantity').val();
                 let sum = parseInt(number) + 1;
@@ -79,12 +88,32 @@
 
     <article class="flex flex-col md:flex-row mb-6">
 
-        <header class="w-full md:w-1/2 ">
-            <a href=""><img class="object-cover w-full h-full border-4 border-graylines" src="http://gramotech.net/html/tigers/images/pro-large.jpg" alt=""></a>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <a href=""><img class="object-cover w-full h-full border-4 border-graylines" src="http://gramotech.net/html/tigers/images/pro-large.jpg" alt=""></a>
+        <div class="w-full md:w-1/2 ">
+            <div class="mb-2">
+                <a href="{{$product->img}}" class="fancybox" rel="gallery"><img class="object-cover w-full h-full border-4 border-graylines " src="{{$product->img}}" alt=""></a>
             </div>
-        </header>
+            <div>
+                <div class="grid grid-cols-4 gap-2">
+
+                    @if ($product->img_2)
+                        <a href="{{$product->img_2}}" class="fancybox" rel="gallery"><img class="object-cover w-full h-full border-4 border-graylines" src="{{$product->img_2}}" alt=""></a>
+                    @endif
+
+                    @if ($product->img_3)
+                        <a href="{{$product->img_3}}" class="fancybox" rel="gallery"><img class="object-cover w-full h-full border-4 border-graylines" src="{{$product->img_3}}" alt=""></a>
+                    @endif
+
+                    @if ($product->img_4)
+                        <a href="{{$product->img_4}}" class="fancybox" rel="gallery"><img class="object-cover w-full h-full border-4 border-graylines" src="{{$product->img_4}}" alt=""></a>
+                    @endif
+
+                    @if ($product->img_5)
+                        <a href="{{$product->img_5}}" class="fancybox" rel="gallery"><img class="object-cover w-full h-full border-4 border-graylines" src="{{$product->img_5}}" alt=""></a>
+                    @endif
+
+                </div>
+            </div>
+        </div>
 
         <div class="px-6 py-5 w-full md:w-1/2 font-roboto">
 
@@ -93,7 +122,19 @@
             </div>
 
             <div class="mb-3">
-                 <a href="/tags/news" class=" font-semibold uppercase text-red text-2x ">${{$product->price}}</a> 
+                @php
+                    $final_price = $product->offer;
+                @endphp
+                @if ($product->offer != '0.00')
+                    <span class=" font-semibold uppercase text-black text-1x5 line-through">${{$product->price}}</span> 
+                    <span class=" font-semibold uppercase text-red text-2x ">${{$product->offer}}</span> 
+                    @php $final_price = $product->offer; @endphp
+                @else
+                    <span class=" font-semibold uppercase text-red text-2x ">${{$product->price}}</span> 
+                @endif
+
+
+                
             </div>
 
             <div class="text-black text-md mb-4">{{$product->sumary}}</div>
@@ -123,39 +164,41 @@
                 </span>
             </div>
 
-            <form action="">
+            <form action="/product-payment" method="POST" id='product-payment-form'>
 
-                <input type="hidden" name="static_price" id='static_price' value="{{$product->price}}">
+                {{ csrf_field() }}
+                <input type="hidden" name="static_price" id='static_price' value="{{$final_price}}">
+                <input type="hidden" name="product_name" id='product_name' value="{{$product->name}}">
                 <input type="hidden" name="product_id" id='product_id' value="{{$product->id}}">
-                <input type="hidden" name="product_price" id='product_price' value="{{$product->price}}">
+                <input type="hidden" name="product_price" id='product_price' value="{{$final_price}}">
                 <input type="hidden" name="product_size" id='product_size' value="L">
                 <input type="hidden" name="product_status" id='product_status' value="{{$product->status}}">
                 <input type="hidden" name="product_quantity" id='product_quantity' value="1">
+                @if (isset(Auth::user()->name))
+                    <input type="hidden" id="user_id" name='user_id' value='{{Auth::user()->id}}'>
+                @else
+                    <input type="hidden" id="user_id" name='user_id' value='0'>
+                @endif
+
+                <x-frontend.buttons.form>
+                    <x-slot name='bg'>graytext</x-slot>
+                    <x-slot name='size'>big</x-slot>
+                    <x-slot name='text'>Confirm and Pay</x-slot>
+                    <x-slot name='class'></x-slot>
+                    <x-slot name='id'>buttonrental</x-slot>
+                    <x-slot name='on_off'></x-slot>
+                </x-frontend.buttons.form>
 
             </form>
 
 
 
-
-
-            <x-frontend.buttons.form>
-                <x-slot name='bg'>graytext</x-slot>
-                <x-slot name='size'>big</x-slot>
-                <x-slot name='text'>Confirm and Pay</x-slot>
-                <x-slot name='class'></x-slot>
-                <x-slot name='id'>buttonrental</x-slot>
-                <x-slot name='on_off'></x-slot>
-            </x-frontend.buttons.form>
         </div>
-
-
-
-
 
     </article>
 
     <div>
-        {{$product->content}}
+        {!!$product->content!!}
     </div>
     
     <div class="separation h-50p"></div>

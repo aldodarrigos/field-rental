@@ -22,4 +22,8 @@ p{ margin-bottom: 1rem;}
 .content ol, ul {
     list-style: none;
 }
+.button_link{
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+}
 

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\{Reservation, User};
+use App\Models\{Reservation, User, Service};
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -56,6 +56,23 @@ class UserController extends Controller
         ->orderBy('reservations.created_at', 'desc')
         ->get();
 
+        $orders = DB::table('sales')
+        ->select(DB::raw('sales.id, products.name as product_name, users.email as user_email, sales.size as product_size, sales.quantity as quantity, sales.code as code, sales.created_at as date'))
+        ->leftJoin('users', 'sales.user_id', '=', 'users.id')
+        ->leftJoin('products', 'sales.product_id', '=', 'products.id')
+        ->where('sales.user_id', Auth::user()->id)
+        ->orderBy('sales.created_at', 'desc')
+        ->get();
+
+        $services = DB::table('service_registration')
+        ->select(DB::raw('service_registration.id as registration_id, services.name as service_name, services.price as service_price, service_registration.player_name as player_name, service_registration.status as registration_status, service_registration.payment_code as payment_code, service_registration.updated_at as registration_date'))
+
+        ->leftJoin('users', 'service_registration.responsible_user', '=', 'users.id')
+        ->leftJoin('services', 'service_registration.service_id', '=', 'services.id')
+        ->where('service_registration.responsible_user', Auth::user()->id)
+        ->orderBy('service_registration.created_at', 'desc')
+        ->get();
+
         $user = User::where('id', Auth::user()->id)->first();
 
         $seo = ['title' => 'User Dashboard | KISC, Sports complex', 
@@ -63,7 +80,7 @@ class UserController extends Controller
         'image' => 'https://katyisc.com/storage/files/katyisc-sports-complex-share.webp'
         ];
 
-        return view('frontend/profile/dashboard', ['seo' => $seo, 'reservations' => $reservations, 'user' => $user]);
+        return view('frontend/profile/dashboard', ['seo' => $seo, 'reservations' => $reservations, 'orders' => $orders, 'user' => $user, 'services' => $services]);
         
     }
 

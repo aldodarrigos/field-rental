@@ -18,6 +18,7 @@
     <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
 
         <div class="col-span-6">
+            
             <form action="/fieldsrental" method="POST" id='bookform'>
             {{ csrf_field() }}
             <x-frontend.forms.input_select>

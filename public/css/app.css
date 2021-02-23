@@ -38958,6 +38958,11 @@ p{ margin-bottom: 1rem;
   list-style: none;
 }
 
+.button_link{
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
+}
+
 @media (min-width: 640px){
   .sm\:container{
     width: 100%;

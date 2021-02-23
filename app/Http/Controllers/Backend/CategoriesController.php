@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\{Category, Tournament_category};
+use App\Models\{Category, CompetitionCategory};
 use DB;
 use Illuminate\Support\Str;
 //use GuzzleHttp\Client;
@@ -21,7 +21,7 @@ class CategoriesController extends Controller
         $records = Category::all();
         $records_sort = Category::where('status', 1)->orderBy('sort', 'ASC')->get();
 
-        $url = "tournaments";
+        $url = "competitions";
         
         return view('backend/categories/index', ['records' => $records, 'url' => $url, 'records_sort' => $records_sort]);
 
@@ -36,7 +36,7 @@ class CategoriesController extends Controller
     {
 
         $action = route('categories.store');
-        $url = "tournaments";
+        $url = "competitions";
         $form = 'new';
 
         return view('backend/categories/create', ['action' => $action, 'url' => $url, 'form' => $form]);
@@ -72,7 +72,7 @@ class CategoriesController extends Controller
         $put = True;
         $form = 'update';
 
-        $url = "tournaments";
+        $url = "competitions";
 
         return view('backend/categories/update', ['content' => $content, 'action' => $action, 'url' => $url, 'put' => $put,  'form' => $form]);
     }
@@ -108,13 +108,13 @@ class CategoriesController extends Controller
         //
     }
 
-    public function get_categories($id_tournament)
+    public function get_categories($id_competition)
     {
 
-        $categories = DB::table('tournament_categories')
-        ->select(DB::raw('tournament_categories.id, tournament_categories.category_id, categories.name'))
-        ->leftJoin('categories', 'tournament_categories.category_id', '=', 'categories.id')
-        ->where('tournament_categories.tournament_id', $id_tournament)
+        $categories = DB::table('competition_categories')
+        ->select(DB::raw('competition_categories.id, competition_categories.category_id, categories.name'))
+        ->leftJoin('categories', 'competition_categories.category_id', '=', 'categories.id')
+        ->where('competition_categories.competition_id', $id_competition)
         ->orderBy('categories.name', 'asc')
         ->get();
         
@@ -130,12 +130,12 @@ class CategoriesController extends Controller
         
     }
 
-    public function get_categories_select($id_tournament)
+    public function get_categories_select($id_competition)
     {
 
         $categories_array = array();
-        $tournament_categories = Tournament_category::where('tournament_id', $id_tournament)->get();
-        foreach ($tournament_categories as $value) {
+        $competition_categories = CompetitionCategory::where('competition_id', $id_competition)->get();
+        foreach ($competition_categories as $value) {
             array_push($categories_array, $value->category_id);
         }
         $categories = Category::where('status', 1)->whereNotIn('id', $categories_array)->orderBy('name', 'desc')->get();

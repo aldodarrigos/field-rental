@@ -24,6 +24,7 @@
                 <x-slot name='image'>{{$product->img}}</x-slot>
                 <x-slot name='title'>{{$product->name}}</x-slot>
                 <x-slot name='price'>{{$product->price}}</x-slot>
+                <x-slot name='offer'>{{$product->offer}}</x-slot>
                 <x-slot name='button_text'>Read more</x-slot>
                 <x-slot name='button_link'>/shop/product/{{$product->slug}}</x-slot>
             </x-frontend.cards.product>

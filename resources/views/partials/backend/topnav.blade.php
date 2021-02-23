@@ -4,7 +4,9 @@
 
     </div>
     <ul class="nav navbar-top-links navbar-right">
-
+        <li class="dropdown">
+            <livewire:backend.competitions-messages></livewire:backend.competitions-messages>
+        </li>
         <li class="dropdown">
             <a class="dropdown-toggle count-info" href="/" target='_blank'>
                 Go to website

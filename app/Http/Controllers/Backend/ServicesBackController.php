@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\{Service};
+use App\Models\{Service, ServiceRegistration};
 use DB;
 use Illuminate\Support\Str;
 //use GuzzleHttp\Client;
@@ -142,9 +142,67 @@ class ServicesBackController extends Controller
 
         return $order_array[1]['id'];
 
+    }
 
+    public function registration()
+    {
+
+        $records = DB::table('service_registration')
+        ->select(DB::raw('service_registration.id as registration_id, 
+        users.name as reg_user, 
+        service_registration.player_name, 
+        service_registration.city, 
+        services.name as service, 
+        service_registration.status, 
+        service_registration.updated_at'))
+
+        ->leftJoin('users', 'service_registration.responsible_user', '=', 'users.id')
+        ->leftJoin('services', 'service_registration.service_id', '=', 'services.id')
+        ->orderBy('service_registration.updated_at', 'desc')
+        ->get();
+
+
+        $url = "services";
+        return view('backend/services/registration', ['records' => $records, 'url' => $url]);
 
     }
+    
+    public function registration_detail($id = null)
+    {
+
+        $record = DB::table('service_registration')
+        ->select(DB::raw('service_registration.id as registration_id, 
+        users.name as reg_user, 
+        users.name as email, 
+        services.name as service,
+        service_registration.player_name, 
+        service_registration.address, 
+        service_registration.city, 
+        service_registration.zip, 
+        service_registration.phone_home, 
+        service_registration.phone_cell, 
+        service_registration.grade, 
+        service_registration.dob, 
+        service_registration.gender, 
+        service_registration.tshirt_size, 
+        service_registration.emergency_contact, 
+        service_registration.emergency_phone, 
+        service_registration.obs, 
+        service_registration.payment_code, 
+        service_registration.status, 
+        service_registration.updated_at as reg_updated_at'))
+
+        ->leftJoin('users', 'service_registration.responsible_user', '=', 'users.id')
+        ->leftJoin('services', 'service_registration.service_id', '=', 'services.id')
+        ->where('service_registration.id', $id)
+        ->first();
+
+
+        $url = "services";
+        return view('backend/services/registration-detail', ['record' => $record, 'url' => $url]);
+
+    }
+
 
 
 }

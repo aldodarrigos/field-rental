@@ -5,8 +5,11 @@ use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\PaymentController;
 use App\Http\Controllers\Frontend\UserController;
 use App\Http\Controllers\Frontend\FieldsController;
-use App\Http\Controllers\Frontend\TournamentsController;
+use App\Http\Controllers\Frontend\ServicesController;
+use App\Http\Controllers\Frontend\CompetitionsController;
 use App\Http\Controllers\Frontend\ShopController;
+use App\Http\Controllers\Frontend\Payments\ProductsController;
+use App\Http\Controllers\Frontend\Payments\ServicePaymentController;
 
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\ReservationController;
@@ -21,9 +24,10 @@ use App\Http\Controllers\Backend\GalleryController;
 use App\Http\Controllers\Backend\SettingsController;
 use App\Http\Controllers\Backend\UsersController;
 use App\Http\Controllers\Backend\SlidesController;
-use App\Http\Controllers\Backend\TournamentsBackController;
-use App\Http\Controllers\Backend\TournamentCatsController;
+use App\Http\Controllers\Backend\CompetitionController;
+use App\Http\Controllers\Backend\CompetitionCategoriesController;
 use App\Http\Controllers\Backend\CategoriesController;
+use App\Http\Controllers\Backend\StoreController;
 
 use App\Http\Controllers\SendmailController;
 use App\Providers\RouteServiceProvider;
@@ -48,8 +52,16 @@ Route::get('/', function () {
 
 Route::get('/', [FrontendController::class, 'index'])->name('frontend.cover');
 Route::get('about', [FrontendController::class, 'about'])->name('frontend.about');
-Route::get('services', [FrontendController::class, 'services'])->name('frontend.services');
-Route::get('services/{slug?}', [FrontendController::class, 'service'])->name('frontend.service');
+Route::get('services', [ServicesController::class, 'services'])->name('frontend.services');
+Route::get('services/{slug?}', [ServicesController::class, 'service'])->name('frontend.service');
+Route::get('service/registration/{id?}', [ServicesController::class, 'registration'])->name('service.registration');
+Route::post('service/registration-submit', [ServicesController::class, 'submit'])->name('service.registration-submit');
+Route::get('service/registration-confirmation/{id?}', [ServicesController::class, 'confirmation'])->name('service.registration-confirmation');
+Route::post('service-payment', [ServicePaymentController::class, 'payment'])->name('service.payment');
+Route::get('service-payment-status', [ServicePaymentController::class, 'status'])->name('service.payment.status');
+Route::get('service-payment-success', [ServicePaymentController::class, 'success'])->name('service.payment.success');
+Route::get('service-payment-fail', [ServicePaymentController::class, 'fail'])->name('service.payment.fail');
+
 //Route::get('fields', [FrontendController::class, 'fields'])->name('frontend.fields');
 Route::get('news', [FrontendController::class, 'news'])->name('frontend.news');
 Route::get('post/{slug?}', [FrontendController::class, 'post'])->name('frontend.post');
@@ -63,15 +75,13 @@ Route::get('signup', [UserController::class, 'singup'])->name('frontend.singup')
 Route::post('user-authenticate', [UserController::class, 'authenticate'])->name('authenticate');
 Route::get('profile/dashboard', [UserController::class, 'dashboard'])->name('frontend.user.dashboard');
 
-Route::get('tournaments', [TournamentsController::class, 'tournaments'])->name('frontend.tournaments');
-Route::get('leagues', [TournamentsController::class, 'leagues'])->name('frontend.leagues');
-Route::get('tournaments/{slug?}', [TournamentsController::class, 'tournament'])->name('frontend.tournament');
-Route::get('leagues/{slug?}', [TournamentsController::class, 'tournament'])->name('frontend.league');
-Route::get('registration/{id?}/{slug?}', [TournamentsController::class, 'registration'])->name('frontend.tournaments.registration');
-Route::post('registration/submit', [TournamentsController::class, 'submit'])->name('tournaments.registration.submit');
-
-Route::get('shop', [ShopController::class, 'index'])->name('frontend.shop');
-Route::get('shop/product/{slug?}', [ShopController::class, 'product'])->name('frontend.product');
+Route::get('tournaments', [CompetitionsController::class, 'tournaments'])->name('frontend.tournaments');
+Route::get('leagues', [CompetitionsController::class, 'leagues'])->name('frontend.leagues');
+Route::get('tournaments/{slug?}', [CompetitionsController::class, 'competition'])->name('frontend.tournament');
+Route::get('leagues/{slug?}', [CompetitionsController::class, 'competition'])->name('frontend.league');
+Route::get('registration/{id?}/{slug?}', [CompetitionsController::class, 'registration'])->name('frontend.competitions.registration');
+Route::post('registration/submit', [CompetitionsController::class, 'submit'])->name('competitions.registration.submit');
+Route::post('competition/contact', [CompetitionsController::class, 'contact'])->name('competitions.contact');
 
 Route::get('fieldsrental', [PaymentController::class, 'fieldsrental'])->name('frontend.fieldsrental');
 Route::post('fieldsrental', [PaymentController::class, 'fieldsrental'])->name('frontend.fieldsrental');
@@ -80,6 +90,14 @@ Route::post('payment', [PaymentController::class, 'payment'])->name('payment');
 Route::get('paypal/failed', [PaymentController::class, 'paypalFailed'])->name('payment.failed');
 Route::get('paypal/status', [PaymentController::class, 'payPalStatus'])->name('payment.status');
 Route::get('paypal/success', [PaymentController::class, 'paypalSuccess'])->name('payment.success');
+
+Route::get('shop', [ShopController::class, 'index'])->name('frontend.shop');
+Route::get('shop/product/{slug?}', [ShopController::class, 'product'])->name('frontend.product');
+Route::get('product-payment', [ProductsController::class, 'payment'])->name('product.payment');
+Route::post('product-payment', [ProductsController::class, 'payment'])->name('product.payment');
+Route::get('product-payment-status', [ProductsController::class, 'status'])->name('product.payment.status');
+Route::get('product-payment-success', [ProductsController::class, 'success'])->name('product.payment.success');
+Route::get('product-payment-fail', [ProductsController::class, 'fail'])->name('product.payment.fail');
 
 //AJAX FUNCTIONS
 Route::get('fields_x_players/{slug?}', [FieldsController::class, 'fields_x_players']);
@@ -104,30 +122,44 @@ Route::middleware(['admin'])->group(function () {
     Route::resource('backend-booking', ReservationController::class);
     Route::get('calendar', [ReservationController::class, 'calendar'])->name('backend.calendar');
     Route::get('get-reservations', [ReservationController::class, 'get_reservations'])->name('backend.get-reservations');
+
     Route::resource('content', ContentController::class);
     Route::resource('content-groups', ContentGroupsController::class);
+    
     Route::resource('backend-fields', FieldsBackController::class);
+
     Route::resource('backend-services', ServicesBackController::class);
+    Route::post('services-sort', [ServicesBackController::class, 'sort'])->name('backend.services.sort');
+    Route::get('bservices-registration', [ServicesBackController::class, 'registration'])->name('bservices-registration');
+    Route::get('serv-registration-detail/{id?}', [ServicesBackController::class, 'registration_detail']);
+    
     Route::resource('backend-news', NewsBackController::class);
     Route::resource('backend-tags', TagsbackController::class);
+
     Route::resource('gallery', GalleryController::class);
+    Route::get('delete-file/{id?}', [GalleryController::class, 'destroy'])->name('backend.gallery.delete');
+
     Route::resource('settings', SettingsController::class);
     Route::resource('slides', SlidesController::class);
     Route::post('slides-sort', [SlidesController::class, 'sort'])->name('backend.slides.sort');
+
     Route::resource('users', UsersController::class);
-    Route::get('delete-file/{id?}', [GalleryController::class, 'destroy'])->name('backend.gallery.delete');
+
     Route::resource('menu', MenuController::class);
     Route::post('menu-sort', [MenuController::class, 'sort'])->name('backend.menu.sort');
     Route::get('delete-menu/{id?}', [MenuController::class, 'destroy'])->name('backend.menu.delete');
-    Route::post('services-sort', [ServicesBackController::class, 'sort'])->name('backend.services.sort');
-    Route::resource('backend-tournaments', TournamentsBackController::class);
-    Route::get('tournament-registrations/{id?}', [TournamentsBackController::class, 'registration'])->name('backend.tournament-registrations');
-    Route::get('tournament-registration/{id?}', [TournamentsBackController::class, 'registration_detail'])->name('backend.tournament-registration');
+
+    Route::resource('competitions', CompetitionController::class);
+    Route::get('competition-registrations/{id?}', [CompetitionController::class, 'registration'])->name('backend.competitions-registrations');
+    Route::get('competition-registration/{id?}', [CompetitionController::class, 'registration_detail'])->name('backend.competition-registration');
     Route::get('get-categories/{id?}', [CategoriesController::class, 'get_categories']);
     Route::get('get-categories-select/{id?}', [CategoriesController::class, 'get_categories_select']);
     Route::post('categories-sort', [CategoriesController::class, 'sort'])->name('backend.categories.sort');
-
-    Route::resource('tournament-categories', TournamentCatsController::class);
+    Route::get('competitions-contact', [CompetitionController::class, 'contact'])->name('backend.competitions.contact');
+    Route::get('competition-message/{id?}', [CompetitionController::class, 'message'])->name('backend.competitions.message');
+    Route::resource('competition-categories', CompetitionCategoriesController::class);
 
     Route::resource('categories', CategoriesController::class);
+
+    Route::resource('store', StoreController::class);
 });

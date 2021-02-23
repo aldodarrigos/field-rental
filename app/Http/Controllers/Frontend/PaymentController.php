@@ -32,9 +32,11 @@ class PaymentController extends Controller
         $this->apiContext = new ApiContext(
             new OAuthTokenCredential(
                 $payPalConfig['client_id'],     // ClientID
-                $payPalConfig['secret']      // ClientSecret
+                $payPalConfig['secret']   // ClientSecret
             )
         );
+
+        $this->apiContext->setConfig($payPalConfig['settings']);
 
     }
 

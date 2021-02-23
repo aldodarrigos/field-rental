@@ -9,7 +9,13 @@
     $settings_active = ($url == 'settings')?'active':'';
     $users_active = ($url == 'users')?'active':'';
     $slides_active = ($url == 'slides')?'active':'';
-    $tournaments_active = ($url == 'tournaments')?'active':'';
+    $competitions_active = ($url == 'competitions')?'active':'';
+    $store_active = ($url == 'store')?'active':'';
+
+
+    //$active = ($link == '/'.Request::segment(1))?'bg-blue text-white':'text-graytext';
+
+
 @endphp
 
 <nav class="navbar-default navbar-static-side" role="navigation">
@@ -46,14 +52,20 @@
             </li>
 
             <li class="{{$services_active}}">
-                <a href="/backend-services"><i class="far fa-folder"></i> <span class="nav-label">Services</span> </a>
+                <a href="/backend-services"><i class="fas fa-trophy"></i> <span class="nav-label">Services</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="/backend-services">Services</a></li>
+                    <li><a href="/bservices-registration">Registration</a></li>
+                </ul>
             </li>
 
-            <li class="{{$tournaments_active}}">
-                <a href="/backend-tournaments"><i class="fas fa-trophy"></i> <span class="nav-label">Tournaments</span><span class="fa arrow"></span></a>
+
+            <li class="{{$competitions_active}}">
+                <a href="/competitions"><i class="fas fa-trophy"></i> <span class="nav-label">Competitions</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
-                    <li><a href="/backend-tournaments">Tournaments</a></li>
+                    <li><a href="/competitions">Competitions</a></li>
                     <li><a href="/categories">Categories</a></li>
+                    <li><a href="/competitions-contact">Contact</a></li>
                 </ul>
             </li>
 
@@ -67,6 +79,10 @@
 
             <li class="{{$gallery_active}}">
                 <a href="/gallery"><i class="far fa-images"></i> <span class="nav-label">Gallery</span> </a>
+            </li>
+
+            <li class="{{$store_active }}">
+                <a href="/store"><i class="fas fa-shopping-cart"></i> <span class="nav-label">Shop</span> </a>
             </li>
 
             <li class="{{$users_active}}">
