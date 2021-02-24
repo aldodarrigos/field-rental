@@ -14,7 +14,10 @@
 <div class="separation h-50p"></div>
 
 <div class="w-11/12 md:w-boxed mx-auto">
-    {!!$intro->content!!}
+    <div class="bg-white px-8 py-8 rounded-lg">
+        <h2 class="bg-blue inline-block px-4 py-2 text-white font-bold border-red border-l-8 mb-2">{{$intro->title}}</h2>
+        {!!$intro->content!!}
+    </div>
 </div>
 
 <div class="separation h-50p"></div>

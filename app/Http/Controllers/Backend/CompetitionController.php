@@ -154,8 +154,9 @@ class CompetitionController extends Controller
     public function registration_detail($id = null)
     {
         $content = DB::table('competition_registration')
-        ->select(DB::raw('competition_registration.id, competition_registration.competition_id, competition_registration.fullname, competition_registration.email, competition_registration.phone, competition_registration.team, competition_registration.message, competition_registration.category_id, categories.name as cat_name, competition_registration.created_at'))
+        ->select(DB::raw('competition_registration.id, competitions.name as competition_name, competition_registration.competition_id, competition_registration.fullname, competition_registration.email, competition_registration.phone, competition_registration.team, competition_registration.message, competition_registration.number_players, competition_registration.gender, competition_registration.category_id, categories.name as cat_name, competition_registration.created_at'))
         ->leftJoin('categories', 'competition_registration.category_id', '=', 'categories.id')
+        ->leftJoin('competitions', 'competition_registration.competition_id', '=', 'competitions.id')
         ->where('competition_registration.id', $id)
         ->first();
 
@@ -192,6 +193,22 @@ class CompetitionController extends Controller
         $url = "competitions";
         
         return view('backend/competitions/message', ['message' => $message, 'url' => $url]);
+
+    }
+
+    public function dashboard()
+    {
+        
+        $records = DB::table('competition_registration')
+        ->select(DB::raw('competition_registration.id, competitions.name as competition_name, competition_registration.fullname, competition_registration.email, competition_registration.phone, competition_registration.team, competition_registration.message, competition_registration.category_id, categories.name as cat_name, competition_registration.created_at'))
+        ->leftJoin('categories', 'competition_registration.category_id', '=', 'categories.id')
+        ->leftJoin('competitions', 'competition_registration.competition_id', '=', 'competitions.id')
+        ->orderBy('competition_registration.created_at', 'desc')
+        ->get();
+
+        $url = "competitions";
+        
+        return view('backend/competitions/registration_dashboard', ['records' => $records, 'url' => $url]);
 
     }
 

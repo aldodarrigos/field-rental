@@ -52,7 +52,7 @@
             </li>
 
             <li class="{{$services_active}}">
-                <a href="/backend-services"><i class="fas fa-trophy"></i> <span class="nav-label">Services</span><span class="fa arrow"></span></a>
+                <a href="/backend-services"><i class="fas fa-briefcase"></i> <span class="nav-label">Services</span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="/backend-services">Services</a></li>
                     <li><a href="/bservices-registration">Registration</a></li>
@@ -65,6 +65,7 @@
                 <ul class="nav nav-second-level collapse">
                     <li><a href="/competitions">Competitions</a></li>
                     <li><a href="/categories">Categories</a></li>
+                    <li><a href="/competition-reg-dashboard">Registration</a></li>
                     <li><a href="/competitions-contact">Contact</a></li>
                 </ul>
             </li>

@@ -159,6 +159,7 @@ Route::middleware(['admin'])->group(function () {
     Route::get('competitions-contact', [CompetitionController::class, 'contact'])->name('backend.competitions.contact');
     Route::get('competition-message/{id?}', [CompetitionController::class, 'message'])->name('backend.competitions.message');
     Route::resource('competition-categories', CompetitionCategoriesController::class);
+    Route::get('competition-reg-dashboard', [CompetitionController::class, 'dashboard']);
 
     Route::resource('categories', CategoriesController::class);
 

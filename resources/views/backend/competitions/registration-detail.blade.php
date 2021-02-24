@@ -49,29 +49,77 @@
             </div>
             <div class="ibox-content">
 
-                <div class="form-group ">
-                    <label>Fullname</label>
-                    <input type="text" name='fullname' class="form-control" @if(!empty($content->fullname)) value="{{$content->fullname}}" @endif>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group ">
+                            <label>Competition</label>
+                            <input type="text" name='fullname' class="form-control" value="{{$content->competition_name}}">
+                        </div>
+                    </div>
                 </div>
 
-                <div class="form-group ">
-                    <label>Email</label>
-                    <input type="text" name='email' class="form-control" @if(!empty($content->email)) value="{{$content->email}}" @endif>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group ">
+                            <label>Fullname</label>
+                            <input type="text" name='fullname' class="form-control" value="{{$content->fullname}}">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group ">
+                            <label>Email</label>
+                            <input type="text" name='email' class="form-control" value="{{$content->email}}">
+                        </div>
+                    </div>
                 </div>
 
-                <div class="form-group ">
-                    <label>Phone</label>
-                    <input type="text" name='phone' class="form-control" @if(!empty($content->phone)) value="{{$content->phone}}" @endif>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group ">
+                            <label>Phone</label>
+                            <input type="text" name='phone' class="form-control" value="{{$content->phone}}">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group ">
+                            <label>Team</label>
+                            <input type="text" name='team' class="form-control" value="{{$content->team}}" >
+                        </div>
+                    </div>
                 </div>
-
-                <div class="form-group ">
-                    <label>Team</label>
-                    <input type="text" name='team' class="form-control" @if(!empty($content->team)) value="{{$content->team}}" @endif>
+               
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group ">
+                            <label>Player number</label>
+                            <input type="text" name='player_number' class="form-control" value="{{$content->number_players}}">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group ">
+                            <label>Category</label>
+                            <input type="text" name='cat_name' class="form-control" value="{{$content->cat_name}}">
+                        </div>
+                    </div>
                 </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group ">
+                            <label>Gender</label>
+                            @php
+                                $gender = ($content->gender == 1)?'Female':'Male';
+                            @endphp
+                            <input type="text" name='player_number' class="form-control" value="{{$gender}}">
+                        </div>
+                    </div>
+                    <div class="col-md-6"></div>
+                </div>
+                
 
                 <div class="form-group tooltip-wrap">
                     <label>Message</label>
-                    <textarea name="message" class="form-control" rows="12">@if(!empty($content->message)){{$content->message}} @endif</textarea>
+                    <textarea name="message" class="form-control" rows="12">{{$content->message}}</textarea>
                 </div>
 
                 <div class="hr-line-dashed"></div>

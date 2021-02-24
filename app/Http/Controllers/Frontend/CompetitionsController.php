@@ -86,7 +86,7 @@ class CompetitionsController extends Controller
     public function submit(Request $request)
     {
 
-        $id = $request->input('tournament_id');
+        $id = $request->input('competition_id');
 
         $registration = new CompetitionRegistration();
         
@@ -97,6 +97,8 @@ class CompetitionsController extends Controller
 
         $registration->category_id = $request->input('category');
         $registration->team = $request->input('team');
+        $registration->gender = $request->input('gender');
+        $registration->number_players = $request->input('number_players');
         $registration->message = $request->input('message');
         $registration->save();
 
