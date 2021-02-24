@@ -28,6 +28,7 @@ class FrontendController extends Controller
 
     public function about()
     {
+        $intro = Content::where('shortcut', 'about.intro')->first();
         $vision = Content::where('shortcut', 'about.vision')->first();
         $mision = Content::where('shortcut', 'about.mision')->first();
         $values = Content::where('shortcut', 'about.values')->first();
@@ -38,7 +39,7 @@ class FrontendController extends Controller
         'image' => 'https://katyisc.com/storage/files/katyisc-sports-complex-share.webp'
         ];
 
-        return view('frontend/about', ['seo' => $seo, 'vision' => $vision, 'mision' => $mision, 'values' => $values, 'fields' => $fields]);
+        return view('frontend/about', ['seo' => $seo, 'vision' => $vision, 'mision' => $mision, 'values' => $values, 'fields' => $fields, 'intro' => $intro]);
         
     }
 

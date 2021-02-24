@@ -23,6 +23,14 @@
             let product_status = $('#product_status').val();
 
             payment_on_off(product_status)
+
+            let size_switch = $('#size_switch').val()
+
+            if(size_switch == 1){
+                payment_on_off(0)
+            }
+
+
             
             $( "#up" ).click(function() {
                 let number = $('#quantity').val();
@@ -52,13 +60,13 @@
                 $( ".size" ).removeClass("bg-red");
                 $( ".size" ).removeClass("text-white");
                 $(this).toggleClass("bg-red text-white");
-                let size_value = $(this).html()
-                $( "#product_size" ).val(size_value);
-                
+                let size_text = $(this).html()
+                let size_id = $(this).data('id')
+                $( "#product_size_id" ).val(size_id);
+                $( "#product_size_text" ).val(size_text);
+                payment_on_off(1)
             });
-            
-
-                        
+    
         });
 
         function payment_on_off(signal){
@@ -144,16 +152,16 @@
                 <span>Availability:</span> <span class="text-red">In Stock</span>
             </div>
 
+            @if ($product->size_switch == 1)
             <div class="uppercase text-md font-semibold text-black mb-6">
                 <span class="mr-3">Size:</span> 
                 <span class="text-black">
-                    <span class="size border-2 border-graysoft px-3 py-1 cursor-pointer rounded-lg">S</span>
-                    <span class="size border-2 border-graysoft px-3 py-1 cursor-pointer rounded-lg">M</span>
-                    <span class="size border-2 border-graysoft px-3 py-1 cursor-pointer rounded-lg bg-red text-white">L</span>
-                    <span class="size border-2 border-graysoft px-3 py-1 cursor-pointer rounded-lg">XL</span>
-                    <span class="size border-2 border-graysoft px-3 py-1 cursor-pointer rounded-lg">2XL</span>
+                    @foreach ($sizes as $size)
+                        <span class="size border-2 border-graysoft px-3 py-1 cursor-pointer rounded-lg" data-id='{{$size->id}}'>{{$size->name}}</span>
+                    @endforeach
                 </span>
             </div>
+            @endif
 
             <div class="uppercase text-lg font-semibold text-black mb-6">
                 <span class="mr-3">Quantity:</span> 
@@ -167,11 +175,13 @@
             <form action="/product-payment" method="POST" id='product-payment-form'>
 
                 {{ csrf_field() }}
+                <input type="hidden" name="size_switch" id='size_switch' value="{{$product->size_switch}}">
                 <input type="hidden" name="static_price" id='static_price' value="{{$final_price}}">
                 <input type="hidden" name="product_name" id='product_name' value="{{$product->name}}">
                 <input type="hidden" name="product_id" id='product_id' value="{{$product->id}}">
                 <input type="hidden" name="product_price" id='product_price' value="{{$final_price}}">
-                <input type="hidden" name="product_size" id='product_size' value="L">
+                <input type="hidden" name="product_size_id" id='product_size_id' value="">
+                <input type="hidden" name="product_size_text" id='product_size_text' value="">
                 <input type="hidden" name="product_status" id='product_status' value="{{$product->status}}">
                 <input type="hidden" name="product_quantity" id='product_quantity' value="1">
                 @if (isset(Auth::user()->name))

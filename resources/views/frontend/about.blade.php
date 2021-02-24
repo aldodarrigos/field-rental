@@ -13,7 +13,16 @@
 
 <div class="separation h-50p"></div>
 
+<div class="w-11/12 md:w-boxed mx-auto">
+    {!!$intro->content!!}
+</div>
+
+<div class="separation h-50p"></div>
+
 <div class="content flex rounded-lg h-auto flex-col-reverse md:flex-row w-11/12 md:w-boxed mx-auto">
+
+
+
     <div class="w-4/4 md:w-3/4">
         <img class="max-w-full rounded-l-lg" src="{{$fields->img}}" alt="">
     </div>

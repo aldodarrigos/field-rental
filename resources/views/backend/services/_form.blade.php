@@ -39,7 +39,7 @@
 
             <div class="row">
                 
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="form-group ">
                         <label for='group'>Status</label>
                         <select class="form-control m-b" name="status">
@@ -57,6 +57,13 @@
                             @endif
 
                         </select>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group ">
+                        <label>Price</label>
+                        <input type="text" name='price' class="form-control" @if(!empty($content->price)) value="{{$content->price}}" @endif>
                     </div>
                 </div>
 

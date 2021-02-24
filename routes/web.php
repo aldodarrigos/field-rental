@@ -28,6 +28,7 @@ use App\Http\Controllers\Backend\CompetitionController;
 use App\Http\Controllers\Backend\CompetitionCategoriesController;
 use App\Http\Controllers\Backend\CategoriesController;
 use App\Http\Controllers\Backend\StoreController;
+use App\Http\Controllers\Backend\ProductSizeController;
 
 use App\Http\Controllers\SendmailController;
 use App\Providers\RouteServiceProvider;
@@ -162,4 +163,9 @@ Route::middleware(['admin'])->group(function () {
     Route::resource('categories', CategoriesController::class);
 
     Route::resource('store', StoreController::class);
+    Route::resource('product-sizes', ProductSizeController::class);
+    Route::get('get-sizes/{id?}', [ProductSizeController::class, 'get_sizes']);
+    Route::get('get-sizes-select/{id?}', [ProductSizeController::class, 'get_sizes_select']);
+
+
 });

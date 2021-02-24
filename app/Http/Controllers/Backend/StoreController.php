@@ -51,7 +51,8 @@ class StoreController extends Controller
     {
         $product = new Product();
         $offer = ($request->input('offer') == null)?'0.00':$request->input('offer');
-
+        $size_switch = ($request->input('size_switch') == null)?'0':$request->input('size_switch');
+        
         $name = $request->input('name');
         $slug_input = Str::of($name)->slug('-');
 
@@ -69,6 +70,7 @@ class StoreController extends Controller
 
         $product->price = $request->input('price');
         $product->offer = $offer;
+        $product->size_switch = $size_switch;
         $product->status = $request->input('status');
         $product->save();
 
@@ -107,6 +109,7 @@ class StoreController extends Controller
 
         $product = Product::find($id);
         $offer = ($request->input('offer') == null)?'0.00':$request->input('offer');
+        $size_switch = ($request->input('size_switch') == null)?'0':$request->input('size_switch');
 
         $product->name = $request->input('name');
         $product->slug = $request->input('slug');
@@ -122,6 +125,7 @@ class StoreController extends Controller
 
         $product->price = $request->input('price');
         $product->offer = $offer;
+        $product->size_switch = $size_switch;
         $product->status = $request->input('status');
         $product->save();
 

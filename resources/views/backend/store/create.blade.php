@@ -7,12 +7,16 @@
     @parent
 
     <link href="{{asset('inspinia/css/plugins/summernote/summernote-bs4.css')}}" rel="stylesheet">
+    <link href="{{asset('inspinia/css/plugins/iCheck/custom.css')}}" rel="stylesheet">
+    <link href="{{asset('inspinia/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css')}}" rel="stylesheet">
     <link href="{{asset('inspinia/css/plugins/datapicker/datepicker3.css')}}" rel="stylesheet">
 
     <!-- SUMMERNOTE -->
     <script src="{{asset('inspinia/js/plugins/summernote/summernote-bs4.js')}}"></script>
     <!-- Data picker -->
     <script src="{{asset('inspinia/js/plugins/datapicker/bootstrap-datepicker.js')}}"></script>
+
+    <script src="{{asset('inspinia/js/plugins/iCheck/icheck.min.js')}}"></script>
 
     <script>
         $(document).ready(function(){
@@ -29,6 +33,12 @@
                 autoclose: true,
                 format: 'yyyy-mm-dd'
             });
+
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+
 
         });
     </script>

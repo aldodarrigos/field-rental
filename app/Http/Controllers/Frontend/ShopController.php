@@ -31,12 +31,19 @@ class ShopController extends Controller
 
         $product = Product::where([['slug', $slug],['status', 1]])->first();
 
+        $sizes = DB::table('product_sizes')
+        ->select(DB::raw('product_sizes.id, product_sizes.product_id, sizes.name'))
+        ->leftJoin('sizes', 'product_sizes.size_id', '=', 'sizes.id')
+        ->where('product_sizes.product_id', $product->id)
+        ->orderBy('sizes.sort', 'asc')
+        ->get();
+
         $seo = ['title' => $product->name.' | KISC, Sports complex', 
         'sumary' => $product->sumary, 
         'image' => $product->img
         ];
 
-        return view('frontend/shop/product', ['seo' => $seo, 'product' => $product]);
+        return view('frontend/shop/product', ['seo' => $seo, 'product' => $product, 'sizes' => $sizes]);
         
     }
 

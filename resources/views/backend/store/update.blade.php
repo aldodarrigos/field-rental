@@ -7,6 +7,8 @@
     @parent
 
     <link href="{{asset('inspinia/css/plugins/summernote/summernote-bs4.css')}}" rel="stylesheet">
+    <link href="{{asset('inspinia/css/plugins/iCheck/custom.css')}}" rel="stylesheet">
+    <link href="{{asset('inspinia/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css')}}" rel="stylesheet">
     <link href="{{asset('inspinia/css/plugins/datapicker/datepicker3.css')}}" rel="stylesheet">
 
     <!-- SUMMERNOTE -->
@@ -14,6 +16,8 @@
 
     <!-- Data picker -->
     <script src="{{asset('inspinia/js/plugins/datapicker/bootstrap-datepicker.js')}}"></script>
+
+    <script src="{{asset('inspinia/js/plugins/iCheck/icheck.min.js')}}"></script>
 
     <script>
         $(document).ready(function(){
@@ -30,6 +34,85 @@
                 autoclose: true,
                 format: 'yyyy-mm-dd'
             });
+
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+
+
+            const token = $('#token').val();
+            let id = $('#product_id').val();
+
+            get_sizes_select(id);
+            get_sizes(id);
+
+            $('#add_size').click(function() {
+                let size_id = $('#sizes').val();
+
+                $.ajax({
+                    url: "/product-sizes",
+                    type:'POST',
+                    data: {
+                        '_token': token,
+                        'product_id': id,
+                        'size_id': size_id,
+                    },
+                    success:function(response){
+                        get_sizes(id);
+                        get_sizes_select(id);
+                    }//Response
+                })//Ajax
+
+            });
+
+
+            function get_sizes_select(product_id){
+                $.ajax({
+                    url: "/get-sizes-select/"+product_id,
+                    type:'GET',
+                    data: {
+                        '_token': token,
+                    },
+                    success:function(response){
+                        $('#sizes').html(response);
+                    }//Response
+                })//Ajax
+            }
+
+
+            function get_sizes(product_id){
+                $.ajax({
+                    url: "/get-sizes/"+product_id,
+                    type:'GET',
+                    data: {
+                        '_token': token,
+                    },
+                    success:function(response){
+                        $('#product_sizes').html(response);
+                    }//Response
+                })//Ajax
+            }
+
+            $(document).on('click', '.delete', function() { 
+                let record = $(this).data('id');
+                console.log(record);
+
+                $.ajax({
+                    url: "/product-sizes/"+record,
+                    type:'delete',
+                    data: {
+                        '_token': token,
+                    },
+                    success:function(response){
+                        get_sizes(id);
+                        get_sizes_select(id);
+                    }//Response
+                })//Ajax
+                
+                
+            });
+
 
         });
     </script>

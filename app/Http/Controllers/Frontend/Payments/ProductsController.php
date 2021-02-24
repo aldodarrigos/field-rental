@@ -47,12 +47,13 @@ class ProductsController extends Controller
         $product_id = $request->input('product_id');
         $product_name = $request->input('product_name');
         $final_price = $request->input('product_price');
-        $product_size = $request->input('product_size');
+        $product_size_id = $request->input('product_size_id');
+        $product_size_text = $request->input('product_size_text');
         $product_status = $request->input('product_status');
         $product_quantity = $request->input('product_quantity');
         $user_id = $request->input('user_id');
 
-        $description = $product_name.' / '.$final_price.' / '.$product_size.' / '.$product_quantity;
+        $description = $product_name.' / '.$final_price.' / '.$product_size_text.' / '.$product_quantity;
 
         // After Step 2
         $payer = new Payer();
@@ -72,7 +73,8 @@ class ProductsController extends Controller
             'product_name' => $product_name, 
             'static_price' => $static_price, 
             'final_price' => $final_price, 
-            'product_size' => $product_size, 
+            'product_size_id' => $product_size_id, 
+            'product_size_text' => $product_size_text, 
             'product_status' => $product_status, 
             'product_quantity' => $product_quantity
         ));
@@ -149,7 +151,7 @@ class ProductsController extends Controller
 
             $sale->user_id = $custom->user_id;
             $sale->product_id = $custom->product_id;
-            $sale->size = $custom->product_size;
+            $sale->size = $custom->product_size_text;
             $sale->quantity = $custom->product_quantity;
             $sale->price_unit = $custom->static_price;
             $sale->final_price = $custom->final_price;

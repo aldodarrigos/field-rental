@@ -14,7 +14,7 @@ class AddPriceColumnToServices extends Migration
     public function up()
     {
         Schema::table('services', function (Blueprint $table) {
-            $table->decimal('price', 10, 2)->nullable()->after('flag');
+            $table->decimal('price', 10, 2)->default(0)->after('flag');
             $table->unsignedTinyInteger('form')->default(0)->after('price');
             $table->unsignedTinyInteger('periot')->default(0)->after('form');
         });

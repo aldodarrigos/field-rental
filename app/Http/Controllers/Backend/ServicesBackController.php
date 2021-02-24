@@ -49,6 +49,8 @@ class ServicesBackController extends Controller
     {
         $service = new Service();
 
+        $price = ($request->input('price') == null)?'0.00':$request->input('price');
+
         $name = $request->input('name');
         $slug_input = Str::of($name)->slug('-');
         $service->name = $name;
@@ -57,7 +59,9 @@ class ServicesBackController extends Controller
         $service->content = $request->input('content');
         $service->img = $request->input('img');
         $service->flag = $request->input('flag');
+        $service->price = $price;
         $service->status = $request->input('status');
+        
         $service->save();
 
         return redirect('backend-services');
@@ -93,7 +97,7 @@ class ServicesBackController extends Controller
     {
 
         $service = Service::find($id);
-
+        $price = ($request->input('price') == null)?'0.00':$request->input('price');
 
         $name = $request->input('name');
         $slug_input = Str::of($name)->slug('-');
@@ -103,7 +107,9 @@ class ServicesBackController extends Controller
         $service->content = $request->input('content');
         $service->img = $request->input('img');
         $service->flag = $request->input('flag');
+        $service->price = $price;
         $service->status = $request->input('status');
+        
         $service->save();
 
         return redirect('backend-services/'.$id.'/edit')->with('success', 'Successful update!');
