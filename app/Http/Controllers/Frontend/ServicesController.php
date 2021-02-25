@@ -35,6 +35,7 @@ class ServicesController extends Controller
         ];
 
         $competitions_on_off = 0;
+        $competitions = '';
 
         if($slug == 'tournaments'){
             $competitions = Competition::where([['is_league', 0], ['status', 1]])->get();

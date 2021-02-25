@@ -84,6 +84,8 @@ Route::get('leagues/{slug?}', [CompetitionsController::class, 'competition'])->n
 Route::get('registration/{id?}/{slug?}', [CompetitionsController::class, 'registration'])->name('frontend.competitions.registration');
 Route::post('registration/submit', [CompetitionsController::class, 'submit'])->name('competitions.registration.submit');
 Route::post('competition/contact', [CompetitionsController::class, 'contact'])->name('competitions.contact');
+Route::get('team-registration/{id?}/{slug?}', [CompetitionsController::class, 'team_registration']);
+Route::post('registration/team-submit', [CompetitionsController::class, 'team_submit']);
 
 Route::get('fieldsrental', [PaymentController::class, 'fieldsrental'])->name('frontend.fieldsrental');
 Route::post('fieldsrental', [PaymentController::class, 'fieldsrental'])->name('frontend.fieldsrental');

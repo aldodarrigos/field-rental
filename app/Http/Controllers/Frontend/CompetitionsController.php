@@ -81,7 +81,6 @@ class CompetitionsController extends Controller
         return view('frontend/competitions/registration', ['seo' => $seo, 'competition' => $competition, 'setting' => $setting, 'categories' => $categories]);
         
     }
-
         
     public function submit(Request $request)
     {
@@ -123,6 +122,30 @@ class CompetitionsController extends Controller
         $contact->save();
 
         return redirect($uri.'/'.$slug)->with('success', 'Message sent!');
+        
+    }
+
+
+    public function team_registration($id = null)
+    {
+
+        $competition = Competition::where('id', $id)->first();
+
+        $categories = DB::table('competition_categories')
+        ->select(DB::raw('competition_categories.id, competition_categories.category_id, categories.name'))
+        ->leftJoin('categories', 'competition_categories.category_id', '=', 'categories.id')
+        ->where('competition_categories.competition_id', $id)
+        ->orderBy('categories.sort', 'asc')
+        ->get();
+
+        $setting = Setting::first();
+
+        $seo = ['title' => $competition->name.' Registration | KISC, Sports complex', 
+        'sumary' => $competition->sumary, 
+        'image' => $competition->img
+        ];
+
+        return view('frontend/competitions/team_registration', ['seo' => $seo, 'competition' => $competition, 'setting' => $setting, 'categories' => $categories]);
         
     }
 
