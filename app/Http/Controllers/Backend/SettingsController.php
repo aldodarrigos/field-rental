@@ -125,14 +125,29 @@ class SettingsController extends Controller
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function update_waiver(Request $request)
     {
-        //
+
+        $setting = Setting::find(1);
+
+        $setting->waiver = $request->input('waiver');
+
+        $setting->save();
+
+        return redirect('waiver')->with('success', 'Successful update!');
+
     }
+
+    public function waiver()
+    {
+
+        $action = route('settings.update', 1);
+        $settings = Setting::find(1);
+        $put = True;
+        $form = 'update';
+        $url = "settings";
+
+        return view('backend/settings/waiver', ['settings' => $settings, 'action' => $action, 'url' => $url, 'put' => $put]);
+    }
+
 }

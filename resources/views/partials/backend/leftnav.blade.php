@@ -82,8 +82,13 @@
                 <a href="/gallery"><i class="far fa-images"></i> <span class="nav-label">Gallery</span> </a>
             </li>
 
-            <li class="{{$store_active }}">
-                <a href="/store"><i class="fas fa-shopping-cart"></i> <span class="nav-label">Shop</span> </a>
+
+            <li class="{{$store_active}}">
+                <a href="/store"><i class="fas fa-shopping-cart"></i> <span class="nav-label">Shop</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="/store">Products</a></li>
+                    <li><a href="/sizes">Sizes</a></li>
+                </ul>
             </li>
 
             <li class="{{$users_active}}">
@@ -97,6 +102,7 @@
                     <li><a href="/settings/1/edit">Global settings</a></li>
                     <li><a href="/menu">Menu</a></li>
                     <li><a href="/slides">SlideShow</a></li>
+                    <li><a href="/waiver">Waiver</a></li>
                 </ul>
             </li>
 

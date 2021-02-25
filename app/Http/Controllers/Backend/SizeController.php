@@ -21,7 +21,7 @@ class SizeController extends Controller
         $records = Size::all();
         $records_sort = Size::where('status', 1)->orderBy('sort', 'ASC')->get();
 
-        $url = "competitions";
+        $url = "store";
         
         return view('backend/sizes/index', ['records' => $records, 'url' => $url, 'records_sort' => $records_sort]);
 
@@ -35,11 +35,11 @@ class SizeController extends Controller
     public function create()
     {
 
-        $action = route('categories.store');
-        $url = "competitions";
+        $action = route('sizes.store');
+        $url = "store";
         $form = 'new';
 
-        return view('backend/categories/create', ['action' => $action, 'url' => $url, 'form' => $form]);
+        return view('backend/sizes/create', ['action' => $action, 'url' => $url, 'form' => $form]);
     }
     
     /**
@@ -50,12 +50,12 @@ class SizeController extends Controller
      */
     public function store(Request $request)
     {
-        $category = new Size();
-        $category->name = $request->input('name');
-        $category->status = $request->input('status');
-        $category->save();
+        $size = new Size();
+        $size->name = $request->input('name');
+        $size->status = $request->input('status');
+        $size->save();
 
-        return redirect('categories');
+        return redirect('sizes');
     }
 
     /**
@@ -67,7 +67,7 @@ class SizeController extends Controller
     public function edit($id)
     {
         
-        $action = route('categories.update', $id);
+        $action = route('sizes.update', $id);
         $content = Size::find($id);
         $put = True;
         $form = 'update';
@@ -87,11 +87,11 @@ class SizeController extends Controller
     public function update(Request $request, $id)
     {
 
-        $category = Size::find($id);
+        $size = Size::find($id);
 
-        $category->name = $request->input('name');
-        $category->status = $request->input('status');
-        $category->save();
+        $size->name = $request->input('name');
+        $size->status = $request->input('status');
+        $size->save();
 
         return redirect('sizes/'.$id.'/edit')->with('success', 'Successful update!');
 
@@ -117,7 +117,7 @@ class SizeController extends Controller
 
 
         for ($i=0; $i < count($order_array); $i++) { 
-            $category = Category::find($order_array[$i]['id']);
+            $category = Size::find($order_array[$i]['id']);
             $category->sort = $i;
             $category->save();
         }

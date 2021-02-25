@@ -29,6 +29,7 @@ use App\Http\Controllers\Backend\CompetitionCategoriesController;
 use App\Http\Controllers\Backend\CategoriesController;
 use App\Http\Controllers\Backend\StoreController;
 use App\Http\Controllers\Backend\ProductSizeController;
+use App\Http\Controllers\Backend\SizeController;
 
 use App\Http\Controllers\SendmailController;
 use App\Providers\RouteServiceProvider;
@@ -119,37 +120,51 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 */
 
 Route::middleware(['admin'])->group(function () {
+
     Route::get('backend/dashboard', [DashboardController::class, 'index'])->name('backend.dashboard');
+
+    //BOOKING
     Route::resource('backend-booking', ReservationController::class);
     Route::get('calendar', [ReservationController::class, 'calendar'])->name('backend.calendar');
     Route::get('get-reservations', [ReservationController::class, 'get_reservations'])->name('backend.get-reservations');
 
+    //CONTENT
     Route::resource('content', ContentController::class);
     Route::resource('content-groups', ContentGroupsController::class);
     
+    //FIELDS
     Route::resource('backend-fields', FieldsBackController::class);
 
+    //Services
     Route::resource('backend-services', ServicesBackController::class);
     Route::post('services-sort', [ServicesBackController::class, 'sort'])->name('backend.services.sort');
     Route::get('bservices-registration', [ServicesBackController::class, 'registration'])->name('bservices-registration');
     Route::get('serv-registration-detail/{id?}', [ServicesBackController::class, 'registration_detail']);
     
+    //NEWS
     Route::resource('backend-news', NewsBackController::class);
     Route::resource('backend-tags', TagsbackController::class);
 
+    //GALLERY
     Route::resource('gallery', GalleryController::class);
     Route::get('delete-file/{id?}', [GalleryController::class, 'destroy'])->name('backend.gallery.delete');
 
+    //SETTINGS
     Route::resource('settings', SettingsController::class);
     Route::resource('slides', SlidesController::class);
     Route::post('slides-sort', [SlidesController::class, 'sort'])->name('backend.slides.sort');
+    Route::get('waiver', [SettingsController::class, 'waiver']);
+    Route::put('update-waiver', [SettingsController::class, 'update_waiver']);
 
+    //USERS
     Route::resource('users', UsersController::class);
 
+    //MENU
     Route::resource('menu', MenuController::class);
     Route::post('menu-sort', [MenuController::class, 'sort'])->name('backend.menu.sort');
     Route::get('delete-menu/{id?}', [MenuController::class, 'destroy'])->name('backend.menu.delete');
 
+    //COMPETITIONS
     Route::resource('competitions', CompetitionController::class);
     Route::get('competition-registrations/{id?}', [CompetitionController::class, 'registration'])->name('backend.competitions-registrations');
     Route::get('competition-registration/{id?}', [CompetitionController::class, 'registration_detail'])->name('backend.competition-registration');
@@ -163,10 +178,13 @@ Route::middleware(['admin'])->group(function () {
 
     Route::resource('categories', CategoriesController::class);
 
+    //STORE
     Route::resource('store', StoreController::class);
     Route::resource('product-sizes', ProductSizeController::class);
+    Route::resource('sizes', SizeController::class);
     Route::get('get-sizes/{id?}', [ProductSizeController::class, 'get_sizes']);
     Route::get('get-sizes-select/{id?}', [ProductSizeController::class, 'get_sizes_select']);
+    Route::post('sizes-sort', [SizeController::class, 'sort'])->name('backend.sizes.sort');
 
 
 });

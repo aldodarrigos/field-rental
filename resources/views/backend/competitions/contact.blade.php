@@ -46,10 +46,10 @@
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>Competitions</h2>
+        <h2>Competitions Contact</h2>
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="/Competitions">Dashboard</a>
+                <a href="/competitions">Dashboard</a>
             </li>
         </ol>
     </div>
@@ -63,7 +63,7 @@
         <div class="col-lg-10">
             <div class="ibox ">
                 <div class="ibox-title">
-                    <h5>Content</h5>
+                    <h5>Contact</h5>
                     <div class="ibox-tools">
                     </div>
                 </div>

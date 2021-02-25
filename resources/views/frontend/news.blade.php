@@ -34,12 +34,6 @@
         
         <aside class="col-span-12 md:col-span-4">
             
-            <!--
-            <livewire:frontend.aside-ad></livewire:frontend.aside-ad>
-            <livewire:frontend.aside-tournament></livewire:frontend.aside-tournament>
-            <livewire:frontend.aside-nextmatch></livewire:frontend.aside-nextmatch>
-            -->
-            
             <livewire:frontend.location-info></livewire:frontend.location-info>
 
             <livewire:frontend.location-map></livewire:frontend.location-map>

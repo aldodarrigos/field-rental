@@ -37,8 +37,12 @@
                     <x-slot name='id'>buttonrental</x-slot>
                     <x-slot name='on_off'></x-slot>
                 </x-frontend.buttons.form>
-                <img class="w-200p" src="https://katyisc.com/storage/files/paypal-button.png" alt="">
+                
             </div>
+
+            {{$slot}}
+
+            <img class="w-200p" src="https://katyisc.com/storage/files/paypal-button.png" alt="">
 
         @else
 

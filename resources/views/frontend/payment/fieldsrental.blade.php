@@ -5,6 +5,23 @@
 @section('assets_down')
 
     @parent
+
+    <!-- jQuery Modal -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+
+    <script>
+        $(document).ready(function() {
+
+            $("#fadelink").click(function(event){
+                event.preventDefault();
+                $("#fade").modal({
+                    fadeDuration: 100
+                });
+            });
+
+        });
+    </script>
     
 @endsection
 
@@ -14,6 +31,14 @@
 <main class="w-11/12 md:w-boxed mx-auto">
 
     <div class="separation h-50p"></div>
+
+    <p><a href="" id='fadelink'>Open Modal</a></p>
+
+    <div id="fade" class="modal" class="overflow-scroll z-50" >
+
+
+
+    </div>
 
     <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
 
@@ -111,8 +136,6 @@
                     <x-slot name='on_off'></x-slot>
                 </x-frontend.buttons.form>
             </div>
-
-
 
             </form>
             
@@ -296,7 +319,11 @@
                     <x-slot name='button_link'></x-slot>
                     <x-slot name='button_text'>Confirm and Pay <i class="far fa-credit-card"></i></x-slot>
                     <x-slot name='button_size'>big</x-slot>
-    
+
+                    
+                <div class="hidden w-full p-3 mt-2 text-black bg-white appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner border border-bluetext rounded-md h-400p overflow-y-auto">
+                    {!!$setting->waiver!!}
+                </div>
                 
                 </x-frontend.cards.field_booking>
                     
@@ -307,9 +334,6 @@
                         <x-slot name='bg'>white</x-slot>
                     
                         <img class="max-w-full rounded-md" src="{{$map->img}}" usemap="#workmap">
-                        <map name="workmap">
-                            <area shape="rect" coords="84,14,155,90" alt="Computer" href="computer.htm">
-                          </map>
                         
                     </x-frontend.pieces.ad_frame>
                     
