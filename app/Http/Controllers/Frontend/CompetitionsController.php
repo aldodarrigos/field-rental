@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Http\Controllers\Frontend;
-use App\Models\{ Competition, Category, CompetitionRegistration, Setting, CompetitionContact};
+use App\Models\{ Competition, Crew, CrewPlayer, CompetitionCrew, CompetitionRegistration, Setting, CompetitionContact};
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Mail\ContactMailable;
 use Illuminate\Support\Facades\Mail;
 use DB;
+use Illuminate\Support\Str;
 
 class CompetitionsController extends Controller
 {
@@ -131,6 +132,7 @@ class CompetitionsController extends Controller
 
         $competition = Competition::where('id', $id)->first();
 
+
         $categories = DB::table('competition_categories')
         ->select(DB::raw('competition_categories.id, competition_categories.category_id, categories.name'))
         ->leftJoin('categories', 'competition_categories.category_id', '=', 'categories.id')
@@ -146,6 +148,85 @@ class CompetitionsController extends Controller
         ];
 
         return view('frontend/competitions/team_registration', ['seo' => $seo, 'competition' => $competition, 'setting' => $setting, 'categories' => $categories]);
+        
+    }
+
+            
+    public function team_submit(Request $request)
+    {
+
+        $competition_id = $request->input('competition_id');
+        $competition_price = $request->input('competition_price');
+        $user_id = $request->input('user_id');
+        $team_name = $request->input('team_name');
+        $slug = Str::of($team_name)->slug('-');
+        $uniform = $request->input('uniform');
+        $gender = $request->input('gender');
+        $category_competition = $request->input('category');
+
+        $crew = new Crew();
+        $crew->manager_id = $user_id;
+        $crew->name = $team_name;
+        $crew->slug = $slug;
+        $crew->uniform_colors = $uniform;
+        $crew->gender = $gender;
+        $crew->category_id = $category_competition;
+        $crew->save();
+
+        $competitionCrew = new CompetitionCrew();
+        $competitionCrew->competition_id = $competition_id;
+        $competitionCrew->user_id = $user_id;
+        $competitionCrew->crew_id = $crew->id;
+        $competitionCrew->price = $competition_price;
+        $competitionCrew->status = 0;
+        $competitionCrew->save();
+        
+        for ($i=1; $i < 11; $i++) { 
+
+            if($request->input('player_name_'.$i) != null){
+                $crewPlayer = new CrewPlayer();
+                $crewPlayer->crew_id = $crew->id;
+                $crewPlayer->name = $request->input('player_name_'.$i);
+                $crewPlayer->age = $request->input('age_'.$i);
+                $crewPlayer->save();
+            }
+
+        }
+
+        return redirect('team-confirmation/'.$competitionCrew->id)->with('success', 'Registration success!');
+        
+    }
+
+            
+    public function team_confirmation($id = null)
+    {
+
+        $registration = DB::table('competition_crews')
+        ->select(DB::raw('competition_crews.id as registration_id, 
+        competition_crews.competition_id as competition_id, 
+        competition_crews.price as registration_price, 
+        competition_crews.status as registration_status, 
+
+        users.name as user_name, users.email as user_email, users.phone as user_phone,
+        crews.id as team_id, crews.name as team_name, crews.manager_id as manager, 
+        crews.uniform_colors as uniforms, crews.gender as gender,
+        categories.name as category'))
+
+        ->leftJoin('users', 'competition_crews.user_id', '=', 'users.id')
+        ->leftJoin('crews', 'competition_crews.crew_id', '=', 'crews.id')
+        ->leftJoin('categories', 'crews.category_id', '=', 'categories.id')
+        ->where('competition_crews.id', $id)
+        ->first();
+
+        $team = CrewPlayer::where('crew_id', $registration->team_id)->orderBy('name', 'ASC')->get();
+        $competition = Competition::where('id', $registration->competition_id)->first();
+
+        $seo = ['title' => $competition->name.' Registration | KISC, Sports complex', 
+        'sumary' => $competition->sumary, 
+        'image' => $competition->img
+        ];
+        
+        return view('frontend/competitions/team_confirmation', ['registration' => $registration, 'team' => $team, 'competition' => $competition, 'seo' => $seo]);
         
     }
 

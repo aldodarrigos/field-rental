@@ -19,9 +19,6 @@ class CreateCrewsTable extends Migration
             $table->string('slug', 120)->nullable();
             $table->string('sumary', 160)->nullable();
             $table->string('img', 120)->nullable();
-            $table->string('img_md', 120)->nullable();
-            $table->string('img_sm', 120)->nullable();
-            $table->unsignedMediumInteger('tournament_id')->default(0);
             $table->unsignedTinyInteger('status')->default(1);
             $table->timestamps();
         });

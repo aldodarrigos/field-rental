@@ -106,6 +106,8 @@
                                 <x-slot name='height'>slim</x-slot>
                                 <x-slot name='bg'>dark</x-slot>
                                 <x-slot name='label_on_off'>off</x-slot>
+                                <x-slot name='disable'>off</x-slot>
+                                
                             </x-frontend.forms.input_text>
                             <span id='alt_check' class='bg-red h-36p font-roboto text-gray ml-2 font-bold rounded mt-2 py-2 px-2 cursor-pointer uppercase text-sm hover:bg-blue ease-in-out duration-300'>Check</span>
                         </div>

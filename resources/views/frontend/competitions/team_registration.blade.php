@@ -44,6 +44,8 @@
 
                         @csrf
                         <input type="hidden" name="competition_id" value='{{$competition->id}}'>
+                        <input type="hidden" name="user_id" value='{{Auth::user()->id}}'>
+                        <input type="hidden" name="competition_price" value='{{$competition->price}}'>
 
                         <div class="grid grid-cols-12 gap-6 mb-2">
                             <div class="col-span-12 md:col-span-6">
@@ -51,20 +53,21 @@
                                     <x-slot name='type'>text</x-slot>
                                     <x-slot name='label'>Fullname</x-slot>
                                     <x-slot name='id'>fullname</x-slot>
-                                    <x-slot name='default'></x-slot>
+                                    <x-slot name='default'>{{Auth::user()->name}}</x-slot>
                                     <x-slot name='placeholder'>Your Name</x-slot>
                                     <x-slot name='autocomplete'>off</x-slot>
                                     <x-slot name='required'>on</x-slot>
                                     <x-slot name='height'>big</x-slot>
                                     <x-slot name='bg'>light</x-slot>
                                     <x-slot name='label_on_off'>on</x-slot>
+                                    <x-slot name='disable'>on</x-slot>
                                 </x-frontend.forms.input_text>
                             </div>
                             <div class="col-span-12 md:col-span-6">
                                 <x-frontend.forms.input_text>
                                     <x-slot name='type'>text</x-slot>
                                     <x-slot name='label'>Team name</x-slot>
-                                    <x-slot name='id'>team</x-slot>
+                                    <x-slot name='id'>team_name</x-slot>
                                     <x-slot name='default'></x-slot>
                                     <x-slot name='placeholder'>Team name</x-slot>
                                     <x-slot name='autocomplete'>off</x-slot>
@@ -72,6 +75,7 @@
                                     <x-slot name='height'>big</x-slot>
                                     <x-slot name='bg'>light</x-slot>
                                     <x-slot name='label_on_off'>on</x-slot>
+                                    <x-slot name='disable'>off</x-slot>
                                 </x-frontend.forms.input_text>
                             </div>
                         </div>
@@ -89,12 +93,12 @@
                                     <x-slot name='height'>big</x-slot>
                                     <x-slot name='bg'>light</x-slot>
                                     <x-slot name='label_on_off'>on</x-slot>
+                                    <x-slot name='disable'>off</x-slot>
                                 </x-frontend.forms.input_text>
                             </div>
                             <div class="col-span-12 md:col-span-6">
                                 
                                 <x-frontend.forms.input_select>
-                                    <x-slot name='type'>text</x-slot>
                                     <x-slot name='label'>Category</x-slot>
                                     <x-slot name='id'>category</x-slot>
                                     <x-slot name='default'></x-slot>
@@ -114,55 +118,86 @@
                             </div>
                         </div>
 
+                        <div class="grid grid-cols-12 gap-6 mb-2">
+                            <div class="col-span-12 md:col-span-6">
+                                <x-frontend.forms.input_select>
+                                    <x-slot name='label'>Gender</x-slot>
+                                    <x-slot name='id'>gender</x-slot>
+                                    <x-slot name='default'></x-slot>
+                                    <x-slot name='placeholder'></x-slot>
+                                    <x-slot name='autocomplete'>off</x-slot>
+                                    <x-slot name='required'>off</x-slot>
+                                    <x-slot name='height'>big</x-slot>
+                                    <x-slot name='bg'>light</x-slot>
+                                    <x-slot name='label_on_off'>on</x-slot>
+        
+                                    <option value="0">Select option</option>
+                                    <option value="1">Female</option>
+                                    <option value="2">Male</option>
+                                    
+                                </x-frontend.forms.input_select>
+                            </div>
+                        </div>
 
+                        <div class="line-dashed"></div>
 
-
-
-
-
-
-
-                        <x-frontend.forms.input_text>
-                            <x-slot name='type'>text</x-slot>
-                            <x-slot name='label'>Players number</x-slot>
-                            <x-slot name='id'>number_players</x-slot>
-                            <x-slot name='default'></x-slot>
-                            <x-slot name='placeholder'>Players number</x-slot>
-                            <x-slot name='autocomplete'>off</x-slot>
-                            <x-slot name='required'>off</x-slot>
-                            <x-slot name='height'>big</x-slot>
-                            <x-slot name='bg'>light</x-slot>
-                            <x-slot name='label_on_off'>on</x-slot>
-                        </x-frontend.forms.input_text>
-
-                        <x-frontend.forms.input_select>
-                            <x-slot name='type'>text</x-slot>
-                            <x-slot name='label'>Gender</x-slot>
-                            <x-slot name='id'>gender</x-slot>
-                            <x-slot name='default'></x-slot>
-                            <x-slot name='placeholder'></x-slot>
-                            <x-slot name='autocomplete'>off</x-slot>
-                            <x-slot name='required'>off</x-slot>
-                            <x-slot name='height'>big</x-slot>
-                            <x-slot name='bg'>light</x-slot>
-                            <x-slot name='label_on_off'>on</x-slot>
-
-                            <option value="0">Select option</option>
-                            <option value="1">Female</option>
-                            <option value="2">Male</option>
+                        @for ($i = 1; $i < 11; $i++)
                             
-                        </x-frontend.forms.input_select>
+                            @php $label_on_off = ($i>1)?'off':'on'; @endphp
 
-                        <x-frontend.forms.textarea>
-                            <x-slot name='label'>Message</x-slot>
-                            <x-slot name='id'>message</x-slot>
-                            <x-slot name='placeholder'>Your message</x-slot>
-                            <x-slot name='autocomplete'>on</x-slot>
-                            <x-slot name='required'>on</x-slot>
-                            <x-slot name='max'>2000</x-slot>
-                        </x-frontend.forms.textarea>
+                            <div class="grid grid-cols-12 gap-4">
 
-                        <button type="submit" class="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-red shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none rounded-md">SEND
+                                <div class="col-span-12 md:col-span-1">
+                                    <x-frontend.forms.input_text>
+                                        <x-slot name='type'>text</x-slot>
+                                        <x-slot name='label'>Num</x-slot>
+                                        <x-slot name='id'>number</x-slot>
+                                        <x-slot name='default'>{{$i}}</x-slot>
+                                        <x-slot name='placeholder'></x-slot>
+                                        <x-slot name='autocomplete'>off</x-slot>
+                                        <x-slot name='required'>off</x-slot>
+                                        <x-slot name='height'>big</x-slot>
+                                        <x-slot name='bg'>light</x-slot>
+                                        <x-slot name='label_on_off'>{{$label_on_off}}</x-slot>
+                                        <x-slot name='disable'>on</x-slot>
+                                    </x-frontend.forms.input_text>
+                                </div>
+                                <div class="col-span-12 md:col-span-9">
+                                    <x-frontend.forms.input_text>
+                                        <x-slot name='type'>text</x-slot>
+                                        <x-slot name='label'>Name</x-slot>
+                                        <x-slot name='id'>player_name_{{$i}}</x-slot>
+                                        <x-slot name='default'></x-slot>
+                                        <x-slot name='placeholder'></x-slot>
+                                        <x-slot name='autocomplete'>off</x-slot>
+                                        <x-slot name='required'>off</x-slot>
+                                        <x-slot name='height'>big</x-slot>
+                                        <x-slot name='bg'>light</x-slot>
+                                        <x-slot name='label_on_off'>{{$label_on_off}}</x-slot>
+                                        <x-slot name='disable'>off</x-slot>
+                                    </x-frontend.forms.input_text>
+                                </div>
+                                <div class="col-span-12 md:col-span-2">
+                                    <x-frontend.forms.input_text>
+                                        <x-slot name='type'>text</x-slot>
+                                        <x-slot name='label'>Age</x-slot>
+                                        <x-slot name='id'>age_{{$i}}</x-slot>
+                                        <x-slot name='default'></x-slot>
+                                        <x-slot name='placeholder'></x-slot>
+                                        <x-slot name='autocomplete'>off</x-slot>
+                                        <x-slot name='required'>off</x-slot>
+                                        <x-slot name='height'>big</x-slot>
+                                        <x-slot name='bg'>light</x-slot>
+                                        <x-slot name='label_on_off'>{{$label_on_off}}</x-slot>
+                                        <x-slot name='disable'>off</x-slot>
+                                    </x-frontend.forms.input_text>
+                                </div>
+                            </div>
+
+                        @endfor
+
+
+                        <button type="submit" class="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-red shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none rounded-md">SAVE
                         </button>
 
                     </form>

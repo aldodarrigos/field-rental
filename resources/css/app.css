@@ -26,4 +26,11 @@ p{ margin-bottom: 1rem;}
     padding-top: 0.6rem;
     padding-bottom: 0.6rem;
 }
+.line-dashed{
+    border-top: 1px dashed #e7eaec;
+    color: #ffffff;
+    background-color: #ffffff;
+    height: 1px;
+    margin: 20px 0;
+}
 

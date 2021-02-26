@@ -10,6 +10,7 @@ use App\Http\Controllers\Frontend\CompetitionsController;
 use App\Http\Controllers\Frontend\ShopController;
 use App\Http\Controllers\Frontend\Payments\ProductsController;
 use App\Http\Controllers\Frontend\Payments\ServicePaymentController;
+use App\Http\Controllers\Frontend\Payments\CompetitionPaymentController;
 
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\ReservationController;
@@ -77,6 +78,7 @@ Route::get('signup', [UserController::class, 'singup'])->name('frontend.singup')
 Route::post('user-authenticate', [UserController::class, 'authenticate'])->name('authenticate');
 Route::get('profile/dashboard', [UserController::class, 'dashboard'])->name('frontend.user.dashboard');
 
+// COMPETITIONS
 Route::get('tournaments', [CompetitionsController::class, 'tournaments'])->name('frontend.tournaments');
 Route::get('leagues', [CompetitionsController::class, 'leagues'])->name('frontend.leagues');
 Route::get('tournaments/{slug?}', [CompetitionsController::class, 'competition'])->name('frontend.tournament');
@@ -86,7 +88,14 @@ Route::post('registration/submit', [CompetitionsController::class, 'submit'])->n
 Route::post('competition/contact', [CompetitionsController::class, 'contact'])->name('competitions.contact');
 Route::get('team-registration/{id?}/{slug?}', [CompetitionsController::class, 'team_registration']);
 Route::post('registration/team-submit', [CompetitionsController::class, 'team_submit']);
+Route::get('team-confirmation/{id?}', [CompetitionsController::class, 'team_confirmation']);
 
+Route::post('competition-payment', [CompetitionPaymentController::class, 'payment'])->name('competition.payment');
+Route::get('competition-payment-status', [CompetitionPaymentController::class, 'status'])->name('competition.payment.status');
+Route::get('competition-payment-success', [CompetitionPaymentController::class, 'success'])->name('competition.payment.success');
+Route::get('competition-payment-fail', [CompetitionPaymentController::class, 'fail'])->name('competition.payment.fail');
+
+//FIELDS RENTAL
 Route::get('fieldsrental', [PaymentController::class, 'fieldsrental'])->name('frontend.fieldsrental');
 Route::post('fieldsrental', [PaymentController::class, 'fieldsrental'])->name('frontend.fieldsrental');
 Route::get('payment', [PaymentController::class, 'payment'])->name('payment');
