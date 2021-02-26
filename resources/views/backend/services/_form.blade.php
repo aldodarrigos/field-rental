@@ -69,7 +69,7 @@
 
                 <div class="col-md-6">
                     <div class="form-group ">
-                        <label>Icon</label>
+                        <label>Icon <small><a href="https://fontawesome.com/icons?d=gallery&m=free" target='_blank'>(Icon library)</a></small></label>
                         <input type="text" name='icon' class="form-control" @if(!empty($content->icon)) value="{{$content->icon}}" @endif>
                     </div>
                 </div>
