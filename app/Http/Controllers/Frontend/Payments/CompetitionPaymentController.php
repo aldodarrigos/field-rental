@@ -19,7 +19,8 @@ use App\Models\{CompetitionCrew, User, Service};
 
 use App\Mail\BookingMailable;
 use Illuminate\Support\Facades\Mail;
- 
+use DB;
+
 class CompetitionPaymentController extends Controller
 {
 
@@ -45,6 +46,7 @@ class CompetitionPaymentController extends Controller
 
         $registration_id = $request->input('registration_id');
         $competition_name = $request->input('competition_name');
+        $competition_id = $request->input('competition_id');
         $registration_price = $request->input('registration_price');
         $team_name = $request->input('team_name');
         $team_id = $request->input('team_id');
@@ -67,6 +69,7 @@ class CompetitionPaymentController extends Controller
 
         $registration_data = json_encode(array(
             'registration_id' => $registration_id, 
+            'competition_id' => $competition_id, 
             'team_id' => $team_id, 
             'user_id' => $user_id, 
         ));
@@ -84,9 +87,7 @@ class CompetitionPaymentController extends Controller
             ->setTransactions(array($transaction))
             ->setRedirectUrls($redirectUrls);
 
-            
         // After Step 3
-
         try {
             $payment->create($this->apiContext);
             //echo $payment;
@@ -126,17 +127,6 @@ class CompetitionPaymentController extends Controller
 
             $response = json_decode($result);
             $custom = json_decode($response->transactions[0]->custom);
-
-            /*
-            'user_id' => $userIdLogin, 
-            'product_id' => $product_id, 
-            'product_name' => $product_name, 
-            'static_price' => $static_price, 
-            'final_price' => $final_price, 
-            'product_size' => $product_size, 
-            'product_status' => $product_status, 
-            'product_quantity' => $product_quantity
-            */
             
             $registration = CompetitionCrew::find($custom->registration_id);
 
@@ -144,14 +134,33 @@ class CompetitionPaymentController extends Controller
             $registration->status = 1;
             $registration->save();
 
+            $registration = DB::table('competition_crews')
+            ->select(DB::raw('
+            competition_crews.id as registration_id, 
+            competition_crews.competition_id as competition_id, 
+            competition_crews.price as registration_price, 
+            competition_crews.status as registration_status, 
+            competition_crews.updated_at as registration_date, 
+            competition_crews.payment_code as payment_code, 
+            
+            competitions.name as competition_name,
 
-            $user = User::where('id', $custom->user_id)->first();
-            $competition = User::where('id', $registration->competition_id)->first();
-            $crew = User::where('id', $custom->team_id)->first();
+            users.name as user_name, users.email as user_email, users.phone as user_phone,
 
-            //$success = $this->successbooking($user->email, $registration->id);
+            crews.id as team_id, crews.name as team_name, crews.manager_id as manager, 
+            crews.uniform_colors as uniforms, crews.gender as gender,
 
-            return redirect('competition-payment-success')->with(['registration' => $registration, 'competition' => $competition, 'user' => $user]);
+            categories.name as category'))
+    
+            ->leftJoin('users', 'competition_crews.user_id', '=', 'users.id')
+            ->leftJoin('crews', 'competition_crews.crew_id', '=', 'crews.id')
+            ->leftJoin('categories', 'crews.category_id', '=', 'categories.id')
+            ->leftJoin('competitions', 'competition_crews.competition_id', '=', 'competitions.id')
+            ->where('competition_crews.id', $custom->registration_id)
+            ->first();
+
+
+            return redirect('competition-payment-success')->with(['registration' => $registration]);
         }
         
     }
@@ -164,20 +173,13 @@ class CompetitionPaymentController extends Controller
 
     public function success()
     {
-
-        /*
-        $reservation = Reservation::where('id', 5)->first();
-        $field = Field::where('id', $reservation->field_id)->first();
-        $user = User::where('id', $reservation->user_id)->first();
-        */
-
         
-        $seo = ['title' => 'Successful purchase | KISC, Sports complex', 
+        $seo = ['title' => 'Successful reservation | KISC, Sports complex', 
         'sumary' => '', 
         'image' => 'https://katyisc.com/storage/files/katyisc-sports-complex-share.webp'
         ];
         
-        return view('frontend/success/service', ['seo' => $seo]);
+        return view('frontend/success/competition', ['seo' => $seo]);
     }
 
     public function successbooking($contact = null, $sale_id = null)

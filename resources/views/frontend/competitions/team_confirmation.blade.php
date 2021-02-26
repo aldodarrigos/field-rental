@@ -29,7 +29,7 @@
 
             <div class="p-8">
 
-                <h1 class="font-roboto text-3x uppercase font-bold text-black leading-none mb-4"><a href="">{{$competition->name}} Registration</a></h1>
+                <h1 class="font-roboto text-3x uppercase font-bold text-black leading-none mb-4"><a href="">{{$competition->name}}</a></h1>
 
                 <h2 class="text-info font-roboto text-4xl uppercase font-bold leading-none mb-6">Successful registration!</h2>
                 
@@ -37,12 +37,13 @@
                     $gender = ($registration->gender == 1)?'Female':'Male';
                 @endphp
 
-                <div><span class="font-bold">Registrant User</span>: {{$registration->user_name}}</div>
-                <div><span class="font-bold">Email</span>: {{$registration->user_email}}</div>
-                <div><span class="font-bold">Team name</span>: {{$registration->team_name}}</div>
-                <div><span class="font-bold">Category</span>: {{$registration->category}}</div>
-                <div><span class="font-bold">Gender</span>: {{$gender}}</div>
-                <div><span class="font-bold">Uniform colors</span>: {{$registration->uniforms}}</div>
+                <div class="mb-2"><span class="font-bold">Registrant User</span>: {{$registration->user_name}}</div>
+                <div class="mb-2"><span class="font-bold">Email</span>: {{$registration->user_email}}</div>
+                <div class="mb-2"><span class="font-bold">Team name</span>: {{$registration->team_name}}</div>
+                <div class="mb-2"><span class="font-bold">Category</span>: {{$registration->category}}</div>
+                <div class="mb-2"><span class="font-bold">Gender</span>: {{$gender}}</div>
+                <div class="mb-2"><span class="font-bold">Uniform colors</span>: {{$registration->uniforms}}</div>
+                <div class="mb-2"><span class="font-bold">Price</span>: ${{$registration->registration_price}}</div>
                 
 
                 <br>
@@ -57,6 +58,7 @@
                         <input type="hidden" name="team_name" id='team_name' value="{{$registration->team_name}}">
                         <input type="hidden" name="team_id" id='team_id' value="{{$registration->team_id}}">
                         <input type="hidden" name="registration_id" id='registration_id' value="{{$registration->registration_id}}">
+                        <input type="hidden" name="competition_id" id='competition_id' value="{{$registration->registration_id}}">
                         <input type="hidden" name="user_name" id='user_name' value="{{$registration->user_name}}">
                         <input type="hidden" name="user_id" id='user_id' value="{{$registration->manager}}">
         

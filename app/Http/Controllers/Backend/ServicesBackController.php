@@ -61,6 +61,7 @@ class ServicesBackController extends Controller
         $service->img = $request->input('img');
         $service->flag = $flag;
         $service->price = $price;
+        $service->icon = $request->input('icon');
         $service->status = $request->input('status');
         
         $service->save();
@@ -110,6 +111,7 @@ class ServicesBackController extends Controller
         $service->img = $request->input('img');
         $service->flag = $flag;
         $service->price = $price;
+        $service->icon = $request->input('icon');
         $service->status = $request->input('status');
         
         $service->save();

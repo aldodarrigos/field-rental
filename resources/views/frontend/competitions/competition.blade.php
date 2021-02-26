@@ -41,7 +41,6 @@
                    
                 </div>
 
-
             </section>
             
             <section class="p-8">
@@ -83,6 +82,7 @@
                             <x-slot name='height'>big</x-slot>
                             <x-slot name='bg'>light</x-slot>
                             <x-slot name='label_on_off'>on</x-slot>
+                            <x-slot name='disable'>off</x-slot>
                         </x-frontend.forms.input_text>
                     </span>
 
@@ -98,6 +98,7 @@
                             <x-slot name='height'>big</x-slot>
                             <x-slot name='bg'>light</x-slot>
                             <x-slot name='label_on_off'>on</x-slot>
+                            <x-slot name='disable'>off</x-slot>
                         </x-frontend.forms.input_text>
                     </span>
 
@@ -113,6 +114,7 @@
                             <x-slot name='height'>big</x-slot>
                             <x-slot name='bg'>light</x-slot>
                             <x-slot name='label_on_off'>on</x-slot>
+                            <x-slot name='disable'>off</x-slot>
                         </x-frontend.forms.input_text>
                     </span>
                     
