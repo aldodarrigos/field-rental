@@ -37,7 +37,7 @@
                     @if ($competition->trials == 0)
 
                         <div class="text-center">
-                            <a href='/registration/{{$competition->id}}/{{$competition->slug}}' class="font-roboto text-gray font-bold rounded py-3 px-8 uppercase text-lg hover:bg-deepblue ease-in-out duration-300 bg-red "><i class="fas fa-users"></i> Register your team</a>
+                            <a href='/team-registration/{{$competition->id}}/{{$competition->slug}}' class="font-roboto text-gray font-bold rounded py-3 px-8 uppercase text-lg hover:bg-deepblue ease-in-out duration-300 bg-red "><i class="fas fa-users"></i> Register your team</a>
                         </div>
 
                     @else
