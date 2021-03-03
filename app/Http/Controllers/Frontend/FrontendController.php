@@ -162,14 +162,14 @@ class FrontendController extends Controller
     public function kidsleague()
     {
 
-        return redirect('/registration/2/kids-league');
+        return redirect('/leagues/kids-league');
         
     }
 
     public function friendshipcup()
     {
 
-        return redirect('/registration/1/friendship-cup');
+        return redirect('/tournaments/friendship-cup');
         
     }
 
