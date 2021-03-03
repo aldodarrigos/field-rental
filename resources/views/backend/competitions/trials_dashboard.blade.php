@@ -97,13 +97,13 @@
                                     @endphp
 
                                     <tr class="gradeX">
-                                        <td><a href="/trial-detail/{{$record->registration_id}}">{{$record->trial_id}}</a></td>
+                                        <td><a href="/tryouts-detail/{{$record->registration_id}}">{{$record->trial_id}}</a></td>
                                         <td>{{$record->player_name}}</td>
                                         <td><strong>{{$record->player_age}}</strong></td>
                                         <td><strong>{{$gender}}</strong></td>
                                         <td><strong>{{$record->category}}</strong></td>
                                         <td><strong>{{$record->competition_name}}</strong></td>
-                                        <td><a href="/trial-detail/{{$record->registration_id}}">{{$record->registrant}}</a></td>
+                                        <td><a href="/tryouts-detail/{{$record->registration_id}}">{{$record->registrant}}</a></td>
                                         <td><strong>{{date('m-d-Y', strtotime($record->date) )}}</strong></td>
                                         <td><span class="btn btn-xs {{$status_color}}">{{$status}}</span></td>
                                     </tr>

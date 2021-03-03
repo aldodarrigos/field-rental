@@ -197,9 +197,9 @@ Route::middleware(['admin'])->group(function () {
     Route::resource('competition-categories', CompetitionCategoriesController::class);
     Route::get('competition-reg-dashboard', [CompetitionController::class, 'dashboard']);
 
-    Route::get('trials-dashboard', [CompetitionController::class, 'trial_dashboard']);
-    Route::get('trial-detail/{id?}', [CompetitionController::class, 'trial_detail']);
-    
+    Route::get('tryouts-dashboard', [CompetitionController::class, 'trial_dashboard']);
+    Route::get('tryouts-detail/{id?}', [CompetitionController::class, 'trial_detail']);
+
     Route::get('teams-dashboard', [CompetitionController::class, 'teams_dashboard']);
     Route::get('teams-detail/{id?}', [CompetitionController::class, 'teams_detail']);
 

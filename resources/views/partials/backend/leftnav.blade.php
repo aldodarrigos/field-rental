@@ -67,7 +67,7 @@
                     <li><a href="/categories">Categories</a></li>
                     <li><a href="/competition-reg-dashboard">Registration</a></li>
                     <li><a href="/teams-dashboard">Teams</a></li>
-                    <li><a href="/trials-dashboard">Trials</a></li>
+                    <li><a href="/tryouts-dashboard">Tryouts</a></li>
                     <li><a href="/competitions-contact">Contact</a></li>
                 </ul>
             </li>

@@ -148,7 +148,7 @@
 
                 <div class="hr-line-dashed"></div>
                 
-                <a href="/trials-dashboard" class="btn btn-w-m btn-default"><i class="fas fa-undo-alt"></i> Return</a>
+                <a href="/tryouts-dashboard" class="btn btn-w-m btn-default"><i class="fas fa-undo-alt"></i> Return</a>
                 
             </div>
         </div>

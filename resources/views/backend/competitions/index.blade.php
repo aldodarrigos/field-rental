@@ -108,7 +108,7 @@
                                         $slug = 'leagues';
                                     }
 
-                                    $modality = ($record->trials == 0)?'Teams':'Trials';
+                                    $modality = ($record->trials == 0)?'Teams':'Tryouts';
 
                                     @endphp
 

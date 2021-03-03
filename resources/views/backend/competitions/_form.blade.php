@@ -99,14 +99,14 @@
                             @if ($form == 'update')
                                 @if ($content->trials == 1)
                                     <option value='0'>Teams</option>
-                                    <option value='1' selected>Trials</option>
+                                    <option value='1' selected>Tryouts</option>
                                 @else
                                     <option value='0' selected>Teams</option>
-                                    <option value='1' >Trials</option>
+                                    <option value='1' >Tryouts</option>
                                 @endif
                             @else
                                 <option value='0' selected>Teams</option>
-                                <option value='1'>Trials</option>
+                                <option value='1'>Tryouts</option>
                             @endif
 
                         </select>
