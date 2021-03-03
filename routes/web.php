@@ -11,6 +11,7 @@ use App\Http\Controllers\Frontend\ShopController;
 use App\Http\Controllers\Frontend\Payments\ProductsController;
 use App\Http\Controllers\Frontend\Payments\ServicePaymentController;
 use App\Http\Controllers\Frontend\Payments\CompetitionPaymentController;
+use App\Http\Controllers\Frontend\Payments\TrialPaymentController;
 
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\ReservationController;
@@ -94,6 +95,15 @@ Route::post('competition-payment', [CompetitionPaymentController::class, 'paymen
 Route::get('competition-payment-status', [CompetitionPaymentController::class, 'status'])->name('competition.payment.status');
 Route::get('competition-payment-success', [CompetitionPaymentController::class, 'success'])->name('competition.payment.success');
 Route::get('competition-payment-fail', [CompetitionPaymentController::class, 'fail'])->name('competition.payment.fail');
+
+Route::get('trials-registration/{id?}/{slug?}', [CompetitionsController::class, 'trials_registration']);
+Route::post('registration/trials-submit', [CompetitionsController::class, 'trials_submit']);
+Route::get('trials-confirmation/{id?}', [CompetitionsController::class, 'trials_confirmation']);
+
+Route::post('trials-payment', [TrialPaymentController::class, 'payment']);
+Route::get('trials-payment-status', [TrialPaymentController::class, 'status']);
+Route::get('trials-payment-success', [TrialPaymentController::class, 'success']);
+Route::get('trials-payment-fail', [TrialPaymentController::class, 'fail']);
 
 //FIELDS RENTAL
 Route::get('fieldsrental', [PaymentController::class, 'fieldsrental'])->name('frontend.fieldsrental');
@@ -186,6 +196,12 @@ Route::middleware(['admin'])->group(function () {
     Route::get('competition-message/{id?}', [CompetitionController::class, 'message'])->name('backend.competitions.message');
     Route::resource('competition-categories', CompetitionCategoriesController::class);
     Route::get('competition-reg-dashboard', [CompetitionController::class, 'dashboard']);
+
+    Route::get('trials-dashboard', [CompetitionController::class, 'trial_dashboard']);
+    Route::get('trial-detail/{id?}', [CompetitionController::class, 'trial_detail']);
+    
+    Route::get('teams-dashboard', [CompetitionController::class, 'teams_dashboard']);
+    Route::get('teams-detail/{id?}', [CompetitionController::class, 'teams_detail']);
 
     Route::resource('categories', CategoriesController::class);
 

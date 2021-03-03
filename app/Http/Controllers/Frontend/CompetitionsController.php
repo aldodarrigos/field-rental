@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Frontend;
-use App\Models\{ Competition, Crew, CrewPlayer, CompetitionCrew, CompetitionRegistration, Setting, CompetitionContact};
+use App\Models\{ Competition, Crew, Trial, CrewPlayer, CompetitionCrew, CompetitionRegistration, CompetitionTrial, Setting, CompetitionContact};
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Mail\ContactMailable;
@@ -227,6 +227,119 @@ class CompetitionsController extends Controller
         ];
         
         return view('frontend/competitions/team_confirmation', ['registration' => $registration, 'team' => $team, 'competition' => $competition, 'seo' => $seo]);
+        
+    }
+
+
+
+    public function trials_registration($id = null)
+    {
+
+        $competition = Competition::where('id', $id)->first();
+
+
+        $categories = DB::table('competition_categories')
+        ->select(DB::raw('competition_categories.id, competition_categories.category_id, categories.name'))
+        ->leftJoin('categories', 'competition_categories.category_id', '=', 'categories.id')
+        ->where('competition_categories.competition_id', $id)
+        ->orderBy('categories.sort', 'asc')
+        ->get();
+
+        $setting = Setting::first();
+
+        $seo = ['title' => $competition->name.' Registration | KISC, Sports complex', 
+        'sumary' => $competition->sumary, 
+        'image' => $competition->img
+        ];
+
+        return view('frontend/competitions/trials_registration', ['seo' => $seo, 'competition' => $competition, 'setting' => $setting, 'categories' => $categories]);
+        
+    }
+
+            
+    public function trials_submit(Request $request)
+    {
+
+        $competition_id = $request->input('competition_id');
+        $competition_price = $request->input('competition_price');
+        $user_id = $request->input('user_id');
+
+
+        $gender = $request->input('gender');
+        $category_competition = $request->input('category');
+
+        $num_records = 0;
+        for ($i=1; $i < 11; $i++) { 
+            if($request->input('player_name_'.$i) != null){
+                $num_records++;
+            }
+        }
+
+        $final_price = $competition_price * $num_records;
+
+        $competitionTrial = new CompetitionTrial();
+        $competitionTrial->competition_id = $competition_id;
+        $competitionTrial->manager_id = $user_id;
+        $competitionTrial->price = $final_price;
+        $competitionTrial->status = 0;
+        $competitionTrial->save();
+        
+        for ($i=1; $i < 11; $i++) { 
+
+            if($request->input('player_name_'.$i) != null){
+                $newPlayer = new Trial();
+                $newPlayer->competition_id = $competition_id;
+                $newPlayer->registration_id = $competitionTrial->id;
+                $newPlayer->name = $request->input('player_name_'.$i);
+                $newPlayer->age = $request->input('age_'.$i);
+                $newPlayer->gender = $request->input('gender_'.$i);
+                $newPlayer->category_id = $request->input('category_'.$i);
+                $newPlayer->save();
+            }
+
+        }
+
+        return redirect('trials-confirmation/'.$competitionTrial->id)->with('success', 'Registration success!');
+        
+    }
+
+            
+    public function trials_confirmation($id = null)
+    {
+
+        $registration = DB::table('competition_trials')
+        ->select(DB::raw('competition_trials.id as registration_id, 
+        competition_trials.competition_id as competition_id, 
+        competition_trials.price as registration_price, 
+        competition_trials.status as registration_status, 
+        competition_trials.manager_id as manager_id, 
+
+        users.name as user_name, users.email as user_email, users.phone as user_phone'))
+
+        ->leftJoin('users', 'competition_trials.manager_id', '=', 'users.id')
+        ->where('competition_trials.id', $id)
+        ->first();
+
+        $trials = DB::table('trials')
+        ->select(DB::raw('trials.id as registration_id, 
+        trials.competition_id as competition_id, 
+        trials.name, 
+        trials.age, 
+        trials.gender, 
+        categories.name as category'))
+
+        ->leftJoin('categories', 'trials.category_id', '=', 'categories.id')
+        ->where('trials.registration_id', $registration->registration_id)
+        ->get();
+
+        $competition = Competition::where('id', $registration->competition_id)->first();
+
+        $seo = ['title' => $competition->name.' Registration | KISC, Sports complex', 
+        'sumary' => $competition->sumary, 
+        'image' => $competition->img
+        ];
+        
+        return view('frontend/competitions/trials_confirmation', ['registration' => $registration, 'trials' => $trials, 'competition' => $competition, 'seo' => $seo]);
         
     }
 

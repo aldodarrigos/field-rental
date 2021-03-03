@@ -34,10 +34,21 @@
                             {!!$competition->content!!}
                     </div>
                     <br>
-                    <div class="text-center">
-                        <a href='/registration/{{$competition->id}}/{{$competition->slug}}' class="font-roboto text-gray font-bold rounded py-3 px-8 uppercase text-lg hover:bg-deepblue ease-in-out duration-300 bg-red "><i class="fas fa-users"></i> Register your team</a>
-                    </div>
+                    @if ($competition->trials == 0)
 
+                        <div class="text-center">
+                            <a href='/registration/{{$competition->id}}/{{$competition->slug}}' class="font-roboto text-gray font-bold rounded py-3 px-8 uppercase text-lg hover:bg-deepblue ease-in-out duration-300 bg-red "><i class="fas fa-users"></i> Register your team</a>
+                        </div>
+
+                    @else
+
+                        <div class="text-center">
+                            <a href='/trials-registration/{{$competition->id}}/{{$competition->slug}}' class="font-roboto text-gray font-bold rounded py-3 px-8 uppercase text-lg hover:bg-deepblue ease-in-out duration-300 bg-red "><i class="fas fa-users"></i> Register for trials</a>
+                        </div>
+                        
+                    @endif
+
+                    <br>
                    
                 </div>
 
@@ -58,7 +69,10 @@
                 </script>
                 @endif
 
-                <h2 class="font-roboto text-2x uppercase font-bold text-black leading-none mb-3">Do you have any questions about this tournament?</h2>
+                @php
+                    $type = ($competition->is_league == 0)?'Tournament':'League';
+                @endphp
+                <h2 class="font-roboto text-2x uppercase font-bold text-black leading-none mb-3">Do you have any questions about this {{$type}}?</h2>
 
                 <form class="mt-6" action="{{route('competitions.contact')}}" method="POST">
 

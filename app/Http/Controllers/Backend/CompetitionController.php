@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\{Competition, CompetitionRegistration, Category, CompetitionCategory, CompetitionContact};
+use App\Models\{Competition, CompetitionRegistration, CrewPlayer, Category, CompetitionCategory, CompetitionContact};
 use DB;
 use Illuminate\Support\Str;
 //use GuzzleHttp\Client;
@@ -61,6 +61,7 @@ class CompetitionController extends Controller
         $content->img = $request->input('img');
         $content->price = $request->input('price');
         $content->is_league = $request->input('is_league');
+        $content->trials = $request->input('trials');
         $content->status = $request->input('status');
         $content->save();
 
@@ -116,6 +117,7 @@ class CompetitionController extends Controller
         $content->img = $request->input('img');
         $content->price = $request->input('price');
         $content->is_league = $request->input('is_league');
+        $content->trials = $request->input('trials');
         $content->status = $request->input('status');
         $content->save();
 
@@ -209,6 +211,143 @@ class CompetitionController extends Controller
         $url = "competitions";
         
         return view('backend/competitions/registration_dashboard', ['records' => $records, 'url' => $url]);
+
+    }
+
+    public function trial_dashboard()
+    {
+        
+        $records = DB::table('trials')
+        ->select(DB::raw('trials.id trial_id, 
+        trials.name as player_name, 
+        trials.age as player_age, 
+        trials.gender as player_gender,
+
+        categories.name as category,
+
+        competitions.name as competition_name,
+
+        users.name as registrant,
+
+        competition_trials.id as registration_id,
+        competition_trials.status as registration_status,
+        competition_trials.updated_at as date'))
+
+        ->leftJoin('categories', 'trials.category_id', '=', 'categories.id')
+        ->leftJoin('competition_trials', 'trials.registration_id', '=', 'competition_trials.id')
+        ->leftJoin('competitions', 'competition_trials.competition_id', '=', 'competitions.id')
+        ->leftJoin('users', 'competition_trials.manager_id', '=', 'users.id')
+        ->where('competitions.trials', 1)
+        ->orderBy('trials.updated_at', 'desc')
+        ->get();
+
+        $url = "competitions";
+        
+        return view('backend/competitions/trials_dashboard', ['records' => $records, 'url' => $url]);
+
+    }
+
+    public function trial_detail($id)
+    {
+        
+        $record = DB::table('competition_trials')
+        ->select(DB::raw('competition_trials.id as registration_id, 
+        competition_trials.price as registration_price, 
+        competition_trials.payment_code as payment_code, 
+        competition_trials.status as registration_status,
+        competition_trials.updated_at as date,
+        competitions.name as competition_name,
+
+        users.name as registrant,
+        users.email as email,
+        users.phone as phone'))
+
+        ->leftJoin('competitions', 'competition_trials.competition_id', '=', 'competitions.id')
+        ->leftJoin('users', 'competition_trials.manager_id', '=', 'users.id')
+        
+        ->where('competition_trials.id', $id)
+        ->first();
+
+        $players = DB::table('trials')
+        ->select(DB::raw('trials.name, 
+        trials.age, 
+        trials.gender, 
+        categories.name as category'))
+
+        ->leftJoin('categories', 'trials.category_id', '=', 'categories.id')
+        ->where('trials.registration_id', $id)
+        ->get();
+
+        $url = "competitions";
+        
+        return view('backend/competitions/trial_detail', ['record' => $record, 'players' => $players, 'url' => $url]);
+
+    }
+
+    public function teams_dashboard()
+    {
+        
+        $records = DB::table('crews')
+        ->select(DB::raw('crews.id team_id, 
+        crews.name as team_name, 
+        crews.uniform_colors as uniforms, 
+        crews.gender as gender,
+        categories.name as category,
+
+        competitions.name as competition_name,
+
+        users.name as registrant,
+        competition_crews.id as registration_id,
+        competition_crews.updated_at as date,
+        competition_crews.status as registration_status'))
+
+        ->leftJoin('categories', 'crews.category_id', '=', 'categories.id')
+        ->leftJoin('competition_crews', 'crews.id', '=', 'competition_crews.crew_id')
+        ->leftJoin('competitions', 'competition_crews.competition_id', '=', 'competitions.id')
+        ->leftJoin('users', 'competition_crews.user_id', '=', 'users.id')
+
+        ->where('competitions.trials', 0)
+        ->orderBy('crews.updated_at', 'desc')
+        ->get();
+
+        $url = "competitions";
+        
+        return view('backend/competitions/teams_dashboard', ['records' => $records, 'url' => $url]);
+
+    }
+
+    public function teams_detail($id)
+    {
+        
+        $record = DB::table('competition_crews')
+        ->select(DB::raw('competition_crews.id registration_id, 
+        crews.id as team_id, 
+        crews.name as team_name, 
+        crews.uniform_colors as uniforms, 
+        crews.gender as gender,
+        categories.name as category,
+
+        competitions.name as competition_name,
+
+        users.name as registrant, users.email, users.phone,
+        competition_crews.price as price,
+        competition_crews.payment_code as payment_code,
+        competition_crews.updated_at as date,
+        competition_crews.status as registration_status'))
+
+        ->leftJoin('crews', 'competition_crews.crew_id', '=', 'crews.id')
+        ->leftJoin('categories', 'crews.category_id', '=', 'categories.id')
+        ->leftJoin('competitions', 'competition_crews.competition_id', '=', 'competitions.id')
+        ->leftJoin('users', 'competition_crews.user_id', '=', 'users.id')
+
+        ->where('competition_crews.id', $id)
+        ->first();
+
+        $players = CrewPlayer::where('crew_id', $record->team_id)->orderBy('name', 'DESC')->get();
+
+        $url = "competitions";
+        
+        return view('backend/competitions/team_detail', ['record' => $record, 'players' => $players, 'url' => $url]);
 
     }
 

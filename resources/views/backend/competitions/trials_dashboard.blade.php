@@ -17,9 +17,6 @@
                 responsive: true,
                 dom: '<"html5buttons"B>lTfgitp',
                 "order": [[ 0, "desc" ]],
-                columnDefs: [
-                    { "targets": [5], "orderable": false }
-                ],
                 buttons: [
                     { extend: 'copy'},
                     {extend: 'csv'},
@@ -49,7 +46,7 @@
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>Competitions</h2>
+        <h2>Trials Registration</h2>
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
                 <a href="/competitions">Dashboard</a>
@@ -63,12 +60,12 @@
 <div class="wrapper wrapper-content animated fadeInRight">
 
     <div class="row">
-        <div class="col-lg-10">
+        <div class="col-lg-12">
             <div class="ibox ">
                 <div class="ibox-title">
-                    <h5>Content</h5>
+                    <h5>Trials registration</h5>
                     <div class="ibox-tools">
-                        <a href="/competitions/create" class="btn btn-primary btn-xs">New Competition</a>
+                        
                     </div>
                 </div>
                 <div class="ibox-content">
@@ -78,12 +75,15 @@
                             <thead>
                                 <tr>
                                     <th>id</th>
-                                    <th>Name</th>
-                                    <th>Type</th>
-                                    <th>Modality</th>
-                                    <th>Create</th>
-                                    <th>Form</th>
+                                    <th>Fullname</th>
+                                    <th>Age</th>
+                                    <th>Gender</th>
+                                    <th>Category</th>
+                                    <th>Competition</th>
+                                    <th>Registrant</th>
+                                    <th>Date</th>
                                     <th>Status</th>
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -91,51 +91,31 @@
                                 @foreach ($records as $record)
 
                                     @php
-
-                                    $status = 'Inactive';
-                                    $status_color = 'default';
-       
-                                    if($record->status == 1) {
-                                        $status = 'Active';
-                                        $status_color = 'info';
-                                    }
- 
-                                    $type = 'Tournament';
-                                    $slug = 'tournaments';
-
-                                    if($record->is_league == 1){
-                                        $type = 'League';
-                                        $slug = 'leagues';
-                                    }
-
-                                    $modality = ($record->trials == 0)?'Teams':'Trials';
-
+                                        $gender = ($record->player_gender == 1)?'Famele':'Male';  
+                                        $status = ($record->registration_status == 1)?'Paid':'Pending payment';  
+                                        $status_color = ($record->registration_status == 1)?'btn-info':'btn-default';  
                                     @endphp
 
                                     <tr class="gradeX">
-                                        <td><strong>{{$record->id}}</strong></td>
-                                        <td>
-                                            <a href="/competitions/{{$record->id}}/edit">{{$record->name}}</a> | 
-                                            <a href="/{{$slug}}/{{$record->slug}}" class="text-info" target='_blank'> View in web</a> 
-                                        </td>
-
-                                        <td>{{$type}}</td>
-                                        <td>{{$modality}}</td>
-
-                                        <td><strong>{{date('Y-m-d', strtotime( $record->created_at) )}}</strong></td>
-                                        
-                                        <td> 
-                                            <a href="/competition-registrations/{{$record->id}}" class="text-default"> Registration</a> /
-                                            <a href="/registration/{{$record->id}}/{{$record->slug}}" class="text-info" target='_blank'> View in web</a>
-                                        </td>
-
-                                        <td class="center"><span class="btn btn-{{$status_color}} btn-xs">{{$status}}</span></td>
+                                        <td><a href="/trial-detail/{{$record->registration_id}}">{{$record->trial_id}}</a></td>
+                                        <td>{{$record->player_name}}</td>
+                                        <td><strong>{{$record->player_age}}</strong></td>
+                                        <td><strong>{{$gender}}</strong></td>
+                                        <td><strong>{{$record->category}}</strong></td>
+                                        <td><strong>{{$record->competition_name}}</strong></td>
+                                        <td><a href="/trial-detail/{{$record->registration_id}}">{{$record->registrant}}</a></td>
+                                        <td><strong>{{date('m-d-Y', strtotime($record->date) )}}</strong></td>
+                                        <td><span class="btn btn-xs {{$status_color}}">{{$status}}</span></td>
                                     </tr>
-                                    
+
                                 @endforeach
 
                             </tbody>
                         </table>
+
+                        <div class="hr-line-dashed"></div>
+                
+                        <a href="/competitions" class="btn btn-w-m btn-default"><i class="fas fa-undo-alt"></i> Return</a>
                     </div>
 
                 </div>
