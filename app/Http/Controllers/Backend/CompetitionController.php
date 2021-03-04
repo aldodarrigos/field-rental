@@ -228,6 +228,7 @@ class CompetitionController extends Controller
         trials.name as player_name, 
         trials.age as player_age, 
         trials.gender as player_gender,
+        trials.tshirt as player_tshirt,
 
         categories.name as category,
 

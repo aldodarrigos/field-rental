@@ -51,6 +51,7 @@
                         <th class="px-4 py-2 " style="background-color:#f8f8f8">Age</th>
                         <th class="px-4 py-2 " style="background-color:#f8f8f8">Gender</th>
                         <th class="px-4 py-2 " style="background-color:#f8f8f8">Category</th>
+                        <th class="px-4 py-2 " style="background-color:#f8f8f8">Tshirt Size</th>
                       </tr>
                     </thead>
 
@@ -62,6 +63,7 @@
                             <td class="px-4 py-4">{{$player->age}}</td>
                             <td class="px-4 py-4">{{$player->gender}}</td>
                             <td class="px-4 py-4">{{$player->category}}</td>
+                            <td class="px-4 py-4">{{$player->tshirt}}</td>
                         </tr>
 
                         @endforeach

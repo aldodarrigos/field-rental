@@ -275,20 +275,20 @@ class CompetitionsController extends Controller
         for ($i=1; $i < 11; $i++) { 
             if($request->input('player_name_'.$i) != null){
 
-                if($competition_second_price > 0){
+                if($competition_second_price > 0){//if second price is more than 0
                     if($i == 1){
                         $discount_price += $competition_price;
                     }else{
                         $discount_price += $competition_second_price;
                     }
-                }else{
+                }else{//if second price is 0
 
                     $players_count++;
 
                 }
             }
         }
-
+        // Set default price
         if($competition_second_price > 0){
             $final_price = $discount_price;
         }else{
@@ -313,6 +313,7 @@ class CompetitionsController extends Controller
                 $newPlayer->age = $request->input('age_'.$i);
                 $newPlayer->gender = $request->input('gender_'.$i);
                 $newPlayer->category_id = $request->input('category_'.$i);
+                $newPlayer->tshirt = $request->input('tshirt_'.$i);
                 $newPlayer->save();
             }
 
@@ -345,6 +346,7 @@ class CompetitionsController extends Controller
         trials.name, 
         trials.age, 
         trials.gender, 
+        trials.tshirt, 
         categories.name as category'))
 
         ->leftJoin('categories', 'trials.category_id', '=', 'categories.id')

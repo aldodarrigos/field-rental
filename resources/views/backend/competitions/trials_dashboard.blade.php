@@ -79,6 +79,7 @@
                                     <th>Age</th>
                                     <th>Gender</th>
                                     <th>Category</th>
+                                    <th>Tshirt Size</th>
                                     <th>Competition</th>
                                     <th>Registrant</th>
                                     <th>Date</th>
@@ -102,6 +103,7 @@
                                         <td><strong>{{$record->player_age}}</strong></td>
                                         <td><strong>{{$gender}}</strong></td>
                                         <td><strong>{{$record->category}}</strong></td>
+                                        <td><strong>{{$record->player_tshirt}}</strong></td>
                                         <td><strong>{{$record->competition_name}}</strong></td>
                                         <td><a href="/tryouts-detail/{{$record->registration_id}}">{{$record->registrant}}</a></td>
                                         <td><strong>{{date('m-d-Y', strtotime($record->date) )}}</strong></td>
