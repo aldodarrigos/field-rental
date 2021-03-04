@@ -269,17 +269,32 @@ class CompetitionsController extends Controller
         $competition_second_price = $request->input('competition_second_price');
         $user_id = $request->input('user_id');
 
-        $final_price = 0;
+        $discount_price = 0;
+        $players_count = 0;
 
         for ($i=1; $i < 11; $i++) { 
             if($request->input('player_name_'.$i) != null){
-                if($i == 1){
-                    $final_price += $competition_price;
+
+                if($competition_second_price > 0){
+                    if($i == 1){
+                        $discount_price += $competition_price;
+                    }else{
+                        $discount_price += $competition_second_price;
+                    }
                 }else{
-                    $final_price += $competition_second_price;
+
+                    $players_count++;
+
                 }
             }
         }
+
+        if($competition_second_price > 0){
+            $final_price = $discount_price;
+        }else{
+            $final_price = $players_count * $competition_price;
+        }
+
 
         $competitionTrial = new CompetitionTrial();
         $competitionTrial->competition_id = $competition_id;

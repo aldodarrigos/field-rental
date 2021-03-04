@@ -53,6 +53,7 @@ class CompetitionController extends Controller
 
         $name = $request->input('name');
         $slug_input = Str::of($name)->slug('-');
+        $second_child_price = ($request->input('second_child_price') == null)?0:$request->input('second_child_price');
 
         $content->name = $name;
         $content->slug = $slug_input;
@@ -60,7 +61,7 @@ class CompetitionController extends Controller
         $content->content = $request->input('content');
         $content->img = $request->input('img');
         $content->price = $request->input('price');
-        $content->second_child_price = $request->input('second_child_price');
+        $content->second_child_price = $second_child_price;
         $content->is_league = $request->input('is_league');
         $content->trials = $request->input('trials');
         $content->status = $request->input('status');
@@ -112,6 +113,7 @@ class CompetitionController extends Controller
 
         $name = $request->input('name');
         $slug_input = Str::of($name)->slug('-');
+        $second_child_price = ($request->input('second_child_price') == null)?0:$request->input('second_child_price');
 
         $content->name = $name;
         $content->slug = $slug_input;
@@ -119,7 +121,7 @@ class CompetitionController extends Controller
         $content->content = $request->input('content');
         $content->img = $request->input('img');
         $content->price = $request->input('price');
-        $content->second_child_price = $request->input('second_child_price');
+        $content->second_child_price = $second_child_price;
         $content->is_league = $request->input('is_league');
         $content->trials = $request->input('trials');
         $content->status = $request->input('status');
