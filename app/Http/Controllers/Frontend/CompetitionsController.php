@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Frontend;
-use App\Models\{ Competition, Crew, Trial, CrewPlayer, CompetitionCrew, CompetitionRegistration, CompetitionTrial, Setting, CompetitionContact};
+use App\Models\{ Competition, Crew, Trial, CrewPlayer, CompetitionCrew, CompetitionRegistration, CompetitionTrial, Setting, CompetitionContact, CompetitionStatus};
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Mail\ContactMailable;
@@ -15,7 +15,7 @@ class CompetitionsController extends Controller
     public function tournaments()
     {
 
-        $posts = Competition::where([['is_league', 0], ['status', 1]])->get();
+        $posts = Competition::where([['is_league', 0], ['status', '!=', 1]])->get();
         $setting = Setting::first();
         $title = 'Tournaments';
 
@@ -23,15 +23,17 @@ class CompetitionsController extends Controller
         'sumary' => '', 
         'image' => 'https://katyisc.com/storage/files/katyisc-sports-complex-share.webp'
         ];
+
+        $competition_status = CompetitionStatus::orderBy('id', 'ASC')->get();
         
-        return view('frontend/competitions/index', ['seo' => $seo, 'posts' => $posts, 'setting' => $setting, 'title' => $title]);
+        return view('frontend/competitions/index', ['seo' => $seo, 'posts' => $posts, 'setting' => $setting, 'title' => $title, 'competition_status' => $competition_status]);
         
     }
     
     public function leagues()
     {
 
-        $posts = Competition::where([['is_league', 1], ['status', 1]])->get();
+        $posts = Competition::where([['is_league', 1], ['status', '!=', 1]])->get();
         $setting = Setting::first();
         $title = 'Leagues';
 
@@ -39,8 +41,10 @@ class CompetitionsController extends Controller
         'sumary' => '', 
         'image' => 'https://katyisc.com/storage/files/katyisc-sports-complex-share.webp'
         ];
+
+        $competition_status = CompetitionStatus::orderBy('id', 'ASC')->get();
         
-        return view('frontend/competitions/index', ['seo' => $seo, 'posts' => $posts, 'setting' => $setting, 'title' => $title]);
+        return view('frontend/competitions/index', ['seo' => $seo, 'posts' => $posts, 'setting' => $setting, 'title' => $title, 'competition_status' => $competition_status]);
         
     }
     
@@ -262,20 +266,20 @@ class CompetitionsController extends Controller
 
         $competition_id = $request->input('competition_id');
         $competition_price = $request->input('competition_price');
+        $competition_second_price = $request->input('competition_second_price');
         $user_id = $request->input('user_id');
 
+        $final_price = 0;
 
-        $gender = $request->input('gender');
-        $category_competition = $request->input('category');
-
-        $num_records = 0;
         for ($i=1; $i < 11; $i++) { 
             if($request->input('player_name_'.$i) != null){
-                $num_records++;
+                if($i == 1){
+                    $final_price += $competition_price;
+                }else{
+                    $final_price += $competition_second_price;
+                }
             }
         }
-
-        $final_price = $competition_price * $num_records;
 
         $competitionTrial = new CompetitionTrial();
         $competitionTrial->competition_id = $competition_id;

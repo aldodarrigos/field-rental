@@ -60,13 +60,26 @@
                         <section class="mb-12 grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-12">
 
                             @foreach ($competitions as $competition)
-                            <x-frontend.cards.related_content>
-                                <x-slot name='image'>{{$competition->img}}</x-slot>
-                                <x-slot name='title'>{{$competition->name}}</x-slot>
-                                <x-slot name='link'>/tournaments/{{$competition->slug}}</x-slot>
-                                <x-slot name='date'></x-slot>
-                                <x-slot name='sumary'>{{$competition->sumary}}</x-slot>
-                            </x-frontend.cards.related_content>
+
+                                @php
+                                    $status_txt = '';
+
+                                    foreach ($competition_status as $item) {
+                                        if($competition->status == $item->id){
+                                            $status_txt = $item->name;
+                                        }
+                                    }
+                                @endphp
+
+                                <x-frontend.cards.related_content>
+                                    <x-slot name='image'>{{$competition->img}}</x-slot>
+                                    <x-slot name='title'>{{$competition->name}}</x-slot>
+                                    <x-slot name='link'>/tournaments/{{$competition->slug}}</x-slot>
+                                    <x-slot name='date'></x-slot>
+                                    <x-slot name='sumary'>{{$competition->sumary}}</x-slot>
+                                    <x-slot name='status'>{{$status_txt}}</x-slot>
+                                </x-frontend.cards.related_content>
+
                             @endforeach
 
                         </section>
@@ -80,14 +93,26 @@
                         <h2 class="font-roboto text-2x uppercase font-bold text-black leading-none mb-4">Current Leagues</h2>
                 
                         <section class="mb-12 grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-12">
-        
+
                             @foreach ($competitions as $competition)
+
+                            @php
+                                $status_txt = '';
+
+                                foreach ($competition_status as $item) {
+                                    if($competition->status == $item->id){
+                                        $status_txt = $item->name;
+                                    }
+                                }
+                            @endphp
+
                             <x-frontend.cards.related_content>
                                 <x-slot name='image'>{{$competition->img}}</x-slot>
                                 <x-slot name='title'>{{$competition->name}}</x-slot>
                                 <x-slot name='link'>/leagues/{{$competition->slug}}</x-slot>
                                 <x-slot name='date'></x-slot>
                                 <x-slot name='sumary'>{{$competition->sumary}}</x-slot>
+                                <x-slot name='status'>{{$status_txt}}</x-slot>
                             </x-frontend.cards.related_content>
                             @endforeach
         

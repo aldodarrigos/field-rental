@@ -42,32 +42,18 @@
             </div>
 
             <div class="row">
-                
-                <div class="col-md-6">
-                    <div class="form-group ">
-                        <label for='group'>Status</label>
-                        <select class="form-control m-b" name="status">
-                            @if ($form == 'update')
-                                @if ($content->status == 1)
-                                    <option value='1' selected>Published</option>
-                                    <option value='0'>Unpublish</option>
-                                @else
-                                    <option value='1'>Published</option>
-                                    <option value='0' selected>Unpublish</option>
-                                @endif
-                            @else
-                                <option value='1'>Published</option>
-                                <option value='0'>Unpublish</option>
-                            @endif
-
-                        </select>
-                    </div>
-                </div>
 
                 <div class="col-md-6">
                     <div class="form-group tooltip-wrap">
                         <label>Price</label> 
                         <input type="text" name='price' class="form-control" @if(!empty($content->price)) value="{{$content->price}}" @endif>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group tooltip-wrap">
+                        <label>Second child price</label> 
+                        <input type="text" name='second_child_price' class="form-control" @if(!empty($content->second_child_price)) value="{{$content->second_child_price}}" @endif>
                     </div>
                 </div>
 
@@ -107,6 +93,29 @@
                             @else
                                 <option value='0' selected>Teams</option>
                                 <option value='1'>Tryouts</option>
+                            @endif
+
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group ">
+                        <label for='group'>Status</label>
+                        <select class="form-control m-b" name="status">
+                            @if ($form == 'update')
+
+                                @foreach ($status as $item)
+                                    @php $selected = ($item->id == $content->status)?'selected':'';  @endphp
+                                    <option value='{{$item->id}}' {{$selected}}>{{$item->name}}</option>
+                                @endforeach
+
+                            @else
+
+                                @foreach ($status as $item)
+                                    <option value='{{$item->id}}'>{{$item->name}}</option>
+                                @endforeach
+
                             @endif
 
                         </select>

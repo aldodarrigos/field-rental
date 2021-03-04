@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Frontend;
-use App\Models\{Content, Service, Setting, ServiceRegistration, Competition};
+use App\Models\{Content, Service, Setting, ServiceRegistration, Competition, CompetitionStatus};
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Mail\ContactMailable;
@@ -38,15 +38,17 @@ class ServicesController extends Controller
         $competitions = '';
 
         if($slug == 'tournaments'){
-            $competitions = Competition::where([['is_league', 0], ['status', 1]])->get();
+            $competitions = Competition::where([['is_league', 0], ['status', '!=', 1]])->get();
             $competitions_on_off = 1;
         }
         if($slug == 'leagues'){
-            $competitions = Competition::where([['is_league', 1], ['status', 1]])->get();
+            $competitions = Competition::where([['is_league', 1], ['status','!=', 1]])->get();
             $competitions_on_off = 1;
         }
 
-        return view('frontend/services/service', ['seo' => $seo, 'service' => $service, 'slug' => $slug, 'competitions' => $competitions, 'competitions_on_off' => $competitions_on_off]);
+        $competition_status = CompetitionStatus::orderBy('id', 'ASC')->get();
+
+        return view('frontend/services/service', ['seo' => $seo, 'service' => $service, 'slug' => $slug, 'competitions' => $competitions, 'competitions_on_off' => $competitions_on_off, 'competition_status' => $competition_status]);
         
     }
 

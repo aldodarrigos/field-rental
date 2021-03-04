@@ -6,8 +6,6 @@
 
     <header class="h-250p">
         <a href="{{$button_link}}"><img class="object-cover w-full h-full " src="{{$image}}" alt=""></a>
-
-        
     </header>
 
     <div class="px-6 py-5 text-center">

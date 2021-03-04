@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\{Competition, CompetitionRegistration, CrewPlayer, Category, CompetitionCategory, CompetitionContact};
+use App\Models\{Competition, CompetitionStatus, CompetitionRegistration, CrewPlayer, Category, CompetitionCategory, CompetitionContact};
 use DB;
 use Illuminate\Support\Str;
 //use GuzzleHttp\Client;
@@ -19,10 +19,10 @@ class CompetitionController extends Controller
     public function index()
     {
         $records = Competition::orderBy('updated_at', 'desc')->get();
-
+        $status = CompetitionStatus::orderBy('id', 'ASC')->get();
         $url = "competitions";
         
-        return view('backend/competitions/index', ['records' => $records, 'url' => $url]);
+        return view('backend/competitions/index', ['records' => $records, 'url' => $url, 'status' => $status]);
 
     }
 
@@ -33,12 +33,12 @@ class CompetitionController extends Controller
      */
     public function create()
     {
-
+        $status = CompetitionStatus::orderBy('id', 'ASC')->get();
         $action = route('competitions.store');
         $url = "competitions";
         $form = 'new';
 
-        return view('backend/competitions/create', ['action' => $action, 'url' => $url, 'form' => $form]);
+        return view('backend/competitions/create', ['action' => $action, 'url' => $url, 'form' => $form, 'status' => $status]);
     }
     
     /**
@@ -60,6 +60,7 @@ class CompetitionController extends Controller
         $content->content = $request->input('content');
         $content->img = $request->input('img');
         $content->price = $request->input('price');
+        $content->second_child_price = $request->input('second_child_price');
         $content->is_league = $request->input('is_league');
         $content->trials = $request->input('trials');
         $content->status = $request->input('status');
@@ -87,12 +88,14 @@ class CompetitionController extends Controller
         }
         $categories = Category::where('status', 1)->whereNotIn('id', $categories_array)->orderBy('name', 'desc')->get();
 
+        $status = CompetitionStatus::orderBy('id', 'ASC')->get();
+
         $put = True;
         $form = 'update';
 
         $url = "competitions";
 
-        return view('backend/competitions/update', ['content' => $content, 'action' => $action, 'url' => $url, 'put' => $put,  'form' => $form, 'categories' => $categories]);
+        return view('backend/competitions/update', ['content' => $content, 'action' => $action, 'url' => $url, 'put' => $put,  'form' => $form, 'categories' => $categories, 'status' => $status]);
     }
 
     /**
@@ -116,6 +119,7 @@ class CompetitionController extends Controller
         $content->content = $request->input('content');
         $content->img = $request->input('img');
         $content->price = $request->input('price');
+        $content->second_child_price = $request->input('second_child_price');
         $content->is_league = $request->input('is_league');
         $content->trials = $request->input('trials');
         $content->status = $request->input('status');

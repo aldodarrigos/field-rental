@@ -46,6 +46,7 @@
                         <input type="hidden" name="competition_id" value='{{$competition->id}}'>
                         <input type="hidden" name="user_id" value='{{Auth::user()->id}}'>
                         <input type="hidden" name="competition_price" value='{{$competition->price}}'>
+                        <input type="hidden" name="competition_second_price" value='{{$competition->second_child_price}}'>
 
                         <div class="grid grid-cols-12 gap-6 mb-2">
                             <div class="col-span-12 md:col-span-6">

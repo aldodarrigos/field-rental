@@ -92,20 +92,22 @@
 
                                     @php
 
-                                    $status = 'Inactive';
+                                    $statustxt = 'Inactive';
                                     $status_color = 'default';
-       
-                                    if($record->status == 1) {
-                                        $status = 'Active';
-                                        $status_color = 'info';
-                                    }
- 
+
                                     $type = 'Tournament';
                                     $slug = 'tournaments';
 
                                     if($record->is_league == 1){
                                         $type = 'League';
                                         $slug = 'leagues';
+                                    }
+
+                                    foreach ($status as $item) {
+                                        if($item->id == $record->status){
+                                            $statustxt = $item->name;
+                                            $status_color = ($item->id != 1)?'info':'default';
+                                        }
                                     }
 
                                     $modality = ($record->trials == 0)?'Teams':'Tryouts';
@@ -129,7 +131,7 @@
                                             <a href="/registration/{{$record->id}}/{{$record->slug}}" class="text-info" target='_blank'> View in web</a>
                                         </td>
 
-                                        <td class="center"><span class="btn btn-{{$status_color}} btn-xs">{{$status}}</span></td>
+                                        <td class="center"><span class="btn btn-{{$status_color}} btn-xs">{{$statustxt}}</span></td>
                                     </tr>
                                     
                                 @endforeach

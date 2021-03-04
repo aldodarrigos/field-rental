@@ -19,7 +19,17 @@
 
             @foreach ($posts as $post)
                 @php
+
                     $slug = ($post->is_league == 0)?'tournaments':'leagues';
+
+                    $status_txt = '';
+
+                    foreach ($competition_status as $item) {
+                        if($item->id == $post->status){
+                            $status_txt = $item->name;
+                        }
+                    }
+
                 @endphp
                 <x-frontend.cards.post_flat>
                     <x-slot name='image'>{{$post->img}}</x-slot>
@@ -28,7 +38,7 @@
                     <x-slot name='date'></x-slot>
                     <x-slot name='sumary'>{{$post->sumary}}</x-slot>
                     <x-slot name='bg'>white</x-slot>
-                    <x-slot name='tag'>{{$slug}}</x-slot>
+                    <x-slot name='tag'>{{$status_txt}}</x-slot>
                     <x-slot name='tag_link'>/{{$slug}}</x-slot>
                 </x-frontend.cards.post_flat>
             @endforeach
