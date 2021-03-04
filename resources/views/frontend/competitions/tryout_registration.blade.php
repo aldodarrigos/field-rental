@@ -40,7 +40,7 @@
                 @endif
 
                <div>
-                    <form action="/registration/trials-submit" method="POST">
+                    <form action="/registration/tryout-submit" method="POST">
 
                         @csrf
                         <input type="hidden" name="competition_id" value='{{$competition->id}}'>

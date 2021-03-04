@@ -236,7 +236,7 @@ class CompetitionsController extends Controller
 
 
 
-    public function trials_registration($id = null)
+    public function tryout_registration($id = null)
     {
 
         $competition = Competition::where('id', $id)->first();
@@ -256,12 +256,12 @@ class CompetitionsController extends Controller
         'image' => $competition->img
         ];
 
-        return view('frontend/competitions/trials_registration', ['seo' => $seo, 'competition' => $competition, 'setting' => $setting, 'categories' => $categories]);
+        return view('frontend/competitions/tryout_registration', ['seo' => $seo, 'competition' => $competition, 'setting' => $setting, 'categories' => $categories]);
         
     }
 
             
-    public function trials_submit(Request $request)
+    public function tryout_submit(Request $request)
     {
 
         $competition_id = $request->input('competition_id');
@@ -319,12 +319,12 @@ class CompetitionsController extends Controller
 
         }
 
-        return redirect('trials-confirmation/'.$competitionTrial->id)->with('success', 'Registration success!');
+        return redirect('tryout-confirmation/'.$competitionTrial->id)->with('success', 'Registration success!');
         
     }
 
             
-    public function trials_confirmation($id = null)
+    public function tryout_confirmation($id = null)
     {
 
         $registration = DB::table('competition_trials')
@@ -360,7 +360,7 @@ class CompetitionsController extends Controller
         'image' => $competition->img
         ];
         
-        return view('frontend/competitions/trials_confirmation', ['registration' => $registration, 'trials' => $trials, 'competition' => $competition, 'seo' => $seo]);
+        return view('frontend/competitions/tryout_confirmation', ['registration' => $registration, 'trials' => $trials, 'competition' => $competition, 'seo' => $seo]);
         
     }
 

@@ -77,7 +77,7 @@
 
                     <div class="text-center mt-6">
 
-                        <form action="/trials-payment" method="POST" id='competition-payment-form' class="inline-block">
+                        <form action="/tryout-payment" method="POST" id='competition-payment-form' class="inline-block">
 
                             {{ csrf_field() }}
                             <input type="hidden" name="registration_price" id='registration_price' value="{{$registration->registration_price}}">

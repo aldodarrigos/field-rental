@@ -4,6 +4,9 @@
 
     </div>
     <ul class="nav navbar-top-links navbar-right">
+        <li class="">
+            {!!'<strong>Texas time:</strong> '.date('G:i:s')!!}
+        </li>
         <li class="dropdown">
             <livewire:backend.competitions-messages></livewire:backend.competitions-messages>
         </li>

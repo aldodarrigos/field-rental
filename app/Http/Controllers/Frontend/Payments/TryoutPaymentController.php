@@ -21,7 +21,7 @@ use App\Mail\BookingMailable;
 use Illuminate\Support\Facades\Mail;
 use DB;
 
-class TrialPaymentController extends Controller
+class TryoutPaymentController extends Controller
 {
 
     private $apiContext;
@@ -72,8 +72,8 @@ class TrialPaymentController extends Controller
         ));
         $transaction->setCustom($registration_data);
 
-        $callbackUrl = url('trials-payment-status');
-        $failedUrl = url('trials-payment-success');
+        $callbackUrl = url('tryout-payment-status');
+        $failedUrl = url('tryout-payment-success');
         $redirectUrls = new RedirectUrls();
         $redirectUrls->setReturnUrl($callbackUrl)
             ->setCancelUrl($failedUrl);
@@ -149,7 +149,7 @@ class TrialPaymentController extends Controller
             ->first();
 
 
-            return redirect('trials-payment-success')->with(['registration' => $registration]);
+            return redirect('tryout-payment-success')->with(['registration' => $registration]);
         }
         
     }
@@ -168,7 +168,7 @@ class TrialPaymentController extends Controller
         'image' => 'https://katyisc.com/storage/files/katyisc-sports-complex-share.webp'
         ];
         
-        return view('frontend/success/trials', ['seo' => $seo]);
+        return view('frontend/success/tryout', ['seo' => $seo]);
     }
 
     public function successbooking($contact = null, $sale_id = null)

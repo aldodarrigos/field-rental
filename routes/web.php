@@ -11,7 +11,7 @@ use App\Http\Controllers\Frontend\ShopController;
 use App\Http\Controllers\Frontend\Payments\ProductsController;
 use App\Http\Controllers\Frontend\Payments\ServicePaymentController;
 use App\Http\Controllers\Frontend\Payments\CompetitionPaymentController;
-use App\Http\Controllers\Frontend\Payments\TrialPaymentController;
+use App\Http\Controllers\Frontend\Payments\TryoutPaymentController;
 
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\ReservationController;
@@ -84,7 +84,7 @@ Route::get('tournaments', [CompetitionsController::class, 'tournaments'])->name(
 Route::get('leagues', [CompetitionsController::class, 'leagues'])->name('frontend.leagues');
 Route::get('tournaments/{slug?}', [CompetitionsController::class, 'competition'])->name('frontend.tournament');
 Route::get('leagues/{slug?}', [CompetitionsController::class, 'competition'])->name('frontend.league');
-Route::get('registration/{id?}/{slug?}', [CompetitionsController::class, 'registration'])->name('frontend.competitions.registration');
+//Route::get('registration/{id?}/{slug?}', [CompetitionsController::class, 'registration'])->name('frontend.competitions.registration');
 Route::post('registration/submit', [CompetitionsController::class, 'submit'])->name('competitions.registration.submit');
 Route::post('competition/contact', [CompetitionsController::class, 'contact'])->name('competitions.contact');
 Route::get('team-registration/{id?}/{slug?}', [CompetitionsController::class, 'team_registration']);
@@ -96,14 +96,14 @@ Route::get('competition-payment-status', [CompetitionPaymentController::class, '
 Route::get('competition-payment-success', [CompetitionPaymentController::class, 'success'])->name('competition.payment.success');
 Route::get('competition-payment-fail', [CompetitionPaymentController::class, 'fail'])->name('competition.payment.fail');
 
-Route::get('trials-registration/{id?}/{slug?}', [CompetitionsController::class, 'trials_registration']);
-Route::post('registration/trials-submit', [CompetitionsController::class, 'trials_submit']);
-Route::get('trials-confirmation/{id?}', [CompetitionsController::class, 'trials_confirmation']);
+Route::get('tryout-registration/{id?}/{slug?}', [CompetitionsController::class, 'tryout_registration']);
+Route::post('registration/tryout-submit', [CompetitionsController::class, 'tryout_submit']);
+Route::get('tryout-confirmation/{id?}', [CompetitionsController::class, 'tryout_confirmation']);
 
-Route::post('trials-payment', [TrialPaymentController::class, 'payment']);
-Route::get('trials-payment-status', [TrialPaymentController::class, 'status']);
-Route::get('trials-payment-success', [TrialPaymentController::class, 'success']);
-Route::get('trials-payment-fail', [TrialPaymentController::class, 'fail']);
+Route::post('tryout-payment', [TryoutPaymentController::class, 'payment']);
+Route::get('tryout-payment-status', [TryoutPaymentController::class, 'status']);
+Route::get('tryout-payment-success', [TryoutPaymentController::class, 'success']);
+Route::get('tryout-payment-fail', [TryoutPaymentController::class, 'fail']);
 
 //FIELDS RENTAL
 Route::get('fieldsrental', [PaymentController::class, 'fieldsrental'])->name('frontend.fieldsrental');
