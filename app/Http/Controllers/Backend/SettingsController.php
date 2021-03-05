@@ -150,4 +150,31 @@ class SettingsController extends Controller
         return view('backend/settings/waiver', ['settings' => $settings, 'action' => $action, 'url' => $url, 'put' => $put]);
     }
 
+    public function field_rules()
+    {
+
+        $action = route('settings.update', 1);
+        $settings = Setting::find(1);
+        $put = True;
+        $form = 'update';
+        $url = "settings";
+
+        return view('backend/settings/field_rules', ['settings' => $settings, 'action' => $action, 'url' => $url, 'put' => $put]);
+    }
+
+    
+    public function update_field_rules(Request $request)
+    {
+
+        $setting = Setting::find(1);
+
+        $setting->field_rules = $request->input('field_rules');
+
+        $setting->save();
+
+        return redirect('field-rules')->with('success', 'Successful update!');
+
+    }
+
+
 }

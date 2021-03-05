@@ -105,6 +105,7 @@
                     <li><a href="/menu">Menu</a></li>
                     <li><a href="/slides">SlideShow</a></li>
                     <li><a href="/waiver">Waiver</a></li>
+                    <li><a href="/field-rules">Field Rules</a></li>
                 </ul>
             </li>
 

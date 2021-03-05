@@ -193,6 +193,10 @@
 
                     </form>
                </div>
+
+               <div class="mt-4 text-sm">
+                {!! $setting->field_rules !!}
+               </div>
             </div>
 
         </main>

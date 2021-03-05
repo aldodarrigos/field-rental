@@ -176,6 +176,8 @@ Route::middleware(['admin'])->group(function () {
     Route::post('slides-sort', [SlidesController::class, 'sort'])->name('backend.slides.sort');
     Route::get('waiver', [SettingsController::class, 'waiver']);
     Route::put('update-waiver', [SettingsController::class, 'update_waiver']);
+    Route::get('field-rules', [SettingsController::class, 'field_rules']);
+    Route::put('update-field-rules', [SettingsController::class, 'update_field_rules']);
 
     //USERS
     Route::resource('users', UsersController::class);
