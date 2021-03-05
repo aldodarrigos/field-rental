@@ -237,7 +237,7 @@
 
                         <div class="hr-line-dashed"></div>
     
-                        <button type="submit" id='buttonrental' class="btn btn-w-m btn-info">CONFIRM <i class="fas fa-download"></i></button>
+                        <button type="submit" id='buttonrental' class="btn btn-w-m btn-info"><i class="fas fa-check"></i> CONFIRM</button>
                         
                     </div>
                 </div>
