@@ -8,6 +8,12 @@
             {!!'<strong>Texas time:</strong> '.date('G:i:s')!!}
         </li>
         <li class="dropdown">
+            <livewire:backend.registration-tryout></livewire:backend.registration-tryout>
+        </li>
+        <li class="dropdown">
+            <livewire:backend.registration-team></livewire:backend.registration-team>
+        </li>
+        <li class="dropdown">
             <livewire:backend.competitions-messages></livewire:backend.competitions-messages>
         </li>
         <li class="dropdown">
