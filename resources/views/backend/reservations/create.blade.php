@@ -219,6 +219,17 @@
                             <span class='{{$hoursarray[$i]['class']}} btn btn-{{$color}} btn-sm mb-2 {{$decoration}} {{$pointer}}' id='{{$hoursarray[$i]['class']}}' data-hour='{{$hoursarray[$i]['hour']}}' data-price='{{$hoursarray[$i]['price']}}'>{{$hoursarray[$i]['hour']}}</span>
                         @endfor
 
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group ">
+                                    <label>Modify Price</label>
+                                    <input type="text" name='alt_price' class="form-control" value="0.00">
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
                         <div class="form-group ">
                             <label>Note</label>
                             <input type="text" name='note' class="form-control" value="">

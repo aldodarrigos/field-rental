@@ -16,7 +16,7 @@
                 pageLength: 25,
                 responsive: true,
                 dom: '<"html5buttons"B>lTfgitp',
-                "order": [[ 5, "desc" ]],
+                "order": [[ 0, "desc" ]],
                 buttons: [
                     { extend: 'copy'},
                     {extend: 'csv'},
@@ -75,12 +75,13 @@
             <table class="table table-striped table-bordered table-hover dataTables-example" >
             <thead>
             <tr>
-                <th>Status</th>
+                <th>ID</th>
                 <th>Field</th>
                 <th>User</th>
                 <th>Email</th>
                 <th>Price</th>
                 <th>Booking</th>
+                <th>Code</th>
                 <th>Note</th>
             </tr>
             </thead>
@@ -100,13 +101,15 @@
                     @endphp
 
                     <tr class="gradeX">
-                        <td><span class="text-{{$status_color}}"><i class="fas fa-circle"></i></span> {{$reservation->code}}</td>
+                        <td>{{$reservation->id}}</td>
+                        
                         <td>{{$reservation->field_name}}</td>
                         <td><strong>{{$reservation->user_name}}</strong></td>
                         <td>{{$reservation->user_email}}</td>
                         <td>${{$reservation->price}}</td>
                         <td class="center text-{{$status_color}}">{!!$reservation->res_date.' <strong>'.$reservation->hour.'</strong>'!!}</td>
-                        <td class="center"><a href="/backend-booking/{{$reservation->id}}" class="btn btn-success btn-xs">Details</a></td>
+                        <td>{{$reservation->code}}</td>
+                        <td class="center"><a href="/backend-booking/{{$reservation->id}}/edit" class="btn btn-success btn-xs">Details</a></td>
                     </tr>
 
                 @endforeach

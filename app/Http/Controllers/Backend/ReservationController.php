@@ -129,16 +129,21 @@ class ReservationController extends Controller
     {   
         $booking = new Reservation();
         $short_name =$request->input('fieldShortName');
-        $date =$request->input('dateSelected');
-        $hour =$request->input('hourSelected');
+        $date = $request->input('dateSelected');
+        $hour = $request->input('hourSelected');
         $code = str_replace( array( '-', ':' ), '', $short_name.$date.$hour); 
+
+        $price = $request->input('priceSelected');
+        $alt_price = $request->input('alt_price');
+
+        $final_price = ($alt_price > 0.00)?$alt_price:$price;
 
         $booking->code = $code;
         $booking->user_id = $request->input('userIdLogin');
         $booking->field_id = $request->input('fieldIdSelected');
         $booking->res_date = $date;
         $booking->hour = $hour;
-        $booking->price = $request->input('priceSelected');
+        $booking->price = $final_price;
         $booking->note = $request->input('note');
         $booking->save();
 
@@ -155,12 +160,35 @@ class ReservationController extends Controller
     {
         
         $action = route('backend-booking.update', $id);
-        $post = Post::find($id);
-        $tags = Tag::where('group_id', 1)->get();
+        $reservation = DB::table('reservations')
+        ->select(DB::raw('reservations.id, 
+        reservations.code, 
+        reservations.code, 
+        
+        users.name as user_name, users.email as user_email, users.phone as user_phone,
+        
+        fields.id as field_id, 
+        fields.name as field_name, 
+        
+        reservations.hour as hour, 
+        reservations.res_date as res_date, 
+        reservations.price as price, 
+        reservations.conf_code as res_code, 
+        reservations.created_at as created_at, 
+        reservations.updated_at as updated_at, 
+        reservations.note'))
 
-        $url = "posts";
+        ->leftJoin('users', 'reservations.user_id', '=', 'users.id')
+        ->leftJoin('fields', 'reservations.field_id', '=', 'fields.id')
+        ->where('reservations.id', $id)
+        ->orderBy('reservations.created_at', 'desc')
+        ->first();
 
-        return view('backend/reservations/update')->with(compact('post', 'tags', 'action', 'url'));
+        $fields = Field::where('status', 1)->orderBy('name', 'ASC')->get();
+
+        $url = "reservations";
+
+        return view('backend/reservations/update')->with(compact('reservation', 'action', 'url', 'fields'));
     }
 
     /**
@@ -173,22 +201,15 @@ class ReservationController extends Controller
     public function update(Request $request, $id)
     {
 
-        $post = Post::find($id);
+        $booking = Reservation::find($id);
+        $booking->field_id = $request->input('field_id');
+        $booking->hour = $request->input('hour');
+        $booking->price = $request->input('price');
+        $booking->res_date = $request->input('date');
+        $booking->note = $request->input('note');
+        $booking->save();
 
-        $post->title = $request->input('title');
-        $post->slug = $request->input('slug');
-        $post->sumary = $request->input('sumary');
-        $post->content = $request->input('content');
-        $post->img = $request->input('img');
-        $post->img_med = $request->input('img_med');
-        $post->img_tiny = $request->input('img_tiny');
-        $post->youtube = $request->input('youtube');
-        $post->tag_id = $request->input('tag_id');
-        $post->pub_date = $request->input('pub_date');
-        $post->status = $request->input('status');
-        $post->save();
-
-        return redirect('backend-posts/'.$id.'/edit')->with('success', 'Successful update!');
+        return redirect('backend-booking/'.$id.'/edit')->with('success', 'Successful update!');
 
     }
 
