@@ -34,21 +34,32 @@
                             {!!$competition->content!!}
                     </div>
                     <br>
-                    @if ($competition->status == '2')
-                        
-                        @if ($competition->trials == 0)
 
-                            <div class="text-center">
-                                <a href='/team-registration/{{$competition->id}}/{{$competition->slug}}' class="font-roboto text-gray font-bold rounded py-3 px-8 uppercase text-lg hover:bg-deepblue ease-in-out duration-300 bg-red "><i class="fas fa-users"></i> Register your team</a>
-                            </div>
+                    @if (isset(Auth::user()->name))
 
-                        @else
-
-                            <div class="text-center">
-                                <a href='/tryout-registration/{{$competition->id}}/{{$competition->slug}}' class="font-roboto text-gray font-bold rounded py-3 px-8 uppercase text-lg hover:bg-deepblue ease-in-out duration-300 bg-red "><i class="fas fa-users"></i> Register for Tryouts</a>
-                            </div>
+                        @if ($competition->status == '2')
                             
+                            @if ($competition->trials == 0)
+
+                                <div class="text-center">
+                                    <a href='/team-registration/{{$competition->id}}/{{$competition->slug}}' class="font-roboto text-gray font-bold rounded py-3 px-8 uppercase text-lg hover:bg-deepblue ease-in-out duration-300 bg-red "><i class="fas fa-users"></i> Register your team</a>
+                                </div>
+
+                            @else
+
+                                <div class="text-center">
+                                    <a href='/tryout-registration/{{$competition->id}}/{{$competition->slug}}' class="font-roboto text-gray font-bold rounded py-3 px-8 uppercase text-lg hover:bg-deepblue ease-in-out duration-300 bg-red "><i class="fas fa-users"></i> Register for Tryouts</a>
+                                </div>
+                                
+                            @endif
+
                         @endif
+
+                    @else
+
+                        <div class="text-center mb-6">
+                            Do you want to register? <a class="font-bold text-red" href="/signin">login</a> to your account or <a class="font-bold text-red" href="/signup">create</a> a new account
+                        </div>
 
                     @endif
 
