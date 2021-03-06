@@ -27,22 +27,32 @@
         </div>
 
         @if (isset(Auth::user()->name))
-            
-            <div class="">
-                <x-frontend.buttons.form>
-                    <x-slot name='bg'>graytext</x-slot>
-                    <x-slot name='size'>{{$button_size}}</x-slot>
-                    <x-slot name='text'>{{$button_text}}</x-slot>
-                    <x-slot name='class'></x-slot>
-                    <x-slot name='id'>buttonrental</x-slot>
-                    <x-slot name='on_off'></x-slot>
-                </x-frontend.buttons.form>
-                
-            </div>
 
             {{$slot}}
 
-            <img class="w-200p" src="https://katyisc.com/storage/files/paypal-button.png" alt="">
+            <br>
+
+            <div class="text-center font-bold flex items-center justify-center gap-2">
+                <input type="checkbox" name="" id="agree" class="h-5 w-5 text-red"> <span class="">I agree to Katy ISC terms and conditions</span>
+            </div>
+
+            <br>
+            
+            <div class="">
+
+                
+                <div class="text-center">
+                    <button type="submit" id='save' class=" bg-graytext font-roboto text-gray font-bold rounded py-3 px-8 uppercase text-lg hover:bg-deepblue ease-in-out duration-300" disabled>Confirm and Pay <i class="far fa-credit-card"></i>
+                    </button>
+                </div>
+
+                <img class="w-200p ml-auto mr-auto" src="https://katyisc.com/storage/files/paypal-button.png" alt="">
+                
+            </div>
+
+            
+
+            
 
         @else
 

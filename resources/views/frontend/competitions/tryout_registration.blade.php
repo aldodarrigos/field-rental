@@ -5,6 +5,21 @@
 @section('assets_down')
 
     @parent
+
+    <script>
+        $("#agree").click(function(){
+            if ($('#agree').is(':checked')){
+                $('#save').prop('disabled', false);
+                $('#save').removeClass("bg-graytext");
+                $('#save').addClass("bg-red");
+            }else{
+                $('#save').prop('disabled', true);
+                $('#save').removeClass("bg-red");
+                $('#save').addClass("bg-graytext");
+            }
+
+        });
+    </script>
     
 
 @endsection
@@ -187,12 +202,30 @@
 
                         @endfor
 
+                        <br>
 
-                        <button type="submit" class="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-red shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none rounded-md">SAVE
-                        </button>
+                        <div class="w-full p-3 mt-2 text-black bg-white appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner border border-bluetext rounded-md h-300p overflow-y-auto">
+                            {!!$setting->waiver!!}
+                        </div>
+
+                        <br>
+
+
+
+                        <div class="text-center font-bold flex items-center justify-center gap-2">
+                            <input type="checkbox" name="" id="agree" class="h-5 w-5 text-red"> <span class="">I agree to Katy ISC terms and conditions</span>
+                        </div>
+                        
+
+                        <div class="text-center">
+                            <button type="submit" id='save' class="bg-graytext px-8 py-3 mt-6 font-medium tracking-widest text-white uppercase  shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none rounded-md" disabled>Confirm registration
+                            </button>
+                        </div>
 
                     </form>
                </div>
+
+               <br>
 
                <div class="mt-4 text-sm">
                 {!! $setting->field_rules !!}

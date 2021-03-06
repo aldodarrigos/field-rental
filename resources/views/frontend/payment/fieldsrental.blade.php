@@ -20,9 +20,23 @@
                 });
             });
 
+            $("#agree").click(function(){
+                if ($('#agree').is(':checked')){
+                    if($('#hourSelected').val() != '') {
+                        $('#save').prop('disabled', false);
+                        $('#save').removeClass("bg-graytext");
+                        $('#save').addClass("bg-red");
+                    }
+                }else{
+                    $('#save').prop('disabled', true);
+                    $('#save').removeClass("bg-red");
+                    $('#save').addClass("bg-graytext");
+                }
+            });
+
         });
     </script>
-    
+        
 @endsection
 
 <x-frontend.pieces.section_header title='Booking' bread='Book Now'></x-frontend.pieces.section_header>
@@ -277,16 +291,14 @@
                                 $('#priceSelected').val(price);
                                 $('#buttonrental').toggleClass("bg-graytext");
                                 $('#buttonrental').toggleClass("bg-red");
-    
-                                if($('#hourSelected').val() != '') {
-                                    $('#buttonrental').prop('disabled', false);
-                                    $('#buttonrental').removeClass("bg-graytext");
-                                    $('#buttonrental').addClass("bg-red");
-                                }else{
-                                    $('#buttonrental').prop('disabled', true);
-                                    $('#buttonrental').addClass("bg-graytext");
-                                    $('#buttonrental').removeClass("bg-red");
+
+                                if ($('#agree').is(':checked')){
+                                    $('#save').prop('disabled', false);
+                                    $('#save').removeClass("bg-graytext");
+                                    $('#save').addClass("bg-red");
                                 }
+    
+
                             });
 
                             $("#clean").click(function(){
@@ -301,16 +313,12 @@
                                 $('#buttonrental').toggleClass("bg-graytext");
                                 $('#buttonrental').toggleClass("bg-red");
     
-                                if($('#hourSelected').val() != '') {
-                                    $('#buttonrental').prop('disabled', false);
-                                    $('#buttonrental').removeClass("bg-graytext");
-                                    $('#buttonrental').addClass("bg-red");
-                                }else{
-                                    $('#buttonrental').prop('disabled', true);
-                                    $('#buttonrental').addClass("bg-graytext");
-                                    $('#buttonrental').removeClass("bg-red");
-                                }
+                                $('#save').prop('disabled', true);
+                                $('#save').removeClass("bg-red");
+                                $('#save').addClass("bg-graytext");
+                                $( "#agree" ).prop( "checked", false );
                             });
+
                         </script>
     
     
@@ -322,9 +330,9 @@
                     <x-slot name='button_size'>big</x-slot>
 
                     
-                <div class="hidden w-full p-3 mt-2 text-black bg-white appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner border border-bluetext rounded-md h-400p overflow-y-auto">
-                    {!!$setting->waiver!!}
-                </div>
+                    <div class="w-full p-3 mt-2 text-black bg-white appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner border border-bluetext rounded-md h-300p overflow-y-auto">
+                        {!!$setting->waiver!!}
+                    </div>
                 
                 </x-frontend.cards.field_booking>
                     
