@@ -17,7 +17,7 @@ use PayPal\Rest\ApiContext;
 
 use App\Models\{CompetitionTrial, User, Service};
 
-use App\Mail\BookingMailable;
+use App\Mail\TryoutsMailable;
 use Illuminate\Support\Facades\Mail;
 use DB;
 
@@ -148,6 +148,7 @@ class TryoutPaymentController extends Controller
             ->where('competition_trials.id', $custom->registration_id)
             ->first();
 
+            $success = $this->successbooking($registration->user_email, $registration->registration_id);
 
             return redirect('tryout-payment-success')->with(['registration' => $registration]);
         }
@@ -174,7 +175,7 @@ class TryoutPaymentController extends Controller
     public function successbooking($contact = null, $sale_id = null)
     {
 
-        $correo = new BookingMailable($contact, $sale_id);
+        $correo = new TryoutsMailable($contact, $sale_id);
         Mail::to($contact)->send($correo);
         
     }

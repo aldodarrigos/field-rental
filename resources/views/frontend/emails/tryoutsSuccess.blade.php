@@ -244,7 +244,7 @@ table{
                 </tr>
                 <tr>
                     <td valign="middle" class="hero bg_white" style="padding: 3em 0 0 0;">
-                        <img src="https://xava.pro/storage/offtopic/kisc-logo-200.webp" alt="" style="width: 200px; height: auto; margin: auto; display: block;">
+                        <img src="https://katyisc.com/storage/files/kisc-logo-200.webp" alt="" style="width: 200px; height: auto; margin: auto; display: block;">
                     </td>
                 </tr>
                 <tr>
@@ -253,19 +253,20 @@ table{
                             <tr>
                                 <td>
                                     <div class="text" style="padding: 0 2.5em; text-align: center;">
-                                        @php
-                                            $field_type = ($field->tag_id == 1)?'5 vs 5 players (6 vs 6)':'7 vs 7 players (9 vs 9)';
-                                        @endphp
-                                        <h1>Successful Booking</h1>
-                                        <p><Strong>Email:</Strong> {{$contact}}</p>
-                                        <p><Strong>Booking Code:</Strong> {{$reservation->code}}</p>
-                                        <p><Strong>Field:</Strong> {{$field->number.'. '.$field->name}}</p>
-                                        <p><Strong>Field type:</Strong> {{$field_type}}</p>
-                                        <p><Strong>Date:</Strong> {{$reservation->res_date}}</p>
-                                        <p><Strong>Hour:</Strong> {{$reservation->hour}}</p>
-                                        <p><Strong>Price:</Strong> ${{$reservation->price}}</p>
-                                        <p><Strong>Paypal Transaction code:</Strong> {{$reservation->conf_code}}</p>
-                                        <p><a href="{{url('/profile/dashboard')}}" class="btn btn-primary">Check your profile</a></p>
+                                        <h1>Successful Reservation</h1>
+                                        <p><Strong>User:</Strong> {{$reservation->user_name}}</p>
+                                        <p><Strong>Email:</Strong> {{$reservation->user_email}}</p>
+                                        <p><Strong>Phone:</Strong> {{$reservation->user_phone}}</p>
+                                        
+                                        <p><Strong>Price:</Strong> ${{$reservation->registration_price}}</p>
+                                        <p><Strong>Paypal Transaction code:</Strong> {{$reservation->payment_code}}</p>
+
+                                        <h2>Players</h2>
+                                        @foreach ($players as $player)
+                                            @php $gender = ($player->gender == 1)?'Female':'Male'; @endphp
+                                            <p><Strong>{{$player->name}} /</Strong> Age:{{$player->age}} / Gender:{{$gender}} / Category: {{$player->category}}</p>
+                                        @endforeach
+                                        
                                     </div>
                                 </td>
                             </tr>

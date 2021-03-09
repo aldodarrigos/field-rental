@@ -148,6 +148,7 @@ Route::middleware(['admin'])->group(function () {
     Route::resource('backend-booking', ReservationController::class);
     Route::get('calendar', [ReservationController::class, 'calendar'])->name('backend.calendar');
     Route::get('get-reservations', [ReservationController::class, 'get_reservations'])->name('backend.get-reservations');
+    Route::get('delete-reservation/{id?}', [ReservationController::class, 'destroy']);
 
     //CONTENT
     Route::resource('content', ContentController::class);
