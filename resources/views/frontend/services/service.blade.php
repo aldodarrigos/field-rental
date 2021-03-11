@@ -52,14 +52,52 @@
 
             <br>
 
-            <div class="p-6">
+            
                 @if ($slug == 'tournaments')
                     @if (count($competitions)>0)
-                        <h2 class="font-roboto text-2x uppercase font-bold text-black leading-none mb-4">Current Tournaments</h2>
+                        <div class="p-6">
+                            <h2 class="font-roboto text-2x uppercase font-bold text-black leading-none mb-4">Current Tournaments</h2>
                     
-                        <section class="mb-12 grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-12">
+                            <section class="mb-12 grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-12">
 
-                            @foreach ($competitions as $competition)
+                                @foreach ($competitions as $competition)
+
+                                    @php
+                                        $status_txt = '';
+
+                                        foreach ($competition_status as $item) {
+                                            if($competition->status == $item->id){
+                                                $status_txt = $item->name;
+                                            }
+                                        }
+                                    @endphp
+
+                                    <x-frontend.cards.related_content>
+                                        <x-slot name='image'>{{$competition->img}}</x-slot>
+                                        <x-slot name='title'>{{$competition->name}}</x-slot>
+                                        <x-slot name='link'>/tournaments/{{$competition->slug}}</x-slot>
+                                        <x-slot name='date'></x-slot>
+                                        <x-slot name='sumary'>{{$competition->sumary}}</x-slot>
+                                        <x-slot name='status'>{{$status_txt}}</x-slot>
+                                    </x-frontend.cards.related_content>
+
+                                @endforeach
+
+                            </section>
+                        </div>
+                    @endif
+
+
+                @endif
+
+                @if ($slug == 'leagues')
+                    @if (count($competitions)>0)
+                        <div class="p-6">
+                            <h2 class="font-roboto text-2x uppercase font-bold text-black leading-none mb-4">Current Leagues</h2>
+                
+                            <section class="mb-12 grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-12">
+
+                                @foreach ($competitions as $competition)
 
                                 @php
                                     $status_txt = '';
@@ -74,54 +112,113 @@
                                 <x-frontend.cards.related_content>
                                     <x-slot name='image'>{{$competition->img}}</x-slot>
                                     <x-slot name='title'>{{$competition->name}}</x-slot>
-                                    <x-slot name='link'>/tournaments/{{$competition->slug}}</x-slot>
+                                    <x-slot name='link'>/leagues/{{$competition->slug}}</x-slot>
                                     <x-slot name='date'></x-slot>
                                     <x-slot name='sumary'>{{$competition->sumary}}</x-slot>
                                     <x-slot name='status'>{{$status_txt}}</x-slot>
                                 </x-frontend.cards.related_content>
-
-                            @endforeach
-
-                        </section>
-                    @endif
-
-
-                @endif
-
-                @if ($slug == 'leagues')
-                    @if (count($competitions)>0)
-                        <h2 class="font-roboto text-2x uppercase font-bold text-black leading-none mb-4">Current Leagues</h2>
-                
-                        <section class="mb-12 grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-12">
-
-                            @foreach ($competitions as $competition)
-
-                            @php
-                                $status_txt = '';
-
-                                foreach ($competition_status as $item) {
-                                    if($competition->status == $item->id){
-                                        $status_txt = $item->name;
-                                    }
-                                }
-                            @endphp
-
-                            <x-frontend.cards.related_content>
-                                <x-slot name='image'>{{$competition->img}}</x-slot>
-                                <x-slot name='title'>{{$competition->name}}</x-slot>
-                                <x-slot name='link'>/leagues/{{$competition->slug}}</x-slot>
-                                <x-slot name='date'></x-slot>
-                                <x-slot name='sumary'>{{$competition->sumary}}</x-slot>
-                                <x-slot name='status'>{{$status_txt}}</x-slot>
-                            </x-frontend.cards.related_content>
-                            @endforeach
-        
-                        </section>
+                                @endforeach
+            
+                            </section>
+                        </div>
                     @endif
 
 
             @endif
-            </div>
+
+
+            <section class="p-4">
+                <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+                @if ($message = Session::get('success'))
+                <script>
+                    Swal.fire({
+                    title: 'Message sent!',
+                    text: 'Thank you for you message. We will get in touch with you shortly.',
+                    icon: 'success',
+                    confirmButtonText: 'OK',
+                    showConfirmButton: false,
+                    })
+                </script>
+                @endif
+
+
+                <h2 class="font-roboto text-2x uppercase font-bold text-black leading-none mb-3">Do you have any questions about this service?</h2>
+
+                <form class="mt-6" action="{{route('service.contact')}}" method="POST">
+
+                    @csrf
+
+                    <div class="flex justify-between gap-3 flex-col md:flex-row mb-2 md:mb-0">
+
+                    <input type="hidden" name="service_id" value='{{$service->id}}'>
+
+                    <span class="w-2/2 md:w-1/2">
+                        <x-frontend.forms.input_text>
+                            <x-slot name='type'>text</x-slot>
+                            <x-slot name='label'>Name</x-slot>
+                            <x-slot name='id'>f_name</x-slot>
+                            <x-slot name='default'></x-slot>
+                            <x-slot name='placeholder'>Your Name</x-slot>
+                            <x-slot name='autocomplete'>off</x-slot>
+                            <x-slot name='required'>on</x-slot>
+                            <x-slot name='height'>big</x-slot>
+                            <x-slot name='bg'>light</x-slot>
+                            <x-slot name='label_on_off'>on</x-slot>
+                            <x-slot name='disable'>off</x-slot>
+                        </x-frontend.forms.input_text>
+                    </span>
+
+                    <span class="w-2/2 md:w-1/2">
+                        <x-frontend.forms.input_text>
+                            <x-slot name='type'>email</x-slot>
+                            <x-slot name='label'>Email</x-slot>
+                            <x-slot name='id'>email</x-slot>
+                            <x-slot name='default'></x-slot>
+                            <x-slot name='placeholder'>john.doe@company.com</x-slot>
+                            <x-slot name='autocomplete'>off</x-slot>
+                            <x-slot name='required'>on</x-slot>
+                            <x-slot name='height'>big</x-slot>
+                            <x-slot name='bg'>light</x-slot>
+                            <x-slot name='label_on_off'>on</x-slot>
+                            <x-slot name='disable'>off</x-slot>
+                        </x-frontend.forms.input_text>
+                    </span>
+
+                    <span class="w-2/2 md:w-1/2">
+                        <x-frontend.forms.input_text>
+                            <x-slot name='type'>text</x-slot>
+                            <x-slot name='label'>Phone</x-slot>
+                            <x-slot name='id'>phone</x-slot>
+                            <x-slot name='default'></x-slot>
+                            <x-slot name='placeholder'>Your phone</x-slot>
+                            <x-slot name='autocomplete'>off</x-slot>
+                            <x-slot name='required'>off</x-slot>
+                            <x-slot name='height'>big</x-slot>
+                            <x-slot name='bg'>light</x-slot>
+                            <x-slot name='label_on_off'>on</x-slot>
+                            <x-slot name='disable'>off</x-slot>
+                        </x-frontend.forms.input_text>
+                    </span>
+                    
+                    </div>
+                
+                    <x-frontend.forms.textarea>
+                        <x-slot name='label'>Message</x-slot>
+                        <x-slot name='id'>message</x-slot>
+                        <x-slot name='placeholder'>Your message</x-slot>
+                        <x-slot name='autocomplete'>on</x-slot>
+                        <x-slot name='required'>on</x-slot>
+                        <x-slot name='max'></x-slot>
+                    </x-frontend.forms.textarea>
+
+
+                    <button type="submit" class="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-red shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none rounded-md">
+                    SEND
+                    </button>
+
+                </form>
+            </section>
 
         </main>
         

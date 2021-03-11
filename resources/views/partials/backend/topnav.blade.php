@@ -7,6 +7,7 @@
         <li class="">
             {!!'<strong>Texas time:</strong> '.date('G:i:s')!!}
         </li>
+
         <li class="dropdown">
             <livewire:backend.registration-tryout></livewire:backend.registration-tryout>
         </li>
@@ -15,6 +16,9 @@
         </li>
         <li class="dropdown">
             <livewire:backend.competitions-messages></livewire:backend.competitions-messages>
+        </li>
+        <li class="dropdown">
+            <livewire:backend.services-message></livewire:backend.services-message>
         </li>
         <li class="dropdown">
             <a class="dropdown-toggle count-info" href="/" target='_blank'>

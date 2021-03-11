@@ -50,8 +50,8 @@
             <div class="ibox-content">
 
                 <div class="form-group ">
-                    <label>Fullname</label>
-                    <input type="text" name='fullname' class="form-control" @if(!empty($message->name)) value="{{$message->name}}" @endif>
+                    <label>Service</label>
+                    <input type="text" name='service' class="form-control" @if(!empty($service->name)) value="{{$service->name}}" @endif>
                 </div>
 
                 <div class="form-group ">
@@ -75,7 +75,7 @@
 
                 <div class="hr-line-dashed"></div>
                 
-                <a href="/competitions-contact" class="btn btn-w-m btn-default"><i class="fas fa-undo-alt"></i> Return</a>
+                <a href="/bservices-contact" class="btn btn-w-m btn-default"><i class="fas fa-undo-alt"></i> Return</a>
                 
             </div>
         </div>

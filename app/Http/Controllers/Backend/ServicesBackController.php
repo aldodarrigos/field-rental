@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\{Service, ServiceRegistration};
+use App\Models\{Service, ServiceRegistration, ServiceContact};
 use DB;
 use Illuminate\Support\Str;
 //use GuzzleHttp\Client;
@@ -212,6 +212,39 @@ class ServicesBackController extends Controller
         return view('backend/services/registration-detail', ['record' => $record, 'url' => $url]);
 
     }
+
+
+    
+    public function contact()
+    {
+        $records = DB::table('services_contact')
+        ->select(DB::raw('services_contact.id as message_id, services_contact.service_id, services.name as service_name, services_contact.name as contact_name, services_contact.email, services_contact.phone, services_contact.status, services_contact.created_at'))
+        ->leftJoin('services', 'services_contact.service_id', '=', 'services.id')
+        ->orderBy('services_contact.id', 'DESC')
+        ->get();
+
+        $url = "services";
+        
+        return view('backend/services/contact', ['records' => $records, 'url' => $url]);
+
+    }
+
+    public function message($id = null)
+    {
+
+        
+        $message = ServiceContact::find($id);
+        $message->status = 1;
+        $message->save();
+
+        $message = ServiceContact::where('id', $id)->first();
+        $service = Service::where('id', $message->service_id)->first();
+        $url = "services";
+        
+        return view('backend/services/message', ['message' => $message, 'url' => $url, 'service' => $service]);
+
+    }
+
 
 
 

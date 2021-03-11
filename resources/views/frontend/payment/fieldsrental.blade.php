@@ -46,14 +46,6 @@
 
     <div class="separation h-50p"></div>
 
-    <p><a href="" id='fadelink'>Open Modal</a></p>
-
-    <div id="fade" class="modal" class="overflow-scroll z-50" >
-
-
-
-    </div>
-
     <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
 
         <div class="col-span-6">

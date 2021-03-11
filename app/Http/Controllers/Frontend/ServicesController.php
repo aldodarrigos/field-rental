@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Frontend;
-use App\Models\{Content, Service, Setting, ServiceRegistration, Competition, CompetitionStatus};
+use App\Models\{Content, Service, Setting, ServiceRegistration, Competition, CompetitionStatus, ServiceContact};
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Mail\ContactMailable;
@@ -107,6 +107,26 @@ class ServicesController extends Controller
         ];
 
         return view('frontend/services/confirmation', ['seo' => $seo, 'registration' => $registration, 'service' => $service, 'setting' => $setting]);
+        
+    }
+
+    public function contact(Request $request)
+    {
+
+        $contact = new ServiceContact();
+
+        $service_id = $request->input('service_id');
+
+        $service = Service::where('id', $service_id)->first();
+        
+        $contact->service_id = $service_id;
+        $contact->name = $request->input('f_name');
+        $contact->email = $request->input('email');
+        $contact->phone = $request->input('phone');
+        $contact->message = $request->input('message');
+        $contact->save();
+
+        return redirect('services/'.$service->slug)->with('success', 'Message sent!');
         
     }
 }

@@ -65,6 +65,7 @@ Route::post('service-payment', [ServicePaymentController::class, 'payment'])->na
 Route::get('service-payment-status', [ServicePaymentController::class, 'status'])->name('service.payment.status');
 Route::get('service-payment-success', [ServicePaymentController::class, 'success'])->name('service.payment.success');
 Route::get('service-payment-fail', [ServicePaymentController::class, 'fail'])->name('service.payment.fail');
+Route::post('service/contact', [ServicesController::class, 'contact'])->name('service.contact');
 
 //Route::get('fields', [FrontendController::class, 'fields'])->name('frontend.fields');
 Route::get('news', [FrontendController::class, 'news'])->name('frontend.news');
@@ -162,7 +163,9 @@ Route::middleware(['admin'])->group(function () {
     Route::post('services-sort', [ServicesBackController::class, 'sort'])->name('backend.services.sort');
     Route::get('bservices-registration', [ServicesBackController::class, 'registration'])->name('bservices-registration');
     Route::get('serv-registration-detail/{id?}', [ServicesBackController::class, 'registration_detail']);
-    
+    Route::get('bservices-contact', [ServicesBackController::class, 'contact']);
+    Route::get('service-message/{id?}', [ServicesBackController::class, 'message']);
+
     //NEWS
     Route::resource('backend-news', NewsBackController::class);
     Route::resource('backend-tags', TagsbackController::class);

@@ -73,6 +73,52 @@ class UserController extends Controller
         ->orderBy('service_registration.created_at', 'desc')
         ->get();
 
+        $tournaments = DB::table('crews')
+        ->select(DB::raw('crews.id team_id, 
+        crews.name as team_name, 
+        categories.name as category,
+        competitions.name as competition_name,
+
+        users.name as registrant,
+        competition_crews.id as registration_id,
+        competition_crews.updated_at as registration_date,
+        competition_crews.status as registration_status'))
+
+        ->leftJoin('categories', 'crews.category_id', '=', 'categories.id')
+        ->leftJoin('competition_crews', 'crews.id', '=', 'competition_crews.crew_id')
+        ->leftJoin('competitions', 'competition_crews.competition_id', '=', 'competitions.id')
+        ->leftJoin('users', 'competition_crews.user_id', '=', 'users.id')
+
+        ->where('crews.manager_id', Auth::user()->id)
+        ->orderBy('crews.updated_at', 'desc')
+        ->get();
+
+
+        $leagues = DB::table('trials')
+        ->select(DB::raw('trials.id trial_id, 
+        trials.name as player_name, 
+        trials.age as player_age, 
+        trials.gender as player_gender,
+        trials.tshirt as player_tshirt,
+
+        categories.name as category,
+
+        competitions.name as competition_name,
+
+        users.name as registrant,
+
+        competition_trials.id as registration_id,
+        competition_trials.status as registration_status,
+        competition_trials.updated_at as registration_date'))
+
+        ->leftJoin('categories', 'trials.category_id', '=', 'categories.id')
+        ->leftJoin('competition_trials', 'trials.registration_id', '=', 'competition_trials.id')
+        ->leftJoin('competitions', 'competition_trials.competition_id', '=', 'competitions.id')
+        ->leftJoin('users', 'competition_trials.manager_id', '=', 'users.id')
+        ->where('competition_trials.manager_id', Auth::user()->id)
+        ->orderBy('trials.updated_at', 'desc')
+        ->get();
+
         $user = User::where('id', Auth::user()->id)->first();
 
         $seo = ['title' => 'User Dashboard | KISC, Sports complex', 
@@ -80,7 +126,7 @@ class UserController extends Controller
         'image' => 'https://katyisc.com/storage/files/katyisc-sports-complex-share.webp'
         ];
 
-        return view('frontend/profile/dashboard', ['seo' => $seo, 'reservations' => $reservations, 'orders' => $orders, 'user' => $user, 'services' => $services]);
+        return view('frontend/profile/dashboard', ['seo' => $seo, 'reservations' => $reservations, 'orders' => $orders, 'user' => $user, 'services' => $services, 'tournaments' => $tournaments, 'leagues' => $leagues]);
         
     }
 

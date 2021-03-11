@@ -5,7 +5,37 @@
 @section('assets_down')
 
     @parent
-    
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script>
+        $( function() {
+            $( "#tabs" ).tabs();
+        } );
+
+        function openCity(evt, cityName) {
+        // Declare all variables
+        var i, tabcontent, tablinks;
+
+        // Get all elements with class="tabcontent" and hide them
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+        }
+
+        // Get all elements with class="tablinks" and remove the class "active"
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+
+        // Show the current tab, and add an "active" class to the button that opened the tab
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+        }
+    </script>
+
+
 
 @endsection
 
@@ -27,222 +57,94 @@
             </div>
             @endif
 
-            <div class="profile flex gap-4 mb-6">
-                <div class="info">
-                    <div class="name text-2x font-bold flex">{{Auth::user()->name}} 
-                        <form method="POST" action="/logout">
-                            @csrf
-                            <a class="text-red text-lg ml-1" href="/logout"
-                            onclick="event.preventDefault(); this.closest('form').submit();"> (Logout)</a>
-                        </form>
-                    </div>
-                    <div class="item"><span class="font-bold">Email: </span> {{$user->email}}
-                    </div>
-                    <div class="item"><span class="font-bold">Status: </span>  User registered</div>
-                    <div class="item"><span class="font-bold">Registered since: </span> {{date('Y-m-d', strtotime($user->created_at))}}</div>
-                </div>
-            </div>
+          
+    <style>
+        /* Style the tab */
+    .tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+    }
+
+    /* Style the buttons that are used to open the tab content */
+    .tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    }
+
+    /* Change background color of buttons on hover */
+    .tab button:hover {
+    background-color: #ddd;
+    }
+
+    /* Create an active/current tablink class */
+    .tab button.active {
+    background-color: #ccc;
+    }
+
+    /* Style the tab content */
+    .tabcontent {
+    display: none;
+    border: 1px solid #ccc;
+    border-top: none;
+    }
+    </style>
+
+
+     <!-- Tab links -->
+    <div class="tab rounded-t-lg">
+
+        <button class="tablinks active font-roboto font-bold uppercase" onclick="openCity(event, 'fields')" >Fields Booking</button>
+
+        <button class="tablinks font-roboto font-bold uppercase" onclick="openCity(event, 'services')">Services</button>
+
+        <button class="tablinks font-roboto font-bold uppercase" onclick="openCity(event, 'tournaments')">Tournaments</button>
+
+        <button class="tablinks font-roboto font-bold uppercase" onclick="openCity(event, 'leagues')">Leagues</button>
+
+        <button class="tablinks font-roboto font-bold uppercase" onclick="openCity(event, 'products')">Product Orders</button>
+    </div>
+  
+    <!-- Tab content -->
+    <div id="fields" class="tabcontent bg-white px-4 py-4" style='display:block;'>
+
+        @include('partials.frontend.profile.fields_orders')
+
+    </div>
+
+    <div id="services" class="tabcontent bg-white p-4">
+
+        @include('partials.frontend.profile.services_orders')
+
+    </div>
+
+    <div id="tournaments" class="tabcontent bg-white p-4">
+
+        @include('partials.frontend.profile.tournaments_orders')
+
+    </div>
+
+    <div id="leagues" class="tabcontent bg-white p-4">
+
+        @include('partials.frontend.profile.leagues_orders')
+
+    </div>
+
+    <div id="products" class="tabcontent bg-white p-4">
+
+        @include('partials.frontend.profile.products_orders')
+
+    </div>
 
 
             
-            <table class="min-w-full">
-                <thead>
-                    <tr>
-                        <th class="px-6 py-3 border-b border-bluetext bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">User</th>
 
-                        <th class="px-6 py-3 border-b border-bluetext bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Reservation</th>
 
-                        <th class="px-6 py-3 border-b border-bluetext bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Status</th>
-
-                        <th class="px-6 py-3 border-b border-bluetext bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Date</th>
-                    </tr>
-                </thead>
-
-                <tbody class="bg-white">
-                    @foreach ($reservations as $item)
-
-                    @php
-                        $date = new DateTime($item->res_date);
-                        $now = new DateTime();
-                        $status = 'Pending';
-                        $status_bg = 'info';
-                        if($date < $now) {
-                            $status = 'Finished';
-                            $status_bg = 'graytext';
-                        }
-                    @endphp
-                        
-                    <tr>
-                        <td class="px-6 py-4 whitespace-no-wrap border-b border-bluetext">
-                            <div class="flex items-center">
-                                <div class="flex-shrink-0 h-10 w-10">
-                                    <img src="{{ Avatar::create(Auth::user()->name)->setFontFamily('arial')->toBase64() }}" />
-                                </div>
-
-                                <div class="ml-4">
-                                    <div class="text-sm leading-5 font-medium text-gray-900">{{Auth::user()->name}}
-                                    </div>
-                                    <div class="text-sm leading-5 text-gray-500">User registered</div>
-                                </div>
-                            </div>
-                        </td>
-
-                        <td class="px-6 py-4 whitespace-no-wrap border-b border-bluetext">
-                            <div class="text-sm leading-5 text-gray-900">{{$item->field_name}}</div>
-                            <div class="text-sm leading-5 text-gray-500"></div>
-                        </td>
-
-                        <td class="px-6 py-4 whitespace-no-wrap border-b border-bluetext">
-                            <span class="px-2 inline-flex text-xs uppercase leading-5 font-semibold rounded-md bg-{{$status_bg}} text-white py-1">{{$status}}</span>
-                        </td>
-
-                        <td class="px-6 py-4 whitespace-no-wrap border-b border-bluetext text-sm leading-5 text-gray-500">
-                            {{$item->res_date}} {{$item->hour}}</td>
-
-                    </tr>
-
-                    @endforeach
-
-                </tbody>
-            </table>
-
-            <br>
-            <h2>Orders</h2>
-
-            <table class="min-w-full">
-                <thead>
-                    <tr>
-                        <th class="px-6 py-3 border-b border-bluetext bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">User</th>
-
-                        <th class="px-6 py-3 border-b border-bluetext bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Product</th>
-
-                        <th class="px-6 py-3 border-b border-bluetext bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Size</th>
-
-                        <th class="px-6 py-3 border-b border-bluetext bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Quantity</th>
-
-                        <th class="px-6 py-3 border-b border-bluetext bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Date</th>
-                        
-                    </tr>
-                </thead>
-
-                <tbody class="bg-white">
-                    @foreach ($orders as $item)
-
-                    @php
-
-                    @endphp
-                        
-                    <tr>
-                        <td class="px-6 py-4 whitespace-no-wrap border-b border-bluetext">
-                            <div class="flex items-center">
-                                <div class="flex-shrink-0 h-10 w-10">
-                                    <img src="{{ Avatar::create(Auth::user()->name)->setFontFamily('arial')->toBase64() }}" />
-                                </div>
-
-                                <div class="ml-4">
-                                    <div class="text-sm leading-5 font-medium text-gray-900">{{Auth::user()->name}}
-                                    </div>
-                                    <div class="text-sm leading-5 text-gray-500">User registered</div>
-                                </div>
-                            </div>
-                        </td>
-
-                        <td class="px-6 py-4 whitespace-no-wrap border-b border-bluetext">
-                            <div class="text-sm leading-5 text-gray-900">{{$item->product_name}}</div>
-                            <div class="text-sm leading-5 text-gray-500"></div>
-                        </td>
-
-                        <td class="px-6 py-4 whitespace-no-wrap border-b border-bluetext">
-                            <div class="text-sm leading-5 text-gray-900">{{$item->product_size}}</div>
-                            <div class="text-sm leading-5 text-gray-500"></div>
-                        </td>
-
-                        <td class="px-6 py-4 whitespace-no-wrap border-b border-bluetext">
-                            <div class="text-sm leading-5 text-gray-900">{{$item->quantity}}</div>
-                            <div class="text-sm leading-5 text-gray-500"></div>
-                        </td>
-
-                        <td class="px-6 py-4 whitespace-no-wrap border-b border-bluetext text-sm leading-5 text-gray-500">
-                            {{$item->date}} </td>
-
-                    </tr>
-
-                    @endforeach
-
-                </tbody>
-            </table>
-
-            <br>
-            <h2>Services</h2>
-
-            <table class="min-w-full">
-                <thead>
-                    <tr>
-                        <th class="px-6 py-3 border-b border-bluetext bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">User</th>
-
-                        <th class="px-6 py-3 border-b border-bluetext bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Service</th>
-
-                        <th class="px-6 py-3 border-b border-bluetext bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Price</th>
-
-                        <th class="px-6 py-3 border-b border-bluetext bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Date</th>
-
-                        <th class="px-6 py-3 border-b border-bluetext bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                        
-                    </tr>
-                </thead>
-
-                <tbody class="bg-white">
-                    @foreach ($services as $item)
-
-                    @php
-                        $status = 'Pending';
-                        $status_bg = 'graytext';
-                        if($item->registration_status == 1) {
-                            $status = 'Paid';
-                            $status_bg = 'info';
-                        }
-                    @endphp
-                        
-                    <tr>
-                        <td class="px-6 py-4 whitespace-no-wrap border-b border-bluetext">
-                            <div class="flex items-center">
-                                <div class="flex-shrink-0 h-10 w-10">
-                                    <img src="{{ Avatar::create(Auth::user()->name)->setFontFamily('arial')->toBase64() }}" />
-                                </div>
-
-                                <div class="ml-4">
-                                    <div class="text-sm leading-5 font-medium text-gray-900">{{Auth::user()->name}}
-                                    </div>
-                                    <div class="text-sm leading-5 text-gray-500">User registered</div>
-                                </div>
-                            </div>
-                        </td>
-
-                        <td class="px-6 py-4 whitespace-no-wrap border-b border-bluetext">
-                            <div class="text-sm leading-5 text-gray-900">{{$item->service_name}}</div>
-                            <div class="text-sm leading-5 text-gray-500"></div>
-                        </td>
-
-                        <td class="px-6 py-4 whitespace-no-wrap border-b border-bluetext">
-                            <div class="text-sm leading-5 text-gray-900">{{$item->service_price}}</div>
-                            <div class="text-sm leading-5 text-gray-500"></div>
-                        </td>
-
-                        <td class="px-6 py-4 whitespace-no-wrap border-b border-bluetext">
-                            <div class="text-sm leading-5 text-gray-900">{{$item->registration_date}}</div>
-                            <div class="text-sm leading-5 text-gray-500"></div>
-                        </td>
-
-                        <td class="px-6 py-4 whitespace-no-wrap border-b border-bluetext">
-                            <span class="px-2 inline-flex text-xs uppercase leading-5 font-semibold rounded-md bg-{{$status_bg}} text-white py-1">{{$status}}</span>
-                        </td>
-
-                    </tr>
-
-                    @endforeach
-
-                </tbody>
-            </table>
             
         </div>
     </div>
