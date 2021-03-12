@@ -85,6 +85,17 @@
                     </div>
                 </div>
 
+                <div class="col-md-4">
+                    <div class="i-checks mt-4">
+                        @if ($form == 'new')
+                            <label> <input type="checkbox" name='form' value="1"> Show Form</label>
+                        @else
+                            @php $formchecked = ($content->form == 1)?'checked':''; @endphp
+                            <label> <input type="checkbox" name='form' value="1" {{$formchecked}}> Show Form</label>
+                        @endif
+                    </div>
+                </div>
+
             </div>
 
             <div class="hr-line-dashed"></div>

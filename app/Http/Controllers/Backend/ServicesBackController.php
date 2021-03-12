@@ -50,6 +50,7 @@ class ServicesBackController extends Controller
         $service = new Service();
 
         $price = ($request->input('price') == null)?'0.00':$request->input('price');
+        $form = ($request->input('form') == null)?'0':$request->input('form');
         $flag = ($request->input('flag'))?1:0;
 
         $name = $request->input('name');
@@ -61,6 +62,7 @@ class ServicesBackController extends Controller
         $service->img = $request->input('img');
         $service->flag = $flag;
         $service->price = $price;
+        $service->form = $form;
         $service->icon = $request->input('icon');
         $service->status = $request->input('status');
         
@@ -100,6 +102,7 @@ class ServicesBackController extends Controller
 
         $service = Service::find($id);
         $price = ($request->input('price') == null)?'0.00':$request->input('price');
+        $form = ($request->input('form') == null)?'0':$request->input('form');
         $flag = ($request->input('flag'))?1:0;
 
         $name = $request->input('name');
@@ -110,6 +113,7 @@ class ServicesBackController extends Controller
         $service->content = $request->input('content');
         $service->img = $request->input('img');
         $service->flag = $flag;
+        $service->form = $form;
         $service->price = $price;
         $service->icon = $request->input('icon');
         $service->status = $request->input('status');
