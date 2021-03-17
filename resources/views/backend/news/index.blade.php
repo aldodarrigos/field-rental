@@ -101,7 +101,7 @@
                                     <td>{{$record->id}}</td>
                                     <td><a href="/backend-news/{{$record->id}}/edit">{{$record->title}}</a></td>
                                     <td>{{$record->tag_name}}</td>
-                                    <td>{{$record->pub_date}}</td>
+                                    <td>{{date('M d, Y', strtotime($record->pub_date))}}</td>
                                     <td class="center"><span class="btn btn-{{$status_color}} btn-xs">{{$status}}</span></td>
                                 </tr>
 

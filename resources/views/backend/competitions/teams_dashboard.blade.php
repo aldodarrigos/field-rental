@@ -104,7 +104,7 @@
                                         <td><strong>{{$record->category}}</strong></td>
                                         <td><strong>{{$record->competition_name}}</strong></td>
                                         <td><a href="/teams-detail/{{$record->registration_id}}">{{$record->registrant}}</a></td>
-                                        <td><strong>{{date('m-d-Y', strtotime($record->date) )}}</strong></td>
+                                        <td><strong>{{date('M d, Y', strtotime($record->date))}}</strong></td>
                                         <td><span class="btn btn-xs {{$status_color}}">{{$status}}</span></td>
                                     </tr>
 

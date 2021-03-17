@@ -107,7 +107,7 @@
                         <td><strong>{{$reservation->user_name}}</strong></td>
                         <td>{{$reservation->user_email}}</td>
                         <td>${{$reservation->price}}</td>
-                        <td class="center text-{{$status_color}}">{!!$reservation->res_date.' <strong>'.$reservation->hour.'</strong>'!!}</td>
+                        <td class="center text-{{$status_color}}">{!!date('M d, Y', strtotime($reservation->res_date)).' <strong>'.$reservation->hour.'</strong>'!!}</td>
                         <td>{{$reservation->code}}</td>
                         <td class="center"><a href="/backend-booking/{{$reservation->id}}/edit" class="btn btn-success btn-xs">Details</a></td>
                     </tr>

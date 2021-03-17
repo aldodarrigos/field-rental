@@ -117,7 +117,7 @@
                                         <td>{{$record->phone}}</td>
                                         <td>{{$record->competition_name}}</td>
 
-                                        <td><strong>{{date('Y-m-d', strtotime( $record->created_at) )}}</strong></td>
+                                        <td><strong>{{date('M d, Y', strtotime($record->created_at))}}</strong></td>
                                         
 
                                         <td class="center"><span class="btn btn-{{$status_color}} btn-xs">{{$status}}</span></td>

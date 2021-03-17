@@ -124,7 +124,7 @@
                                         <td>{{$type}}</td>
                                         <td>{{$modality}}</td>
 
-                                        <td><strong>{{date('Y-m-d', strtotime( $record->created_at) )}}</strong></td>
+                                        <td><strong>{{date('M d, Y', strtotime($record->created_at))}}</strong></td>
                                         
                                         <td> 
                                             <a href="/competition-registrations/{{$record->id}}" class="text-default"> Registration</a> /
