@@ -74,6 +74,31 @@
             </div>
 
             <div class="row">
+                
+                <div class="col-md-4">
+                    <div class="form-group ">
+                        <label>Price regular (2nd hour)</label>
+                        <input type="text" name='price_regular_alt' class="form-control" @if(!empty($content->price_regular_alt)) value="{{$content->price_regular_alt}}" @endif>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group ">
+                        <label>Price Night (2nd hour)</label>
+                        <input type="text" name='price_night_alt' class="form-control" @if(!empty($content->price_night_alt)) value="{{$content->price_night_alt}}" @endif>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group ">
+                        <label>Price Weekend (2nd hour)</label>
+                        <input type="text" name='price_weekend_alt' class="form-control" @if(!empty($content->price_weekend_alt)) value="{{$content->price_weekend_alt}}" @endif>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
                 <div class="col-md-6">
                     <div class="form-group ">
                         <label for='group'>Players Number</label>

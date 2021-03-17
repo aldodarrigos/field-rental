@@ -173,4 +173,16 @@ class FrontendController extends Controller
         
     }
 
+    public function test()
+    {
+
+        $seo = ['title' => 'Test | KISC, Sports complex', 
+        'sumary' => '', 
+        'image' => ''
+        ];
+        return view('frontend/test', ['seo' => $seo]);
+
+        
+    }
+
 }

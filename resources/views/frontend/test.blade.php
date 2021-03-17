@@ -253,14 +253,12 @@ table{
                             <tr>
                                 <td>
                                     <div class="text" style="padding: 0 2.5em; text-align: center;">
-                                        @php
-                                            $field_type = ($field->tag_id == 1)?'5 vs 5 players (6 vs 6)':'7 vs 7 players (9 vs 9)';
-                                        @endphp
+      
                                         <h1>Successful Booking</h1>
-                                        <p><Strong>Email:</Strong> {{$contact}}</p>
-                                        <p><Strong>Booking Code:</Strong> {{$code}}</p>
-                                        <p><Strong>Field:</Strong> {{$field->number.'. '.$field->name}}</p>
-                                        <p><Strong>Field type:</Strong> {{$field_type}}</p>
+                                        <p><Strong>Email:</Strong> David Chávarri</p>
+                                        <p><Strong>Booking Code:</Strong> aasd2as8as2a8</p>
+                                        <p><Strong>Field:</Strong> Soccer City</p>
+                                        <p><Strong>Field type:</Strong> 7 vs 7 Players</p>
 
                                         <table class="">
 
@@ -273,18 +271,21 @@ table{
                                             </thead>
            
                                             <tbody>
-                                                @foreach ($reservation as $item)
                                                 <tr>
-                                                    <td style='padding: 5px 10px'>{{date('M d, Y', strtotime($item->res_date))}}</td>
-                                                    <td style='padding: 5px 10px'>{{$item->hour}}</td>
-                                                    <td style='padding: 5px 10px'>${{$item->price}}</td>
+                                                    <td style='padding: 5px 10px'><strong>Feb 28, 2021</strong></td>
+                                                    <td style='padding: 5px 10px'>10:00</td>
+                                                    <td style='padding: 5px 10px'>$150.00</td>
                                                 </tr>
-                                                @endforeach
+                                                <tr>
+                                                    <td style='padding: 5px 10px'><strong>Feb 28, 2021</strong></td>
+                                                    <td style='padding: 5px 10px'>10:00</td>
+                                                    <td style='padding: 5px 10px'>$150.00</td>
+                                                </tr>
                                             </tbody>
     
                                           </table>
-                                        <p><Strong>Paypal Transaction code:</Strong> {{$paypal_code}}</p>
-                                        <p><a href="{{url('/profile/dashboard')}}" class="btn btn-primary">Check your profile</a></p>
+                                        <p><Strong>Paypal Transaction code:</Strong> 1312165456</p>
+                                        <p><a href="" class="btn btn-primary">Check your profile</a></p>
                                     </div>
                                 </td>
                             </tr>

@@ -11,8 +11,8 @@
                     <div class="font-roboto text-xl uppercase font-bold leading-none mb-2 mt-2 text-warning">{{$date}}</div>
                 </div>
                 <div class="">
-                    <div class="font-roboto text-lg uppercase font-bold leading-none mb-2 mt-2">Hour</div>
-                    <div class="font-roboto text-xl uppercase font-bold leading-none mb-2 mt-2 text-warning">{{$hour}}</div>
+                    <div class="font-roboto text-lg uppercase font-bold leading-none mb-2 mt-2 px-2">Hour</div>
+                    <div class="font-roboto text-xl uppercase font-bold leading-none mb-2 mt-2 px-2 text-warning">{{$hour}}</div>
                 </div>
                 <div class="">
                     <div class="font-roboto text-lg uppercase font-bold leading-none mb-2 mt-2">Price</div>
@@ -49,10 +49,6 @@
                 <img class="w-200p ml-auto mr-auto" src="https://katyisc.com/storage/files/paypal-button.png" alt="">
                 
             </div>
-
-            
-
-            
 
         @else
 

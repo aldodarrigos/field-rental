@@ -6,7 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use App\Models\{Reservation, Field};
+use App\Models\{Reservation, Field, User};
 
 class BookingMailable extends Mailable
 {
@@ -14,16 +14,22 @@ class BookingMailable extends Mailable
 
     public $subject = 'Succesfull Booking';
     public $contact;
-    public $bookId;
+    public $code;
+    public $field_id;
+    public $user_id;
+    public $paypal_code;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($contact, $bookId)
+    public function __construct($contact, $code, $field_id, $user_id, $paypal_code)
     {
         $this->contact = $contact;
-        $this->bookId = $bookId;
+        $this->code = $code;
+        $this->field_id = $field_id;
+        $this->user_id = $user_id;
+        $this->paypal_code = $paypal_code;
     }
 
     /**
@@ -33,8 +39,9 @@ class BookingMailable extends Mailable
      */
     public function build()
     {
-        $reservation = Reservation::where('id', $this->bookId)->first();
-        $field = Field::where('id', $reservation->field_id)->first();
-        return $this->view('frontend.emails.successbooking', ['reservation' => $reservation, 'field' => $field]);
+        $reservation = Reservation::where('code', $this->code)->get();
+        $field = Field::where('id', $this->field_id)->first();
+        $user = User::where('id', $this->user_id)->first();
+        return $this->view('frontend.emails.successbooking', ['reservation' => $reservation, 'field' => $field, 'user' => $user, 'code' => $this->code, $this->paypal_code]);
     }
 }

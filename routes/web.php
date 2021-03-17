@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\FrontendController;
-use App\Http\Controllers\Frontend\PaymentController;
+//use App\Http\Controllers\Frontend\PaymentController;
+use App\Http\Controllers\Frontend\Payments\FieldsPaymentController;
 use App\Http\Controllers\Frontend\UserController;
 use App\Http\Controllers\Frontend\FieldsController;
 use App\Http\Controllers\Frontend\ServicesController;
@@ -55,6 +56,7 @@ Route::get('/', function () {
 */
 
 Route::get('/', [FrontendController::class, 'index'])->name('frontend.cover');
+Route::get('/testing', [FrontendController::class, 'test']);
 Route::get('about', [FrontendController::class, 'about'])->name('frontend.about');
 Route::get('services', [ServicesController::class, 'services'])->name('frontend.services');
 Route::get('services/{slug?}', [ServicesController::class, 'service'])->name('frontend.service');
@@ -107,13 +109,13 @@ Route::get('tryout-payment-success', [TryoutPaymentController::class, 'success']
 Route::get('tryout-payment-fail', [TryoutPaymentController::class, 'fail']);
 
 //FIELDS RENTAL
-Route::get('fieldsrental', [PaymentController::class, 'fieldsrental'])->name('frontend.fieldsrental');
-Route::post('fieldsrental', [PaymentController::class, 'fieldsrental'])->name('frontend.fieldsrental');
-Route::get('payment', [PaymentController::class, 'payment'])->name('payment');
-Route::post('payment', [PaymentController::class, 'payment'])->name('payment');
-Route::get('paypal/failed', [PaymentController::class, 'paypalFailed'])->name('payment.failed');
-Route::get('paypal/status', [PaymentController::class, 'payPalStatus'])->name('payment.status');
-Route::get('paypal/success', [PaymentController::class, 'paypalSuccess'])->name('payment.success');
+Route::get('fieldsrental', [FieldsPaymentController::class, 'fieldsrental'])->name('frontend.fieldsrental');
+Route::post('fieldsrental', [FieldsPaymentController::class, 'fieldsrental'])->name('frontend.fieldsrental');
+Route::get('payment', [FieldsPaymentController::class, 'payment'])->name('payment');
+Route::post('payment', [FieldsPaymentController::class, 'payment'])->name('payment');
+Route::get('paypal/failed', [FieldsPaymentController::class, 'paypalFailed'])->name('payment.failed');
+Route::get('paypal/status', [FieldsPaymentController::class, 'payPalStatus'])->name('payment.status');
+Route::get('paypal/success', [FieldsPaymentController::class, 'paypalSuccess'])->name('payment.success');
 
 Route::get('shop', [ShopController::class, 'index'])->name('frontend.shop');
 Route::get('shop/product/{slug?}', [ShopController::class, 'product'])->name('frontend.product');

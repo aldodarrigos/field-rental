@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Frontend\Payments;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -68,25 +68,30 @@ class FieldsPaymentController extends Controller
 
                 if((date('N', strtotime($date)) >= 6)){
                     $price = $field->price_weekend;
+                    $price_alt = $field->price_weekend_alt;
                 }else{
                     if(in_array($item, $hot_hours)){
                         $price = $field->price_night;
+                        $price_alt = $field->price_night_alt;
                     }else{
                         $price = $field->price_regular;
+                        $price_alt = $field->price_regular_alt;
                     }
                 }
 
                 if($this->check_hours($item, $field->id, $date)){
                     array_push($hoursarray, 
                     ['hour' => $item, 
-                    'class' => 'reservedday',
-                    'price' => $price
+                    'class' => 'taken',
+                    'price' => $price,
+                    'price_alt' => $price_alt
                     ]);
                 }else{
                     array_push($hoursarray, [
                         'hour' => $item, 
-                        'class' => 'dummyclass',
-                        'price' => $price
+                        'class' => 'noselect',
+                        'price' => $price,
+                        'price_alt' => $price_alt
                         ]);
                 }
             }
@@ -107,7 +112,7 @@ class FieldsPaymentController extends Controller
         'image' => 'https://katyisc.com/storage/files/katyisc-sports-complex-share.webp'
         ];
 
-        return view('frontend/payment/fieldsrental', ['seo' => $seo, 'result' => $result, 'field' => $field, 'field_id' => $field_id, 'date' => $date, 'fields_select' => $fields_select, 'reservations' => $reservations, 'hoursarray' => $hoursarray, 'players_number' => $players_number, 'map' => $map, 'setting' => $setting]);
+        return view('frontend/fieldsrental', ['seo' => $seo, 'result' => $result, 'field' => $field, 'field_id' => $field_id, 'date' => $date, 'fields_select' => $fields_select, 'reservations' => $reservations, 'hoursarray' => $hoursarray, 'players_number' => $players_number, 'map' => $map, 'setting' => $setting]);
         
     }
 
@@ -129,22 +134,23 @@ class FieldsPaymentController extends Controller
 
     public function payment(Request $request)
     {
-        $priceSelected = $request->input('priceSelected');
-        $hourSelected = $request->input('hourSelected');
+    
         $dateSelected = $request->input('dateSelected');
-        $fieldIdSelected = $request->input('fieldIdSelected');
+        $field_id = $request->input('fieldIdSelected');
         $fieldShortName = $request->input('fieldShortName');
-        $fieldSelectedName = $request->input('fieldSelectedName');
+        $field_name = $request->input('fieldSelectedName');
+        $bookingArray = $request->input('bookingArray');
+        $totalPrice = $request->input('totalPrice');
         $userIdLogin = $request->input('userIdLogin');
 
-        $description = $fieldSelectedName.' / '.$dateSelected.' / '.$hourSelected;
+        $description = $field_name.' / '.$dateSelected;
 
         // After Step 2
         $payer = new Payer();
         $payer->setPaymentMethod('paypal');
 
         $amount = new Amount();
-        $amount->setTotal($priceSelected);
+        $amount->setTotal($totalPrice);
         $amount->setCurrency('USD');
 
         $transaction = new Transaction();
@@ -153,12 +159,12 @@ class FieldsPaymentController extends Controller
 
         $reservation_data = json_encode(array(
             'user_id' => $userIdLogin, 
-            'field_id' => $fieldIdSelected, 
+            'field_id' => $field_id, 
             'field_short_name' => $fieldShortName, 
-            'field_name' => $fieldSelectedName, 
-            'price' => $priceSelected, 
-            'date' => $dateSelected, 
-            'hour' => $hourSelected
+            'field_name' => $field_name, 
+            'price' => $totalPrice, 
+            'date' => $dateSelected,
+            'array' => $bookingArray
         ));
         $transaction->setCustom($reservation_data);
 
@@ -216,36 +222,33 @@ class FieldsPaymentController extends Controller
 
             $response = json_decode($result);
             $custom = json_decode($response->transactions[0]->custom);
+            $booking_array = json_decode($custom->array);
 
-            /*
-            echo $response->id.'<br>';
-            echo $custom->user_id.'<br>';
-            echo $custom->field_id.'<br>';
-            echo $custom->field_name.'<br>';
-            echo $custom->price.'<br>';
-            echo $custom->date.'<br>';
-            echo $custom->hour.'<br>';
-            */
-            
-            $reservation = new Reservation();
-            $code = str_replace( array( '-', ':' ), '', $custom->field_short_name.$custom->date.$custom->hour); 
-            $reservation->user_id = $custom->user_id;
-            $reservation->code = $code;
-            $reservation->field_id = $custom->field_id;
-            $reservation->res_date = $custom->date;
-            $reservation->hour = $custom->hour;
-            $reservation->price = $custom->price;
-            $reservation->conf_code = $response->id;
+            $code = str_replace( array( '-', ':' ), '', $custom->field_short_name.$custom->date.rand(1000,9999)); 
 
-            $reservation->save();
+            for ($i=0; $i < count($booking_array) ; $i++) { 
 
-            //$reservation = Reservation::where('id', 5)->first();
-            $field = Field::where('id', $reservation->field_id)->first();
-            $user = User::where('id', $reservation->user_id)->first();
+                $reservation = new Reservation();
+                
+                $reservation->user_id = $custom->user_id;
+                $reservation->code = $code;
+                $reservation->field_id = $custom->field_id;
+                $reservation->res_date = $custom->date;
+                $reservation->hour = $booking_array[$i][0];
+                $reservation->price = $booking_array[$i][1];
+                $reservation->conf_code = $response->id;
+    
+                $reservation->save();
 
-            $success = $this->successbooking($user->email, $reservation->id);
+            }
 
-            return redirect('paypal/success')->with(['reservation' => $reservation, 'field' => $field, 'user' => $user]);
+            $field = Field::where('id', $custom->field_id)->first();
+            $user = User::where('id', $custom->user_id)->first();
+
+            $success = $this->successbooking($user->email, $code, $custom->field_id, $custom->user_id, $response->id);
+            $reservation = Reservation::where('code', $code)->get();
+
+            return redirect('paypal/success')->with(['reservation' => $reservation, 'field' => $field, 'user' => $user, 'code' => $code, 'paypal_code' => $response->id]);
         }
         
     }
@@ -258,26 +261,18 @@ class FieldsPaymentController extends Controller
 
     public function paypalSuccess()
     {
-
-        /*
-        $reservation = Reservation::where('id', 5)->first();
-        $field = Field::where('id', $reservation->field_id)->first();
-        $user = User::where('id', $reservation->user_id)->first();
-        */
-
-        
         $seo = ['title' => 'Booking Success | KISC, Sports complex', 
         'sumary' => '', 
         'image' => 'https://katyisc.com/storage/files/katyisc-sports-complex-share.webp'
         ];
         
-        return view('frontend/payment/success', ['seo' => $seo]);
+        return view('frontend/success/fields', ['seo' => $seo]);
     }
 
-    public function successbooking($contact = null, $bookId = null)
+    public function successbooking($contact = null, $code = null, $field_id = null, $user_id, $paypal_code = null)
     {
 
-        $correo = new BookingMailable($contact, $bookId);
+        $correo = new BookingMailable($contact, $code, $field_id, $user_id, $paypal_code);
         Mail::to($contact)->send($correo);
         
     }

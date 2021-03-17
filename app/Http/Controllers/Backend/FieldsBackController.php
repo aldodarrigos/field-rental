@@ -54,6 +54,10 @@ class FieldsBackController extends Controller
         $name = $request->input('name');
         $slug_input = Str::of($name)->slug('-');
 
+        $price_regular_alt = ($request->input('price_regular_alt') == null)?'0.00':$request->input('price_regular_alt');
+        $price_night_alt = ($request->input('price_night_alt') == null)?'0.00':$request->input('price_night_alt');
+        $price_weekend_alt = ($request->input('price_weekend_alt') == null)?'0.00':$request->input('price_weekend_alt');
+
         $content->name = $name;
         $content->slug = $slug_input;
         
@@ -62,8 +66,14 @@ class FieldsBackController extends Controller
         $content->content = $request->input('content');
 
         $content->price_regular = $request->input('price_regular');
+        $content->price_regular_alt = $price_regular_alt;
+
         $content->price_night = $request->input('price_night');
+        $content->price_night_alt = $price_night_alt;
+
         $content->price_weekend = $request->input('price_weekend');
+        $content->price_weekend_alt = $price_weekend_alt;
+
         $content->number = $request->input('number');
 
         $content->tag_id = $request->input('tag_id');
@@ -107,6 +117,11 @@ class FieldsBackController extends Controller
         $name = $request->input('name');
         $slug_input = Str::of($name)->slug('-');
 
+        $price_regular_alt = ($request->input('price_regular_alt') == null)?'0.00':$request->input('price_regular_alt');
+        $price_night_alt = ($request->input('price_night_alt') == null)?'0.00':$request->input('price_night_alt');
+        $price_weekend_alt = ($request->input('price_weekend_alt') == null)?'0.00':$request->input('price_weekend_alt');
+
+
         $content->name = $name;
         $content->slug = $slug_input;
         $content->short_name = $request->input('short_name');
@@ -115,8 +130,14 @@ class FieldsBackController extends Controller
         $content->content = $request->input('content');
 
         $content->price_regular = $request->input('price_regular');
+        $content->price_regular_alt = $price_regular_alt;
+
         $content->price_night = $request->input('price_night');
+        $content->price_night_alt = $price_night_alt;
+
         $content->price_weekend = $request->input('price_weekend');
+        $content->price_weekend_alt = $price_weekend_alt;
+        
         $content->number = $request->input('number');
 
         $content->tag_id = $request->input('tag_id');

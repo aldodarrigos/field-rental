@@ -76,8 +76,11 @@
             <tr>
                 <th>Name</th>
                 <th>P.Regular</th>
+                <th>P.Regular (2nd H)</th>
                 <th>P.Night</th>
+                <th>P.Night (2nd H)</th>
                 <th>P.Weekend</th>
+                <th>P.Weekend (2nd H)</th>
                 <th>P.Number</th>
                 <th>Status</th>
             </tr>
@@ -101,8 +104,11 @@
                     <tr class="gradeX">
                         <td><a href="/backend-fields/{{$record->id}}/edit">{{$record->number.'. '.$record->name}}</a></td>
                         <td><strong>{{$record->price_regular}}</strong></td>
+                        <td><strong>{{$record->price_regular_alt}}</strong></td>
                         <td>{{$record->price_night}}</td>
+                        <td>{{$record->price_night_alt}}</td>
                         <td>{{$record->price_weekend}}</td>
+                        <td>{{$record->price_weekend_alt}}</td>
                         <td>{{$players_number}}</td>
                         <td class="center"><span class="btn btn-{{$status_color}} btn-xs">{{$status}}</span></td>
                     </tr>
