@@ -38,11 +38,11 @@ class ServicesController extends Controller
         $competitions = '';
 
         if($slug == 'tournaments'){
-            $competitions = Competition::where([['is_league', 0], ['status', '!=', 1]])->get();
+            $competitions = Competition::where([['is_league', 0], ['status', '!=', 1]])->orderBy('created_at', 'DESC')->get();
             $competitions_on_off = 1;
         }
         if($slug == 'leagues'){
-            $competitions = Competition::where([['is_league', 1], ['status','!=', 1]])->get();
+            $competitions = Competition::where([['is_league', 1], ['status','!=', 1]])->orderBy('created_at', 'DESC')->get();
             $competitions_on_off = 1;
         }
 
