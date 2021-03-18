@@ -19,7 +19,7 @@ class ReservationController extends Controller
     public function index()
     {
         $reservations = DB::table('reservations')
-        ->select(DB::raw('reservations.id, reservations.code, users.name as user_name, users.email as user_email, fields.name as field_name, reservations.hour as hour, reservations.res_date as res_date, reservations.price as price, reservations.conf_code as res_code, reservations.created_at as created_at'))
+        ->select(DB::raw('reservations.id, reservations.code, users.name as user_name, users.email as user_email, fields.name as field_name, fields.number as field_number, reservations.hour as hour, reservations.res_date as res_date, reservations.price as price, reservations.conf_code as res_code, reservations.created_at as created_at'))
         ->leftJoin('users', 'reservations.user_id', '=', 'users.id')
         ->leftJoin('fields', 'reservations.field_id', '=', 'fields.id')
         ->orderBy('reservations.created_at', 'desc')

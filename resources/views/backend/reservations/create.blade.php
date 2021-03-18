@@ -290,7 +290,7 @@
                             <select class="form-control m-b" name="field" id='field'>
                                 <option value="">Pick a Field --</option>
                                 @foreach ($fields as $item)
-                                    <option value='{{$item->id}}'>{{$item->name}}</option>
+                                    <option value='{{$item->id}}'>{{$item->number.'.'.$item->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -361,7 +361,7 @@
                             }
                         @endphp
                         
-                        <h1>{{$field->name}} <span style='font-size: .9rem;'><strong>{{$field_players_number}}</strong></span> </h1>
+                        <h1>{{$field->number.'.'.$field->name}} <span style='font-size: .9rem;'><strong>{{$field_players_number}}</strong></span> </h1>
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered table-hover" >
                                 <thead>

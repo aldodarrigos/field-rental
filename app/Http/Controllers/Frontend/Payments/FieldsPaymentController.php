@@ -272,8 +272,13 @@ class FieldsPaymentController extends Controller
     public function successbooking($contact = null, $code = null, $field_id = null, $user_id, $paypal_code = null)
     {
 
-        $correo = new BookingMailable($contact, $code, $field_id, $user_id, $paypal_code);
-        Mail::to($contact)->send($correo);
+        $admin_email = Setting::first()->email;
+        
+        $confirmation = new BookingMailable($contact, $code, $field_id, $user_id, $paypal_code);
+        Mail::to($contact)->send($confirmation);
+
+        $copy = new BookingMailable($contact, $code, $field_id, $user_id, $paypal_code);
+        Mail::to($admin_email)->send($copy);
         
     }
 

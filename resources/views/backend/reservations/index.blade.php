@@ -103,7 +103,7 @@
                     <tr class="gradeX">
                         <td>{{$reservation->id}}</td>
                         
-                        <td>{{$reservation->field_name}}</td>
+                        <td>{{$reservation->field_number.'.'.$reservation->field_name}}</td>
                         <td><strong>{{$reservation->user_name}}</strong></td>
                         <td>{{$reservation->user_email}}</td>
                         <td>${{$reservation->price}}</td>
