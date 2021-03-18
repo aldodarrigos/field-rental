@@ -55,9 +55,9 @@ Route::get('/', function () {
 });
 */
 
-Route::get('/', [FrontendController::class, 'index'])->name('frontend.cover');
+Route::get('/', [FrontendController::class, 'index']);
 Route::get('/testing', [FrontendController::class, 'test']);
-Route::get('about', [FrontendController::class, 'about'])->name('frontend.about');
+Route::get('about', [FrontendController::class, 'about']);
 Route::get('services', [ServicesController::class, 'services'])->name('frontend.services');
 Route::get('services/{slug?}', [ServicesController::class, 'service'])->name('frontend.service');
 Route::get('service/registration/{id?}', [ServicesController::class, 'registration'])->name('service.registration');
@@ -148,9 +148,9 @@ Route::middleware(['admin'])->group(function () {
     Route::get('backend/dashboard', [DashboardController::class, 'index'])->name('backend.dashboard');
 
     //BOOKING
-    Route::resource('backend-booking', ReservationController::class);
-    Route::get('calendar', [ReservationController::class, 'calendar'])->name('backend.calendar');
-    Route::get('get-reservations', [ReservationController::class, 'get_reservations'])->name('backend.get-reservations');
+    Route::resource('booking', ReservationController::class);
+    Route::get('calendar', [ReservationController::class, 'calendar']);
+    Route::get('get-reservations', [ReservationController::class, 'get_reservations']);
     Route::get('delete-reservation/{id?}', [ReservationController::class, 'destroy']);
 
     //CONTENT

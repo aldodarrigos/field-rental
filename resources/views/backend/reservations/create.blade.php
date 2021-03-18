@@ -26,36 +26,198 @@
 
             $('#buttonrental').prop('disabled', true);
 
-            $(".dummyclass").click(function(){
-                $(".dummyclass").removeClass('bg-info');
-                $(this).toggleClass("bg-info");
-                let day = $(this).text();
-                let price = $(this).data("price");
-                let hour = $(this).data("hour");
+            $(".noselect").click(function(){
 
-                //Set hidden inputs 
-                $('#hourSelected').val(hour);//get hour selected
-                $('#priceSelected').val(price);
+                if($(this).hasClass('noselect')){
 
-                //Show selected day and price
-                $('#show_hour').text(day);
-                $('#show_price').text(price);
+                        hour_button_switch($(this), '1')
+                        sethour($(this))
+                        xsa()
+                        //$('#buttonrental').toggleClass("bg-graytext")
+                        //$('#buttonrental').toggleClass("bg-red")
 
-                
-                $('#buttonrental').toggleClass("bg-graytext");
-                $('#buttonrental').toggleClass("bg-red");
-
-                if($('#hourSelected').val() != '') {
-                    $('#buttonrental').prop('disabled', false);
-                    $('#buttonrental').removeClass("bg-graytext");
-                    $('#buttonrental').addClass("bg-red");
                 }else{
-                    $('#buttonrental').prop('disabled', true);
-                    $('#buttonrental').addClass("bg-graytext");
-                    $('#buttonrental').removeClass("bg-red");
+
+                    hour_button_switch($(this), '0')
+                    unsethour($(this))
+                    xsa()
+
                 }
+
+
             });
 
+        });
+
+
+        function sethour(thisHour){
+
+            let hour_text = thisHour.text();
+            let price = thisHour.data("price")
+            let price_alt = thisHour.data("pricealt")
+            let hour = thisHour.data("hour")
+            let houralt = thisHour.data("houralt")
+            let mark = thisHour.data("mark")
+
+            let hourInt = parseInt(hour.replace(':00', ''))
+
+            $('#hour-'+hourInt).attr('data-price', price)
+            $('#hour-'+hourInt).attr('data-pricealt', price_alt)
+            $('#hour-'+hourInt).attr('data-mark', mark)
+            $('#hour-'+hourInt).attr('data-active', 1)
+            $('#hour-'+hourInt).attr('data-houralt', houralt)
+
+        }
+
+        function unsethour(thisHour){
+
+            let hour = thisHour.data("hour")
+            let hourInt = parseInt(hour.replace(':00', ''))
+
+            $('#hour-'+hourInt).attr('data-price', '')
+            $('#hour-'+hourInt).attr('data-pricealt', '')
+            $('#hour-'+hourInt).attr('data-active', 0)
+            $('#hour-'+hourInt).attr('data-mark', '')
+            $('#hour-'+hourInt).attr('data-houralt', '')
+
+        }
+
+
+        function xsa(){
+
+            matrix = []
+            matrixFinale = []
+            let mod_price_regular = $('#alt_price_regular').val()
+            let mod_price_hot = $('#alt_price_hot').val()
+
+            for (let i = 22; i > 9; i--) {
+                let indexhour = $('#hour-'+i)
+                if(indexhour.attr('data-active') == '1'){
+                    matrix.push([indexhour.val(), indexhour.attr('data-price'), indexhour.attr('data-pricealt'), indexhour.attr('data-mark'), indexhour.attr('data-houralt')])
+                }
+            }//endfor
+            console.log(matrix)
+
+
+            if(matrix.length == 1){
+                let mark = matrix[0][3]//Get if hour is regular or hot
+                let houralt = matrix[0][4]//Get alternative format date
+                matrixFinale = []
+                $('#sumary').html('')
+
+                //if alt regular price is set get this price. If not get regular price
+                let calculate_price = (mod_price_regular != '')?mod_price_regular:matrix[0][1]
+                if(mark == 'h'){
+                    //if alt hot price is set get this price. If not get hot price
+                    calculate_price = (mod_price_hot != '')?mod_price_hot:matrix[0][1]
+                }
+                matrixFinale.push([matrix[0][0], calculate_price])
+                let currentDate = $('#dateSelectedAlt').val()
+
+                $('#sumary').append('<tr><td>'+currentDate+'</td><td>'+houralt+'</td><td><span>$ '+calculate_price+'</span></td></tr>')
+
+                $('#total').text(calculate_price)//Total Text
+                $('#totalPrice').val(calculate_price)//Total hidden value
+                $('#bookingArray').val(JSON.stringify(matrixFinale))
+                confirm_button_switch('on')
+
+            }else if(matrix.length > 1){
+
+                matrixFinale = []
+                $('#sumary').html('')
+                let sumTotal = parseFloat('0.00')
+
+                for (let x = 0; x < matrix.length; x++) {
+
+                    let currentDate = $('#dateSelectedAlt').val()
+                    let mark = matrix[x][3]//Get if hour is regular or hot
+                    let houralt = matrix[x][4]//Get alternative format date
+
+                    if(x == 0){
+
+                        //if alt regular price is set get this price. If not get regular price
+                        let calculate_price = (mod_price_regular != '')?mod_price_regular:matrix[0][1]
+                        if(mark == 'h'){
+                            //if alt hot price is set get this price. If not get hot price
+                            calculate_price = (mod_price_hot != '')?mod_price_hot:matrix[0][1]
+                        }
+
+                        matrixFinale.push([matrix[x][0], calculate_price])
+                        $('#sumary').append('<tr><td>'+currentDate+'</td><td>'+houralt+'</td><td><span>$ '+calculate_price+'</span></td></tr>')
+                        
+                        sumTotal += parseFloat(calculate_price)
+                        $('#total').text(sumTotal.toFixed(2))//Total Text
+                        $('#totalPrice').val(sumTotal.toFixed(2))//Total hidden value
+                        $('#bookingArray').val(JSON.stringify(matrixFinale))
+
+                    }else{
+
+                        let price = (matrix[x][2] > 0)?matrix[x][2]:matrix[x][1]
+
+                        //if alt regular price is set get this price. If not get regular price
+                        let calculate_price = (mod_price_regular != '')?mod_price_regular:price
+                        if(mark == 'h'){
+                            //if alt hot price is set get this price. If not get hot price
+                            calculate_price = (mod_price_hot != '')?mod_price_hot:price
+                        }
+
+
+                        matrixFinale.push([matrix[x][0], calculate_price])
+                        $('#sumary').append('<tr><td>'+currentDate+'</td><td>'+houralt+'</td><td><span>$ '+calculate_price+'</span></td></tr>')
+
+                        sumTotal += parseFloat(calculate_price)
+                        $('#total').text(sumTotal.toFixed(2))//Total Text
+                        $('#totalPrice').val(sumTotal.toFixed(2))//Total hidden value
+                        $('#bookingArray').val(JSON.stringify(matrixFinale))
+
+                    }
+                    
+                }
+
+                confirm_button_switch('on')
+
+            }else{
+                let currentDate = $('#dateSelected').val()
+                $('#sumary').html('<tr><td>'+currentDate+'</td><td><span>-----</span></td><td><span>-----</span></td></tr>')//reset table booking
+                $('#total').text('0.00')//reset text total
+                $('#bookingArray').val('0')//reset hidden value array
+                $('#totalPrice').val('0.00')//reset hidden value
+                confirm_button_switch('off')
+            }
+
+            console.log(matrixFinale)
+
+        }
+
+
+        function hour_button_switch(thisObj, signal){
+            if(signal == '1'){
+                thisObj.addClass("btn-info");
+                thisObj.removeClass("btn-default");
+                thisObj.removeClass("noselect");
+                thisObj.addClass("selected");
+            }else{
+                thisObj.addClass("btn-default");
+                thisObj.removeClass("btn-info");
+                thisObj.removeClass("selected");
+                thisObj.addClass("noselect");
+            }
+        }
+
+        function confirm_button_switch(signal){
+            if(signal == 'on') {
+                $('#buttonrental').prop('disabled', false);
+                $('#buttonrental').removeClass("bg-graytext");
+                $('#buttonrental').addClass("bg-red");
+            }else{
+                $('#buttonrental').prop('disabled', true);
+                $('#buttonrental').addClass("bg-graytext");
+                $('#buttonrental').removeClass("bg-red");
+            }
+        }
+
+        $("#clean").click(function(){               
+            location.reload();
         });
 
         $('#players_number').change(function() {
@@ -144,6 +306,8 @@
                         
                         <button type="submit" class="btn btn-w-m btn-success">CHECK NOW <i class="fas fa-check"></i></button>
 
+                        <a href="/booking" class="btn btn-w-m btn-default"><i class="fas fa-undo-alt"></i> Return</a>
+
                     </form>
                     
                 </div>
@@ -154,18 +318,32 @@
             <form action="{{$action}}" method="POST">
 
                 @if ($result == 1)
-                <input type="hidden" id="hourSelected" name='hourSelected' value=''>
-                <input type="hidden" id="priceSelected" name='priceSelected' value=''>
+
                 <input type="hidden" id="dateSelected" name='dateSelected' value='{{$date}}'>
+                <input type="hidden" id="dateSelectedAlt" name='dateSelectedAlt' value='{{date('M d, Y', strtotime($date))}}'>
                 <input type="hidden" id="fieldIdSelected" name='fieldIdSelected' value='{{$field->id}}'>
                 <input type="hidden" id="fieldSelectedName" name='fieldSelectedName' value='{{$field->name}}'>
                 <input type="hidden" id="fieldShortName" name='fieldShortName' value='{{$field->short_name}}'>
                 <input type="hidden" id="userIdLogin" name='userIdLogin' value='{{Auth::user()->id}}'>
-
+                <input type="hidden" id="bookingArray" name='bookingArray' value='0'>
+                <input type="hidden" id="totalPrice" name='totalPrice' value='0.00'>
 
                 @csrf
+
+                <input type="hidden" id="hour-10" value='10:00' data-price='' data-pricealt='' data-mark='' data-active='0'>
+                <input type="hidden" id="hour-11" value='11:00' data-price='' data-pricealt='' data-mark='' data-active='0'>
+                <input type="hidden" id="hour-12" value='12:00' data-price='' data-pricealt='' data-mark='' data-active='0'>
+                <input type="hidden" id="hour-13" value='13:00' data-price='' data-pricealt='' data-mark='' data-active='0'>
+                <input type="hidden" id="hour-14" value='14:00' data-price='' data-pricealt='' data-mark='' data-active='0'>
+                <input type="hidden" id="hour-15" value='15:00' data-price='' data-pricealt='' data-mark='' data-active='0'>
+                <input type="hidden" id="hour-16" value='16:00' data-price='' data-pricealt='' data-mark='' data-active='0'>
+                <input type="hidden" id="hour-17" value='17:00' data-price='' data-pricealt='' data-mark='' data-active='0'>
+                <input type="hidden" id="hour-18" value='18:00' data-price='' data-pricealt='' data-mark='' data-active='0'>
+                <input type="hidden" id="hour-19" value='19:00' data-price='' data-pricealt='' data-mark='' data-active='0'>
+                <input type="hidden" id="hour-20" value='20:00' data-price='' data-pricealt='' data-mark='' data-active='0'>
+                <input type="hidden" id="hour-21" value='21:00' data-price='' data-pricealt='' data-mark='' data-active='0'>
+                <input type="hidden" id="hour-22" value='22:00' data-price='' data-pricealt='' data-mark='' data-active='0'>
                 
-                    
                 <div class="ibox ">
                     <div class="ibox-title">
                         <h5>Booking availability</h5>
@@ -193,19 +371,19 @@
                                     <th>Price</th>
                                 </tr>
                                 </thead>
+                                <tbody id="sumary">
                                     <tr>
-                                        <td>{{$date}}</td>
-                                        <td><span id='show_hour'>-----</span></td>
-                                        <td><span id='show_price'>-----</span></td>
+                                        <td>{{date('M d, Y', strtotime($date))}}</td>
+                                        <td><span>-----</span></td>
+                                        <td><span>-----</span></td>
                                     </tr>
-                                <tbody>
                                 </tbody>
                             </table>
                         </div>
                         
                         @for ($i = 0; $i < count($hoursarray); $i++)
                             @php
-                                if($hoursarray[$i]['class'] == 'dummyclass'){
+                                if($hoursarray[$i]['class'] == 'noselect'){
                                     $color = 'default';
                                     $pointer = 'cursor-pointer';
                                     $decoration = '';
@@ -214,16 +392,42 @@
                                     $pointer = 'cursor-not-allowed';
                                     $decoration = 'line-through';
                                 }
+
+                                if($hoursarray[$i]['hour'] == '8:00'){ $hour_fix = '8 AM'; }
+                                else if ($hoursarray[$i]['hour'] == '9:00'){ $hour_fix = '9 AM'; }
+                                else if ($hoursarray[$i]['hour'] == '10:00'){ $hour_fix = '10 AM'; }
+                                else if ($hoursarray[$i]['hour'] == '11:00'){ $hour_fix = '11 AM'; }
+                                else if ($hoursarray[$i]['hour'] == '12:00'){ $hour_fix = '12 AM'; }
+                                else if ($hoursarray[$i]['hour'] == '13:00'){ $hour_fix = '1 PM'; }
+                                else if ($hoursarray[$i]['hour'] == '14:00'){ $hour_fix = '2 PM'; }
+                                else if ($hoursarray[$i]['hour'] == '15:00'){ $hour_fix = '3 PM'; }
+                                else if ($hoursarray[$i]['hour'] == '16:00'){ $hour_fix = '4 PM'; }
+                                else if ($hoursarray[$i]['hour'] == '17:00'){ $hour_fix = '5 PM'; }
+                                else if ($hoursarray[$i]['hour'] == '18:00'){ $hour_fix = '6 PM'; }
+                                else if ($hoursarray[$i]['hour'] == '19:00'){ $hour_fix = '7 PM'; }
+                                else if ($hoursarray[$i]['hour'] == '20:00'){ $hour_fix = '8 PM'; }
+                                else if ($hoursarray[$i]['hour'] == '21:00'){ $hour_fix = '9 PM'; }
+                                else if ($hoursarray[$i]['hour'] == '22:00'){ $hour_fix = '10 PM'; }
         
                             @endphp
-                            <span class='{{$hoursarray[$i]['class']}} btn btn-{{$color}} btn-sm mb-2 {{$decoration}} {{$pointer}}' id='{{$hoursarray[$i]['class']}}' data-hour='{{$hoursarray[$i]['hour']}}' data-price='{{$hoursarray[$i]['price']}}'>{{$hoursarray[$i]['hour']}}</span>
+                            <span class='{{$hoursarray[$i]['class']}} btn btn-{{$color}} btn-sm mb-2 {{$decoration}} {{$pointer}}' id='{{$hoursarray[$i]['class']}}' data-hour='{{$hoursarray[$i]['hour']}}' data-houralt='{{$hour_fix}}' data-price='{{$hoursarray[$i]['price']}}' data-pricealt='{{$hoursarray[$i]['price_alt']}}' data-mark='{{$hoursarray[$i]['mark']}}' style="width:60px;">{{$hour_fix}}</span>
                         @endfor
 
+                        <span class='btn btn-default btn-sm mb-2 cursor-pointer' id='clean'> <i class="fas fa-sync"></i> </span>
+
+                        <hr>
+
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group ">
-                                    <label>Modify Price</label>
-                                    <input type="text" name='alt_price' class="form-control" value="0.00">
+                                    <label>Custom regular hour price</label>
+                                    <input type="text" name='alt_price_regular' id='alt_price_regular' class="form-control" value="">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group ">
+                                    <label>Custom high demand hour</label>
+                                    <input type="text" name='alt_price_hot' id='alt_price_hot' class="form-control" value="">
                                 </div>
                             </div>
                         </div>

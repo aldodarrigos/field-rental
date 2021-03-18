@@ -40,7 +40,7 @@ class ReservationController extends Controller
     {
 
         $fields = Field::where('status', 1)->orderBy('number', 'ASC')->get();
-        $action = route('backend-booking.store');
+        $action = route('booking.store');
         $url = "reservations";
 
         $hot_hours = ['18:00', '19:00', '20:00', '21:00', '22:00'];
@@ -67,25 +67,35 @@ class ReservationController extends Controller
 
                 if((date('N', strtotime($date)) >= 6)){
                     $price = $field->price_weekend;
+                    $price_alt = $field->price_weekend_alt;
+                    $mark = 'w';
                 }else{
                     if(in_array($item, $hot_hours)){
                         $price = $field->price_night;
+                        $price_alt = $field->price_night_alt;
+                        $mark = 'h';
                     }else{
                         $price = $field->price_regular;
+                        $price_alt = $field->price_regular_alt;
+                        $mark = 'r';
                     }
                 }
 
                 if($this->check_hours($item, $field->id, $date)){
                     array_push($hoursarray, 
                     ['hour' => $item, 
-                    'class' => 'reservedday',
-                    'price' => $price
+                    'class' => 'taken',
+                    'price' => $price,
+                    'price_alt' => $price_alt,
+                    'mark' => $mark
                     ]);
                 }else{
                     array_push($hoursarray, [
                         'hour' => $item, 
-                        'class' => 'dummyclass',
-                        'price' => $price
+                        'class' => 'noselect',
+                        'price' => $price,
+                        'price_alt' => $price_alt,
+                        'mark' => $mark
                         ]);
                 }
             }
@@ -127,27 +137,31 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {   
-        $booking = new Reservation();
-        $short_name =$request->input('fieldShortName');
+
+        $short_name = $request->input('fieldShortName');
+        $field_id = $request->input('fieldIdSelected');
+        $user_id = $request->input('userIdLogin');
         $date = $request->input('dateSelected');
-        $hour = $request->input('hourSelected');
-        $code = str_replace( array( '-', ':' ), '', $short_name.$date.$hour); 
+        $booking_array = json_decode($request->input('bookingArray'));
+        $code = str_replace( array( '-', ':' ), '', $short_name.$date.rand(1000,9999)); 
 
-        $price = $request->input('priceSelected');
-        $alt_price = $request->input('alt_price');
+        //$alt_price = $request->input('alt_price');
+        //$final_price = ($alt_price > 0.00)?$alt_price:$price;
 
-        $final_price = ($alt_price > 0.00)?$alt_price:$price;
+        for ($i=0; $i < count($booking_array) ; $i++) { 
 
-        $booking->code = $code;
-        $booking->user_id = $request->input('userIdLogin');
-        $booking->field_id = $request->input('fieldIdSelected');
-        $booking->res_date = $date;
-        $booking->hour = $hour;
-        $booking->price = $final_price;
-        $booking->note = $request->input('note');
-        $booking->save();
+            $reservation = new Reservation();
+            $reservation->user_id = $user_id;
+            $reservation->code = $code;
+            $reservation->field_id = $field_id;
+            $reservation->res_date = $date;
+            $reservation->hour = $booking_array[$i][0];
+            $reservation->price = $booking_array[$i][1];
+            $reservation->save();
 
-        return redirect('backend-booking');
+        }
+
+        return redirect('booking');
     }
 
     /**
@@ -159,7 +173,7 @@ class ReservationController extends Controller
     public function edit($id)
     {
         
-        $action = route('backend-booking.update', $id);
+        $action = route('booking.update', $id);
         $reservation = DB::table('reservations')
         ->select(DB::raw('reservations.id, 
         reservations.code, 
@@ -209,7 +223,7 @@ class ReservationController extends Controller
         $booking->note = $request->input('note');
         $booking->save();
 
-        return redirect('backend-booking/'.$id.'/edit')->with('success', 'Successful update!');
+        return redirect('booking/'.$id.'/edit')->with('success', 'Successful update!');
 
     }
 
@@ -240,7 +254,7 @@ class ReservationController extends Controller
         $menu = Reservation::find($id);
         $menu->delete();
 
-        return redirect('backend-booking')->with('success','Reservation deleted.');
+        return redirect('booking')->with('success','Reservation deleted.');
     }
 
     public function calendar(){
@@ -268,7 +282,7 @@ class ReservationController extends Controller
             array_push($array, array(
                 'title' => $item->user_name.' - '.$item->field_short_name, 
                 'start' => $item->res_date.' '.$item->hour,
-                'url' => '/backend-booking/'.$item->id,
+                'url' => '/booking/'.$item->id,
                 'note' => $item->field_name.' - '.$item->res_date.' - '.$item->hour.' - '.$item->code,
             ));
         }

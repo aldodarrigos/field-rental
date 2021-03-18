@@ -168,7 +168,7 @@
                                 <button type="submit" class="btn btn-w-m btn-success"><i class="fas fa-download"></i> Update</button>
                                 <input type="hidden" name="_method" value="PUT">
         
-                                <a href="/backend-booking" class="btn btn-w-m btn-default"><i class="fas fa-undo-alt"></i> Return</a>
+                                <a href="/booking" class="btn btn-w-m btn-default"><i class="fas fa-undo-alt"></i> Return</a>
                             </div>
                             <div class="col-md-3">
                                 <a href="" class="btn btn-w-m btn-danger float-right" data-toggle="modal" data-target="#myModal6"><i class="far fa-trash-alt"></i> Delete</a>

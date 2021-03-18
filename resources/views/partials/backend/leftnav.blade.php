@@ -36,7 +36,7 @@
             </li>
 
             <li class='{{$reservations_active}}'>
-                <a href="/backend-booking"><i class="fas fa-book"></i> <span class="nav-label">Booking</span> </a>
+                <a href="/booking"><i class="fas fa-book"></i> <span class="nav-label">Booking</span> </a>
             </li>
 
             <li class="{{$content_active}}">

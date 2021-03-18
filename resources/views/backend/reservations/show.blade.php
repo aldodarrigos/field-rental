@@ -27,7 +27,7 @@
         <h2>Booking</h2>
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="/backend-booking">Dashboard</a>
+                <a href="/booking">Dashboard</a>
             </li>
             <li class="breadcrumb-item active">
                 <strong>Booking Detail</strong>
@@ -129,7 +129,7 @@
 
                 <div class="hr-line-dashed"></div>
 
-                <a href="/backend-booking" class="btn btn-w-m btn-default"><i class="fas fa-undo-alt"></i> Return</a>
+                <a href="/booking" class="btn btn-w-m btn-default"><i class="fas fa-undo-alt"></i> Return</a>
 
 
                 
