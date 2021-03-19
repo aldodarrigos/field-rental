@@ -41,7 +41,7 @@ class UserController extends Controller
 
         }
         // if failed login
-        return redirect('user-login');
+        return redirect('signin')->with('status', 'Incorrect email or password.');
         
     }
 

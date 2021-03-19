@@ -210,7 +210,8 @@ class CompetitionsController extends Controller
         competition_crews.competition_id as competition_id, 
         competition_crews.price as registration_price, 
         competition_crews.status as registration_status, 
-
+        competitions.status as competition_status,
+        
         users.name as user_name, users.email as user_email, users.phone as user_phone,
         crews.id as team_id, crews.name as team_name, crews.manager_id as manager, 
         crews.uniform_colors as uniforms, crews.gender as gender,
@@ -219,6 +220,7 @@ class CompetitionsController extends Controller
         ->leftJoin('users', 'competition_crews.user_id', '=', 'users.id')
         ->leftJoin('crews', 'competition_crews.crew_id', '=', 'crews.id')
         ->leftJoin('categories', 'crews.category_id', '=', 'categories.id')
+        ->leftJoin('competitions', 'competition_crews.competition_id', '=', 'competitions.id')
         ->where('competition_crews.id', $id)
         ->first();
 
@@ -333,10 +335,11 @@ class CompetitionsController extends Controller
         competition_trials.price as registration_price, 
         competition_trials.status as registration_status, 
         competition_trials.manager_id as manager_id, 
-
+        competitions.status as competition_status,
         users.name as user_name, users.email as user_email, users.phone as user_phone'))
 
         ->leftJoin('users', 'competition_trials.manager_id', '=', 'users.id')
+        ->leftJoin('competitions', 'competition_trials.competition_id', '=', 'competitions.id')
         ->where('competition_trials.id', $id)
         ->first();
 

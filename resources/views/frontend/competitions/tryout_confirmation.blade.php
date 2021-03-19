@@ -75,6 +75,8 @@
 
                 @if ($registration->registration_status == 0)
 
+                    @if ($registration->competition_status == 2)
+                        
                     <div class="text-center mt-6">
 
                         <form action="/tryout-payment" method="POST" id='competition-payment-form' class="inline-block">
@@ -94,6 +96,8 @@
                         <a href='/profile/dashboard' class="font-roboto text-gray font-bold rounded py-3 px-8 uppercase text-lg hover:bg-deepblue ease-in-out duration-300 bg-red"><i class="fas fa-sign-in-alt"></i> Pay Later</a>
 
                     </div>
+
+                    @endif
                     
                 @else
                     

@@ -65,7 +65,7 @@
 
             <td class="px-6 py-4 whitespace-no-wrap border-b border-bluetext">
                 @if ($item->registration_status == 1)
-                    <span class="px-2 inline-flex text-xs uppercase leading-5 font-semibold rounded-md bg-{{$status_bg}} text-white py-1">{{$status}}</span>
+                    <span class="px-2 inline-flex text-xs uppercase leading-5 font-semibold rounded-md bg-{{$status_bg}} text-white py-1" data-id='{{$item->registration_id}}'>{{$status}}</span>
                 @else
                     <a href="/team-confirmation/{{$item->registration_id}}" class="px-2 inline-flex text-xs uppercase leading-5 font-semibold rounded-md bg-{{$status_bg}} text-white py-1">{{$status}}</a>
                 @endif
