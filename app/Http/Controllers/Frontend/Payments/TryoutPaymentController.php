@@ -15,7 +15,7 @@ use PayPal\Api\Transaction;
 use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Rest\ApiContext;
 
-use App\Models\{CompetitionTrial, User, Service};
+use App\Models\{CompetitionTrial, User, Service, Setting};
 
 use App\Mail\TryoutsMailable;
 use Illuminate\Support\Facades\Mail;
@@ -175,8 +175,14 @@ class TryoutPaymentController extends Controller
     public function successbooking($contact = null, $sale_id = null)
     {
 
-        $correo = new TryoutsMailable($contact, $sale_id);
-        Mail::to($contact)->send($correo);
+        $admin_email = Setting::first()->email;
+
+        $confirmation = new TryoutsMailable($contact, $sale_id);
+        Mail::to($contact)->send($confirmation);
+
+        $copy = new TryoutsMailable($contact, $sale_id);
+        Mail::to($admin_email)->send($copy);
+
         
     }
 

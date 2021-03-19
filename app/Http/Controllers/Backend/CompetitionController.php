@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\{Competition, CompetitionStatus, CompetitionRegistration, CrewPlayer, Category, CompetitionCategory, CompetitionContact};
+use App\Models\{Competition, CompetitionStatus, CompetitionRegistration, CrewPlayer, Category, CompetitionCategory, CompetitionContact, Crew, Trial};
 use DB;
 use Illuminate\Support\Str;
 //use GuzzleHttp\Client;
@@ -229,7 +229,7 @@ class CompetitionController extends Controller
         trials.age as player_age, 
         trials.gender as player_gender,
         trials.tshirt as player_tshirt,
-
+        trials.read,
         categories.name as category,
 
         competitions.name as competition_name,
@@ -276,14 +276,16 @@ class CompetitionController extends Controller
         ->first();
 
         $players = DB::table('trials')
-        ->select(DB::raw('trials.name, 
-        trials.age, 
-        trials.gender, 
-        categories.name as category'))
-
+        ->select(DB::raw('trials.id, trials.name, trials.age, trials.gender, categories.name as category'))
         ->leftJoin('categories', 'trials.category_id', '=', 'categories.id')
         ->where('trials.registration_id', $id)
         ->get();
+
+        foreach ($players as $item) {
+            $player = Trial::where('id', $item->id)->first();
+            $player->read = 1;
+            $player->save();
+        }
 
         $url = "competitions";
         
@@ -299,6 +301,7 @@ class CompetitionController extends Controller
         crews.name as team_name, 
         crews.uniform_colors as uniforms, 
         crews.gender as gender,
+        crews.read,
         categories.name as category,
 
         competitions.name as competition_name,
@@ -349,6 +352,10 @@ class CompetitionController extends Controller
 
         ->where('competition_crews.id', $id)
         ->first();
+
+        $team = Crew::where('id', $record->team_id)->first();
+        $team->read = 1;
+        $team->save();
 
         $players = CrewPlayer::where('crew_id', $record->team_id)->orderBy('name', 'DESC')->get();
 

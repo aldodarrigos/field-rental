@@ -46,7 +46,7 @@
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>Trials Registration</h2>
+        <h2>Teams Registration</h2>
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
                 <a href="/competitions">Dashboard</a>
@@ -63,7 +63,7 @@
         <div class="col-lg-12">
             <div class="ibox ">
                 <div class="ibox-title">
-                    <h5>Trials registration</h5>
+                    <h5>teams registration</h5>
                     <div class="ibox-tools">
                         
                     </div>
@@ -83,6 +83,7 @@
                                     <th>Registrant</th>
                                     <th>Date</th>
                                     <th>Status</th>
+                                    <th>Read</th>
 
                                 </tr>
                             </thead>
@@ -94,10 +95,12 @@
                                         $gender = ($record->gender == 1)?'Famele':'Male';  
                                         $status = ($record->registration_status == 1)?'Paid':'Pending payment';  
                                         $status_color = ($record->registration_status == 1)?'btn-info':'btn-default';  
+                                        $read = ($record->read == 1)?'Read':'unread';  
+                                        $read_color = ($record->read == 0)?'btn-info':'btn-default';  
                                     @endphp
 
                                     <tr class="gradeX">
-                                        <td><a href="/trial-detail/{{$record->registration_id}}">{{$record->team_id}}</a></td>
+                                        <td><a href="/teams-detail/{{$record->registration_id}}">{{$record->team_id}}</a></td>
                                         <td>{{$record->team_name}}</td>
                                         <td><strong>{{$record->uniforms}}</strong></td>
                                         <td><strong>{{$gender}}</strong></td>
@@ -106,6 +109,7 @@
                                         <td><a href="/teams-detail/{{$record->registration_id}}">{{$record->registrant}}</a></td>
                                         <td><strong>{{date('M d, Y', strtotime($record->date))}}</strong></td>
                                         <td><span class="btn btn-xs {{$status_color}}">{{$status}}</span></td>
+                                        <td><span class="btn btn-xs {{$read_color}}">{{$read}}</span></td>
                                     </tr>
 
                                 @endforeach

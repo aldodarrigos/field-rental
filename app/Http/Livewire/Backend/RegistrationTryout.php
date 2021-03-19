@@ -15,7 +15,7 @@ class RegistrationTryout extends Component
         competitions.name as competition_name, competition_trials.updated_at as updated_at'))
         ->leftJoin('competition_trials', 'trials.registration_id', '=', 'competition_trials.id')
         ->leftJoin('competitions', 'competition_trials.competition_id', '=', 'competitions.id')
-        ->where('competition_trials.status', 0)
+        ->where('trials.read', 0)
         ->orderBy('competition_trials.updated_at', 'DESC')
         ->get();
 

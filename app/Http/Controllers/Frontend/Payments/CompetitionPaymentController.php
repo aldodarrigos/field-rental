@@ -15,7 +15,7 @@ use PayPal\Api\Transaction;
 use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Rest\ApiContext;
 
-use App\Models\{CompetitionCrew, User, Service};
+use App\Models\{CompetitionCrew, User, Service, Setting};
 
 use App\Mail\TeamMailable;
 use Illuminate\Support\Facades\Mail;
@@ -187,8 +187,13 @@ class CompetitionPaymentController extends Controller
     public function successbooking($contact = null, $sale_id = null)
     {
 
-        $correo = new TeamMailable($contact, $sale_id);
-        Mail::to($contact)->send($correo);
+        $admin_email = Setting::first()->email;
+
+        $confirmation = new TeamMailable($contact, $sale_id);
+        Mail::to($contact)->send($confirmation);
+
+        $copy = new TeamMailable($contact, $sale_id);
+        Mail::to($admin_email)->send($copy);
         
     }
 

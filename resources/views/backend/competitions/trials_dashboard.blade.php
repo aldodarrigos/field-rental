@@ -63,7 +63,7 @@
         <div class="col-lg-12">
             <div class="ibox ">
                 <div class="ibox-title">
-                    <h5>Trials registration</h5>
+                    <h5>Tryouts registration</h5>
                     <div class="ibox-tools">
                         
                     </div>
@@ -84,6 +84,7 @@
                                     <th>Registrant</th>
                                     <th>Date</th>
                                     <th>Status</th>
+                                    <th>Read</th>
 
                                 </tr>
                             </thead>
@@ -95,6 +96,8 @@
                                         $gender = ($record->player_gender == 1)?'Famele':'Male';  
                                         $status = ($record->registration_status == 1)?'Paid':'Pending payment';  
                                         $status_color = ($record->registration_status == 1)?'btn-info':'btn-default';  
+                                        $read = ($record->read == 1)?'Read':'unread';  
+                                        $read_color = ($record->read == 0)?'btn-info':'btn-default';  
                                     @endphp
 
                                     <tr class="gradeX">
@@ -108,6 +111,7 @@
                                         <td><a href="/tryouts-detail/{{$record->registration_id}}">{{$record->registrant}}</a></td>
                                         <td><strong>{{date('M d, Y', strtotime($record->date))}}</strong></td>
                                         <td><span class="btn btn-xs {{$status_color}}">{{$status}}</span></td>
+                                        <td><span class="btn btn-xs {{$read_color}}">{{$read}}</span></td>
                                     </tr>
 
                                 @endforeach

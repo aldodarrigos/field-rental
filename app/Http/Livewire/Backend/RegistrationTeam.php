@@ -15,7 +15,7 @@ class RegistrationTeam extends Component
         competitions.name as competition_name'))
         ->leftJoin('competition_crews', 'crews.id', '=', 'competition_crews.crew_id')
         ->leftJoin('competitions', 'competition_crews.competition_id', '=', 'competitions.id')
-        ->where('competition_crews.status', 0)
+        ->where('crews.read', 0)
         ->orderBy('competition_crews.updated_at', 'DESC')
         ->get();
 
