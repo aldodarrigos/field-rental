@@ -16,7 +16,7 @@
                 pageLength: 25,
                 responsive: true,
                 dom: '<"html5buttons"B>lTfgitp',
-                "order": [[ 0, "DESC" ]],
+                "order": [[ 0, "desc" ]],
                 buttons: [
                     { extend: 'copy'},
                     {extend: 'csv'},
@@ -46,10 +46,10 @@
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>Services Registration</h2>
+        <h2>Summer Clinics</h2>
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="/backend-services">Services</a>
+                <a href="/summerclin">Dashboard</a>
             </li>
         </ol>
     </div>
@@ -60,11 +60,12 @@
 <div class="wrapper wrapper-content animated fadeInRight">
 
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-8">
             <div class="ibox ">
                 <div class="ibox-title">
-                    <h5>Services Registration</h5>
+                    <h5>Summer Clinics events</h5>
                     <div class="ibox-tools">
+                        <a href="/summerclin/create" class="btn btn-primary btn-xs">New Event</a>
                     </div>
                 </div>
                 <div class="ibox-content">
@@ -73,17 +74,11 @@
                         <table class="table table-striped table-bordered table-hover dataTables-example" >
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Player Name</th>
-                                    <th>Age</th>
-                                    <th>Gender</th>
-                                    <th>Tshirt Size</th>
-                                    <th>Grade</th>
-                                    <th>Obs</th>
-                                    <th>Service</th>
-                                    <th>Reg User</th>
+                                    <th>id</th>
+                                    <th>Name</th>
                                     <th>Date</th>
                                     <th>Status</th>
+                                    <th>Registration</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -91,43 +86,41 @@
                                 @foreach ($records as $record)
 
                                     @php
+                                        $status_color = ($record->status == 1)?'btn-info':'btn-default';  
+                                        $read = ($record->read == 1)?'Read':'unread';  
+                                        $read_color = ($record->read == 0)?'btn-info':'btn-default';  
+                                        $statustxt = '';
+                                        $status_color = 'btn-default';
 
-                                    $status = 'Pending';
-                                    $status_color = 'default';
-                                    if($record->status == 1) {
-                                        $status = 'Paid';
-                                        $status_color = 'info';
-                                    }
-
-                                    $gender = ($record->gender == 1)?'Female':'Male';
-
+                                        foreach ($status as $item) {
+                                            if ($item->id == $record->status) {
+                                                $statustxt = $item->name;
+                                            }
+                                            if ($item->id == 2) {
+                                                $status_color = 'btn-info';
+                                            }
+                                        }
                                     @endphp
 
+
                                     <tr class="gradeX">
-                                        <td><a href="/serv-registration-detail/{{$record->registration_id}}">{{$record->player_id}}</a></td>
-                                        
-                                        <td><a href="/serv-registration-detail/{{$record->registration_id}}">{{$record->player_name}}</a></td>
-                                        <td>{{$record->age}}</td>
-                                        <td>{{$gender}}</td>
-                                        <td>{{$record->tshirt_size}}</td>
-                                        <td>{{$record->grade}}</td>
-                                        <td>{{$record->obs}}</td>
-                                        <td>{{$record->service_name}}</td>
-                                        <td>{{$record->reg_user}}</td>
-                                        <td>{{date('M d, Y h:i:s A', strtotime($record->updated_at))}}</td>
-                                        <td class="center"><span class="btn btn-{{$status_color}} btn-xs">{{$status}}</span></td>
+                                        <td><a href="/summerclin/{{$record->id}}/edit">{{$record->id}}</a></td>
+                                        <td><a href="/summerclin/{{$record->id}}/edit">{{$record->name}}</a></td>
+                                        <td><strong>{{date('M d, Y', strtotime($record->created_at))}}</strong></td>
+                                        <td><span class="btn btn-xs {{$status_color}}">{{$statustxt}}</span></td>
+                                        <td><a href="/summerclin-registration/{{$record->id}}">Registration</a></td>
                                     </tr>
 
                                 @endforeach
 
                             </tbody>
                         </table>
+                
                     </div>
 
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 

@@ -65,7 +65,7 @@ class UserController extends Controller
         ->get();
 
         $services = DB::table('service_registration')
-        ->select(DB::raw('service_registration.id as registration_id, services.name as service_name, services.price as service_price, service_registration.player_name as player_name, service_registration.status as registration_status, service_registration.payment_code as payment_code, service_registration.updated_at as registration_date'))
+        ->select(DB::raw('service_registration.id as registration_id, services.name as service_name, service_registration.price as service_price, service_registration.status as registration_status, service_registration.payment_code as payment_code, service_registration.updated_at as registration_date'))
 
         ->leftJoin('users', 'service_registration.responsible_user', '=', 'users.id')
         ->leftJoin('services', 'service_registration.service_id', '=', 'services.id')

@@ -25,7 +25,7 @@
         <h2>Tryouts</h2>
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="/competitions">Dashboard</a>
+                <a href="/summerclin">Dashboard</a>
             </li>
             <li class="breadcrumb-item active">
                 <strong>Registration detail</strong>
@@ -52,28 +52,30 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group ">
-                            <label>Competition</label>
-                            <input type="text" name='fullname' class="form-control" value="{{$record->competition_name}}">
+                            <label>Event</label>
+                            <input type="text" name='fullname' class="form-control" value="{{$record->event_name}}">
                         </div>
                     </div>
-                    <div class="col-md-6">
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-4">
                         <div class="form-group ">
                             <label>Registrant</label>
                             <input type="text" name='fullname' class="form-control" value="{{$record->registrant}}">
                         </div>
                     </div>
-                </div>
 
-                <div class="row">
-
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group ">
                             <label>Email</label>
                             <input type="text" name='email' class="form-control" value="{{$record->email}}">
                         </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group ">
                             <label>Phone</label>
                             <input type="text" name='phone' class="form-control" value="{{$record->phone}}">
@@ -83,30 +85,74 @@
 
                 <div class="row">
 
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group ">
-                            <label>Amount </label>
-                            <input type="text" name='team' class="form-control" value="{{'$'.$record->registration_price}}" >
+                            <label>Address</label>
+                            <input type="text" name='fullname' class="form-control" value="{{$record->address}}">
                         </div>
                     </div>
-                    <div class="col-md-6">
+
+                    <div class="col-md-4">
+                        <div class="form-group ">
+                            <label>City</label>
+                            <input type="text" name='email' class="form-control" value="{{$record->city}}">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group ">
+                            <label>Zip</label>
+                            <input type="text" name='phone' class="form-control" value="{{$record->zip}}">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-3">
+                        <div class="form-group ">
+                            <label>Phone Home</label>
+                            <input type="text" name='fullname' class="form-control" value="{{$record->phone_home}}">
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group ">
+                            <label>Phone Cell</label>
+                            <input type="text" name='fullname' class="form-control" value="{{$record->phone_cell}}">
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group ">
+                            <label>Emergency Contact</label>
+                            <input type="text" name='email' class="form-control" value="{{$record->emergency_contact}}">
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group ">
+                            <label>Emergency Phone</label>
+                            <input type="text" name='phone' class="form-control" value="{{$record->emergency_phone}}">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-3">
+                        <div class="form-group ">
+                            <label>Amount </label>
+                            <input type="text" name='team' class="form-control" value="{{'$'.$record->price}}" >
+                        </div>
+                    </div>
+                    <div class="col-md-3">
                         <div class="form-group ">
                             <label>Registration date </label>
                             <input type="text" name='team' class="form-control" value="{{date('m-d-Y', strtotime($record->date) )}}" >
                         </div>
                     </div>
-                </div>
-               
-                <div class="row">
-                    <div class="col-md-6">
-                        @php
-                            $status = ($record->registration_status == 0)?'Pending payment':'Paid';
-                        @endphp
-                        <div class="form-group ">
-                            <label>Status</label>
-                            <input type="text" name='player_number' class="form-control" value="{{$status}}">
-                        </div>
-                    </div>
+
                     <div class="col-md-6">
                         <div class="form-group ">
                             <label>Payment Code</label>
@@ -114,6 +160,7 @@
                         </div>
                     </div>
                 </div>
+            
 
                 <div class="hr-line-dashed"></div>
 
@@ -123,7 +170,8 @@
                             <th>Name</th>
                             <th>Age</th>
                             <th>Gender</th>
-                            <th>Category</th>
+                            <th>Tshirt</th>
+                            <th>Obs</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -138,7 +186,8 @@
                                 <td>{{$player->name}}</td>
                                 <td><strong>{{$player->age}}</strong></td>
                                 <td><strong>{{$gender}}</strong></td>
-                                <td><strong>{{$player->category}}</strong></td>
+                                <td><strong>{{$player->tshirt_size}}</strong></td>
+                                <td>{{$player->obs}}</td>
                             </tr>
 
                         @endforeach
@@ -148,7 +197,7 @@
 
                 <div class="hr-line-dashed"></div>
                 
-                <a href="/tryouts-dashboard" class="btn btn-w-m btn-default"><i class="fas fa-undo-alt"></i> Return</a>
+                <a href="/summerclin-registration/{{$record->event_id}}" class="btn btn-w-m btn-default"><i class="fas fa-undo-alt"></i> Return</a>
                 
             </div>
         </div>

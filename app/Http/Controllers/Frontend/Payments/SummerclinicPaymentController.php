@@ -15,13 +15,13 @@ use PayPal\Api\Transaction;
 use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Rest\ApiContext;
 
-use App\Models\{ServiceRegistration, Setting};
+use App\Models\{Summerclinicreg, Setting};
 
-use App\Mail\ServicesMailable;
+use App\Mail\SummerMailable;
 use Illuminate\Support\Facades\Mail;
 use DB;
 
-class ServicePaymentController extends Controller
+class SummerclinicPaymentController extends Controller
 {
 
     private $apiContext;
@@ -45,12 +45,12 @@ class ServicePaymentController extends Controller
     {
 
         $registration_id = $request->input('registration_id');
-        $service_name = $request->input('event_name');
+        $event_name = $request->input('event_name');
         $registration_price = $request->input('final_price');
         $user_name = $request->input('user_name');
         $user_email = $request->input('user_email');
 
-        $description = $service_name.' / '.$user_name;
+        $description = $event_name.' / '.$user_name;
 
         // After Step 2
         $payer = new Payer();
@@ -70,8 +70,8 @@ class ServicePaymentController extends Controller
         ));
         $transaction->setCustom($registration_data);
 
-        $callbackUrl = url('service-payment-status');
-        $failedUrl = url('service-payment-success');
+        $callbackUrl = url('summer-clinic-payment-status');
+        $failedUrl = url('summer-clinic-payment-success');
         $redirectUrls = new RedirectUrls();
         $redirectUrls->setReturnUrl($callbackUrl)
             ->setCancelUrl($failedUrl);
@@ -123,7 +123,7 @@ class ServicePaymentController extends Controller
             $response = json_decode($result);
             $custom = json_decode($response->transactions[0]->custom);
             
-            $registration = ServiceRegistration::find($custom->registration_id);
+            $registration = Summerclinicreg::find($custom->registration_id);
 
             $registration->payment_code = $response->id;
             $registration->status = 1;
@@ -131,7 +131,7 @@ class ServicePaymentController extends Controller
 
             $success = $this->successbooking($custom->user_email, $custom->registration_id);
 
-            return redirect('service/confirmation/'.$custom->registration_id);
+            return redirect('summer-clinic-confirmation/'.$custom->registration_id);
         }
         
     }
@@ -149,10 +149,10 @@ class ServicePaymentController extends Controller
 
         $admin_email = Setting::first()->email;
 
-        $confirmation = new ServicesMailable($contact, $reg_id);
+        $confirmation = new SummerMailable($contact, $reg_id);
         Mail::to($contact)->send($confirmation);
 
-        $copy = new ServicesMailable($contact, $reg_id);
+        $copy = new SummerMailable($contact, $reg_id);
         Mail::to($admin_email)->send($copy);
 
         

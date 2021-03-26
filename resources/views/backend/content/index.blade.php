@@ -107,7 +107,7 @@
                         <td>{{$record->link}}</td>
                         <td>{{$flag}}</td>
                         <td>{{$record->group_name}}</td>
-                        <td class="center">{{date('m-d-Y', strtotime($record->updated_at))}}</td>
+                        <td class="center">{{date('M d, Y', strtotime($record->updated_at))}}</td>
                         <td class="center"><span class="btn btn-{{$status_color}} btn-xs">{{$status}}</span></td>
                     </tr>
 

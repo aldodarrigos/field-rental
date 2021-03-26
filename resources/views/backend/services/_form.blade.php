@@ -62,6 +62,13 @@
 
                 <div class="col-md-6">
                     <div class="form-group ">
+                        <label>Icon <small><a href="https://fontawesome.com/icons?d=gallery&m=free" target='_blank'>(Icon library)</a></small></label>
+                        <input type="text" name='icon' class="form-control" @if(!empty($content->icon)) value="{{$content->icon}}" @endif>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group ">
                         <label>Price</label>
                         <input type="text" name='price' class="form-control" @if(!empty($content->price)) value="{{$content->price}}" @endif>
                     </div>
@@ -69,12 +76,14 @@
 
                 <div class="col-md-6">
                     <div class="form-group ">
-                        <label>Icon <small><a href="https://fontawesome.com/icons?d=gallery&m=free" target='_blank'>(Icon library)</a></small></label>
-                        <input type="text" name='icon' class="form-control" @if(!empty($content->icon)) value="{{$content->icon}}" @endif>
+                        <label>Second Child Price</label>
+                        <input type="text" name='price_alt' class="form-control" @if(!empty($content->price_alt)) value="{{$content->price_alt}}" @endif>
                     </div>
                 </div>
 
-                <div class="col-md-4">
+
+
+                <div class="col-md-6">
                     <div class="i-checks mt-4">
                         @if ($form == 'new')
                             <label> <input type="checkbox" name='flag' value="1"> In Cover</label>
@@ -85,13 +94,13 @@
                     </div>
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="i-checks mt-4">
                         @if ($form == 'new')
-                            <label> <input type="checkbox" name='form' value="1"> Show Form</label>
+                            <label> <input type="checkbox" name='reg_available' value="1"> Registration Available</label>
                         @else
-                            @php $formchecked = ($content->form == 1)?'checked':''; @endphp
-                            <label> <input type="checkbox" name='form' value="1" {{$formchecked}}> Show Form</label>
+                            @php $reg_available = ($content->reg_available == 1)?'checked':''; @endphp
+                            <label> <input type="checkbox" name='reg_available' value="1" {{$reg_available}}> Registration Available</label>
                         @endif
                     </div>
                 </div>

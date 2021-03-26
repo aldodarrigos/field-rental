@@ -7,6 +7,10 @@ use App\Http\Controllers\Frontend\Payments\FieldsPaymentController;
 use App\Http\Controllers\Frontend\UserController;
 use App\Http\Controllers\Frontend\FieldsController;
 use App\Http\Controllers\Frontend\ServicesController;
+
+use App\Http\Controllers\Frontend\SummerclinicController;
+use App\Http\Controllers\Frontend\Payments\SummerclinicPaymentController;
+
 use App\Http\Controllers\Frontend\CompetitionsController;
 use App\Http\Controllers\Frontend\ShopController;
 use App\Http\Controllers\Frontend\Payments\ProductsController;
@@ -33,6 +37,7 @@ use App\Http\Controllers\Backend\CategoriesController;
 use App\Http\Controllers\Backend\StoreController;
 use App\Http\Controllers\Backend\ProductSizeController;
 use App\Http\Controllers\Backend\SizeController;
+use App\Http\Controllers\Backend\SummerController;
 
 use App\Http\Controllers\SendmailController;
 use App\Providers\RouteServiceProvider;
@@ -61,13 +66,22 @@ Route::get('about', [FrontendController::class, 'about']);
 Route::get('services', [ServicesController::class, 'services'])->name('frontend.services');
 Route::get('services/{slug?}', [ServicesController::class, 'service'])->name('frontend.service');
 Route::get('service/registration/{id?}', [ServicesController::class, 'registration'])->name('service.registration');
-Route::post('service/registration-submit', [ServicesController::class, 'submit'])->name('service.registration-submit');
-Route::get('service/registration-confirmation/{id?}', [ServicesController::class, 'confirmation'])->name('service.registration-confirmation');
+Route::post('service/submit', [ServicesController::class, 'submit']);
+Route::get('service/confirmation/{id?}', [ServicesController::class, 'confirmation']);
+
 Route::post('service-payment', [ServicePaymentController::class, 'payment'])->name('service.payment');
 Route::get('service-payment-status', [ServicePaymentController::class, 'status'])->name('service.payment.status');
 Route::get('service-payment-success', [ServicePaymentController::class, 'success'])->name('service.payment.success');
 Route::get('service-payment-fail', [ServicePaymentController::class, 'fail'])->name('service.payment.fail');
 Route::post('service/contact', [ServicesController::class, 'contact'])->name('service.contact');
+
+//SUMMER CLINICS
+Route::get('summer-clinic/{id?}', [SummerclinicController::class, 'event']);
+Route::post('summer-clinic-registration', [SummerclinicController::class, 'registration']);
+Route::get('summer-clinic-confirmation/{id?}', [SummerclinicController::class, 'confirmation']);
+Route::post('summer-clinic-payment', [SummerclinicPaymentController::class, 'payment']);
+Route::get('summer-clinic-payment-status', [SummerclinicPaymentController::class, 'status']);
+Route::get('summer-clinic-payment-fail', [SummerclinicPaymentController::class, 'fail']);
 
 //Route::get('fields', [FrontendController::class, 'fields'])->name('frontend.fields');
 Route::get('news', [FrontendController::class, 'news'])->name('frontend.news');
@@ -212,6 +226,13 @@ Route::middleware(['admin'])->group(function () {
     Route::get('teams-detail/{id?}', [CompetitionController::class, 'teams_detail']);
 
     Route::resource('categories', CategoriesController::class);
+
+    //SUMMER CLINIC
+
+    Route::resource('summerclin', SummerController::class);
+    Route::get('summerclin-registration/{id?}', [SummerController::class, 'registration']);
+    Route::get('summerclin-registration-detail/{id?}', [SummerController::class, 'registration_detail']);
+    
 
     //STORE
     Route::resource('store', StoreController::class);

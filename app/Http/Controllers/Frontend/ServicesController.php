@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Frontend;
-use App\Models\{Content, Service, Setting, ServiceRegistration, Competition, CompetitionStatus, ServiceContact};
+use App\Models\{Content, Service, Setting, ServiceRegistration, Serviceplayer, Competition, CompetitionStatus, ServiceContact, Summerclinic};
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Mail\ContactMailable;
@@ -36,6 +36,7 @@ class ServicesController extends Controller
 
         $competitions_on_off = 0;
         $competitions = '';
+        $clinics = '';
 
         if($slug == 'tournaments'){
             $competitions = Competition::where([['is_league', 0], ['status', '!=', 1]])->orderBy('created_at', 'DESC')->get();
@@ -45,10 +46,13 @@ class ServicesController extends Controller
             $competitions = Competition::where([['is_league', 1], ['status','!=', 1]])->orderBy('created_at', 'DESC')->get();
             $competitions_on_off = 1;
         }
+        if($slug == 'summer-clinic'){
+            $clinics = Summerclinic::where('status','!=', 1)->orderBy('created_at', 'DESC')->get();
+        }
 
         $competition_status = CompetitionStatus::orderBy('id', 'ASC')->get();
 
-        return view('frontend/services/service', ['seo' => $seo, 'service' => $service, 'slug' => $slug, 'competitions' => $competitions, 'competitions_on_off' => $competitions_on_off, 'competition_status' => $competition_status]);
+        return view('frontend/services/service', ['seo' => $seo, 'service' => $service, 'slug' => $slug, 'competitions' => $competitions, 'competitions_on_off' => $competitions_on_off, 'competition_status' => $competition_status, 'clinics' => $clinics]);
         
     }
 
@@ -69,28 +73,68 @@ class ServicesController extends Controller
 
     public function submit(Request $request)
     {
+        $price = $request->input('price');
+        $price_alt = $request->input('price_alt');
+
+        $acumulative_price = 0;
+        $players_count = 0;
+
+        for ($i=1; $i < 5; $i++) { 
+            if($request->input('player_name_'.$i) != null){
+
+                if($price_alt > 0){//if second price is more than 0
+                    if($i == 1){
+                        $acumulative_price += $price;
+                    }else{
+                        $acumulative_price += $price_alt;
+                    }
+                }else{//if second price is 0
+
+                    $players_count++;
+
+                }
+            }
+        }
+        // Set default price
+        if($price_alt > 0){
+            $final_price = $acumulative_price;
+        }else{
+            $final_price = $players_count * $price;
+        }
+
         $registration = new ServiceRegistration();
 
         $registration->service_id = $request->input('service_id');
         $registration->responsible_user = $request->input('user_id');
-        $registration->player_name = $request->input('player_name');
-        $registration->dob = $request->input('dob');
-        $registration->gender = $request->input('gender');
         $registration->address = $request->input('address');
         $registration->city = $request->input('city');
         $registration->zip = $request->input('zip');
-        $registration->email = $request->input('email');
         $registration->phone_home = $request->input('phone_home');
         $registration->phone_cell = $request->input('phone_cell');
-        $registration->grade = $request->input('grade');
-        $registration->tshirt_size = $request->input('tshirt_size');
         $registration->emergency_contact = $request->input('emergency_contact');
         $registration->emergency_phone = $request->input('emergency_phone');
-        $registration->obs = $request->input('obs');
-
+        $registration->price = $final_price;
         $registration->save();
 
-        return redirect('service/registration-confirmation/'.$registration->id)->with('success', 'Successful register!');
+        for ($i=1; $i < 5; $i++) { 
+
+            $grade = ($request->input('grade_'.$i) != null)?$request->input('grade_'.$i):null;
+
+            if($request->input('player_name_'.$i) != null){
+                $newPlayer = new Serviceplayer();
+                $newPlayer->registration_id = $registration->id;
+                $newPlayer->name = $request->input('player_name_'.$i);
+                $newPlayer->age = $request->input('age_'.$i);
+                $newPlayer->gender = $request->input('gender_'.$i);
+                $newPlayer->tshirt_size = $request->input('tshirt_'.$i);
+                $newPlayer->grade = $grade;
+                $newPlayer->obs = $request->input('obs_'.$i);
+                $newPlayer->save();
+            }
+
+        }
+
+        return redirect('service/confirmation/'.$registration->id)->with('success', 'Successful register!');
     }
 
 
@@ -98,15 +142,43 @@ class ServicesController extends Controller
     public function confirmation($id = null)
     {
         $setting = Setting::first();
-        $registration = ServiceRegistration::where('id', $id)->first();
+
+        $registration = DB::table('service_registration')
+        ->select(DB::raw('service_registration.id as registration_id, 
+
+        service_registration.service_id as service_id,
+        services.name as service_name,
+
+        service_registration.responsible_user as user_id, 
+        service_registration.address, 
+        service_registration.city, 
+        service_registration.zip, 
+        service_registration.phone_home, 
+        service_registration.phone_cell,
+        service_registration.emergency_contact,
+        service_registration.emergency_phone,
+        service_registration.price as final_price,
+        service_registration.payment_code,
+        service_registration.status as registration_status,
+        service_registration.updated_at as registration_updated_at,
+
+        users.name as user_name, users.email as user_email, users.phone as user_phone'))
+
+        ->leftJoin('users', 'service_registration.responsible_user', '=', 'users.id')
+        ->leftJoin('services', 'service_registration.service_id', '=', 'services.id')
+        ->where('service_registration.id', $id)
+        ->first();
+
+
         $service = Service::where('id', $registration->service_id)->first();
+        $players = Serviceplayer::where('registration_id', $registration->registration_id)->get();
 
         $seo = ['title' => $service->name.' registration | KISC, Sports complex', 
         'sumary' => $service->sumary, 
         'image' => $service->img
         ];
 
-        return view('frontend/services/confirmation', ['seo' => $seo, 'registration' => $registration, 'service' => $service, 'setting' => $setting]);
+        return view('frontend/services/confirmation', ['seo' => $seo, 'registration' => $registration, 'service' => $service, 'players' => $players, 'setting' => $setting]);
         
     }
 

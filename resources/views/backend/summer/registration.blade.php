@@ -16,7 +16,7 @@
                 pageLength: 25,
                 responsive: true,
                 dom: '<"html5buttons"B>lTfgitp',
-                "order": [[ 0, "DESC" ]],
+                "order": [[ 0, "desc" ]],
                 buttons: [
                     { extend: 'copy'},
                     {extend: 'csv'},
@@ -46,10 +46,10 @@
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>Services Registration</h2>
+        <h2>{{$event->name}}</h2>
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="/backend-services">Services</a>
+                <a href="/summerclin">Dashboard</a>
             </li>
         </ol>
     </div>
@@ -63,8 +63,9 @@
         <div class="col-lg-12">
             <div class="ibox ">
                 <div class="ibox-title">
-                    <h5>Services Registration</h5>
+                    <h5>{{$event->name}} registration</h5>
                     <div class="ibox-tools">
+                        
                     </div>
                 </div>
                 <div class="ibox-content">
@@ -73,61 +74,48 @@
                         <table class="table table-striped table-bordered table-hover dataTables-example" >
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Player Name</th>
+                                    <th>id</th>
+                                    <th>Player</th>
                                     <th>Age</th>
                                     <th>Gender</th>
-                                    <th>Tshirt Size</th>
-                                    <th>Grade</th>
-                                    <th>Obs</th>
-                                    <th>Service</th>
-                                    <th>Reg User</th>
+                                    <th>Tshirt</th>
+                                    <th>Registrant</th>
+                                    <th>Event</th>
                                     <th>Date</th>
-                                    <th>Status</th>
+                                    <th>Detail</th>
                                 </tr>
                             </thead>
                             <tbody>
+             
 
                                 @foreach ($records as $record)
 
                                     @php
-
-                                    $status = 'Pending';
-                                    $status_color = 'default';
-                                    if($record->status == 1) {
-                                        $status = 'Paid';
-                                        $status_color = 'info';
-                                    }
-
-                                    $gender = ($record->gender == 1)?'Female':'Male';
-
+                                        $gender = ($record->player_gender == 1)?'Female':'Male';
                                     @endphp
-
                                     <tr class="gradeX">
-                                        <td><a href="/serv-registration-detail/{{$record->registration_id}}">{{$record->player_id}}</a></td>
-                                        
-                                        <td><a href="/serv-registration-detail/{{$record->registration_id}}">{{$record->player_name}}</a></td>
-                                        <td>{{$record->age}}</td>
+                                        <td><a href="/summerclin-registration-detail/{{$record->registration_id}}">{{$record->player_id}}</a></td>
+                                        <td><a href="/summerclin-registration-detail/{{$record->registration_id}}">{{$record->player_name}}</a></td>
+                                        <td>{{$record->player_age}}</td>
                                         <td>{{$gender}}</td>
-                                        <td>{{$record->tshirt_size}}</td>
-                                        <td>{{$record->grade}}</td>
-                                        <td>{{$record->obs}}</td>
-                                        <td>{{$record->service_name}}</td>
-                                        <td>{{$record->reg_user}}</td>
-                                        <td>{{date('M d, Y h:i:s A', strtotime($record->updated_at))}}</td>
-                                        <td class="center"><span class="btn btn-{{$status_color}} btn-xs">{{$status}}</span></td>
+                                        <td>{{$record->player_tshirt}}</td>
+                                        <td>{{$record->user_name}}</td>
+                                        <td>{{$record->event_name}}</td>
+                                        <td><strong>{{date('M d, Y', strtotime($record->player_date))}}</strong></td>
+        
+                                        <td><a href="/summerclin-registration-detail/{{$record->registration_id}}">Detail</a></td>
                                     </tr>
 
                                 @endforeach
 
                             </tbody>
                         </table>
+                
                     </div>
 
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 

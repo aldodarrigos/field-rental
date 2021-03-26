@@ -221,8 +221,6 @@
 
                         <br>
 
-
-
                         <div class="text-center font-bold flex items-center justify-center gap-2">
                             <input type="checkbox" name="" id="agree" class="h-5 w-5 text-red"> <span class="">I agree to Katy ISC terms and conditions</span>
                         </div>

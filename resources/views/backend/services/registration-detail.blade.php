@@ -6,16 +6,14 @@
 
     @parent
 
-    <link href="{{asset('inspinia/css/plugins/iCheck/custom.css')}}" rel="stylesheet">
-    <link href="{{asset('inspinia/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css')}}" rel="stylesheet">
-
-    <script src="{{asset('inspinia/js/plugins/iCheck/icheck.min.js')}}"></script>
+    <link href="{{asset('inspinia/css/plugins/summernote/summernote-bs4.css')}}" rel="stylesheet">
+    <script src="{{asset('inspinia/js/plugins/summernote/summernote-bs4.js')}}"></script>
 
     <script>
         $(document).ready(function () {
-            $('.i-checks').iCheck({
-                checkboxClass: 'icheckbox_square-green',
-                radioClass: 'iradio_square-green',
+
+            $('.summernote').summernote({
+                height: 300
             });
         });
     </script>
@@ -24,13 +22,13 @@
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>Registration Service</h2>
+        <h2>Services registration</h2>
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="/backend-services">Dashboard</a>
+                <a href="/bservices-registration">Dashboard</a>
             </li>
             <li class="breadcrumb-item active">
-                <strong>Reservation Detail</strong>
+                <strong>Registration detail</strong>
             </li>
         </ol>
     </div>
@@ -44,7 +42,7 @@
         <div class="col-lg-6">
         <div class="ibox ">
             <div class="ibox-title">
-                <h5>Reservation detail</h5>
+                <h5>Registration detail</h5>
                 <div class="ibox-tools">
     
                 </div>
@@ -52,110 +50,163 @@
             <div class="ibox-content">
 
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group ">
-                            <label>Paypal Code</label>
-                            <input type="text" name='' class="form-control" value="{{$record->payment_code}}" >
+                            <label>Service</label>
+                            <input type="text" name='fullname' class="form-control" value="{{$record->service}}">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        @php
+                            $status = ($record->status == 1)?'Paid':'Pending';
+                        @endphp
+                        <div class="form-group ">
+                            <label>Status</label>
+                            <input type="text" class="form-control" value="{{$status}}">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <div class="form-group ">
+                            <label>Registrant</label>
+                            <input type="text" name='fullname' class="form-control" value="{{$record->reg_user}}">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group ">
+                            <label>Email</label>
+                            <input type="text" name='email' class="form-control" value="{{$record->email}}">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group ">
+                            <label>Phone</label>
+                            <input type="text" name='phone' class="form-control" value="{{$record->phone}}">
                         </div>
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group ">
-                            <label>User registration</label>
-                            <input type="text" name='' class="form-control" value="{{$record->reg_user}}" >
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group ">
-                            <label>User registration email</label>
-                            <input type="text" name='' class="form-control" value="{{$record->email}}" >
-                        </div>
-                    </div>
-                </div>
 
-                <div class="row">
                     <div class="col-md-4">
-                        <div class="form-group ">
-                            <label>Player Name</label>
-                            <input type="text" name='' class="form-control" value="{{$record->player_name}}" >
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group ">
-                            <label>DOB</label>
-                            <input type="text" name='' class="form-control" value="{{$record->dob}}" >
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group ">
-                            <label>Gender</label>
-                            <input type="text" name='' class="form-control" value="{{$record->gender}}" >
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-6">
                         <div class="form-group ">
                             <label>Address</label>
-                            <input type="text" name='' class="form-control" value="{{$record->address}}" >
+                            <input type="text" name='fullname' class="form-control" value="{{$record->address}}">
                         </div>
                     </div>
-                    <div class="col-md-3">
+
+                    <div class="col-md-4">
                         <div class="form-group ">
                             <label>City</label>
-                            <input type="text" name='' class="form-control" value="{{$record->city}}" >
+                            <input type="text" name='email' class="form-control" value="{{$record->city}}">
                         </div>
                     </div>
-                    <div class="col-md-3">
+
+                    <div class="col-md-4">
                         <div class="form-group ">
                             <label>Zip</label>
-                            <input type="text" name='' class="form-control" value="{{$record->zip}}" >
+                            <input type="text" name='phone' class="form-control" value="{{$record->zip}}">
                         </div>
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group ">
-                            <label>Grade</label>
-                            <input type="text" name='' class="form-control" value="{{$record->grade}}" >
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group ">
-                            <label>Tee shirt size</label>
-                            <input type="text" name='' class="form-control" value="{{$record->tshirt_size}}" >
-                        </div>
-                    </div>
-                </div>
 
-                <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-3">
+                        <div class="form-group ">
+                            <label>Phone Home</label>
+                            <input type="text" name='fullname' class="form-control" value="{{$record->phone_home}}">
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group ">
+                            <label>Phone Cell</label>
+                            <input type="text" name='fullname' class="form-control" value="{{$record->phone_cell}}">
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
                         <div class="form-group ">
                             <label>Emergency Contact</label>
-                            <input type="text" name='' class="form-control" value="{{$record->emergency_contact}}" >
+                            <input type="text" name='email' class="form-control" value="{{$record->emergency_contact}}">
                         </div>
                     </div>
-                    <div class="col-md-6">
+
+                    <div class="col-md-3">
                         <div class="form-group ">
                             <label>Emergency Phone</label>
-                            <input type="text" name='' class="form-control" value="{{$record->emergency_phone}}" >
+                            <input type="text" name='phone' class="form-control" value="{{$record->emergency_phone}}">
                         </div>
                     </div>
                 </div>
 
-                <div class="form-group ">
-                    <label>KNOWN ALLERGIES OR OTHER PERTINENT MEDICAL INFORMATION</label>
-                    <input type="text" name='' class="form-control" value="{{$record->obs}}" >
+                <div class="row">
+
+                    <div class="col-md-2">
+                        <div class="form-group ">
+                            <label>Amount paid </label>
+                            <input type="text" name='team' class="form-control" value="{{'$'.$record->price}}" >
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group ">
+                            <label>Registration date </label>
+                            <input type="text" name='team' class="form-control" value="{{date('M d, Y h:i:s A', strtotime($record->date) )}}" >
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group ">
+                            <label>Payment Code</label>
+                            <input type="text" name='player_number' class="form-control" value="{{$record->payment_code}}">
+                        </div>
+                    </div>
                 </div>
+            
 
+                <div class="hr-line-dashed"></div>
 
+                <table class="table  table-bordered dataTables-example" >
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Gender</th>
+                            <th>Tshirt</th>
+                            <th>Obs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach ($players as $player)
+
+                            @php
+                                $gender = ($player->gender == 1)?'Female':'Male';  
+                            @endphp
+
+                            <tr class="gradeX">
+                                <td>{{$player->name}}</td>
+                                <td><strong>{{$player->age}}</strong></td>
+                                <td><strong>{{$gender}}</strong></td>
+                                <td><strong>{{$player->tshirt_size}}</strong></td>
+                                <td>{{$player->obs}}</td>
+                            </tr>
+
+                        @endforeach
+
+                    </tbody>
+                </table>
+
+                <div class="hr-line-dashed"></div>
+                
                 <a href="/bservices-registration" class="btn btn-w-m btn-default"><i class="fas fa-undo-alt"></i> Return</a>
-
-
                 
             </div>
         </div>
@@ -163,11 +214,7 @@
     </div>
 </div>
 
-
-
-
-
-
 @endsection
+
 
 

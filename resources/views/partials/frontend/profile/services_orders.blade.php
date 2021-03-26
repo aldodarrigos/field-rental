@@ -42,7 +42,7 @@
             </td>
 
             <td class="px-6 py-4 whitespace-no-wrap border-b border-bluetext">
-                <div class="text-sm leading-5 text-gray-900">{{$item->service_name}}</div>
+                <div class="text-sm leading-5 text-gray-900"><a href="/service/confirmation/{{$item->registration_id}}">{{$item->service_name}}</a></div>
                 <div class="text-sm leading-5 text-gray-500"></div>
             </td>
 
@@ -60,7 +60,7 @@
                 @if ($item->registration_status == 1)
                     <span class="px-2 inline-flex text-xs uppercase leading-5 font-semibold rounded-md bg-{{$status_bg}} text-white py-1">{{$status}}</span>
                 @else
-                    <a href="/service/registration-confirmation/{{$item->registration_id}}" class="px-2 inline-flex text-xs uppercase leading-5 font-semibold rounded-md bg-{{$status_bg}} text-white py-1">{{$status}}</a>
+                    <a href="/service/confirmation/{{$item->registration_id}}" class="px-2 inline-flex text-xs uppercase leading-5 font-semibold rounded-md bg-{{$status_bg}} text-white py-1">{{$status}}</a>
                 @endif
                 
             </td>

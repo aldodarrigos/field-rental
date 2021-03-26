@@ -57,6 +57,7 @@
                     <li><a href="/backend-services">Services</a></li>
                     <li><a href="/bservices-registration">Registration</a></li>
                     <li><a href="/bservices-contact">Contact</a></li>
+                    <li><a href="/summerclin">Summer Clinics</a></li>
                 </ul>
             </li>
 

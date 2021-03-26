@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\{Service, ServiceRegistration, ServiceContact};
+use App\Models\{Service, ServiceRegistration, ServiceContact, Serviceplayer};
 use DB;
 use Illuminate\Support\Str;
 //use GuzzleHttp\Client;
@@ -50,7 +50,8 @@ class ServicesBackController extends Controller
         $service = new Service();
 
         $price = ($request->input('price') == null)?'0.00':$request->input('price');
-        $form = ($request->input('form') == null)?'0':$request->input('form');
+        $price_alt = ($request->input('price_alt') == null)?'0.00':$request->input('price_alt');
+        $reg_available = ($request->input('reg_available') == null)?'0':$request->input('reg_available');
         $flag = ($request->input('flag'))?1:0;
 
         $name = $request->input('name');
@@ -62,7 +63,8 @@ class ServicesBackController extends Controller
         $service->img = $request->input('img');
         $service->flag = $flag;
         $service->price = $price;
-        $service->form = $form;
+        $service->price_alt = $price_alt;
+        $service->reg_available = $reg_available;
         $service->icon = $request->input('icon');
         $service->status = $request->input('status');
         
@@ -102,7 +104,8 @@ class ServicesBackController extends Controller
 
         $service = Service::find($id);
         $price = ($request->input('price') == null)?'0.00':$request->input('price');
-        $form = ($request->input('form') == null)?'0':$request->input('form');
+        $price_alt = ($request->input('price_alt') == null)?'0.00':$request->input('price_alt');
+        $reg_available = ($request->input('reg_available') == null)?'0':$request->input('reg_available');
         $flag = ($request->input('flag'))?1:0;
 
         $name = $request->input('name');
@@ -113,8 +116,9 @@ class ServicesBackController extends Controller
         $service->content = $request->input('content');
         $service->img = $request->input('img');
         $service->flag = $flag;
-        $service->form = $form;
+        $service->reg_available = $reg_available;
         $service->price = $price;
+        $service->price_alt = $price_alt;
         $service->icon = $request->input('icon');
         $service->status = $request->input('status');
         
@@ -161,15 +165,22 @@ class ServicesBackController extends Controller
     public function registration()
     {
 
-        $records = DB::table('service_registration')
+        $records = DB::table('service_players')
         ->select(DB::raw('service_registration.id as registration_id, 
         users.name as reg_user, 
-        service_registration.player_name, 
-        service_registration.city, 
-        services.name as service, 
+        service_players.id as player_id, 
+        service_players.name as player_name, 
+        service_players.age, 
+        service_players.gender, 
+        service_players.tshirt_size, 
+        service_players.grade, 
+        service_players.obs, 
+        services.name as service_name, 
         service_registration.status, 
         service_registration.updated_at'))
 
+        
+        ->leftJoin('service_registration', 'service_players.registration_id', '=', 'service_registration.id')
         ->leftJoin('users', 'service_registration.responsible_user', '=', 'users.id')
         ->leftJoin('services', 'service_registration.service_id', '=', 'services.id')
         ->orderBy('service_registration.updated_at', 'desc')
@@ -187,33 +198,32 @@ class ServicesBackController extends Controller
         $record = DB::table('service_registration')
         ->select(DB::raw('service_registration.id as registration_id, 
         users.name as reg_user, 
-        users.name as email, 
+        users.email as email, 
+        users.phone as phone, 
         services.name as service,
-        service_registration.player_name, 
         service_registration.address, 
         service_registration.city, 
         service_registration.zip, 
+        service_registration.price, 
         service_registration.phone_home, 
         service_registration.phone_cell, 
-        service_registration.grade, 
-        service_registration.dob, 
-        service_registration.gender, 
-        service_registration.tshirt_size, 
+
         service_registration.emergency_contact, 
         service_registration.emergency_phone, 
-        service_registration.obs, 
         service_registration.payment_code, 
         service_registration.status, 
-        service_registration.updated_at as reg_updated_at'))
+        service_registration.updated_at as date'))
 
         ->leftJoin('users', 'service_registration.responsible_user', '=', 'users.id')
         ->leftJoin('services', 'service_registration.service_id', '=', 'services.id')
         ->where('service_registration.id', $id)
         ->first();
 
+        $players = Serviceplayer::where('registration_id', $record->registration_id)->orderBy('id', 'DESC')->get();
+
 
         $url = "services";
-        return view('backend/services/registration-detail', ['record' => $record, 'url' => $url]);
+        return view('backend/services/registration-detail', ['record' => $record, 'url' => $url, 'players' => $players]);
 
     }
 
