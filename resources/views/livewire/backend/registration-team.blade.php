@@ -1,5 +1,5 @@
 <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-    <i class="fas fa-shield-alt"></i> @if ($count > 0) <span class="label label-info">{{$count}} @endif </span>
+    <i class="fas fa-shield-alt" title='Teams registration'></i> @if ($count > 0) <span class="label label-info">{{$count}} @endif </span>
 </a>
 <ul class="dropdown-menu dropdown-messages">
 

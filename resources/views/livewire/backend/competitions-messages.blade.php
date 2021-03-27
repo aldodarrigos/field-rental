@@ -1,5 +1,5 @@
 <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-    <i class="fa fa-envelope"></i> @if ($count > 0) <span class="label label-info">{{$count}} @endif </span>
+    <i class="fa fa-envelope" title='Competitions Contact Form'></i> @if ($count > 0) <span class="label label-info">{{$count}} @endif </span>
 </a>
 <ul class="dropdown-menu dropdown-messages">
 
@@ -24,7 +24,7 @@
     <li>
         <div class="text-center link-block">
             <a href="/competitions-contact" class="dropdown-item">
-                <i class="fa fa-envelope"></i> <strong>Read All Messages</strong>
+                <i class="fa fa-envelope"></i> <strong>View All Competitions Messages</strong>
             </a>
         </div>
     </li>

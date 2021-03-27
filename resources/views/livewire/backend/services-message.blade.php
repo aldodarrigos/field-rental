@@ -1,5 +1,5 @@
 <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-    <i class="fas fa-inbox"></i> @if ($count > 0) <span class="label label-info">{{$count}} @endif </span>
+    <i class="fas fa-inbox" title='Services Contact Form'></i> @if ($count > 0) <span class="label label-info">{{$count}} @endif </span>
 </a>
 
 <ul class="dropdown-menu dropdown-messages">
@@ -25,7 +25,7 @@
     <li>
         <div class="text-center link-block">
             <a href="/bservices-contact" class="dropdown-item">
-                <i class="fa fa-envelope"></i> <strong>Read All Messages</strong>
+                <i class="fa fa-envelope"></i> <strong>View All Services Messages</strong>
             </a>
         </div>
     </li>

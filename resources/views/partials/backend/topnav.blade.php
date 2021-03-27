@@ -21,6 +21,12 @@
             <livewire:backend.services-message></livewire:backend.services-message>
         </li>
         <li class="dropdown">
+            <livewire:backend.soocer-registration></livewire:backend.soocer-registration>
+        </li>
+        <li class="dropdown">
+            <livewire:backend.services-registration></livewire:backend.services-registration>
+        </li>
+        <li class="dropdown">
             <a class="dropdown-toggle count-info" href="/" target='_blank'>
                 Go to website
             </a>

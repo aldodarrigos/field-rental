@@ -177,6 +177,7 @@ class ServicesBackController extends Controller
         service_players.obs, 
         services.name as service_name, 
         service_registration.status, 
+        service_registration.read, 
         service_registration.updated_at'))
 
         
@@ -211,7 +212,7 @@ class ServicesBackController extends Controller
         service_registration.emergency_contact, 
         service_registration.emergency_phone, 
         service_registration.payment_code, 
-        service_registration.status, 
+        service_registration.status,
         service_registration.updated_at as date'))
 
         ->leftJoin('users', 'service_registration.responsible_user', '=', 'users.id')
@@ -221,6 +222,9 @@ class ServicesBackController extends Controller
 
         $players = Serviceplayer::where('registration_id', $record->registration_id)->orderBy('id', 'DESC')->get();
 
+        $reservation = ServiceRegistration::where('id', $id)->first();
+        $reservation->read = 1;
+        $reservation->save();
 
         $url = "services";
         return view('backend/services/registration-detail', ['record' => $record, 'url' => $url, 'players' => $players]);

@@ -46,7 +46,7 @@
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>Summer Clinics</h2>
+        <h2>Soccer Clinics</h2>
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
                 <a href="/summerclin">Dashboard</a>
@@ -63,7 +63,7 @@
         <div class="col-lg-8">
             <div class="ibox ">
                 <div class="ibox-title">
-                    <h5>Summer Clinics events</h5>
+                    <h5>Soccer Clinics events</h5>
                     <div class="ibox-tools">
                         <a href="/summerclin/create" class="btn btn-primary btn-xs">New Event</a>
                     </div>

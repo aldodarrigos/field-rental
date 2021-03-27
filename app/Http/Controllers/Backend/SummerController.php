@@ -112,6 +112,7 @@ class SummerController extends Controller
         $records = DB::table('summerclinic_players')
         ->select(DB::raw('summerclinic_players.id as player_id, 
         summerclinic_registration.id as registration_id,
+        summerclinic_registration.read,
         summerclinic_players.registration_id as event_id, 
         summerclinic.id as event_id,
         summerclinic.name as event_name,
@@ -161,6 +162,7 @@ class SummerController extends Controller
         summerclinic_registration.price, 
         summerclinic_registration.payment_code, 
         summerclinic_registration.status, 
+        summerclinic_registration.read, 
         summerclinic_registration.updated_at as date
         '))
 
@@ -171,6 +173,10 @@ class SummerController extends Controller
         ->first();
 
         $players = Summerclinicplay::where('registration_id', $record->registration_id)->get();
+
+        $reservation = Summerclinicreg::where('id', $id)->first();
+        $reservation->read = 1;
+        $reservation->save();
 
         $url = "services";
         

@@ -84,6 +84,7 @@
                                     <th>Reg User</th>
                                     <th>Date</th>
                                     <th>Status</th>
+                                    <th>Read</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -100,6 +101,8 @@
                                     }
 
                                     $gender = ($record->gender == 1)?'Female':'Male';
+                                    $read = ($record->read == 1)?'default':'info';
+                                    $read_txt = ($record->read == 1)?'Read':'Unread';
 
                                     @endphp
 
@@ -116,6 +119,7 @@
                                         <td>{{$record->reg_user}}</td>
                                         <td>{{date('M d, Y h:i:s A', strtotime($record->updated_at))}}</td>
                                         <td class="center"><span class="btn btn-{{$status_color}} btn-xs">{{$status}}</span></td>
+                                        <td><span class="btn btn-{{$read}} btn-xs">{{$read_txt}}</span></td>
                                     </tr>
 
                                 @endforeach

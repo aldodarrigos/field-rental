@@ -83,6 +83,7 @@
                                     <th>Event</th>
                                     <th>Date</th>
                                     <th>Detail</th>
+                                    <th>Read</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -92,6 +93,8 @@
 
                                     @php
                                         $gender = ($record->player_gender == 1)?'Female':'Male';
+                                        $read = ($record->read == 1)?'default':'info';
+                                        $read_txt = ($record->read == 1)?'Read':'Unread';
                                     @endphp
                                     <tr class="gradeX">
                                         <td><a href="/summerclin-registration-detail/{{$record->registration_id}}">{{$record->player_id}}</a></td>
@@ -104,6 +107,8 @@
                                         <td><strong>{{date('M d, Y', strtotime($record->player_date))}}</strong></td>
         
                                         <td><a href="/summerclin-registration-detail/{{$record->registration_id}}">Detail</a></td>
+
+                                        <td><span class="btn btn-{{$read}} btn-xs">{{$read_txt}}</span></td>
                                     </tr>
 
                                 @endforeach

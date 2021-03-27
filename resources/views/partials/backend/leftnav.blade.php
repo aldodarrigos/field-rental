@@ -23,12 +23,15 @@
         <ul class="nav metismenu" id="side-menu">
 
             <li class="nav-header">
-                <div class="dropdown profile-element" style="display: flex; grid-gap: .5rem;">
-                    <img alt="image" class="" src="https://xava.pro/storage/offtopic/kisc-logo-200.webp" style='width: 40px; height: 40px;'>
-                    <span style='display: inline-block;'>
-                        <span class="block m-t-xs font-bold text-white">{{Auth::user()->name}}</span>
-                        <span class="text-muted text-xs block">Admin</span>
-                    </span>
+                <div class="dropdown profile-element" >
+                    <div style="display: flex; grid-gap: .5rem;">
+                        <img alt="image" class="" src="https://xava.pro/storage/offtopic/kisc-logo-200.webp" style='width: 40px; height: 40px;'>
+                        <span style='display: inline-block;'>
+                            <span class="block m-t-xs font-bold text-white">{{Auth::user()->name}}</span>
+                            <span class="text-muted text-xs block">Admin</span>
+                        </span>
+                    </div>
+
                 </div>
                 <div class="logo-element">
                     KSC
@@ -57,7 +60,7 @@
                     <li><a href="/backend-services">Services</a></li>
                     <li><a href="/bservices-registration">Registration</a></li>
                     <li><a href="/bservices-contact">Contact</a></li>
-                    <li><a href="/summerclin">Summer Clinics</a></li>
+                    <li><a href="/summerclin">Soccer Clinics</a></li>
                 </ul>
             </li>
 
