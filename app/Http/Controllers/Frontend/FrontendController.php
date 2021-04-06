@@ -173,14 +173,14 @@ class FrontendController extends Controller
         
     }
 
-    public function test()
+    public function soccer()
     {
 
-        $seo = ['title' => 'Test | KISC, Sports complex', 
+        $seo = ['title' => 'Soccer TV | KISC, Sports complex', 
         'sumary' => '', 
         'image' => ''
         ];
-        return view('frontend/test', ['seo' => $seo]);
+        return view('frontend/soccer', ['seo' => $seo]);
 
         
     }

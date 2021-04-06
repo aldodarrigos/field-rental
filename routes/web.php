@@ -66,6 +66,8 @@ Route::get('about', [FrontendController::class, 'about']);
 Route::get('services', [ServicesController::class, 'services'])->name('frontend.services');
 Route::get('services/{slug?}', [ServicesController::class, 'service'])->name('frontend.service');
 Route::get('service/registration/{id?}', [ServicesController::class, 'registration'])->name('service.registration');
+Route::get('soccer-tv', [FrontendController::class, 'soccer']);
+
 Route::post('service/submit', [ServicesController::class, 'submit']);
 Route::get('service/confirmation/{id?}', [ServicesController::class, 'confirmation']);
 
