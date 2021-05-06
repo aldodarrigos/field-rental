@@ -21,6 +21,13 @@
                 <label>Name</label>
                 <input type="text" name='name' class="form-control" @if(!empty($content->name)) value="{{$content->name}}" @endif>
             </div>
+            
+            @if ($form == 'update')
+                <div class="form-group ">
+                    <label>Slug</label>
+                    <input type="text" name='slug' class="form-control" @if(!empty($content->slug)) value="{{$content->slug}}" @endif>
+                </div>
+            @endif
 
             <div class="form-group tooltip-wrap">
                 <label >Sumary <i class="fas fa-question-circle text-muted" data-toggle="tooltip" data-placement="top" title="Sumary field must have 120 characters max."></i></label>

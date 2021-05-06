@@ -111,12 +111,10 @@ class CompetitionController extends Controller
 
         $content = Competition::find($id);
 
-        $name = $request->input('name');
-        $slug_input = Str::of($name)->slug('-');
         $second_child_price = ($request->input('second_child_price') == null)?0:$request->input('second_child_price');
 
-        $content->name = $name;
-        $content->slug = $slug_input;
+        $content->name = $request->input('name');
+        $content->slug = $request->input('slug');
         $content->sumary = $request->input('sumary');
         $content->content = $request->input('content');
         $content->img = $request->input('img');
