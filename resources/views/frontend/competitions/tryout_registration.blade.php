@@ -24,7 +24,11 @@
 
 @endsection
 
-<x-frontend.pieces.section_header title='Tournaments' bread='{{$competition->name}}'></x-frontend.pieces.section_header>
+@php
+    $competition_title = ($competition->is_league == 1)?'Leagues':'Tournaments';
+@endphp
+
+<x-frontend.pieces.section_header title='{{$competition_title}}' bread='{{$competition->name}}'></x-frontend.pieces.section_header>
 
 <div class="w-11/12 md:w-boxed mx-auto">
 
