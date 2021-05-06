@@ -163,19 +163,19 @@
                 <input type="hidden" id="bookingArray" name='bookingArray' value='0'>
                 <input type="hidden" id="totalPrice" name='totalPrice' value='0.00'>
 
-                <input type="hidden" id="hour-9" value='09:00' data-price='' data-pricealt='' data-active='0'>
-                <input type="hidden" id="hour-10" value='10:00' data-price='' data-pricealt='' data-active='0'>
-                <input type="hidden" id="hour-11" value='11:00' data-price='' data-pricealt='' data-active='0'>
-                <input type="hidden" id="hour-12" value='12:00' data-price='' data-pricealt='' data-active='0'>
-                <input type="hidden" id="hour-13" value='13:00' data-price='' data-pricealt='' data-active='0'>
-                <input type="hidden" id="hour-14" value='14:00' data-price='' data-pricealt='' data-active='0'>
-                <input type="hidden" id="hour-15" value='15:00' data-price='' data-pricealt='' data-active='0'>
-                <input type="hidden" id="hour-16" value='16:00' data-price='' data-pricealt='' data-active='0'>
-                <input type="hidden" id="hour-17" value='17:00' data-price='' data-pricealt='' data-active='0'>
-                <input type="hidden" id="hour-18" value='18:00' data-price='' data-pricealt='' data-active='0'>
-                <input type="hidden" id="hour-19" value='19:00' data-price='' data-pricealt='' data-active='0'>
-                <input type="hidden" id="hour-20" value='20:00' data-price='' data-pricealt='' data-active='0'>
-                <input type="hidden" id="hour-21" value='21:00' data-price='' data-pricealt='' data-active='0'>
+                <input type="hidden" id="hour-9" value='09:00' data-price='' data-pricealt='' data-active='0' data-althour=''>
+                <input type="hidden" id="hour-10" value='10:00' data-price='' data-pricealt='' data-active='0' data-althour=''>
+                <input type="hidden" id="hour-11" value='11:00' data-price='' data-pricealt='' data-active='0' data-althour=''>
+                <input type="hidden" id="hour-12" value='12:00' data-price='' data-pricealt='' data-active='0' data-althour=''>
+                <input type="hidden" id="hour-13" value='13:00' data-price='' data-pricealt='' data-active='0' data-althour=''>
+                <input type="hidden" id="hour-14" value='14:00' data-price='' data-pricealt='' data-active='0' data-althour=''>
+                <input type="hidden" id="hour-15" value='15:00' data-price='' data-pricealt='' data-active='0' data-althour=''>
+                <input type="hidden" id="hour-16" value='16:00' data-price='' data-pricealt='' data-active='0' data-althour=''>
+                <input type="hidden" id="hour-17" value='17:00' data-price='' data-pricealt='' data-active='0' data-althour=''>
+                <input type="hidden" id="hour-18" value='18:00' data-price='' data-pricealt='' data-active='0' data-althour=''>
+                <input type="hidden" id="hour-19" value='19:00' data-price='' data-pricealt='' data-active='0' data-althour=''>
+                <input type="hidden" id="hour-20" value='20:00' data-price='' data-pricealt='' data-active='0' data-althour=''>
+                <input type="hidden" id="hour-21" value='21:00' data-price='' data-pricealt='' data-active='0' data-althour=''>
 
                 @if (isset(Auth::user()->name))
                     <input type="hidden" id="userIdLogin" name='userIdLogin' value='{{Auth::user()->id}}'>
@@ -273,6 +273,7 @@
                                         <x-slot name='dataHour'>{{$hoursarray[$i]['hour']}}</x-slot>
                                         <x-slot name='dataPrice'>{{$hoursarray[$i]['price']}}</x-slot>
                                         <x-slot name='dataPriceAlt'>{{$hoursarray[$i]['price_alt']}}</x-slot>
+                                        <x-slot name='dataAltHour'>{{$hour_fix}}</x-slot>
                                         <x-slot name='pointer'>{{$pointer}}</x-slot>
                                         <x-slot name='decoration'>{{$decoration}}</x-slot>
                                         <x-slot name='hover'></x-slot>
@@ -332,12 +333,14 @@
                                     let price = thisHour.data("price")
                                     let price_alt = thisHour.data("pricealt")
                                     let hour = thisHour.data("hour")
+                                    let althour = thisHour.data("althour")
                                     
                                     let hourInt = parseInt(hour.replace(':00', ''))
                                     
                                     $('#hour-'+hourInt).attr('data-price', price)
                                     $('#hour-'+hourInt).attr('data-pricealt', price_alt)
                                     $('#hour-'+hourInt).attr('data-active', 1)
+                                    $('#hour-'+hourInt).attr('data-althour', althour)
                           
                                 }
                                 
@@ -353,7 +356,7 @@
                                     $('#hour-'+hourInt).attr('data-price', '')
                                     $('#hour-'+hourInt).attr('data-pricealt', '')
                                     $('#hour-'+hourInt).attr('data-active', 0)
-
+                                    $('#hour-'+hourInt).attr('data-althour', '')
     
 
                                 }
@@ -366,7 +369,7 @@
                                     for (let i = 21; i > 8; i--) {
                                         let indexhour = $('#hour-'+i)
                                         if(indexhour.attr('data-active') == '1'){
-                                            matrix.push([indexhour.val(), indexhour.attr('data-price'), indexhour.attr('data-pricealt')])
+                                            matrix.push([indexhour.attr('data-althour'), indexhour.attr('data-price'), indexhour.attr('data-pricealt')])
                                         }
                                     }//endfor
 
