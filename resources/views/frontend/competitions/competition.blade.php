@@ -9,10 +9,14 @@
 
 @endsection
 
-<x-frontend.pieces.section_header title='Tournaments' bread='{{$competition->name}}'></x-frontend.pieces.section_header>
+@php
+    $competition_title = ($competition->is_league == 1)?'Leagues':'Tournaments';
+@endphp
+
+<x-frontend.pieces.section_header title='{{$competition_title}}' bread='{{$competition->name}}'></x-frontend.pieces.section_header>
 
 <div class="w-11/12 md:w-boxed mx-auto">
-
+    
     <div class="grid grid-cols-12 gap-6 py-8">
 
         <main class="col-span-12 md:col-span-8  ">
@@ -42,7 +46,7 @@
                             @if ($competition->trials == 0)
 
                                 <div class="text-center">
-                                    <a href='/team-registration/{{$competition->id}}/{{$competition->slug}}' class="font-roboto text-gray font-bold rounded py-3 px-8 uppercase text-lg hover:bg-deepblue ease-in-out duration-300 bg-red "><i class="fas fa-users"></i> Register your team</a>
+                                    <a href='/team-registration/{{$competition->id}}/{{$competition->slug}}' class="font-roboto text-gray font-bold rounded py-3 px-8 uppercase text-lg hover:bg-deepblue ease-in-out duration-300 bg-red "><i class="fas fa-users"></i> Register here</a>
                                 </div>
 
                             @else
