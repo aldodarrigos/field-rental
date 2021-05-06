@@ -44,8 +44,15 @@
                 <h1 class="font-roboto text-3x uppercase font-bold text-black leading-none mb-3">{{$competition->name}}</h1>
 
                 <div class="mb-8">
-                    <a href="/tags/tournaments" class="font-roboto bg-red font-semibold uppercase text-white text-sm px-2 py-1 mr-2 hover:bg-blue hover:text-white rounded ease-in-out duration-300">{{$competition_title}}</a> 
-                   <span class="text-sm text-black font-bold">{{$competition->pub_date}}</span>
+                    <x-frontend.buttons.no_link>
+                        <x-slot name='size'>small</x-slot>
+                        <x-slot name='pointer'>cursor</x-slot>
+                        <x-slot name='bg'>red</x-slot>
+                        <x-slot name='class'></x-slot>
+                        <x-slot name='decoration'></x-slot>
+                        <x-slot name='id'></x-slot>
+                        <x-slot name='text'>{{$competition_title}}</x-slot>
+                    </x-frontend.buttons.no_link>
                </div>
     
                <div class="mb-4">
