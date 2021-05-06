@@ -118,7 +118,7 @@
                                 <div class="form-group ">
                                     <label for='group'>Hour</label>
                                     <select class="form-control m-b" name="hour">
-                                        @for ($i = 10; $i < 23; $i++)
+                                        @for ($i = 9; $i < 22; $i++)
                                             @php
                                                 $selected = ($i.':00' == $reservation->hour)?'selected':'';
                                             @endphp

@@ -31,7 +31,7 @@
                     }
 
                 @endphp
-                <x-frontend.cards.post_flat>
+                <x-frontend.cards.post_flat_no_tag>
                     <x-slot name='image'>{{$post->img}}</x-slot>
                     <x-slot name='title'>{{$post->name}}</x-slot>
                     <x-slot name='link'>/{{$slug}}/{{$post->slug}}</x-slot>
@@ -40,17 +40,12 @@
                     <x-slot name='bg'>white</x-slot>
                     <x-slot name='tag'>{{$status_txt}}</x-slot>
                     <x-slot name='tag_link'>/{{$slug}}</x-slot>
-                </x-frontend.cards.post_flat>
+                </x-frontend.cards.post_flat_no_tag>
             @endforeach
 
         </main>
         
         <aside class="col-span-12 md:col-span-4">
-            <!--
-            <livewire:frontend.aside-ad></livewire:frontend.aside-ad>
-            <livewire:frontend.aside-tournament></livewire:frontend.aside-tournament>
-            <livewire:frontend.aside-nextmatch></livewire:frontend.aside-nextmatch>
-            -->
 
             <x-frontend.pieces.ad_frame title='Location'>
                 <x-slot name='frame_icon'><i class="fas fa-map-marker-alt"></i></x-slot>

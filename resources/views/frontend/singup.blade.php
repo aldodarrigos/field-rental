@@ -14,11 +14,21 @@
 
 <main class="w-11/12 md:w-boxed mx-auto">
 
+
+
     <div class="separation h-50p"></div>
 
     <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
 
         <div class="col-span-6">
+
+            <div class="mx-auto">
+                <div class="bg-white px-8 py-6 rounded-lg">
+                    {{ $top_text->subtitle }}
+                </div>
+            </div>
+            
+            <br>
 
             <form method="POST" action="{{ route('register') }}">
                 @csrf

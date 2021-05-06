@@ -17,7 +17,7 @@
 
     if($size == 'small'){
         $height = '1';
-        $fontSize = 'sm';
+        $fontSize = 'xs';
         $px = '2';
     }
 @endphp

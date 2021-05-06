@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\{Reservation, User, Service};
+use App\Models\{Reservation, User, Service, Content};
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -132,11 +132,13 @@ class UserController extends Controller
 
     public function singup()
     {
+        $top_text = Content::where('shortcut', 'signup.text')->first();
+
         $seo = ['title' => 'Sign Up | KISC, Sports complex', 
             'sumary' => '', 
             'image' => 'https://katyisc.com/storage/files/katyisc-sports-complex-share.webp'
             ];
-        return view('frontend/singup', ['seo' => $seo]);
+        return view('frontend/singup', ['seo' => $seo, 'top_text' => $top_text]);
         
     }
 

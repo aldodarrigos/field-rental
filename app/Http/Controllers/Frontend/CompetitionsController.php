@@ -33,7 +33,7 @@ class CompetitionsController extends Controller
     public function leagues()
     {
 
-        $posts = Competition::where([['is_league', 1], ['status', '!=', 1]])->get();
+        $posts = Competition::where([['is_league', 1], ['status', '!=', 1]])->orderBy('id', 'DESC')->get();
         $setting = Setting::first();
         $title = 'Leagues';
 

@@ -1,6 +1,6 @@
 <div class="bg-deepblue text-graytext fixed w-full z-30 top-0">
     <div class="w-full md:w-boxed max-w-boxed mx-auto h-40 flex items-center px-4 sm:px-0">
-        <div class="social flex gap-2 w-2/5 md:w-1/2">
+        <div class="social flex gap-2 w-2/6 md:w-1/2">
             <div class="border border-lines w-25 h-25 rounded flex items-center justify-center hover:bg-blue">
                 <a href="{{$setting->facebook}}" target='_blank'><i class="fab fa-facebook-f text-graytext hover:text-white text-sm"></i></a>
             </div>
@@ -11,7 +11,7 @@
                 <a href="{{$setting->youtube}}" target='_blank'><i class="fab fa-youtube text-graytext hover:text-white text-sm"></i></a>
             </div>
         </div>
-        <div class="opctions w-3/5 md:w-1/2 flex justify-end gap-2 text-sm ">
+        <div class="opctions w-4/6 md:w-1/2 flex justify-end gap-2 text-xs md:text-sm ">
             <div class="item border-r border-graytext pr-3 hidden"><a href="">ENG <i class="fas fa-caret-down"></i></a></div>
             <div class="uppercase pl-3">
                 @if (isset(Auth::user()->name))

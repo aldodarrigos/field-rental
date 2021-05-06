@@ -163,6 +163,7 @@
                 <input type="hidden" id="bookingArray" name='bookingArray' value='0'>
                 <input type="hidden" id="totalPrice" name='totalPrice' value='0.00'>
 
+                <input type="hidden" id="hour-9" value='09:00' data-price='' data-pricealt='' data-active='0'>
                 <input type="hidden" id="hour-10" value='10:00' data-price='' data-pricealt='' data-active='0'>
                 <input type="hidden" id="hour-11" value='11:00' data-price='' data-pricealt='' data-active='0'>
                 <input type="hidden" id="hour-12" value='12:00' data-price='' data-pricealt='' data-active='0'>
@@ -175,7 +176,6 @@
                 <input type="hidden" id="hour-19" value='19:00' data-price='' data-pricealt='' data-active='0'>
                 <input type="hidden" id="hour-20" value='20:00' data-price='' data-pricealt='' data-active='0'>
                 <input type="hidden" id="hour-21" value='21:00' data-price='' data-pricealt='' data-active='0'>
-                <input type="hidden" id="hour-22" value='22:00' data-price='' data-pricealt='' data-active='0'>
 
                 @if (isset(Auth::user()->name))
                     <input type="hidden" id="userIdLogin" name='userIdLogin' value='{{Auth::user()->id}}'>
@@ -250,8 +250,8 @@
                                             $pointer = 'cursor-not-allowed';
                                             $decoration = 'line-through';
                                         }
-                                        if($hoursarray[$i]['hour'] == '8:00'){ $hour_fix = '8 AM'; }
-                                        else if ($hoursarray[$i]['hour'] == '9:00'){ $hour_fix = '9 AM'; }
+
+                                        if ($hoursarray[$i]['hour'] == '09:00'){ $hour_fix = '9 AM'; }
                                         else if ($hoursarray[$i]['hour'] == '10:00'){ $hour_fix = '10 AM'; }
                                         else if ($hoursarray[$i]['hour'] == '11:00'){ $hour_fix = '11 AM'; }
                                         else if ($hoursarray[$i]['hour'] == '12:00'){ $hour_fix = '12 AM'; }
@@ -264,7 +264,6 @@
                                         else if ($hoursarray[$i]['hour'] == '19:00'){ $hour_fix = '7 PM'; }
                                         else if ($hoursarray[$i]['hour'] == '20:00'){ $hour_fix = '8 PM'; }
                                         else if ($hoursarray[$i]['hour'] == '21:00'){ $hour_fix = '9 PM'; }
-                                        else if ($hoursarray[$i]['hour'] == '22:00'){ $hour_fix = '10 PM'; }
     
                                     @endphp
                                     <x-frontend.buttons.hour>
@@ -303,12 +302,7 @@
                                 });
         
                                 $(".button_hour").click(function(){
-                                    /*
-                                    $(".noselect").removeClass('bg-warning');
-                                    $(".noselect").addClass('bg-green');
-                                    $(".noselect").addClass('text-gray');
-                                    $(".noselect").removeClass('text-black');
-                                    */
+
                                     if($(this).hasClass('noselect')){
 
                                         hour_button_switch($(this), '1')
@@ -344,7 +338,7 @@
                                     $('#hour-'+hourInt).attr('data-price', price)
                                     $('#hour-'+hourInt).attr('data-pricealt', price_alt)
                                     $('#hour-'+hourInt).attr('data-active', 1)
-
+                          
                                 }
                                 
                                 function unsethour(thisHour){
@@ -360,6 +354,8 @@
                                     $('#hour-'+hourInt).attr('data-pricealt', '')
                                     $('#hour-'+hourInt).attr('data-active', 0)
 
+    
+
                                 }
 
 
@@ -367,7 +363,7 @@
 
                                     matrix = []
                                     matrixFinale = []
-                                    for (let i = 22; i > 9; i--) {
+                                    for (let i = 21; i > 8; i--) {
                                         let indexhour = $('#hour-'+i)
                                         if(indexhour.attr('data-active') == '1'){
                                             matrix.push([indexhour.val(), indexhour.attr('data-price'), indexhour.attr('data-pricealt')])
