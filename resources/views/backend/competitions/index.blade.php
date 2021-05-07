@@ -92,6 +92,8 @@
 
                                     @php
 
+                                    $registration_link = ($record->trials == 1)?'tryout-registration':'team-registration';
+
                                     $statustxt = 'Inactive';
                                     $status_color = 'default';
 
@@ -128,7 +130,7 @@
                                         
                                         <td> 
                                             <a href="/competition-registrations/{{$record->id}}" class="text-default"> Registration</a> /
-                                            <a href="/registration/{{$record->id}}/{{$record->slug}}" class="text-info" target='_blank'> View in web</a>
+                                            <a href="/{{$registration_link}}/{{$record->id}}/{{$record->slug}}" class="text-info" target='_blank'> View in web</a>
                                         </td>
 
                                         <td class="center"><span class="btn btn-{{$status_color}} btn-xs">{{$statustxt}}</span></td>
