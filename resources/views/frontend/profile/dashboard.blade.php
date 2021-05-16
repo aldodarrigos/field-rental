@@ -39,7 +39,20 @@
 
 @endsection
 
-<x-frontend.pieces.section_header title='Profile' bread='Dashboard'></x-frontend.pieces.section_header>
+@php
+    $linkAdmin = (Auth::user()->role ==2)?'<a href="/booking" target="_blank">GO TO ADMIN AREA</a>':'User Profile';
+@endphp
+
+<div class="bg-deepblue text-white pt-32">
+    <div class="w-11/12 md:w-boxed mx-auto h-120p flex items-center ">
+        <div>
+            <h1 class="text-2x5 font-bold leading-none pb-2 uppercase">Profile </h1>
+            <div class="breadcrumb">
+                <a href="/" class="text-red font-bold uppercase">Home</a> <span>/</span> <a href="">{!!$linkAdmin!!}</a>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <main class="w-11/12 md:w-boxed mx-auto">

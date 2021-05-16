@@ -114,15 +114,40 @@
 
                         <div class="row">
 
+                            @php
+                                $hoursArray = [
+                                    ['hour' => '09:00', 'alt' => '9 AM'],
+                                    ['hour' => '10:00', 'alt' => '10 AM'],
+                                    ['hour' => '11:00', 'alt' => '11 AM'],
+                                    ['hour' => '12:00', 'alt' => '12 PM'],
+                                    ['hour' => '13:00', 'alt' => '1 PM'],
+                                    ['hour' => '14:00', 'alt' => '2 PM'],
+                                    ['hour' => '15:00', 'alt' => '3 PM'],
+                                    ['hour' => '16:00', 'alt' => '4 PM'],
+                                    ['hour' => '17:00', 'alt' => '5 PM'],
+                                    ['hour' => '18:00', 'alt' => '6 PM'],
+                                    ['hour' => '19:00', 'alt' => '7 PM'],
+                                    ['hour' => '20:00', 'alt' => '8 PM'],
+                                    ['hour' => '21:00', 'alt' => '9 PM'],
+                                ];
+
+                                /*
+                                for ($i=0; $i < count($hoursArray) ; $i++) { 
+                                    echo $hoursArray[$i]['alt']."<br>";
+                                }
+                                */
+                 
+                            @endphp
+
                             <div class="col-md-6">
                                 <div class="form-group ">
                                     <label for='group'>Hour</label>
                                     <select class="form-control m-b" name="hour">
-                                        @for ($i = 9; $i < 22; $i++)
+                                        @for ($i = 0; $i < count($hoursArray); $i++)
                                             @php
-                                                $selected = ($i.':00' == $reservation->hour)?'selected':'';
+                                                $selected = ($hoursArray[$i]['hour'] == $reservation->hour)?'selected':'';
                                             @endphp
-                                            <option value='{{$i.':00'}}' {{$selected}}>{{$i.':00'}}</option>
+                                            <option value='{{$hoursArray[$i]['hour']}}' {{$selected}}>{{$hoursArray[$i]['alt']}}</option>
                                         @endfor
 
                                     </select>

@@ -16,7 +16,7 @@
                 pageLength: 25,
                 responsive: true,
                 dom: '<"html5buttons"B>lTfgitp',
-                "order": [[ 0, "desc" ]],
+                "order": [[ 4, "desc" ]],
                 buttons: [
                     { extend: 'copy'},
                     {extend: 'csv'},
@@ -75,13 +75,12 @@
             <table class="table table-striped table-bordered table-hover dataTables-example" >
             <thead>
             <tr>
-                <th>ID</th>
                 <th>Field</th>
                 <th>User</th>
                 <th>Email</th>
                 <th>Price</th>
                 <th>Booking</th>
-                <th>Code</th>
+                <th>Obs</th>
                 <th>Note</th>
             </tr>
             </thead>
@@ -100,15 +99,13 @@
                     }
                     @endphp
 
-                    <tr class="gradeX">
-                        <td>{{$reservation->id}}</td>
-                        
+                    <tr class="gradeX">                        
                         <td>{{$reservation->field_number.'.'.$reservation->field_name}}</td>
                         <td><strong>{{$reservation->user_name}}</strong></td>
                         <td>{{$reservation->user_email}}</td>
                         <td>${{$reservation->price}}</td>
                         <td class="center text-{{$status_color}}">{!!date('M d, Y', strtotime($reservation->res_date)).' <strong>'.date('h:i A', strtotime($reservation->hour)).'</strong>'!!}</td>
-                        <td>{{$reservation->code}}</td>
+                        <td>{{$reservation->note}}</td>
                         <td class="center"><a href="/booking/{{$reservation->id}}/edit" class="btn btn-success btn-xs">Details</a></td>
                     </tr>
 

@@ -19,7 +19,7 @@ class ReservationController extends Controller
     public function index()
     {
         $reservations = DB::table('reservations')
-        ->select(DB::raw('reservations.id, reservations.code, users.name as user_name, users.email as user_email, fields.name as field_name, fields.number as field_number, reservations.hour as hour, reservations.res_date as res_date, reservations.price as price, reservations.conf_code as res_code, reservations.created_at as created_at'))
+        ->select(DB::raw('reservations.id, reservations.code, users.name as user_name, users.email as user_email, fields.name as field_name, fields.number as field_number, reservations.hour as hour, reservations.res_date as res_date, reservations.price as price, reservations.conf_code as res_code, reservations.created_at as created_at, note'))
         ->leftJoin('users', 'reservations.user_id', '=', 'users.id')
         ->leftJoin('fields', 'reservations.field_id', '=', 'fields.id')
         ->orderBy('reservations.created_at', 'desc')
@@ -142,6 +142,7 @@ class ReservationController extends Controller
         $field_id = $request->input('fieldIdSelected');
         $user_id = $request->input('userIdLogin');
         $date = $request->input('dateSelected');
+        $note = $request->input('note');
         $booking_array = json_decode($request->input('bookingArray'));
         $code = str_replace( array( '-', ':' ), '', $short_name.$date.rand(1000,9999)); 
 
@@ -157,6 +158,7 @@ class ReservationController extends Controller
             $reservation->res_date = $date;
             $reservation->hour = $booking_array[$i][0];
             $reservation->price = $booking_array[$i][1];
+            $reservation->note = $note;
             $reservation->save();
 
         }

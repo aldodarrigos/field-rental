@@ -235,7 +235,6 @@ Route::middleware(['admin'])->group(function () {
     Route::get('summerclin-registration/{id?}', [SummerController::class, 'registration']);
     Route::get('summerclin-registration-detail/{id?}', [SummerController::class, 'registration_detail']);
     
-
     //STORE
     Route::resource('store', StoreController::class);
     Route::resource('product-sizes', ProductSizeController::class);
@@ -243,6 +242,5 @@ Route::middleware(['admin'])->group(function () {
     Route::get('get-sizes/{id?}', [ProductSizeController::class, 'get_sizes']);
     Route::get('get-sizes-select/{id?}', [ProductSizeController::class, 'get_sizes_select']);
     Route::post('sizes-sort', [SizeController::class, 'sort'])->name('backend.sizes.sort');
-
 
 });
