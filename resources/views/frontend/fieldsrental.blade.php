@@ -254,7 +254,7 @@
                                         if ($hoursarray[$i]['hour'] == '09:00'){ $hour_fix = '9 AM'; }
                                         else if ($hoursarray[$i]['hour'] == '10:00'){ $hour_fix = '10 AM'; }
                                         else if ($hoursarray[$i]['hour'] == '11:00'){ $hour_fix = '11 AM'; }
-                                        else if ($hoursarray[$i]['hour'] == '12:00'){ $hour_fix = '12 AM'; }
+                                        else if ($hoursarray[$i]['hour'] == '12:00'){ $hour_fix = '12 PM'; }
                                         else if ($hoursarray[$i]['hour'] == '13:00'){ $hour_fix = '1 PM'; }
                                         else if ($hoursarray[$i]['hour'] == '14:00'){ $hour_fix = '2 PM'; }
                                         else if ($hoursarray[$i]['hour'] == '15:00'){ $hour_fix = '3 PM'; }
@@ -369,7 +369,7 @@
                                     for (let i = 21; i > 8; i--) {
                                         let indexhour = $('#hour-'+i)
                                         if(indexhour.attr('data-active') == '1'){
-                                            matrix.push([indexhour.attr('data-althour'), indexhour.attr('data-price'), indexhour.attr('data-pricealt')])
+                                            matrix.push([indexhour.attr('data-althour'), indexhour.attr('data-price'), indexhour.attr('data-pricealt'), indexhour.val()])
                                         }
                                     }//endfor
 
@@ -379,7 +379,7 @@
 
                                         matrixFinale = []
                                         $('#sumary').html('')
-                                        matrixFinale.push([matrix[0][0], matrix[0][1]])
+                                        matrixFinale.push([matrix[0][3], matrix[0][1]])
 
                                         $('#sumary').append('<tr class="hover:bg-gray-100 border border-dotted border-softblue text-base text-center text-warning"><td class="font-roboto py-1 font-bold">'+matrix[0][0]+'</td><td class="font-roboto py-1 font-bold border-l border-dotted border-softblue">$ '+matrix[0][1]+'</td></tr>')
 
@@ -397,7 +397,7 @@
 
                                             if(x == 0){
 
-                                                matrixFinale.push([matrix[x][0], matrix[x][1]])
+                                                matrixFinale.push([matrix[x][3], matrix[x][1]])
                                                 $('#sumary').append('<tr class="hover:bg-gray-100 border border-dotted border-softblue text-base text-center text-warning"><td class="font-roboto py-1 font-bold">'+matrix[x][0]+'</td><td class="font-roboto py-1 font-bold border-l border-dotted border-softblue">$ '+matrix[x][1]+'</td></tr>')
                                                 
                                                 sumTotal += parseFloat(matrix[x][1])
@@ -407,7 +407,7 @@
                                             }else{
 
                                                 let finalPrice = (matrix[x][2] > 0)?matrix[x][2]:matrix[x][1]
-                                                matrixFinale.push([matrix[x][0], finalPrice])
+                                                matrixFinale.push([matrix[x][3], finalPrice])
                                                 $('#sumary').append('<tr class="hover:bg-gray-100 border border-dotted border-softblue text-base text-center text-warning"><td class="font-roboto py-1 font-bold">'+matrix[x][0]+'</td><td class="font-roboto py-1 font-bold border-l border-dotted border-softblue">$ '+finalPrice+'</td></tr>')
 
                                                 sumTotal += parseFloat(finalPrice)
