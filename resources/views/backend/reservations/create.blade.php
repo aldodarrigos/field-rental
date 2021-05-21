@@ -214,6 +214,11 @@
             }
         }
 
+        //Prevent multiple submit form
+        $('#reservation_form').on('submit', function() {
+            $('#buttonrental').attr('disabled','disabled');
+        });
+
         $("#clean").click(function(){               
             location.reload();
         });
@@ -313,7 +318,7 @@
         </div>
         <div class="col-md-6">
 
-            <form action="{{$action}}" method="POST">
+            <form action="{{$action}}" method="POST" id="reservation_form">
 
                 @if ($result == 1)
 
