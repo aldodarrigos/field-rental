@@ -276,7 +276,7 @@ table{
                                                 @foreach ($reservation as $item)
                                                 <tr>
                                                     <td style='padding: 5px 10px'>{{date('M d, Y', strtotime($item->res_date))}}</td>
-                                                    <td style='padding: 5px 10px'>{{$item->hour}}</td>
+                                                    <td style='padding: 5px 10px'>{{date('g A', strtotime($item->hour))}}</td>
                                                     <td style='padding: 5px 10px'>${{$item->price}}</td>
                                                 </tr>
                                                 @endforeach

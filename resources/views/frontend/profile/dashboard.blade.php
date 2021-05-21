@@ -119,8 +119,6 @@
                 <button class="tablinks font-roboto font-bold uppercase" onclick="openCity(event, 'leagues')">Leagues</button>
 
                 <button class="tablinks font-roboto font-bold uppercase" onclick="openCity(event, 'products')">Product Orders</button>
-
-                <button class="tablinks font-roboto font-bold uppercase" onclick="openCity(event, 'streaming')">Streaming</button>
             </div>
     
             <!-- Tab content -->
@@ -155,29 +153,7 @@
             </div>
 
 
-            <div id="streaming" class="tabcontent bg-white p-4">
 
-                <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-
-                rtsp://admin:Gt514865*@50.213.160.94:554/streaming/channels/101
-
-                <video id="video" autoplay="true" controls="controls" type='application/x-mpegURL'></video>
-                <script>
-                if (Hls.isSupported()) {
-                    var video = document.getElementById('video');
-                    var hls = new Hls();
-                    // bind them together
-                    hls.attachMedia(video);
-                    hls.on(Hls.Events.MEDIA_ATTACHED, function () {
-                    console.log("video and hls.js are now bound together !");
-                    hls.loadSource("rtsp://admin:Gt514865*@50.213.160.94:554/streaming/channels/101");
-                    hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
-                    });
-                    });
-                }
-                </script>
-
-            </div>
             
 
 

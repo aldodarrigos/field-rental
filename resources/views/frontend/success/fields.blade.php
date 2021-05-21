@@ -54,7 +54,7 @@
                             </div>
                             <div class="">
                                 <div class="font-roboto text-lg uppercase font-bold leading-none mb-2 mt-2">Hour</div>
-                                <div class="font-roboto text-xl uppercase font-bold leading-none mb-2 mt-2 text-warning">{{$item->hour}}</div>
+                                <div class="font-roboto text-xl uppercase font-bold leading-none mb-2 mt-2 text-warning">{{date('g A', strtotime($item->hour))}}</div>
                             </div>
                             <div class="">
                                 <div class="font-roboto text-lg uppercase font-bold leading-none mb-2 mt-2">Price</div>
