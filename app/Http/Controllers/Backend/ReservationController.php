@@ -273,7 +273,7 @@ class ReservationController extends Controller
         //$reservations = Reservation::orderBy('res_date', 'DESC')->get();
 
         $reservations = DB::table('reservations')
-        ->select(DB::raw('reservations.id, reservations.code, users.name as user_name, fields.name as field_name, fields.short_name as field_short_name, reservations.hour, reservations.res_date'))
+        ->select(DB::raw('reservations.id, reservations.code, users.name as user_name, fields.name as field_name, fields.short_name as field_short_name, fields.number as field_number, reservations.hour, reservations.res_date'))
         ->leftJoin('users', 'reservations.user_id', '=', 'users.id')
         ->leftJoin('fields', 'reservations.field_id', '=', 'fields.id')
         ->orderBy('reservations.res_date', 'desc')
@@ -282,10 +282,10 @@ class ReservationController extends Controller
         $options = '<option value="0" selected="">Pick a Field --</option>';
         foreach($reservations as $item){
             array_push($array, array(
-                'title' => $item->user_name.' - '.$item->field_short_name, 
+                'title' => $item->user_name.' - '.$item->field_short_name.' ('.$item->field_number.')', 
                 'start' => $item->res_date.' '.$item->hour,
                 'url' => '/booking/'.$item->id,
-                'note' => $item->field_name.' - '.$item->res_date.' - '.$item->hour.' - '.$item->code,
+                'note' => $item->field_name.' ('.$item->field_number.')'.' / '.$item->res_date.' / '.$item->hour,
             ));
         }
         return $array;
