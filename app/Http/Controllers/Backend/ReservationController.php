@@ -288,7 +288,7 @@ class ReservationController extends Controller
                 'title' => $name.' - '.$item->field_short_name.' ('.$item->field_number.')', 
                 'start' => $item->res_date.' '.$item->hour,
                 'url' => '/booking/'.$item->id,
-                'note' => $item->field_name.' ('.$item->field_number.')'.' / '.$item->res_date.' / '.$item->hour,
+                'note' => $item->field_name.' ('.$item->field_number.')'.' / '.$item->res_date.' / '.date('h A', strtotime($item->hour)),
             ));
         }
         return $array;
