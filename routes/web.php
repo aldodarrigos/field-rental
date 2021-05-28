@@ -166,6 +166,7 @@ Route::middleware(['admin'])->group(function () {
     //BOOKING
     Route::resource('booking', ReservationController::class);
     Route::get('calendar', [ReservationController::class, 'calendar']);
+    Route::get('calendar-fields', [ReservationController::class, 'fields']);
     Route::get('get-reservations', [ReservationController::class, 'get_reservations']);
     Route::get('delete-reservation/{id?}', [ReservationController::class, 'destroy']);
 

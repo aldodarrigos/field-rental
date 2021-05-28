@@ -78,12 +78,6 @@
                 }
             });
 
-
-
-
-
-
-
         });
     </script>
 
@@ -94,7 +88,7 @@
         <h2>Calendar</h2>
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="/backend-booking">Dashboard</a>
+                <a href="/booking">Dashboard</a>
             </li>
         </ol>
     </div>
@@ -110,7 +104,8 @@
             <div class="ibox-title">
                 <h5>Booking Calendar</h5>
                 <div class="ibox-tools">
-                    <a href="/backend-booking/create" class="btn btn-primary btn-xs">New Booking</a>
+                    <a href="/calendar-fields" class="btn btn-xs btn-success text-white" style='color: #fff!Important;'>Fields Calendar <i class="far fa-calendar-alt"></i></a> 
+                    <a href="/booking/create" class="btn btn-primary btn-xs">New Booking</a>
                 </div>
             </div>
             <div class="ibox-content">

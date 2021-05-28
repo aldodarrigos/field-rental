@@ -63,7 +63,7 @@
 <div class="wrapper wrapper-content animated fadeInRight">
 
     <div class="row">
-        <div class="col-lg-10">
+        <div class="col-lg-12">
             <div class="ibox ">
                 <div class="ibox-title">
                     <h5>Content</h5>

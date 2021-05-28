@@ -288,10 +288,110 @@ class ReservationController extends Controller
                 'title' => $name.' - '.$item->field_short_name.' ('.$item->field_number.')', 
                 'start' => $item->res_date.' '.$item->hour,
                 'url' => '/booking/'.$item->id,
-                'note' => $item->field_name.' ('.$item->field_number.')'.' / '.$item->res_date.' / '.date('h A', strtotime($item->hour)),
-            ));
+                'note' => $item->field_name.' ('.$item->field_number.')'.' / '.$item->res_date.' / '.date('h A', strtotime($item->hour)),            ));
         }
         return $array;
         
+    }
+
+
+    public function fields(Request $request){
+
+        $now = date('Y-m-d');
+
+        $date = ($request->input('date'))?$request->input('date'):$now;
+
+        $reservations = DB::table('reservations')
+        ->select(DB::raw('reservations.id AS res_id, users.name AS user_name, fields.id as field_id, fields.name AS field_name, reservations.res_date, reservations.hour'))
+        ->leftJoin('users', 'reservations.user_id', '=', 'users.id')
+        ->leftJoin('fields', 'reservations.field_id', '=', 'fields.id')
+        ->where('reservations.res_date', '2021-05-21')
+        ->where('reservations.hour', '09:00')
+        ->orderBy('fields.number', 'ASC')
+        ->get();
+
+        $hours = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00'];
+
+        $hour_9am = $this->hour_reservation('09:00', $date);
+        $hour_10am = $this->hour_reservation('10:00', $date);
+        $hour_11am = $this->hour_reservation('11:00', $date);
+        $hour_12pm = $this->hour_reservation('12:00', $date);
+        $hour_1pm = $this->hour_reservation('13:00', $date);
+        $hour_2pm = $this->hour_reservation('14:00', $date);
+        $hour_3pm = $this->hour_reservation('15:00', $date);
+        $hour_4pm = $this->hour_reservation('16:00', $date);
+        $hour_5pm = $this->hour_reservation('17:00', $date);
+        $hour_6pm = $this->hour_reservation('18:00', $date);
+        $hour_7pm = $this->hour_reservation('19:00', $date);
+        $hour_8pm = $this->hour_reservation('20:00', $date);
+        $hour_9pm = $this->hour_reservation('21:00', $date);
+
+        $url = 'reservations';
+
+        $fields = Field::where('status', 1)->orderBy('number', 'ASC')->get();
+
+        return view('backend/reservations/fields', [
+            'reservations' => $reservations, 
+            'url' => $url, 
+            'fields' => $fields, 
+            'date' => $date, 
+            'hour_9am' => $hour_9am, 
+            'hour_10am' => $hour_10am, 
+            'hour_11am' => $hour_11am,
+            'hour_12pm' => $hour_12pm,
+            'hour_1pm' => $hour_1pm,
+            'hour_2pm' => $hour_2pm,
+            'hour_3pm' => $hour_3pm,
+            'hour_4pm' => $hour_4pm,
+            'hour_5pm' => $hour_5pm,
+            'hour_6pm' => $hour_6pm,
+            'hour_7pm' => $hour_7pm,
+            'hour_8pm' => $hour_8pm,
+            'hour_9pm' => $hour_9pm,
+            ],
+    
+        );
+    }
+
+    public function hour_reservation($hour, $date){
+
+        $fields = Field::where('status', 1)->orderBy('number', 'ASC')->get();
+        $hoursarray = array();
+
+        foreach ($fields as $field) {
+            $result = $this->check_hours_calendar($hour, $field->id, $date);
+            if( $result != 'fail'){
+                array_push($hoursarray, 
+                ['res_id' => $result->res_id, 
+                'user' => $result->user_name
+                ]);
+            }else{
+                array_push($hoursarray, 
+                    ['res_id' => '000', 
+                    'user' => 'Available'
+                    ]);
+            }
+
+        }
+
+        return $hoursarray;
+
+    }
+    public function check_hours_calendar($hour, $field, $date){
+
+        $reservations = DB::table('reservations')
+        ->select(DB::raw('reservations.id AS res_id, users.name AS user_name, fields.id as field_id, fields.name AS field_name, reservations.res_date, reservations.hour'))
+        ->leftJoin('users', 'reservations.user_id', '=', 'users.id')
+        ->leftJoin('fields', 'reservations.field_id', '=', 'fields.id')
+        ->where('reservations.res_date', $date)
+        ->where('reservations.field_id', $field)
+        ->where('reservations.hour', $hour)
+        ->limit(1)
+        ->first();
+
+        $return = ($reservations)?$reservations:'fail';
+
+        return $return;
+
     }
 }
