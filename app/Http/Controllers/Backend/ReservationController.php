@@ -301,15 +301,6 @@ class ReservationController extends Controller
 
         $date = ($request->input('date'))?$request->input('date'):$now;
 
-        $reservations = DB::table('reservations')
-        ->select(DB::raw('reservations.id AS res_id, users.name AS user_name, fields.id as field_id, fields.name AS field_name, reservations.res_date, reservations.hour'))
-        ->leftJoin('users', 'reservations.user_id', '=', 'users.id')
-        ->leftJoin('fields', 'reservations.field_id', '=', 'fields.id')
-        ->where('reservations.res_date', '2021-05-21')
-        ->where('reservations.hour', '09:00')
-        ->orderBy('fields.number', 'ASC')
-        ->get();
-
         $hours = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00'];
 
         $hour_9am = $this->hour_reservation('09:00', $date);
@@ -331,7 +322,6 @@ class ReservationController extends Controller
         $fields = Field::where('status', 1)->orderBy('number', 'ASC')->get();
 
         return view('backend/reservations/fields', [
-            'reservations' => $reservations, 
             'url' => $url, 
             'fields' => $fields, 
             'date' => $date, 
@@ -361,9 +351,10 @@ class ReservationController extends Controller
         foreach ($fields as $field) {
             $result = $this->check_hours_calendar($hour, $field->id, $date);
             if( $result != 'fail'){
+                $user_name = ($result->note != '')?$result->note:$result->user_name;
                 array_push($hoursarray, 
                 ['res_id' => $result->res_id, 
-                'user' => $result->user_name
+                'user' => $user_name
                 ]);
             }else{
                 array_push($hoursarray, 
@@ -380,7 +371,7 @@ class ReservationController extends Controller
     public function check_hours_calendar($hour, $field, $date){
 
         $reservations = DB::table('reservations')
-        ->select(DB::raw('reservations.id AS res_id, users.name AS user_name, fields.id as field_id, fields.name AS field_name, reservations.res_date, reservations.hour'))
+        ->select(DB::raw('reservations.id AS res_id, users.name AS user_name, fields.id as field_id, fields.name AS field_name, reservations.res_date, reservations.hour, reservations.note as note'))
         ->leftJoin('users', 'reservations.user_id', '=', 'users.id')
         ->leftJoin('fields', 'reservations.field_id', '=', 'fields.id')
         ->where('reservations.res_date', $date)
