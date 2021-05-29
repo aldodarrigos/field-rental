@@ -113,7 +113,7 @@ class NewsBackController extends Controller
         $post->slug = $request->input('slug');
         
         $post->sumary = $request->input('sumary');
-        $post->content = $request->input('content');
+        $post->content = htmlentities($request->input('content'));
 
         $post->img = $request->input('img');
 

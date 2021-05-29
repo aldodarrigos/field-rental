@@ -59,7 +59,7 @@
             </div>
             <div class="mr-2">
                 <div class="input-group date float-right">
-                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" name="date" value="{{date('Y-m-d')}}"> 
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" name="date" value="{{$date}}"> 
                 </div>
             </div>
         </div>   
