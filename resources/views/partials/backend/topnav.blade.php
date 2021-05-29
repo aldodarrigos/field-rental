@@ -4,7 +4,7 @@
 
     </div>
     <ul class="nav navbar-top-links navbar-right">
-        <li class="">
+        <li class="d-none d-sm-block">
             {!!'<strong>Texas time:</strong> '.date('G:i:s')!!}
         </li>
 
@@ -26,7 +26,7 @@
         <li class="dropdown">
             <livewire:backend.services-registration></livewire:backend.services-registration>
         </li>
-        <li class="dropdown">
+        <li class="dropdown d-none d-sm-block">
             <a class="dropdown-toggle count-info" href="/" target='_blank'>
                 Go to website
             </a>
