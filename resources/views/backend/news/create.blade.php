@@ -18,7 +18,14 @@
         $(document).ready(function(){
 
             $('.summernote').summernote({
-                height: 600
+                height: 600,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'underline', 'clear']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['insert', ['link', 'picture']],
+                ]
             });
 
             var mem = $('.input-group.date').datepicker({

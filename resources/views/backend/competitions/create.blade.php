@@ -13,7 +13,14 @@
         $(document).ready(function () {
 
             $('.summernote').summernote({
-                height: 300
+                height: 300,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'underline', 'clear']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['insert', ['link', 'picture']],
+                ]
             });
         });
     </script>
