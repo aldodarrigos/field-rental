@@ -107,7 +107,7 @@ class NewsBackController extends Controller
     public function update(Request $request, $id)
     {
 
-        $x = htmlentities($request->input('content'));
+        $x = htmlspecialchars($request->input('content'));
         
             /*
         $x = base64_encode($request->input('content'));
