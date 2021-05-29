@@ -22,6 +22,8 @@
                 height: 600
             });
             
+            //$('.summernote').html(escape($('.summernote').summernote('code')));
+            
             var mem = $('.input-group.date').datepicker({
                 todayBtn: "linked",
                 keyboardNavigation: false,

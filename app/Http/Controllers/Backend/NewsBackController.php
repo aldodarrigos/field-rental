@@ -107,6 +107,8 @@ class NewsBackController extends Controller
     public function update(Request $request, $id)
     {
 
+        $x = htmlentities($request->input('content'));
+        
             /*
         $x = base64_encode($request->input('content'));
 
@@ -120,7 +122,7 @@ class NewsBackController extends Controller
         $post->slug = $request->input('slug');
         
         $post->sumary = $request->input('sumary');
-        $post->content = $request->input('content');
+        $post->content = $x;
 
         $post->img = $request->input('img');
 
