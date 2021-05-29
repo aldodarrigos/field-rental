@@ -54,7 +54,6 @@ class FrontendController extends Controller
         ->leftJoin('tags', 'posts.tag_id', '=', 'tags.id')
         ->where('posts.status', 1)
         ->orderBy('posts.pub_date', 'desc')
-        ->limit(5)
         ->get();
 
         $seo = ['title' => 'News | KISC, Sports complex', 
