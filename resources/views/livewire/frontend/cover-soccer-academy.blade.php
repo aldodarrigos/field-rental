@@ -5,7 +5,7 @@
         </div>
         <div class="w-5/5 md:w-2/5 py-10 px-10 md:py-36 md:px-20">
             <div class="text-red uppercase font-roboto font-bold">{{$content->subtitle}}</div>    
-            <h1 class="text-black font-roboto text-4x5 md:text-5xl uppercase font-bold leading-none mb-4 mt-2">{{$content->title}}</h1>
+            <h1 class="text-black font-roboto text-4x5 md:text-5xl uppercase font-bold leading-none mb-4 mt-2 break-all">{{$content->title}}</h1>
             <div class="mb-6 text-black">
                 {{$content->content}}
             </div>
