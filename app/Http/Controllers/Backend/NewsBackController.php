@@ -108,9 +108,11 @@ class NewsBackController extends Controller
     {
 
         $content = $request->input('content');
-        $content = str_replace('"', '&#34;', $content);
-        $content = str_replace(':', '&#58;', $content);
-        $content = str_replace(';', '&#59;', $content);
+        $content = str_replace('"', '\"', $content);
+        $content = str_replace("'", "\'", $content);
+        $content = str_replace(":", "\:", $content);
+        $content = str_replace(";", "\;", $content);
+
         /*
         
         $x = htmlentities($request->input('content'));
@@ -128,7 +130,7 @@ class NewsBackController extends Controller
         $post->slug = $request->input('slug');
         
         $post->sumary = $request->input('sumary');
-        $post->content = $_POST['content'];
+        $post->content = $content;
 
         $post->img = $request->input('img');
 
