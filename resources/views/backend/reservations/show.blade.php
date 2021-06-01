@@ -117,10 +117,22 @@
                     </div>
                 </div>
 
-                <div class="form-group ">
-                    <label>Paypal Code</label>
-                    <input type="text" name='conf_code' class="form-control" value="{{$reservation->res_code}}" disabled>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group ">
+                            <label>Paypal Code</label>
+                            <input type="text" name='conf_code' class="form-control" value="{{$reservation->res_code}}" disabled>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group ">
+                            <label>Cliente Name</label>
+                            <input type="text" name='user_rel' class="form-control" value="{{$reservation->user_rel}}" disabled>
+                        </div>
+                    </div>
                 </div>
+
+                
 
                 <div class="form-group ">
                     <label>Note</label>
