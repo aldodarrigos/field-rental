@@ -110,11 +110,12 @@
                                         $status = 'Finished';
                                         $status_color = 'default';
                                     }
+                                    $user_name = ($reservation->user_rel != null)?$reservation->user_rel:$reservation->user_name;
                                     @endphp
 
                                     <tr class="gradeX">                        
                                         <td><strong>{{$reservation->field_number}}.</strong> {{$reservation->field_name}}</td>
-                                        <td><strong>{{$reservation->user_name}}</strong></td>
+                                        <td><strong>{{$user_name}}</strong></td>
                                         <td>{{$reservation->user_email}}</td>
                                         <td>${{$reservation->price}}</td>
                                         <td class="center text-{{$status_color}}">{!!date('M d, Y', strtotime($reservation->res_date)).' <strong>'.date('h:i A', strtotime($reservation->hour)).'</strong>'!!}</td>

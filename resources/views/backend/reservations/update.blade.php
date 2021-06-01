@@ -175,11 +175,13 @@
                                     <input type="text" name='conf_code' class="form-control" value="{{$reservation->res_code}}" disabled>
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="form-group ">
+                                    <label>Client name</label>
+                                    <input type="text" name='user_rel' class="form-control" value="{{$reservation->user_rel}}">
+                                </div>
+                            </div>
                         </div>
-
-
-
-
         
                         <div class="form-group ">
                             <label>Note</label>

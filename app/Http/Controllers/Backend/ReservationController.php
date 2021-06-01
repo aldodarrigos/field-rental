@@ -19,7 +19,7 @@ class ReservationController extends Controller
     public function index()
     {
         $reservations = DB::table('reservations')
-        ->select(DB::raw('reservations.id, reservations.code, users.name as user_name, users.email as user_email, fields.name as field_name, fields.number as field_number, reservations.hour as hour, reservations.res_date as res_date, reservations.price as price, reservations.conf_code as res_code, reservations.created_at as created_at, note'))
+        ->select(DB::raw('reservations.id, reservations.code, users.name as user_name, users.email as user_email, fields.name as field_name, fields.number as field_number, reservations.hour as hour, reservations.res_date as res_date, reservations.price as price, reservations.conf_code as res_code, reservations.created_at as created_at, reservations.note, reservations.user_rel'))
         ->leftJoin('users', 'reservations.user_id', '=', 'users.id')
         ->leftJoin('fields', 'reservations.field_id', '=', 'fields.id')
         ->orderBy('reservations.created_at', 'desc')
@@ -286,7 +286,7 @@ class ReservationController extends Controller
         $options = '<option value="0" selected="">Pick a Field --</option>';
         foreach($reservations as $item){
 
-            $name = ($item->note != '')?$item->note:$item->user_name;
+            $name = ($item->user_rel != '')?$item->user_rel:$item->user_name;
 
             array_push($array, array(
                 'title' => $name.' - '.$item->field_short_name.' ('.$item->field_number.')', 
@@ -355,7 +355,7 @@ class ReservationController extends Controller
         foreach ($fields as $field) {
             $result = $this->check_hours_calendar($hour, $field->id, $date);
             if( $result != 'fail'){
-                $user_name = ($result->note != '')?$result->note:$result->user_name;
+                $user_name = ($result->user_rel != '')?$result->user_rel:$result->user_name;
                 array_push($hoursarray, 
                 ['res_id' => $result->res_id, 
                 'user' => $user_name
