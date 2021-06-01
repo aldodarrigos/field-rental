@@ -39,7 +39,7 @@
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>Fields Calendar {{$date}}</h2>
+        <h2>Fields Calendar</h2>
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
                 <a href="/booking">Dashboard</a>
@@ -52,25 +52,43 @@
 </div>
 <div class="wrapper wrapper-content  animated fadeInRight">
 
-    <form action="">
-        <div class="d-flex flex-row-reverse">
-            <div class="">
-                <button type="submit" class="btn btn-md btn-success"><i class="fa fa-search"></i></button>
-            </div>
-            <div class="mr-2">
-                <div class="input-group date float-right">
-                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" name="date" value="{{$date}}"> 
-                </div>
-            </div>
-        </div>   
-    </form>
+    <div class="row justify-content-between mb-2">
+        
+        <div class="col-md-2 text-center text-md-left mb-2 mb-md-0">
+            <form action="" class="">
+                <input type="hidden" name="date" value="{{date("Y-m-d",strtotime($date."- 1 days"))}}">
+                <button class="btn btn-success btn-sm"><i class="fas fa-angle-double-left"></i> Prev day</button>
+            </form>
+            
+        </div>
+        <div class="col-md-3 mb-2 mb-md-0">
+            <form action="">
+                <div class="d-flex flex-row-reverse">
+                    <div class="">
+                        <button type="submit" class="btn btn-md btn-success"><i class="fa fa-search"></i></button>
+                    </div>
+                    <div class="mr-2">
+                        <div class="input-group date float-right">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" name="date" value="{{$date}}"> 
+                        </div>
+                    </div>
+                </div>   
+            </form>    
+            
+        </div>
+        <div class="col-md-2 text-center text-md-right">
+            <form action="">
+                <input type="hidden" name="date" value="{{date("Y-m-d",strtotime($date."+ 1 days"))}}">
+                <button class="btn btn-success btn-sm"><i class="fas fa-angle-double-right"></i> Next day</button>
+            </form>
+        </div>
+    </div>
 
-    <br>
     <div class="row">
         <div class="col-md-12">
             <div class="ibox">
                 <div class="ibox-title">
-                    <h5>Reservations</h5>
+                    <h5>Fields Reservations (<strong>{{$date}}</strong>)</h5>
                     <div class="ibox-tools">
                         <a href="/calendar" class="btn btn-xs btn-success text-white" style='color: #fff!Important;'>Calendar <i class="far fa-calendar-alt"></i></a>
 
