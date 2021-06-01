@@ -431,6 +431,12 @@
                                     <input type="text" name='alt_price_hot' id='alt_price_hot' class="form-control" value="">
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="form-group ">
+                                    <label>Client name</label>
+                                    <input type="text" name='user_rel' id='user_rel' class="form-control" value="">
+                                </div>
+                            </div>
                         </div>
 
                         

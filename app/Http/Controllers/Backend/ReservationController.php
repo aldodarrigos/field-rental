@@ -143,6 +143,7 @@ class ReservationController extends Controller
         $user_id = $request->input('userIdLogin');
         $date = $request->input('dateSelected');
         $note = $request->input('note');
+        $user_rel = $request->input('user_rel');
         $booking_array = json_decode($request->input('bookingArray'));
         $code = str_replace( array( '-', ':' ), '', $short_name.$date.rand(1000,9999)); 
 
@@ -159,6 +160,7 @@ class ReservationController extends Controller
             $reservation->hour = $booking_array[$i][0];
             $reservation->price = $booking_array[$i][1];
             $reservation->note = $note;
+            $reservation->user_rel = $user_rel;
             $reservation->save();
 
         }
@@ -192,7 +194,8 @@ class ReservationController extends Controller
         reservations.conf_code as res_code, 
         reservations.created_at as created_at, 
         reservations.updated_at as updated_at, 
-        reservations.note'))
+        reservations.note,
+        reservations.user_rel'))
 
         ->leftJoin('users', 'reservations.user_id', '=', 'users.id')
         ->leftJoin('fields', 'reservations.field_id', '=', 'fields.id')
@@ -223,6 +226,7 @@ class ReservationController extends Controller
         $booking->price = $request->input('price');
         $booking->res_date = $request->input('date');
         $booking->note = $request->input('note');
+        $booking->user_rel = $request->input('user_rel');
         $booking->save();
 
         return redirect('booking/'.$id.'/edit')->with('success', 'Successful update!');
@@ -233,7 +237,7 @@ class ReservationController extends Controller
     {
 
         $reservation = DB::table('reservations')
-        ->select(DB::raw('reservations.id, reservations.code, reservations.code, users.name as user_name, users.email as user_email, fields.name as field_name, reservations.hour as hour, reservations.res_date as res_date, reservations.price as price, reservations.conf_code as res_code, reservations.created_at as created_at, reservations.note'))
+        ->select(DB::raw('reservations.id, reservations.code, reservations.code, users.name as user_name, users.email as user_email, fields.name as field_name, reservations.hour as hour, reservations.res_date as res_date, reservations.price as price, reservations.conf_code as res_code, reservations.created_at as created_at, reservations.note, reservations.user_rel'))
         ->leftJoin('users', 'reservations.user_id', '=', 'users.id')
         ->leftJoin('fields', 'reservations.field_id', '=', 'fields.id')
         ->where('reservations.id', $id)
@@ -273,7 +277,7 @@ class ReservationController extends Controller
         //$reservations = Reservation::orderBy('res_date', 'DESC')->get();
 
         $reservations = DB::table('reservations')
-        ->select(DB::raw('reservations.id, reservations.code, users.name as user_name, fields.name as field_name, fields.short_name as field_short_name, fields.number as field_number, reservations.hour, reservations.res_date, reservations.note as note'))
+        ->select(DB::raw('reservations.id, reservations.code, users.name as user_name, fields.name as field_name, fields.short_name as field_short_name, fields.number as field_number, reservations.hour, reservations.res_date, reservations.note as note, reservations.user_rel as user_rel'))
         ->leftJoin('users', 'reservations.user_id', '=', 'users.id')
         ->leftJoin('fields', 'reservations.field_id', '=', 'fields.id')
         ->orderBy('reservations.res_date', 'desc')
@@ -371,7 +375,7 @@ class ReservationController extends Controller
     public function check_hours_calendar($hour, $field, $date){
 
         $reservations = DB::table('reservations')
-        ->select(DB::raw('reservations.id AS res_id, users.name AS user_name, fields.id as field_id, fields.name AS field_name, reservations.res_date, reservations.hour, reservations.note as note'))
+        ->select(DB::raw('reservations.id AS res_id, users.name AS user_name, fields.id as field_id, fields.name AS field_name, reservations.res_date, reservations.hour, reservations.note as note, reservations.user_rel as user_rel'))
         ->leftJoin('users', 'reservations.user_id', '=', 'users.id')
         ->leftJoin('fields', 'reservations.field_id', '=', 'fields.id')
         ->where('reservations.res_date', $date)

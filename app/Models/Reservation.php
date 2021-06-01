@@ -16,7 +16,8 @@ class Reservation extends Model
         'hour',
         'price', 
         'conf_code', 
-        'note'
+        'note',
+        'user_rel'
     ];
 
 }
