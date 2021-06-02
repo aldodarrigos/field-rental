@@ -47,7 +47,8 @@
 
             </div>
 
-            @if ($slug == 'summer-clinic')
+            <!-- Summer clinics, Soccer Clinics, Soccer Skill training -->
+            @if ($service->id == 5)
                 
                 @if (count($clinics)>0)
                     <div class="pt-6 px-2">

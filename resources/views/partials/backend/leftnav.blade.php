@@ -40,6 +40,11 @@
 
             <li class='{{$reservations_active}}'>
                 <a href="/booking"><i class="fas fa-book"></i> <span class="nav-label">Booking</span> </a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="/booking">Dashboard</a></li>
+                    <li><a href="/calendar">Calendar</a></li>
+                    <li><a href="/calendar-fields">Fields Calendar</a></li>
+                </ul>
             </li>
 
             <li class="{{$content_active}}">
