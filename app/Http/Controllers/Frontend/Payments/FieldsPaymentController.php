@@ -48,7 +48,7 @@ class FieldsPaymentController extends Controller
 
         $season = $setting->season;
         $hot_hours = ['18:00', '19:00', '20:00', '21:00'];
-        if($season == 2){
+        if($season == 1){
             $hot_hours = ['20:00', '21:00'];
         }
 
