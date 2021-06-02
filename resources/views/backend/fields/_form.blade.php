@@ -52,21 +52,21 @@
                 
                 <div class="col-md-4">
                     <div class="form-group ">
-                        <label>Price regular</label>
+                        <label>Regular Price</label>
                         <input type="text" name='price_regular' class="form-control" @if(!empty($content->price_regular)) value="{{$content->price_regular}}" @endif>
                     </div>
                 </div>
 
                 <div class="col-md-4">
                     <div class="form-group ">
-                        <label>Price Night</label>
+                        <label>Night Price</label>
                         <input type="text" name='price_night' class="form-control" @if(!empty($content->price_night)) value="{{$content->price_night}}" @endif>
                     </div>
                 </div>
 
                 <div class="col-md-4">
                     <div class="form-group ">
-                        <label>Price Weekend</label>
+                        <label>Weekend Price</label>
                         <input type="text" name='price_weekend' class="form-control" @if(!empty($content->price_weekend)) value="{{$content->price_weekend}}" @endif>
                     </div>
                 </div>
@@ -77,21 +77,21 @@
                 
                 <div class="col-md-4">
                     <div class="form-group ">
-                        <label>Price regular (2nd hour)</label>
+                        <label>2nd hour Price</label>
                         <input type="text" name='price_regular_alt' class="form-control" @if(!empty($content->price_regular_alt)) value="{{$content->price_regular_alt}}" @endif>
                     </div>
                 </div>
 
                 <div class="col-md-4">
                     <div class="form-group ">
-                        <label>Price Night (2nd hour)</label>
+                        <label>2nd hour Night Price</label>
                         <input type="text" name='price_night_alt' class="form-control" @if(!empty($content->price_night_alt)) value="{{$content->price_night_alt}}" @endif>
                     </div>
                 </div>
 
                 <div class="col-md-4">
                     <div class="form-group ">
-                        <label>Price Weekend (2nd hour)</label>
+                        <label>2nd hour Weekend Price</label>
                         <input type="text" name='price_weekend_alt' class="form-control" @if(!empty($content->price_weekend_alt)) value="{{$content->price_weekend_alt}}" @endif>
                     </div>
                 </div>

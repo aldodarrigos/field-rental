@@ -6,6 +6,24 @@
 
     @parent
     
+    <script>
+        $(document).ready(function(){
+
+            $('#post_content').each(function(){
+                // Get the content
+                var str = $(this).html();
+                // Set the regex string
+
+
+                var regex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|].(?:jpg|gif|png|webp))/ig;
+
+                // Replace plain text links by hyperlinks
+                var replaced_text = str.replace(regex, "<img src='$1' class='max-w-full border-8 border-gray mx-auto'>");
+                // Echo link
+                $(this).html(replaced_text);
+            });
+        });
+    </script>
 
 @endsection
 
@@ -34,7 +52,7 @@
                        <span class="text-sm text-black font-bold">{{$competition->pub_date}}</span>
                     </div>
         
-                    <div class="mb-8">
+                    <div class="mb-8" id="post_content">
                             {!!$competition->content!!}
                     </div>
                     <br>

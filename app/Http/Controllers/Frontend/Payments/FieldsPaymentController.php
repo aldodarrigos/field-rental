@@ -44,7 +44,15 @@ class FieldsPaymentController extends Controller
     {
         $map = Content::where('id', 11)->first();
         $fields_select = Field::where('status', 1)->orderBy('number', 'ASC')->get();
+        $setting = Setting::first();
+
+        $season = $setting->season;
         $hot_hours = ['18:00', '19:00', '20:00', '21:00'];
+        if($season == 2){
+            $hot_hours = ['20:00', '21:00'];
+        }
+
+        
         $hours = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00'];
 
         $hoursarray = array();
@@ -105,7 +113,7 @@ class FieldsPaymentController extends Controller
             $result = 0;
         }
 
-        $setting = Setting::first();
+        
 
         $seo = ['title' => 'Booking | KISC, Sports complex', 
         'sumary' => 'Book now', 
