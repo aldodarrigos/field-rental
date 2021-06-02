@@ -46,7 +46,7 @@ class ServicesController extends Controller
             $competitions = Competition::where([['is_league', 1], ['status','!=', 1]])->orderBy('created_at', 'DESC')->get();
             $competitions_on_off = 1;
         }
-        if($slug == 'summer-clinic'){
+        if($service->id == 5){
             $clinics = Summerclinic::where('status','!=', 1)->orderBy('created_at', 'DESC')->get();
         }
 
