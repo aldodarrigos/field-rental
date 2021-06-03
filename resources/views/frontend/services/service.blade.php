@@ -71,7 +71,7 @@
                                 <x-frontend.cards.related_content>
                                     <x-slot name='image'>{{$clinic->img}}</x-slot>
                                     <x-slot name='title'>{{$clinic->name}}</x-slot>
-                                    <x-slot name='link'>/summer-clinic/{{$clinic->slug}}</x-slot>
+                                    <x-slot name='link'>/soccer-clinic/{{$clinic->slug}}</x-slot>
                                     <x-slot name='date'></x-slot>
                                     <x-slot name='sumary'>{{$clinic->sumary}}</x-slot>
                                     <x-slot name='status'>{{$status_txt}}</x-slot>

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\{Reservation, Field};
+use App\Models\{Reservation, Field, Setting};
 use DB;
 use Illuminate\Support\Str;
 use GuzzleHttp\Client;
@@ -42,8 +42,14 @@ class ReservationController extends Controller
         $fields = Field::where('status', 1)->orderBy('number', 'ASC')->get();
         $action = route('booking.store');
         $url = "reservations";
+        $setting = Setting::first();
 
-        $hot_hours = ['18:00', '19:00', '20:00', '21:00', '22:00'];
+        $season = $setting->season;
+        $hot_hours = ['18:00', '19:00', '20:00', '21:00'];
+        if($season == 1){
+            $hot_hours = ['20:00', '21:00'];
+        }
+        
         $hours = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00'];
         $hoursarray = array();
         

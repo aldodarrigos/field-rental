@@ -24,7 +24,7 @@
 
 @endsection
 
-<x-frontend.pieces.section_header title='Summer Clinics' bread='{{$event->name}}'></x-frontend.pieces.section_header>
+<x-frontend.pieces.section_header title='Soccer Clinic' bread='{{$event->name}}'></x-frontend.pieces.section_header>
 
 <div class="w-11/12 md:w-boxed mx-auto">
 
@@ -46,7 +46,7 @@
                <h2 class="font-roboto text-2x uppercase font-bold text-black leading-none mb-6">Registration</h2>
 
                <div>
-                    <form action="/summer-clinic-registration" method="POST">
+                    <form action="/soccer-clinic-registration" method="POST">
 
                         @csrf
                         <input type="hidden" name="event_id" value='{{$event->id}}'>

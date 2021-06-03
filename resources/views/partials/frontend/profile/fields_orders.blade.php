@@ -51,7 +51,7 @@
             </td>
 
             <td class="px-6 py-4 whitespace-no-wrap border-b border-bluetext text-sm leading-5 text-gray-500">
-                {{$item->res_date}} {{$item->hour}}</td>
+                {{date('M d, Y', strtotime($item->res_date))}} {{$item->hour}}</td>
 
         </tr>
 

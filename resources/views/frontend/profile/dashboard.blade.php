@@ -118,7 +118,10 @@
 
                 <button class="tablinks font-roboto font-bold uppercase" onclick="openCity(event, 'leagues')">Leagues</button>
 
+                <button class="tablinks font-roboto font-bold uppercase" onclick="openCity(event, 'soccer')">Soccer Clinic</button>
+                <!--
                 <button class="tablinks font-roboto font-bold uppercase" onclick="openCity(event, 'products')">Product Orders</button>
+                -->
             </div>
     
             <!-- Tab content -->
@@ -146,12 +149,21 @@
 
             </div>
 
-            <div id="products" class="tabcontent bg-white p-4">
 
-                @include('partials.frontend.profile.products_orders')
+
+            <div id="soccer" class="tabcontent bg-white p-4">
+
+                @include('partials.frontend.profile.soccer_clinics')
 
             </div>
 
+            <!--
+            <div id="products" class="tabcontent bg-white p-4">
+
+                @include('partials.frontend.profile.soccer_clinics')
+
+            </div>
+            -->
 
 
             

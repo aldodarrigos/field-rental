@@ -21,7 +21,7 @@ use App\Mail\SummerMailable;
 use Illuminate\Support\Facades\Mail;
 use DB;
 
-class SummerclinicPaymentController extends Controller
+class SoccerClinicPaymentController extends Controller
 {
 
     private $apiContext;
@@ -70,8 +70,8 @@ class SummerclinicPaymentController extends Controller
         ));
         $transaction->setCustom($registration_data);
 
-        $callbackUrl = url('summer-clinic-payment-status');
-        $failedUrl = url('summer-clinic-payment-success');
+        $callbackUrl = url('soccer-clinic-payment-status');
+        $failedUrl = url('soccer-clinic-payment-success');
         $redirectUrls = new RedirectUrls();
         $redirectUrls->setReturnUrl($callbackUrl)
             ->setCancelUrl($failedUrl);
@@ -106,7 +106,7 @@ class SummerclinicPaymentController extends Controller
 
         if(!$paymentId or !$payerId or !$token){
             $status = 'No se pudo procesar el pago a través de Paypal.';
-            return redirect('product-payment-fail');
+            return redirect('soccer-clinic-payment-fail');
         }
 
         $payment = Payment::get($paymentId, $this->apiContext);
@@ -131,7 +131,7 @@ class SummerclinicPaymentController extends Controller
 
             $success = $this->successbooking($custom->user_email, $custom->registration_id);
 
-            return redirect('summer-clinic-confirmation/'.$custom->registration_id);
+            return redirect('soccer-clinic-confirmation/'.$custom->registration_id);
         }
         
     }

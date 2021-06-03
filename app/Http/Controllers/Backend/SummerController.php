@@ -113,6 +113,7 @@ class SummerController extends Controller
         ->select(DB::raw('summerclinic_players.id as player_id, 
         summerclinic_registration.id as registration_id,
         summerclinic_registration.read,
+        summerclinic_registration.status as status_registration,
         summerclinic_players.registration_id as event_id, 
         summerclinic.id as event_id,
         summerclinic.name as event_name,

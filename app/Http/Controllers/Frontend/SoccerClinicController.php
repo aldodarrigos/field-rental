@@ -9,14 +9,14 @@ use Illuminate\Support\Facades\Mail;
 use DB;
 use Illuminate\Support\Str;
 
-class SummerclinicController extends Controller
+class SoccerClinicController extends Controller
 {
     
     public function event($slug = null)
     {
 
         $event = Summerclinic::where('slug', $slug)->first();
-        $title = 'Summer Clinics';
+        $title = 'Soccer Clinic';
         $setting = Setting::first();
 
         $seo = ['title' => $event->name.' | KISC, Sports complex', 
@@ -25,7 +25,7 @@ class SummerclinicController extends Controller
         ];
 
         
-        return view('frontend/summer_clinic/event', ['seo' => $seo, 'event' => $event, 'title' => $title, 'setting' => $setting]);
+        return view('frontend/soccer_clinic/event', ['seo' => $seo, 'event' => $event, 'title' => $title, 'setting' => $setting]);
         
     }
     
@@ -104,7 +104,7 @@ class SummerclinicController extends Controller
         }
 
 
-        return redirect('summer-clinic-confirmation/'.$summerclinicreg->id)->with('success', 'Registration success!');
+        return redirect('soccer-clinic-confirmation/'.$summerclinicreg->id)->with('success', 'Registration success!');
         
     }
 
@@ -149,7 +149,7 @@ class SummerclinicController extends Controller
         'image' => $registration->event_img
         ];
         
-        return view('frontend/summer_clinic/confirmation', ['registration' => $registration, 'players' => $players, 'seo' => $seo]);
+        return view('frontend/soccer_clinic/confirmation', ['registration' => $registration, 'players' => $players, 'seo' => $seo]);
         
     }
     

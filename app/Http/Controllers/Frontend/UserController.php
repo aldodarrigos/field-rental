@@ -119,6 +119,23 @@ class UserController extends Controller
         ->orderBy('trials.updated_at', 'desc')
         ->get();
 
+        $soccer_clinic = DB::table('summerclinic_players')
+        ->select(DB::raw('summerclinic_players.registration_id as registration_id, 
+        summerclinic.name as event_name,
+        summerclinic_players.name as player_name, 
+        summerclinic_players.age as player_age,
+        summerclinic_players.gender as player_gender,
+        summerclinic_players.tshirt_size as player_tshirt,
+        summerclinic_players.obs as player_obs,
+        summerclinic_registration.status as registration_status,
+        summerclinic_players.updated_at as registration_date'))
+
+        ->leftJoin('summerclinic_registration', 'summerclinic_players.registration_id', '=', 'summerclinic_registration.id')
+        ->leftJoin('summerclinic', 'summerclinic_registration.event_id', '=', 'summerclinic.id')
+        ->where('summerclinic_registration.user_id', Auth::user()->id)
+        ->orderBy('summerclinic_players.updated_at', 'desc')
+        ->get();
+
         $user = User::where('id', Auth::user()->id)->first();
 
         $seo = ['title' => 'User Dashboard | KISC, Sports complex', 
@@ -126,7 +143,7 @@ class UserController extends Controller
         'image' => 'https://katyisc.com/storage/files/katyisc-sports-complex-share.webp'
         ];
 
-        return view('frontend/profile/dashboard', ['seo' => $seo, 'reservations' => $reservations, 'orders' => $orders, 'user' => $user, 'services' => $services, 'tournaments' => $tournaments, 'leagues' => $leagues]);
+        return view('frontend/profile/dashboard', ['seo' => $seo, 'reservations' => $reservations, 'orders' => $orders, 'user' => $user, 'services' => $services, 'tournaments' => $tournaments, 'leagues' => $leagues, 'soccer_clinic' => $soccer_clinic]);
         
     }
 

@@ -87,7 +87,7 @@
                         
                     <div class="text-center mt-6">
 
-                        <form action="/summer-clinic-payment" method="POST" id='competition-payment-form' class="inline-block">
+                        <form action="/soccer-clinic-payment" method="POST" id='competition-payment-form' class="inline-block">
 
                             {{ csrf_field() }}
                             <input type="hidden" name="final_price" id='final_price' value="{{$registration->final_price}}">

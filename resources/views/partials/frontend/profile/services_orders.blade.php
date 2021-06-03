@@ -52,7 +52,7 @@
             </td>
 
             <td class="px-6 py-4 whitespace-no-wrap border-b border-bluetext">
-                <div class="text-sm leading-5 text-gray-900">{{$item->registration_date}}</div>
+                <div class="text-sm leading-5 text-gray-900">{{date('M d, Y', strtotime($item->registration_date))}}</div>
                 <div class="text-sm leading-5 text-gray-500"></div>
             </td>
 

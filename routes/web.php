@@ -8,8 +8,8 @@ use App\Http\Controllers\Frontend\UserController;
 use App\Http\Controllers\Frontend\FieldsController;
 use App\Http\Controllers\Frontend\ServicesController;
 
-use App\Http\Controllers\Frontend\SummerclinicController;
-use App\Http\Controllers\Frontend\Payments\SummerclinicPaymentController;
+use App\Http\Controllers\Frontend\SoccerClinicController;
+use App\Http\Controllers\Frontend\Payments\SoccerClinicPaymentController;
 
 use App\Http\Controllers\Frontend\CompetitionsController;
 use App\Http\Controllers\Frontend\ShopController;
@@ -78,12 +78,12 @@ Route::get('service-payment-fail', [ServicePaymentController::class, 'fail'])->n
 Route::post('service/contact', [ServicesController::class, 'contact'])->name('service.contact');
 
 //SUMMER CLINICS
-Route::get('summer-clinic/{id?}', [SummerclinicController::class, 'event']);
-Route::post('summer-clinic-registration', [SummerclinicController::class, 'registration']);
-Route::get('summer-clinic-confirmation/{id?}', [SummerclinicController::class, 'confirmation']);
-Route::post('summer-clinic-payment', [SummerclinicPaymentController::class, 'payment']);
-Route::get('summer-clinic-payment-status', [SummerclinicPaymentController::class, 'status']);
-Route::get('summer-clinic-payment-fail', [SummerclinicPaymentController::class, 'fail']);
+Route::get('soccer-clinic/{id?}', [SoccerClinicController::class, 'event']);
+Route::post('soccer-clinic-registration', [SoccerClinicController::class, 'registration']);
+Route::get('soccer-clinic-confirmation/{id?}', [SoccerClinicController::class, 'confirmation']);
+Route::post('soccer-clinic-payment', [SoccerClinicPaymentController::class, 'payment']);
+Route::get('soccer-clinic-payment-status', [SoccerClinicPaymentController::class, 'status']);
+Route::get('soccer-clinic-payment-fail', [SoccerClinicPaymentController::class, 'fail']);
 
 //Route::get('fields', [FrontendController::class, 'fields'])->name('frontend.fields');
 Route::get('news', [FrontendController::class, 'news'])->name('frontend.news');
