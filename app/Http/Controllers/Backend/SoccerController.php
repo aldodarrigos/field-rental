@@ -9,7 +9,7 @@ use DB;
 use Illuminate\Support\Str;
 //use GuzzleHttp\Client;
 
-class SummerController extends Controller
+class SoccerController extends Controller
 {
 
     public function index()
@@ -18,7 +18,7 @@ class SummerController extends Controller
         $status = CompetitionStatus::orderBy('id', 'ASC')->get();
         $url = "services";
         
-        return view('backend/summer/index', ['records' => $records, 'url' => $url, 'status' => $status]);
+        return view('backend/soccer/index', ['records' => $records, 'url' => $url, 'status' => $status]);
 
     }
 
@@ -26,11 +26,11 @@ class SummerController extends Controller
     public function create()
     {
         $status = CompetitionStatus::orderBy('id', 'ASC')->get();
-        $action = route('summerclin.store');
+        $action = route('soccer-clinics.store');
         $url = "services";
         $form = 'new';
 
-        return view('backend/summer/create', ['action' => $action, 'url' => $url, 'form' => $form, 'status' => $status]);
+        return view('backend/soccer/create', ['action' => $action, 'url' => $url, 'form' => $form, 'status' => $status]);
     }
     
 
@@ -52,14 +52,14 @@ class SummerController extends Controller
         $content->status = $request->input('status');
         $content->save();
 
-        return redirect('summerclin');
+        return redirect('soccer-clinics');
     }
 
 
     public function edit($id)
     {
         
-        $action = route('summerclin.update', $id);
+        $action = route('soccer-clinics.update', $id);
         $content = Summerclinic::find($id);
         $status = CompetitionStatus::orderBy('id', 'ASC')->get();
 
@@ -68,7 +68,7 @@ class SummerController extends Controller
 
         $url = "services";
 
-        return view('backend/summer/update', ['content' => $content, 'action' => $action, 'url' => $url, 'put' => $put,  'form' => $form, 'status' => $status]);
+        return view('backend/soccer/update', ['content' => $content, 'action' => $action, 'url' => $url, 'put' => $put,  'form' => $form, 'status' => $status]);
     }
 
 
@@ -77,12 +77,10 @@ class SummerController extends Controller
 
         $content = Summerclinic::find($id);
 
-        $name = $request->input('name');
-        $slug_input = Str::of($name)->slug('-');
         $second_child_price = ($request->input('second_child_price') == null)?0:$request->input('second_child_price');
 
-        $content->name = $name;
-        $content->slug = $slug_input;
+        $content->name = $request->input('name');
+        $content->slug = $request->input('slug');
         $content->sumary = $request->input('sumary');
         $content->content = $request->input('content');
         $content->img = $request->input('img');
@@ -91,7 +89,7 @@ class SummerController extends Controller
         $content->status = $request->input('status');
         $content->save();
 
-        return redirect('summerclin/'.$id.'/edit')->with('success', 'Successful update!');
+        return redirect('soccer-clinics/'.$id.'/edit')->with('success', 'Successful update!');
 
     }
 
@@ -138,7 +136,7 @@ class SummerController extends Controller
 
         $url = "services";
         
-        return view('backend/summer/registration', ['records' => $records, 'url' => $url, 'event' => $event]);
+        return view('backend/soccer/registration', ['records' => $records, 'url' => $url, 'event' => $event]);
 
     }
 
@@ -181,7 +179,7 @@ class SummerController extends Controller
 
         $url = "services";
         
-        return view('backend/summer/registration_detail', ['record' => $record, 'players' => $players, 'url' => $url]);
+        return view('backend/soccer/registration_detail', ['record' => $record, 'players' => $players, 'url' => $url]);
 
     }
 

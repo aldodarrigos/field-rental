@@ -25,7 +25,7 @@
         <h2>Soccer Clinics</h2>
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="/summerclin">Dashboard</a>
+                <a href="/soccer-clinics">Dashboard</a>
             </li>
             <li class="breadcrumb-item active">
                 <strong>New Event</strong>
@@ -49,7 +49,7 @@
             </div>
             <div class="ibox-content">
 
-                @include('backend.summer._form')
+                @include('backend.soccer._form')
                 
             </div>
         </div>

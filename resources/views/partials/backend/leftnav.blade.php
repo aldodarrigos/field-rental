@@ -60,12 +60,12 @@
             </li>
 
             <li class="{{$services_active}}">
-                <a href="/backend-services"><i class="fas fa-briefcase"></i> <span class="nav-label">Services</span></a>
+                <a href="/backend-services"><i class="fas fa-briefcase"></i> <span class="nav-label">Services</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="/backend-services">Services</a></li>
                     <li><a href="/bservices-registration">Registration</a></li>
                     <li><a href="/bservices-contact">Contact</a></li>
-                    <li><a href="/summerclin">Soccer Clinics</a></li>
+                    <li><a href="/soccer-clinics">Soccer Clinics</a></li>
                 </ul>
             </li>
 

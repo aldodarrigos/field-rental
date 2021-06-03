@@ -25,7 +25,7 @@
         <h2>Tryouts</h2>
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="/summerclin">Dashboard</a>
+                <a href="/soccer-clinics">Dashboard</a>
             </li>
             <li class="breadcrumb-item active">
                 <strong>Registration detail</strong>
@@ -197,7 +197,7 @@
 
                 <div class="hr-line-dashed"></div>
                 
-                <a href="/summerclin-registration/{{$record->event_id}}" class="btn btn-w-m btn-default"><i class="fas fa-undo-alt"></i> Return</a>
+                <a href="/soccer-clinics-registration/{{$record->event_id}}" class="btn btn-w-m btn-default"><i class="fas fa-undo-alt"></i> Return</a>
                 
             </div>
         </div>

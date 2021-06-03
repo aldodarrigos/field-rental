@@ -37,7 +37,7 @@ use App\Http\Controllers\Backend\CategoriesController;
 use App\Http\Controllers\Backend\StoreController;
 use App\Http\Controllers\Backend\ProductSizeController;
 use App\Http\Controllers\Backend\SizeController;
-use App\Http\Controllers\Backend\SummerController;
+use App\Http\Controllers\Backend\SoccerController;
 
 use App\Http\Controllers\SendmailController;
 use App\Providers\RouteServiceProvider;
@@ -232,9 +232,9 @@ Route::middleware(['admin'])->group(function () {
 
     //SUMMER CLINIC
 
-    Route::resource('summerclin', SummerController::class);
-    Route::get('summerclin-registration/{id?}', [SummerController::class, 'registration']);
-    Route::get('summerclin-registration-detail/{id?}', [SummerController::class, 'registration_detail']);
+    Route::resource('soccer-clinics', SoccerController::class);
+    Route::get('soccer-clinics-registration/{id?}', [SoccerController::class, 'registration']);
+    Route::get('soccer-clinics-registration-detail/{id?}', [SoccerController::class, 'registration_detail']);
     
     //STORE
     Route::resource('store', StoreController::class);

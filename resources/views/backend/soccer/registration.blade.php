@@ -49,7 +49,7 @@
         <h2>{{$event->name}}</h2>
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="/summerclin">Dashboard</a>
+                <a href="/soccer-clinics">Dashboard</a>
             </li>
         </ol>
     </div>
@@ -99,8 +99,8 @@
                                     @endphp
 
                                     <tr class="gradeX">
-                                        <td><a href="/summerclin-registration-detail/{{$record->registration_id}}">{{$record->player_id}}</a></td>
-                                        <td><a href="/summerclin-registration-detail/{{$record->registration_id}}">{{$record->player_name}}</a></td>
+                                        <td><a href="/soccer-clinics-registration-detail/{{$record->registration_id}}">{{$record->player_id}}</a></td>
+                                        <td><a href="/soccer-clinics-registration-detail/{{$record->registration_id}}">{{$record->player_name}}</a></td>
                                         <td>{{$record->player_age}}</td>
                                         <td>{{$gender}}</td>
                                         <td>{{$record->player_tshirt}}</td>
@@ -118,7 +118,12 @@
                 
                     </div>
 
+                    <div class="hr-line-dashed"></div>
+                    
+                    <a href="/soccer-clinics" class="btn btn-w-m btn-default"><i class="fas fa-undo-alt"></i> Return</a>
+
                 </div>
+                
             </div>
         </div>
     </div>

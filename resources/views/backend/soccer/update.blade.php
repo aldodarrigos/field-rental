@@ -101,10 +101,10 @@
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>Soccer Clinics</h2>
+        <h2>Soccer Clinic</h2>
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="/summerclin">Dashboard</a>
+                <a href="/soccer-clinics">Dashboard</a>
             </li>
             <li class="breadcrumb-item active">
                 <strong>Update Event</strong>
@@ -128,7 +128,7 @@
                 </div>
                 <div class="ibox-content">
 
-                    @include('backend.summer._form')
+                    @include('backend.soccer._form')
 
                 </div>
             </div>

@@ -49,7 +49,7 @@
         <h2>Soccer Clinic</h2>
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="/summerclin">Dashboard</a>
+                <a href="/soccer-clinics">Dashboard</a>
             </li>
         </ol>
     </div>
@@ -65,7 +65,7 @@
                 <div class="ibox-title">
                     <h5>Soccer Clinic events</h5>
                     <div class="ibox-tools">
-                        <a href="/summerclin/create" class="btn btn-primary btn-xs">New Event</a>
+                        <a href="/soccer-clinics/create" class="btn btn-primary btn-xs">New Event</a>
                     </div>
                 </div>
                 <div class="ibox-content">
@@ -104,11 +104,11 @@
 
 
                                     <tr class="gradeX">
-                                        <td><a href="/summerclin/{{$record->id}}/edit">{{$record->id}}</a></td>
-                                        <td><a href="/summerclin/{{$record->id}}/edit">{{$record->name}}</a></td>
+                                        <td><a href="/soccer-clinics/{{$record->id}}/edit">{{$record->id}}</a></td>
+                                        <td><a href="/soccer-clinics/{{$record->id}}/edit">{{$record->name}}</a></td>
                                         <td><strong>{{date('M d, Y', strtotime($record->created_at))}}</strong></td>
                                         <td><span class="btn btn-xs {{$status_color}}">{{$statustxt}}</span></td>
-                                        <td><a href="/summerclin-registration/{{$record->id}}">Registration</a></td>
+                                        <td><a href="/soccer-clinics-registration/{{$record->id}}">Registration</a></td>
                                     </tr>
 
                                 @endforeach
