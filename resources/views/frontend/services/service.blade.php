@@ -11,8 +11,6 @@
        });
     </script>
 
-    
-
 @endsection
 
 <x-frontend.pieces.section_header title='{{$service->name}}' bread='Services'></x-frontend.pieces.section_header>
