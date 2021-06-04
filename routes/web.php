@@ -169,6 +169,7 @@ Route::middleware(['admin'])->group(function () {
     Route::get('calendar-fields', [ReservationController::class, 'fields']);
     Route::get('get-reservations', [ReservationController::class, 'get_reservations']);
     Route::get('delete-reservation/{id?}', [ReservationController::class, 'destroy']);
+    Route::get('get-reservation-detail/{id?}', [ReservationController::class, 'get_detail']);
 
     //CONTENT
     Route::resource('content', ContentController::class);

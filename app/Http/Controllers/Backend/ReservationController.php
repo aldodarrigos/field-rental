@@ -187,8 +187,6 @@ class ReservationController extends Controller
         $reservation = DB::table('reservations')
         ->select(DB::raw('reservations.id, 
         reservations.code, 
-        reservations.code, 
-        
         users.name as user_name, users.email as user_email, users.phone as user_phone,
         
         fields.id as field_id, 
@@ -301,6 +299,37 @@ class ReservationController extends Controller
                 'note' => $item->field_name.' ('.$item->field_number.')'.' / '.$item->res_date.' / '.date('h A', strtotime($item->hour)),            ));
         }
         return $array;
+        
+    }
+
+    public function get_detail($id)
+    {
+
+        $reservation = DB::table('reservations')
+        ->select(DB::raw('reservations.id, 
+        reservations.code, 
+        
+        users.name as user_name, users.email as user_email, users.phone as user_phone,
+        
+        fields.id as field_id, 
+        fields.name as field_name, 
+        
+        TIME_FORMAT(reservations.hour, "%l:%i %p") as hour, 
+        DATE_FORMAT(reservations.res_date, "%b %d, %Y") as res_date, 
+        reservations.price as price, 
+        reservations.conf_code as res_code, 
+        DATE_FORMAT(reservations.updated_at, "%b %d, %Y %H:%i:%s") as updated_at, 
+        reservations.note,
+        reservations.user_rel'))
+
+        ->leftJoin('users', 'reservations.user_id', '=', 'users.id')
+        ->leftJoin('fields', 'reservations.field_id', '=', 'fields.id')
+        ->where('reservations.id', $id)
+        ->limit(1)
+        ->get();
+        
+
+        return $reservation;
         
     }
 

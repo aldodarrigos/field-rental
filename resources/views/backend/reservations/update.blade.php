@@ -92,7 +92,7 @@
 
                             <div class="col-md-6">
                                 <div class="form-group ">
-                                    <label for='group'>Status</label>
+                                    <label for='group'>Field</label>
                                     <select class="form-control m-b" name="field_id">
                                         @foreach ($fields as $field)
                                             @php
