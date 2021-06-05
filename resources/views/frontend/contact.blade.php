@@ -5,6 +5,20 @@
 @section('assets_down')
 
     @parent
+
+    <script>
+        $('#reload').click(function (e){
+            e.preventDefault();
+            $.ajax({
+                type:'GET',
+                'url': 'reload-captcha',
+                success: function(res){
+                    $('#captcha-img').html(res.captcha)
+                }
+
+            })
+        })
+    </script>
     
 @endsection
 
@@ -31,48 +45,58 @@
                 <div class="flex justify-between gap-3 flex-col md:flex-row mb-2 md:mb-0">
 
                   <span class="w-2/2 md:w-1/2">
-                    <x-frontend.forms.input_text>
-                        <x-slot name='type'>text</x-slot>
-                        <x-slot name='label'>Name</x-slot>
-                        <x-slot name='id'>name</x-slot>
-                        <x-slot name='default'></x-slot>
-                        <x-slot name='placeholder'>Your Name</x-slot>
-                        <x-slot name='autocomplete'>off</x-slot>
-                        <x-slot name='required'>on</x-slot>
-                        <x-slot name='height'>big</x-slot>
-                        <x-slot name='bg'>light</x-slot>
-                        <x-slot name='label_on_off'>on</x-slot>
-                        <x-slot name='disable'>off</x-slot>
-                    </x-frontend.forms.input_text>
+                    <label for="name" class="block text-xs font-semibold text-gray-600 uppercase">Name @error('name') <small class="text-red">({{$message}})</small>@enderror</label>
+                    <input id="name" type="text" name="name" placeholder="Your Name" autocomplete="off" value="{{old('name')}}" class="block w-full px-3 py-3 mt-2 text-black bg-gray-200 px-2 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner border border-bluetext rounded-lg">
+
                   </span>
 
                   <span class="w-2/2 md:w-1/2">
-                    <x-frontend.forms.input_text>
-                        <x-slot name='type'>email</x-slot>
-                        <x-slot name='label'>Email</x-slot>
-                        <x-slot name='id'>email</x-slot>
-                        <x-slot name='default'></x-slot>
-                        <x-slot name='placeholder'>john.doe@company.com</x-slot>
-                        <x-slot name='autocomplete'>off</x-slot>
-                        <x-slot name='required'>on</x-slot>
-                        <x-slot name='height'>big</x-slot>
-                        <x-slot name='bg'>light</x-slot>
-                        <x-slot name='label_on_off'>on</x-slot>
-                        <x-slot name='disable'>off</x-slot>
-                    </x-frontend.forms.input_text>
+
+                    <div class="mb-2">
+                        <label for="email" class="block text-xs font-semibold text-gray-600 uppercase">Email @error('email') <small class="text-red">({{$message}})</small>@enderror</label>
+                        <input id="email" type="email" name="email" placeholder="john.doe@company.com" autocomplete="off" value="{{ old('email') }}" class="block w-full px-3 py-3 mt-2 text-black bg-gray-200 px-2 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner border border-bluetext rounded-lg">
+                    </div>
+
                   </span>
                   
                 </div>
-            
-                <x-frontend.forms.textarea>
-                    <x-slot name='label'>Message</x-slot>
-                    <x-slot name='id'>message</x-slot>
-                    <x-slot name='placeholder'>Your message</x-slot>
-                    <x-slot name='autocomplete'>on</x-slot>
-                    <x-slot name='required'>on</x-slot>
-                    <x-slot name='max'>2000</x-slot>
-                </x-frontend.forms.textarea>
 
+                <div class="mb-2">
+                    <label for="message" class="block mt-2 text-xs font-semibold text-gray-600 uppercase">Message @error('message') <small class="text-red">({{$message}})</small>@enderror</label>
+                    <textarea cols="30" rows="8" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner border border-bluetext rounded-md" id="message" name="message" placeholder="Your message" spellcheck="false" data-gramm="false" maxlength="2000">{{ old('message') }}</textarea>
+                </div>
+
+                <div class="px-3">Please solve the following math challenge to send this message</div>
+                <div class="flex justify-between gap-3 flex-col md:flex-row mb-2 md:mb-0 px-2">
+                    <span class="w-2/2 md:w-1/6">
+                        
+                        <div class="mt-3" id='captcha-img' >{!! Captcha::img(); !!}</div>
+                        <div class="mt-2 ">
+                            <span class="cursor-pointer" id="reload" class="">Reload</span>
+                        </div>
+                    </span>
+                    <span class="w-2/2 md:w-1/6">
+                        <x-frontend.forms.input_text>
+                            <x-slot name='type'>text</x-slot>
+                            <x-slot name='label'>Captcha</x-slot>
+                            <x-slot name='id'>captcha</x-slot>
+                            <x-slot name='default'></x-slot>
+                            <x-slot name='placeholder'></x-slot>
+                            <x-slot name='autocomplete'>off</x-slot>
+                            <x-slot name='required'>off</x-slot>
+                            <x-slot name='height'>big</x-slot>
+                            <x-slot name='bg'>light</x-slot>
+                            <x-slot name='label_on_off'>off</x-slot>
+                            <x-slot name='disable'>off</x-slot>
+                        </x-frontend.forms.input_text>
+                    </span>
+                    <span class="w-2/2 md:w-4/5">
+                        @error('captcha') <small class="text-red">({{$message}})</small>@enderror
+                    </span>
+
+
+                    
+                </div>
 
                 <button type="submit" class="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-red shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none rounded-md">
                   SEND
@@ -89,9 +113,6 @@
         </aside>
         
     </div>
-
-
-
 
     <div class="separation h-50p"></div>
 

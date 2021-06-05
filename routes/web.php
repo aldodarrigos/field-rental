@@ -18,6 +18,8 @@ use App\Http\Controllers\Frontend\Payments\ServicePaymentController;
 use App\Http\Controllers\Frontend\Payments\CompetitionPaymentController;
 use App\Http\Controllers\Frontend\Payments\TryoutPaymentController;
 
+use App\Http\Controllers\Frontend\CaptchaController;
+
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\ReservationController;
 use App\Http\Controllers\Backend\ContentController;
@@ -92,6 +94,8 @@ Route::get('tags/{slug?}', [FrontendController::class, 'tags'])->name('frontend.
 Route::get('contact', [FrontendController::class, 'contact'])->name('frontend.contact');
 Route::post('contact', [FrontendController::class, 'contact'])->name('frontend.contact.send');
 Route::get('covid-19-protocol', [FrontendController::class, 'covid'])->name('frontend.covid');
+
+Route::get('reload-captcha', [CaptchaController::class, 'reload']);
 
 Route::get('signin', [UserController::class, 'login'])->name('frontend.login');
 Route::get('signup', [UserController::class, 'singup'])->name('frontend.singup');

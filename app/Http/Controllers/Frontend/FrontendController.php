@@ -123,11 +123,23 @@ class FrontendController extends Controller
 
     public function contact(Request $request)
     {
-        $name = $request->input('name');
-        $email = $request->input('email');
-        $text = $request->input('message');
+        
+
+        
 
         if($request->input()){
+
+            $validator = $request->validate([
+                'name'  =>  'required',
+                'email' =>  'required',
+                'message' =>  'required',
+                'captcha' =>  'required|captcha',
+            ]);
+
+            $name = $request->input('name');
+            $email = $request->input('email');
+            $text = $request->input('message');
+
             $send = $this->send_contact($name, $email, $text);
             return redirect('/contact')->with('success', 'Message sent');
 
