@@ -160,7 +160,7 @@ class FrontendController extends Controller
     public function send_contact($name = null, $email = null, $message = null)
     {
         $vars = new ContactMailable($name, $email, $message);
-        Mail::to('info@katyisc.com')->send($vars);
+        Mail::to('katysoccerfields@gmail.com')->send($vars);
     }
 
     public function shop()
