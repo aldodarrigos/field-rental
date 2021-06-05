@@ -7,7 +7,7 @@
 
     <li>
         <div class="dropdown-messages-box">
-            <a class="dropdown-item float-left" href="/summerclin-registration-detail/{{$player->registration_id}}">
+            <a class="dropdown-item float-left" href="/soccer-clinics-registration-detail/{{$player->registration_id}}">
                 <img alt="image" class="rounded-circle" src="https://icons.iconarchive.com/icons/xenatt/the-circle/512/App-Messages-icon.png">
             </a>
             <div class="media-body">
