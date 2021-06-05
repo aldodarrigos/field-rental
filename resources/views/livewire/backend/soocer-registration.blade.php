@@ -23,8 +23,8 @@
 
     <li>
         <div class="text-center link-block">
-            <a href="/summerclin" class="dropdown-item">
-                <i class="fa fa-envelope"></i> <strong>View all players</strong>
+            <a href="/soccer-clinics" class="dropdown-item">
+                <i class="fa fa-envelope"></i> <strong>View all clinics</strong>
             </a>
         </div>
     </li>
