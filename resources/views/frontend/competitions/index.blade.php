@@ -31,7 +31,7 @@
                     }
 
                 @endphp
-                <x-frontend.cards.post_flat_no_tag>
+                <x-frontend.cards.post_flat>
                     <x-slot name='image'>{{$post->img}}</x-slot>
                     <x-slot name='title'>{{$post->name}}</x-slot>
                     <x-slot name='link'>/{{$slug}}/{{$post->slug}}</x-slot>
@@ -39,8 +39,8 @@
                     <x-slot name='sumary'>{{$post->sumary}}</x-slot>
                     <x-slot name='bg'>white</x-slot>
                     <x-slot name='tag'>{{$status_txt}}</x-slot>
-                    <x-slot name='tag_link'>/{{$slug}}</x-slot>
-                </x-frontend.cards.post_flat_no_tag>
+                    <x-slot name='tag_link'>/{{$slug}}/{{$post->slug}}</x-slot>
+                </x-frontend.cards.post_flat>
             @endforeach
 
         </main>
