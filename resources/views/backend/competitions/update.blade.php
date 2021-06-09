@@ -6,13 +6,22 @@
 
     @parent
 
-    <script src="{{asset('ckeditor/ckeditor.js')}}"></script>
+    <link href="{{asset('inspinia/css/plugins/summernote/summernote-bs4.css')}}" rel="stylesheet">
+    <script src="{{asset('inspinia/js/plugins/summernote/summernote-bs4.js')}}"></script>
 
     <script>
         $(document).ready(function () {
 
-
-            CKEDITOR.replace( 'summernote' );
+            $('.summernote').summernote({
+                height: 300,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'underline', 'clear']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['insert', ['link', 'picture']],
+                ]
+            });
 
             const token = $('#token').val();
             let id = $('#competition_id').val();
