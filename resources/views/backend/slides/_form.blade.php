@@ -23,7 +23,7 @@
 
                     <div class="form-group ">
                         <label>Title</label>
-                        <input type="text" name='title' class="form-control" @if(!empty($content->title)) value="{{$content->title}}" @endif>
+                        <input type="text" name='title' class="form-control" required @if(!empty($content->title)) value="{{$content->title}}" @endif>
                     </div>
 
                     <div class="row">
@@ -120,6 +120,7 @@
                         @endif
                     </div>
 
+                    <!--
                     <div class="i-checks mt-4">
                         @if ($form == 'new')
                             <label> <input type="checkbox" name='bottom' value="1"> Button center</label>
@@ -128,7 +129,7 @@
                             <label> <input type="checkbox" name='bottom' value="1" {{$buttonMobchecked}}> Button center</label>
                         @endif
                     </div>
-
+                    -->
 
                     
 
