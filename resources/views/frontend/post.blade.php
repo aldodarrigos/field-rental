@@ -14,7 +14,6 @@
                 var str = $(this).html();
                 // Set the regex string
 
-
                 var regex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|].(?:jpg|gif|png|webp))/ig;
 
                 // Replace plain text links by hyperlinks
@@ -25,7 +24,6 @@
         });
     </script>
 
-    
 @endsection
 
 <x-frontend.pieces.section_header title='Blog' bread='latest News'></x-frontend.pieces.section_header>
@@ -50,7 +48,7 @@
 
 
     
-               <div id='post_content'>
+               <div id='post_content' class="text_content">
 
                     {!!$post->content!!}
 

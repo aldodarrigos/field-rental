@@ -21,11 +21,16 @@
                     {
                         "targets": [ 7 ],
                         "visible": false,
-                        "searchable": true
+                        "searchable": false
                     },
                     {
                         "targets": [ 6 ],
                         "searchable": false,
+                        "sortable": false
+                    },
+                    {
+                        "targets": [ 4 ],
+                        "searchable": true,
                         "sortable": false
                     }
                 ],

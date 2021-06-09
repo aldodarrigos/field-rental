@@ -38938,6 +38938,25 @@ video {
 p{ margin-bottom: 1rem;
 }
 
+#post_content a{
+  color: #007bff;
+}
+
+#post_content h1{
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+#post_content h2{
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+#post_content h3{
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
 .video-responsive {
   height: 0;
   overflow: hidden;

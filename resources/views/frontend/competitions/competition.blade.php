@@ -52,7 +52,7 @@
                        <span class="text-sm text-black font-bold">{{$competition->pub_date}}</span>
                     </div>
         
-                    <div class="mb-8" id="post_content">
+                    <div class="mb-8 text_content" id="post_content">
                             {!!$competition->content!!}
                     </div>
                     <br>

@@ -89,10 +89,10 @@
                                 @php
 
                                 $status = 'Active';
-                                $status_color = 'default';
-                                if($record->status == 1) {
+                                $status_color = 'info';
+                                if($record->status == 0) {
                                     $status = 'Inactive';
-                                    $status_color = 'info';
+                                    $status_color = 'default';
                                 }
 
                                 @endphp

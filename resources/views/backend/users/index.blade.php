@@ -16,7 +16,7 @@
                 pageLength: 25,
                 responsive: true,
                 dom: '<"html5buttons"B>lTfgitp',
-                "order": [[ 1, "desc" ]],
+                "order": [[ 0, "desc" ]],
                 buttons: [
                     { extend: 'copy'},
                     {extend: 'csv'},
@@ -77,6 +77,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Name</th>
+                                    <th>Phone</th>
                                     <th>Email</th>
                                     <th>Role</th>
                                     <th>Member</th>
@@ -104,6 +105,7 @@
                                     <tr class="gradeX">
                                         <td>{{$record->id}}</td>
                                         <td><a href="/users/{{$record->id}}/edit">{{$record->name}}</a></td>
+                                        <td><strong>{{$record->phone}}</strong></td>
                                         <td><strong>{{$record->email}}</strong></td>
                                         <td>{{$role}}</td>
                                         <td>{{$member}}</td>

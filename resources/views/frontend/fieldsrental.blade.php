@@ -289,10 +289,6 @@
                                 <div><span><i class="fas fa-circle text-warning"></i></span> Selected</div>
                                 <div><span><i class="fas fa-circle text-red"></i></span> Not available</div>
                             </div>
-    
-                            <div class="text-xs">
-                                <p>If you want to book more than 1 hour please contact: <strong>{{$setting->phone_1}}</strong>, <br> <strong>{{$setting->phone_2}}</strong></p>
-                            </div>
         
                             <script>
                                 var matrix =  []; 
