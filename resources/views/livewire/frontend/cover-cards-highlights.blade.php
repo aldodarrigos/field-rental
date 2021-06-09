@@ -9,7 +9,7 @@
                         <x-slot name='title'>{{$content->title}}</x-slot>
                         <x-slot name='title_color'>white</x-slot>
                         <x-slot name='sumary'>
-                            {{$content->content}}
+                            {!!$content->content!!}
                         </x-slot>
                         <x-slot name='sumary_color'>gray</x-slot>
                         <x-slot name='image'>{{$content->img}}</x-slot>
