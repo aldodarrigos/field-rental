@@ -5,23 +5,18 @@
 @section('assets_down')
 
     @parent
-
-    <link href="{{asset('inspinia/css/plugins/summernote/summernote-bs4.css')}}" rel="stylesheet">
-    <script src="{{asset('inspinia/js/plugins/summernote/summernote-bs4.js')}}"></script>
-
+    <script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
     <script>
         $(document).ready(function () {
 
-            $('.summernote').summernote({
-                height: 300,
-                toolbar: [
-                    ['style', ['style']],
-                    ['font', ['bold', 'underline', 'clear']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['table', ['table']],
-                    ['insert', ['link', 'picture']],
-                ]
-            });
+ClassicEditor
+.create( document.querySelector( '.summernote' ) )
+.then( editor => {
+console.log( editor );
+} )
+.catch( error => {
+console.error( error );
+} );
 
             const token = $('#token').val();
             let id = $('#competition_id').val();
