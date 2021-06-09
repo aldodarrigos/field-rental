@@ -110,9 +110,6 @@ class CompetitionController extends Controller
     {
 
         $content = Competition::find($id);
-        $contenido = htmlspecialchars($request->input('content'));
-        echo $contenido;
-        exit();
 
         $second_child_price = ($request->input('second_child_price') == null)?0:$request->input('second_child_price');
 
