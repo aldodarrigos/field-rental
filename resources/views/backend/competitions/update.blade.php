@@ -5,18 +5,14 @@
 @section('assets_down')
 
     @parent
-    <script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
+
+    <script src="{{asset('ckeditor/ckeditor.js')}}"></script>
+
     <script>
         $(document).ready(function () {
 
-ClassicEditor
-.create( document.querySelector( '.summernote' ) )
-.then( editor => {
-console.log( editor );
-} )
-.catch( error => {
-console.error( error );
-} );
+
+            CKEDITOR.replace( 'summernote' );
 
             const token = $('#token').val();
             let id = $('#competition_id').val();
