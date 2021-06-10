@@ -22,7 +22,11 @@
                     ['insert', ['link', 'picture']],
                 ]
             });
+
+
         });
+
+
     </script>
 
 @endsection

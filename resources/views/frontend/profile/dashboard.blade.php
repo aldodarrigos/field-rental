@@ -34,42 +34,6 @@
         evt.currentTarget.className += " active";
         }
     </script>
-
-
-
-@endsection
-
-@php
-    $linkAdmin = (Auth::user()->role ==2)?'<a href="/booking" target="_blank">GO TO ADMIN AREA</a>':'User Profile';
-@endphp
-
-<div class="bg-deepblue text-white pt-32">
-    <div class="w-11/12 md:w-boxed mx-auto h-120p flex items-center ">
-        <div>
-            <h1 class="text-2x5 font-bold leading-none pb-2 uppercase">Profile </h1>
-            <div class="breadcrumb">
-                <a href="/" class="text-red font-bold uppercase">Home</a> <span>/</span> <a href="">{!!$linkAdmin!!}</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<main class="w-11/12 md:w-boxed mx-auto">
-
-    <div class="separation h-50p"></div>
-
-    <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
-
-        <div class="col-span-12">
-
-            @if ($message = Session::get('success'))
-            <div class="alert alert-success alert-block">
-                <button type="button" class="close" data-dismiss="alert">×</button>	
-                    <strong>{{ $message }}</strong>
-            </div>
-            @endif
-
             <style>
                 /* Style the tab */
                 .tab {
@@ -107,6 +71,72 @@
                 }
             </style>
 
+
+@endsection
+
+@php
+    $linkAdmin = (Auth::user()->role ==2)?'<a href="/booking" target="_blank">GO TO ADMIN AREA</a>':'User Profile';
+@endphp
+
+<div class="bg-deepblue text-white pt-32">
+    <div class="w-11/12 md:w-boxed mx-auto h-120p flex items-center ">
+        <div>
+            <h1 class="text-2x5 font-bold leading-none pb-2 uppercase">Profile </h1>
+            <div class="breadcrumb">
+                <a href="/" class="text-red font-bold uppercase">Home</a> <span>/</span> <a href="">{!!$linkAdmin!!}</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<main class="w-11/12 md:w-boxed mx-auto">
+
+    <div class="separation h-25p"></div>
+
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+
+        <div class="col-span-12">
+
+            @if ($message = Session::get('success'))
+            <div class="alert alert-success alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>	
+                    <strong>{{ $message }}</strong>
+            </div>
+            @endif
+
+
+            @php
+                $pending_payment = 0;
+
+                foreach ($tournaments as $item) {
+                    if($item->registration_status != 1){
+                        $pending_payment++;
+                    }
+                }
+
+                foreach ($leagues as $item) {
+                    if($item->registration_status != 1){
+                        $pending_payment++;
+                    }
+                }
+
+                foreach ($soccer_clinic as $item) {
+                    if($item->registration_status != 1){
+                        $pending_payment++;
+                    }
+                }
+            @endphp
+
+
+            <div class="mb-4">
+                @if ($pending_payment > 0)
+                    <div class="w-full py-3 mt-6 px-4 font-medium tracking-widest text-white uppercase bg-graytext shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none rounded-md">
+                        You have {{$pending_payment}} pending payments.
+                    </div>
+                    
+                @endif
+            </div>
 
             <!-- Tab links -->
             <div class="tab rounded-t-lg">

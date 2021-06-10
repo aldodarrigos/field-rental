@@ -15,7 +15,7 @@
 
             <div class="form-group ">
                 <label >Name</label>
-                <input type="text" name='name' class="form-control" @if(!empty($content->name)) value="{{$content->name}}" @endif>
+                <input type="text" name='name' required class="form-control" @if(!empty($content->name)) value="{{$content->name}}" @endif>
             </div>
 
             <div class="form-group ">

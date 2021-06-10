@@ -221,6 +221,7 @@ Route::middleware(['admin'])->group(function () {
     Route::get('competition-registration/{id?}', [CompetitionController::class, 'registration_detail'])->name('backend.competition-registration');
     Route::get('get-categories/{id?}', [CategoriesController::class, 'get_categories']);
     Route::get('get-categories-select/{id?}', [CategoriesController::class, 'get_categories_select']);
+    Route::get('get-categories-all', [CategoriesController::class, 'get_categories_all']);
     Route::post('categories-sort', [CategoriesController::class, 'sort'])->name('backend.categories.sort');
     Route::get('competitions-contact', [CompetitionController::class, 'contact'])->name('backend.competitions.contact');
     Route::get('competition-message/{id?}', [CompetitionController::class, 'message'])->name('backend.competitions.message');

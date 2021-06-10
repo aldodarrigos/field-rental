@@ -34,11 +34,12 @@ class CompetitionController extends Controller
     public function create()
     {
         $status = CompetitionStatus::orderBy('id', 'ASC')->get();
+        $categories = Category::where('status', 1)->orderBy('name', 'desc')->get();
         $action = route('competitions.store');
         $url = "competitions";
         $form = 'new';
 
-        return view('backend/competitions/create', ['action' => $action, 'url' => $url, 'form' => $form, 'status' => $status]);
+        return view('backend/competitions/create', ['action' => $action, 'url' => $url, 'form' => $form, 'status' => $status, 'categories' => $categories]);
     }
     
     /**

@@ -120,7 +120,7 @@
                                         <td><strong>{{$record->id}}</strong></td>
                                         <td>
                                             <a href="/competitions/{{$record->id}}/edit">{{$record->name}}</a> | 
-                                            <a href="/{{$slug}}/{{$record->slug}}" class="text-info" target='_blank'> View in web</a> 
+                                            <a href="/{{$slug}}/{{$record->slug}}" class="text-info" target='_blank'> Test view</a> 
                                         </td>
 
                                         <td>{{$type}}</td>
@@ -130,7 +130,7 @@
                                         
                                         <td> 
                                             <a href="/competition-registrations/{{$record->id}}" class="text-default"> Registration</a> /
-                                            <a href="/{{$registration_link}}/{{$record->id}}/{{$record->slug}}" class="text-info" target='_blank'> View in web</a>
+                                            <a href="/{{$registration_link}}/{{$record->id}}/{{$record->slug}}" class="text-info" target='_blank'> Test view</a>
                                         </td>
 
                                         <td class="center"><span class="btn btn-{{$status_color}} btn-xs">{{$statustxt}}</span></td>

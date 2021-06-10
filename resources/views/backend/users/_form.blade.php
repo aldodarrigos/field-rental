@@ -18,7 +18,7 @@
                 <div class="col-md-6">
                     <div class="form-group ">
                         <label >Name</label>
-                        <input type="text" name='nome' class="form-control" @if(!empty($content->name)) value="{{$content->name}}" @endif autocomplete='off'>
+                        <input type="text" name='nome' class="form-control" required @if(!empty($content->name)) value="{{$content->name}}" @endif autocomplete='off'>
                     </div>
                 </div>
                 <div class="col-md-6">

@@ -149,6 +149,20 @@ class CategoriesController extends Controller
         
     }
 
+    public function get_categories_all()
+    {
+
+        $categories = Category::where('status', 1)->orderBy('name', 'desc')->get();
+        
+        $records = '<option value="0">-- SELECT --</option>';
+        foreach($categories  as $item){
+            $records .= '                        
+            <option value="'.$item->id.'">'.$item->name.'</option>';
+        }
+        return $records;
+        
+    }
+
     public function sort()
     {
         $order = $_POST["order"];

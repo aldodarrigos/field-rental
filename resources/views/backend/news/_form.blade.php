@@ -15,7 +15,7 @@
 
             <div class="form-group ">
                 <label >Title</label>
-                <input type="text" name='title' class="form-control" @if(!empty($content->title)) value="{{$content->title}}" @endif required>
+                <input type="text" name='title' class="form-control" required @if(!empty($content->title)) value="{{$content->title}}" @endif required>
             </div>
 
             @if ($form == 'update')

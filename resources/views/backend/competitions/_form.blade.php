@@ -19,7 +19,7 @@
 
             <div class="form-group ">
                 <label>Name</label>
-                <input type="text" name='name' class="form-control" @if(!empty($content->name)) value="{{$content->name}}" @endif>
+                <input type="text" name='name' class="form-control" required @if(!empty($content->name)) value="{{$content->name}}" @endif>
             </div>
             
             @if ($form == 'update')
@@ -133,6 +133,8 @@
 
             <div class="hr-line-dashed"></div>
 
+            @if ($form == 'update')
+                
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group ">
@@ -158,9 +160,13 @@
                 </div>
             </div>
 
+            <div class="hr-line-dashed"></div>
+
+            @endif
+
             
 
-            <div class="hr-line-dashed"></div>
+            
 
             <button type="submit" class="btn btn-w-m btn-success">Save</button>
             @if(!empty($put))

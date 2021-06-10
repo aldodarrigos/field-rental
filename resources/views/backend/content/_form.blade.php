@@ -15,7 +15,7 @@
 
             <div class="form-group ">
                 <label >Shortcut</label>
-                <input type="text" name='shortcut' class="form-control" @if(!empty($content->shortcut)) value="{{$content->shortcut}}" @endif>
+                <input type="text" name='shortcut' class="form-control" required @if(!empty($content->shortcut)) value="{{$content->shortcut}}" @endif>
             </div>
             
             <div class="form-group ">
