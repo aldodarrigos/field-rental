@@ -54,12 +54,12 @@
 
     <style>
         .capsule{
-            background: #FAFAFB;
-            border: 1px solid #e7eaec;
+            background: #23c6c8;
+            color: #fff;
+            font-weight: bold;
             margin: 0;
             padding: 5px 10px;
-            border-radius: 2px;
-            border-left: 3px solid #1c84c6;
+            border-radius: 5px;
         }
         .show_card{
             cursor: pointer;
@@ -77,9 +77,7 @@
         </ol>
     </div>
     <div class="col-lg-2">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-            Launch demo modal
-        </button>
+
     </div>
 </div>
 <div class="wrapper wrapper-content  animated fadeInRight">

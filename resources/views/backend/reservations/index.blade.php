@@ -66,7 +66,7 @@
         <h2>Booking</h2>
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="/reservations">Dashboard</a>
+                <a href="/booking">Dashboard</a>
             </li>
         </ol>
     </div>
