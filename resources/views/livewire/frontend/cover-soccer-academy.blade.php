@@ -10,7 +10,7 @@
                 {{$content->content}}
             </div>
             <x-frontend.buttons.link>
-                <x-slot name='link'>/{{$content->link}}</x-slot>
+                <x-slot name='link'>{{$content->link}}</x-slot>
                 <x-slot name='size'>regular</x-slot>
                 Read more <i class="fas fa-plus text-xs"></i>
             </x-frontend.buttons.calltoaction>
