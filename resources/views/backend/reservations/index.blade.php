@@ -29,6 +29,11 @@
                         "sortable": false
                     },
                     {
+                        "targets": [ 5 ],
+                        "searchable": true,
+                        "sortable": false
+                    },
+                    {
                         "targets": [ 4 ],
                         "searchable": true,
                         "sortable": false

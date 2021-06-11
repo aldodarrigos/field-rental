@@ -61,18 +61,11 @@ class UsersController extends Controller
         $password = Hash::make($request->input('password')) ;
 
         $user->name = $request->input('name');
-        $user->email = $request->input('email');
+        $user->email = $request->input('mailtext');
         $user->password = $password;
         $user->role = $request->input('role');
-        $user->ide = $request->input('ide');
-        
         $user->born = $request->input('born');
-        $user->address = $request->input('address');
         $user->phone = $request->input('phone');
-
-        $user->member = $request->input('member');
-        $user->member_start = $request->input('member_start');
-        $user->member_finish = $request->input('member_finish');
         $user->status = $request->input('status');
         $user->save();
 
@@ -119,13 +112,8 @@ class UsersController extends Controller
             $user->email = $request->input('mailtext');
             $user->password = Hash::make($password);
             $user->role = $request->input('role');
-            $user->ide = $request->input('ide');
-            $user->born = $request->input('born');
-            $user->address = $request->input('address');
+            $user->born = $request->input('pub_date');
             $user->phone = $request->input('phone');
-            $user->member = $request->input('member');
-            $user->member_start = $request->input('member_start');
-            $user->member_finish = $request->input('member_finish');
             $user->status = $request->input('status');
             $user->save();
 
@@ -134,13 +122,8 @@ class UsersController extends Controller
             $user->name = $request->input('nome');
             $user->email = $request->input('mailtext');
             $user->role = $request->input('role');
-            $user->ide = $request->input('ide');
-            $user->born = $request->input('born');
-            $user->address = $request->input('address');
+            $user->born = $request->input('pub_date');
             $user->phone = $request->input('phone');
-            $user->member = $request->input('member');
-            $user->member_start = $request->input('member_start');
-            $user->member_finish = $request->input('member_finish');
             $user->status = $request->input('status');
             $user->save();
 

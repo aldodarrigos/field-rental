@@ -6,17 +6,23 @@
 
     @parent
 
-    <link href="{{asset('inspinia/css/plugins/iCheck/custom.css')}}" rel="stylesheet">
-    <link href="{{asset('inspinia/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css')}}" rel="stylesheet">
+    <link href="{{asset('inspinia/css/plugins/datapicker/datepicker3.css')}}" rel="stylesheet">
 
-    <script src="{{asset('inspinia/js/plugins/iCheck/icheck.min.js')}}"></script>
+    <!-- Data picker -->
+    <script src="{{asset('inspinia/js/plugins/datapicker/bootstrap-datepicker.js')}}"></script>
 
     <script>
-        $(document).ready(function () {
-            $('.i-checks').iCheck({
-                checkboxClass: 'icheckbox_square-green',
-                radioClass: 'iradio_square-green',
+        $(document).ready(function(){
+
+            var mem = $('.input-group.date').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                autoclose: true,
+                format: 'yyyy-mm-dd'
             });
+
         });
     </script>
 
@@ -41,7 +47,7 @@
 <div class="wrapper wrapper-content animated fadeInRight">
 
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-6">
         <div class="ibox ">
             <div class="ibox-title">
                 <h5>New User</h5>

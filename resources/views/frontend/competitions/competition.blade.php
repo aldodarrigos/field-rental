@@ -41,8 +41,8 @@
             
             <section class="bg-white mb-8 rounded-lg">
 
-                <div class="h-auto md:h-400p">
-                    <img class="object-cover w-full h-full rounded-t-lg" src="{{$competition->img}}" alt="">
+                <div class="">
+                    <img class="rounded-t-lg" src="{{$competition->img}}" alt="">
                 </div>
 
                 <div class="p-8">

@@ -38,6 +38,10 @@
                 </div>
             </li>
 
+            <li class="d-block d-sm-none">
+                <a href="/" target="_blank"><i class="fas fa-sign-out-alt"></i> <span class="nav-label">Go to website</span> </a>
+            </li>
+
             <li class='{{$reservations_active}}'>
                 <a href="/booking"><i class="fas fa-book"></i> <span class="nav-label">Booking</span> </a>
                 <ul class="nav nav-second-level collapse">
@@ -63,7 +67,7 @@
                 <a href="/backend-services"><i class="fas fa-briefcase"></i> <span class="nav-label">Services</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="/backend-services">Services</a></li>
-                    <!--<li><a href="/bservices-registration">Registration</a></li>-->
+                    <li><a href="/bservices-registration">Registration</a></li>
                     <li><a href="/bservices-contact">Contact</a></li>
                     <li><a href="/soccer-clinics">Soccer Clinics</a></li>
                 </ul>
@@ -75,7 +79,7 @@
                 <ul class="nav nav-second-level collapse">
                     <li><a href="/competitions">Competitions</a></li>
                     <li><a href="/categories">Categories</a></li>
-                    <li><a href="/competition-reg-dashboard">Registration</a></li>
+                    <!--<li><a href="/competition-reg-dashboard">Registration</a></li>-->
                     <li><a href="/teams-dashboard">Teams</a></li>
                     <li><a href="/tryouts-dashboard">Tryouts</a></li>
                     <li><a href="/competitions-contact">Contact</a></li>

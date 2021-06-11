@@ -131,7 +131,7 @@
 
             <div class="mb-4">
                 @if ($pending_payment > 0)
-                    <div class="w-full py-3 mt-6 px-4 font-medium tracking-widest text-white uppercase bg-graytext shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none rounded-md">
+                    <div class="w-full py-3 mt-6 px-4 font-medium tracking-widest text-white uppercase bg-danger shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none rounded-md">
                         You have {{$pending_payment}} pending payments.
                     </div>
                     

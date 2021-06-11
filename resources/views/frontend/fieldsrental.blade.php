@@ -242,7 +242,7 @@
                                 @for ($i = 0; $i < count($hoursarray); $i++)
                                     @php
                                         if($hoursarray[$i]['class'] == 'noselect'){
-                                            $color = 'bg-green';
+                                            $color = 'bg-green button_hour noselect';
                                             $pointer = 'cursor-pointer';
                                             $decoration = '';
                                         }else{

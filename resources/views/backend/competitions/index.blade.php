@@ -16,9 +16,24 @@
                 pageLength: 25,
                 responsive: true,
                 dom: '<"html5buttons"B>lTfgitp',
-                "order": [[ 0, "desc" ]],
+                "order": [[ 7, "desc" ]],
                 columnDefs: [
-                    { "targets": [5], "orderable": false }
+                    {
+                        "targets": [ 4 ],
+                        "sortable": false,
+                        "searchable": true
+                    },
+                    {
+                        "targets": [ 5 ],
+                        "sortable": false,
+                        "searchable": false
+                    },
+                    {
+                        "targets": [ 7 ],
+                        "visible": false,
+                        "sortable": false,
+                        "searchable": false
+                    }
                 ],
                 buttons: [
                     { extend: 'copy'},
@@ -84,6 +99,7 @@
                                     <th>Create</th>
                                     <th>Form</th>
                                     <th>Status</th>
+                                    <th>Date</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -129,11 +145,11 @@
                                         <td><strong>{{date('M d, Y', strtotime($record->created_at))}}</strong></td>
                                         
                                         <td> 
-                                            <a href="/competition-registrations/{{$record->id}}" class="text-default"> Registration</a> /
                                             <a href="/{{$registration_link}}/{{$record->id}}/{{$record->slug}}" class="text-info" target='_blank'> Test view</a>
                                         </td>
 
                                         <td class="center"><span class="btn btn-{{$status_color}} btn-xs">{{$statustxt}}</span></td>
+                                        <td><strong>{{date('Y-m-d', strtotime($record->created_at))}}</strong></td>
                                     </tr>
                                     
                                 @endforeach

@@ -16,7 +16,19 @@
                 pageLength: 25,
                 responsive: true,
                 dom: '<"html5buttons"B>lTfgitp',
-                "order": [[ 4, "desc" ]],
+                "order": [[ 5, "desc" ]],
+                "columnDefs": [
+                    {
+                        "targets": [ 5 ],
+                        "visible": false,
+                        "searchable": false
+                    },
+                    {
+                        "targets": [ 3 ],
+                        "searchable": true,
+                        "sortable": false
+                    }
+                ],
                 buttons: [
                     { extend: 'copy'},
                     {extend: 'csv'},
@@ -79,6 +91,7 @@
                             <th>Tag</th>
                             <th>Pub Date</th>
                             <th>Status</th>
+                            <th>HidePubDate</th>
                         </tr>
                         </thead>
                         
@@ -103,6 +116,7 @@
                                     <td>{{$record->tag_name}}</td>
                                     <td>{{date('M d, Y', strtotime($record->pub_date))}}</td>
                                     <td class="center"><span class="btn btn-{{$status_color}} btn-xs">{{$status}}</span></td>
+                                    <td>{{date('Y-m-d', strtotime($record->pub_date))}}</td>
                                 </tr>
 
                             @endforeach

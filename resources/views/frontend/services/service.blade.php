@@ -21,15 +21,18 @@
 
         <main class="col-span-12 md:col-span-8 rounded-lg">
             
-            <div class="h-400p">
-                <img class="object-cover w-full h-full rounded-t-lg" src="{{$service->img}}" alt="">
+            <div class="">
+                <img class="rounded-t-lg" src="{{$service->img}}" alt="">
             </div>
 
             <div class="p-8 bg-white rounded-b-lg">
                 
                 <h1 class="font-roboto text-3x uppercase font-bold text-black leading-none mb-3"><a href="">{{$service->name}}</a></h1>
 
-                <div class="mb-6">{!!$service->content!!}</div>
+                <div id='post_content' class="text_content mb-6">
+                    {!!$service->content!!}
+                </div>
+                
 
                 <br>
             
@@ -44,7 +47,7 @@
                 <br>
 
             </div>
-
+            {{$service->id }}
             <!-- Summer clinics, Soccer Clinics, Soccer Skill training -->
             @if ($service->id == 5)
                 

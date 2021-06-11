@@ -16,7 +16,19 @@
                 pageLength: 25,
                 responsive: true,
                 dom: '<"html5buttons"B>lTfgitp',
-                "order": [[ 5, "desc" ]],
+                "order": [[ 7, "desc" ]],
+                "columnDefs": [
+                    {
+                        "targets": [ 7 ],
+                        "visible": false,
+                        "searchable": false
+                    },
+                    {
+                        "targets": [ 5 ],
+                        "searchable": true,
+                        "sortable": false
+                    }
+                ],
                 buttons: [
                     { extend: 'copy'},
                     {extend: 'csv'},
@@ -79,6 +91,7 @@
                                     <th>Event</th>
                                     <th>Date</th>
                                     <th>Status</th>
+                                    <th>Hidedate</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -119,8 +132,9 @@
 
                                         <td><strong>{{date('M d, Y', strtotime($record->created_at))}}</strong></td>
                                         
-
                                         <td class="center"><span class="btn btn-{{$status_color}} btn-xs">{{$status}}</span></td>
+
+                                        <td><strong>{{date('Y-m-d', strtotime($record->created_at))}}</strong></td>
                                     </tr>
                                     
                                 @endforeach

@@ -15,7 +15,7 @@
             <div class="item border-r border-graytext pr-3 hidden"><a href="">ENG <i class="fas fa-caret-down"></i></a></div>
             <div class="uppercase pl-3">
                 @if (isset(Auth::user()->name))
-                    <span class="border-r border-graytext pr-3 text-white"><a href="/profile/dashboard">Account</a></span>
+                    <span class="border-r border-graytext pr-3 text-white"><a href="/profile/dashboard">My Account</a></span>
 
                     <span class="pl-2 text-graytext">
                         <form method="POST" action="/logout" class="inline-block">
