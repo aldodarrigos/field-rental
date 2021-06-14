@@ -148,7 +148,7 @@
 
                 <div class="hr-line-dashed"></div>
                 
-                <a href="/tryouts-dashboard" class="btn btn-w-m btn-default"><i class="fas fa-undo-alt"></i> Return</a>
+                <a href="/tryout-competition-registration/{{$record->competition_id}}" class="btn btn-w-m btn-default"><i class="fas fa-undo-alt"></i> Return</a>
                 
             </div>
         </div>

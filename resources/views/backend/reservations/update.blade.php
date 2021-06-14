@@ -198,7 +198,7 @@
                                 <a href="/booking" class="btn btn-w-m btn-default"><i class="fas fa-undo-alt"></i> Return</a>
                             </div>
                             <div class="col-md-3">
-                                <a href="" class="btn btn-w-m btn-danger float-right" data-toggle="modal" data-target="#myModal6"><i class="far fa-trash-alt"></i> Delete</a>
+                                <a href="" class="btn btn-w-m btn-danger float-right" data-toggle="modal" data-target="#delete"><i class="far fa-trash-alt"></i> Delete</a>
                             </div>
                         </div>
 
@@ -210,7 +210,7 @@
     </div>
 </div>
 
-<div class="modal inmodal fade" id="myModal6" tabindex="-1" role="dialog"  aria-hidden="true">
+<div class="modal inmodal fade" id="delete" tabindex="-1" role="dialog"  aria-hidden="true">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">

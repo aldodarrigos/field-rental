@@ -167,7 +167,7 @@
 
                 <div class="hr-line-dashed"></div>
                 
-                <a href="/teams-dashboard" class="btn btn-w-m btn-default"><i class="fas fa-undo-alt"></i> Return</a>
+                <a href="/team-competition-registration/{{$record->competition_id}}" class="btn btn-w-m btn-default"><i class="fas fa-undo-alt"></i> Return</a>
                 
             </div>
         </div>

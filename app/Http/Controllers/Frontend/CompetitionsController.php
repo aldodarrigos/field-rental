@@ -112,19 +112,30 @@ class CompetitionsController extends Controller
         
     public function contact(Request $request)
     {
+        if($request->input()){
 
-        $slug = $request->input('slug');
-        $is_league = $request->input('is_league');
-        $uri = ($is_league == 1)?'leagues':'tournaments';
+            $validator = $request->validate([
+                'f_name'  =>  'required',
+                'email' =>  'required',
+                'phone' =>  'required',
+                'message' =>  'required',
+                'captcha' =>  'required|captcha',
+            ]);
 
-        $contact = new CompetitionContact();
+            $slug = $request->input('slug');
+            $is_league = $request->input('is_league');
+            $uri = ($is_league == 1)?'leagues':'tournaments';
+
+            $contact = new CompetitionContact();
         
-        $contact->competition_id = $request->input('competition_id');
-        $contact->name = $request->input('f_name');
-        $contact->email = $request->input('email');
-        $contact->phone = $request->input('phone');
-        $contact->message = $request->input('message');
-        $contact->save();
+            $contact->competition_id = $request->input('competition_id');
+            $contact->name = $request->input('f_name');
+            $contact->email = $request->input('email');
+            $contact->phone = $request->input('phone');
+            $contact->message = $request->input('message');
+            $contact->save();
+
+        }
 
         return redirect($uri.'/'.$slug)->with('success', 'Message sent!');
         

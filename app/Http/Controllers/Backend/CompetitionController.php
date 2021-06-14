@@ -138,7 +138,10 @@ class CompetitionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $record = Competition::find($id);
+        $record->delete();
+
+        return redirect('competitions')->with('success','Record deleted.');
     }
 
     public function registration($id = null)
@@ -253,6 +256,45 @@ class CompetitionController extends Controller
 
     }
 
+    
+    public function tryout_registration($id = null)
+    {
+        
+        $records = DB::table('trials')
+        ->select(DB::raw('trials.id trial_id, 
+        trials.name as player_name, 
+        trials.age as player_age, 
+        trials.gender as player_gender,
+        trials.tshirt as player_tshirt,
+        trials.read,
+        categories.name as category,
+
+        competitions.name as competition_name,
+        competitions.id as competition_id,
+
+        users.name as registrant,
+
+        competition_trials.id as registration_id,
+        competition_trials.status as registration_status,
+        competition_trials.updated_at as date'))
+
+        ->leftJoin('categories', 'trials.category_id', '=', 'categories.id')
+        ->leftJoin('competition_trials', 'trials.registration_id', '=', 'competition_trials.id')
+        ->leftJoin('competitions', 'competition_trials.competition_id', '=', 'competitions.id')
+        ->leftJoin('users', 'competition_trials.manager_id', '=', 'users.id')
+        ->where('competitions.trials', 1)
+        ->where('competitions.id', $id)
+        ->orderBy('trials.updated_at', 'desc')
+        ->get();
+
+        $competition = Competition::where('id', $id)->first();
+
+        $url = "competitions";
+        
+        return view('backend/competitions/trial_registration', ['records' => $records, 'url' => $url, 'competition' => $competition]);
+
+    }
+
     public function trial_detail($id)
     {
         
@@ -263,6 +305,7 @@ class CompetitionController extends Controller
         competition_trials.status as registration_status,
         competition_trials.updated_at as date,
         competitions.name as competition_name,
+        competitions.id as competition_id,
 
         users.name as registrant,
         users.email as email,
@@ -325,6 +368,42 @@ class CompetitionController extends Controller
 
     }
 
+    public function team_registration($id = null)
+    {
+        
+        $records = DB::table('crews')
+        ->select(DB::raw('crews.id team_id, 
+        crews.name as team_name, 
+        crews.uniform_colors as uniforms, 
+        crews.gender as gender,
+        crews.read,
+        categories.name as category,
+
+        competitions.name as competition_name,
+
+        users.name as registrant,
+        competition_crews.id as registration_id,
+        competition_crews.updated_at as date,
+        competition_crews.status as registration_status'))
+
+        ->leftJoin('categories', 'crews.category_id', '=', 'categories.id')
+        ->leftJoin('competition_crews', 'crews.id', '=', 'competition_crews.crew_id')
+        ->leftJoin('competitions', 'competition_crews.competition_id', '=', 'competitions.id')
+        ->leftJoin('users', 'competition_crews.user_id', '=', 'users.id')
+
+        ->where('competitions.trials', 0)
+        ->where('competitions.id', $id)
+        ->orderBy('crews.updated_at', 'desc')
+        ->get();
+
+        $competition = Competition::where('id', $id)->first();
+
+        $url = "competitions";
+        
+        return view('backend/competitions/team_registration', ['records' => $records, 'url' => $url, 'competition' => $competition]);
+
+    }
+
     public function teams_detail($id)
     {
         
@@ -336,6 +415,7 @@ class CompetitionController extends Controller
         crews.gender as gender,
         categories.name as category,
 
+        competitions.id as competition_id,
         competitions.name as competition_name,
 
         users.name as registrant, users.email, users.phone,

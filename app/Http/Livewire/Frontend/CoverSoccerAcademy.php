@@ -8,7 +8,7 @@ class CoverSoccerAcademy extends Component
 {
     public function render()
     {
-        $content = Content::where('shortcut', 'cover.soccer.academy')->first();
+        $content = Content::where('id', 3)->first();
         return view('livewire.frontend.cover-soccer-academy', ['content' => $content]);
     }
 }

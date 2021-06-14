@@ -193,6 +193,7 @@ Route::middleware(['admin'])->group(function () {
     //NEWS
     Route::resource('backend-news', NewsBackController::class);
     Route::resource('backend-tags', TagsbackController::class);
+    Route::get('delete-post/{id?}', [NewsBackController::class, 'destroy']);
 
     //GALLERY
     Route::resource('gallery', GalleryController::class);
@@ -227,6 +228,11 @@ Route::middleware(['admin'])->group(function () {
     Route::get('competition-message/{id?}', [CompetitionController::class, 'message'])->name('backend.competitions.message');
     Route::resource('competition-categories', CompetitionCategoriesController::class);
     Route::get('competition-reg-dashboard', [CompetitionController::class, 'dashboard']);
+    Route::get('delete-competition/{id?}', [CompetitionController::class, 'destroy']);
+
+    Route::get('team-competition-registration/{id?}', [CompetitionController::class, 'team_registration']);
+    Route::get('tryout-competition-registration/{id?}', [CompetitionController::class, 'tryout_registration']);
+
 
     Route::get('tryouts-dashboard', [CompetitionController::class, 'trial_dashboard']);
     Route::get('tryouts-detail/{id?}', [CompetitionController::class, 'trial_detail']);

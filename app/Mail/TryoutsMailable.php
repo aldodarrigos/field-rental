@@ -13,7 +13,7 @@ class TryoutsMailable extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $subject = 'Succesfull Reservation';
+    public $subject = 'League Succesfull Reservation';
     public $contact;
     public $bookId;
     /**

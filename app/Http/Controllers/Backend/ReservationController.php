@@ -261,8 +261,8 @@ class ReservationController extends Controller
      */
     public function destroy($id)
     {
-        $menu = Reservation::find($id);
-        $menu->delete();
+        $record = Reservation::find($id);
+        $record->delete();
 
         return redirect('booking')->with('success','Reservation deleted.');
     }

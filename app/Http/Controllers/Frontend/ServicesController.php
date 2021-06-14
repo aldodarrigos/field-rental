@@ -184,21 +184,34 @@ class ServicesController extends Controller
 
     public function contact(Request $request)
     {
+        if($request->input()){
 
-        $contact = new ServiceContact();
+            $validator = $request->validate([
+                'f_name'  =>  'required',
+                'email' =>  'required',
+                'phone' =>  'required',
+                'message' =>  'required',
+                'captcha' =>  'required|captcha',
+            ]);
 
-        $service_id = $request->input('service_id');
+            $contact = new ServiceContact();
 
-        $service = Service::where('id', $service_id)->first();
-        
-        $contact->service_id = $service_id;
-        $contact->name = $request->input('f_name');
-        $contact->email = $request->input('email');
-        $contact->phone = $request->input('phone');
-        $contact->message = $request->input('message');
-        $contact->save();
+            $service_id = $request->input('service_id');
+    
+            $service = Service::where('id', $service_id)->first();
+            
+            $contact->service_id = $service_id;
+            $contact->name = $request->input('f_name');
+            $contact->email = $request->input('email');
+            $contact->phone = $request->input('phone');
+            $contact->message = $request->input('message');
+            $contact->save();
+    
+            return redirect('services/'.$service->slug)->with('success', 'Message sent!');
 
-        return redirect('services/'.$service->slug)->with('success', 'Message sent!');
+        }
+
+
         
     }
 }

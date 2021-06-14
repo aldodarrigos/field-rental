@@ -42,10 +42,10 @@
 
                 @csrf
 
-                <div class="flex justify-between gap-3 flex-col md:flex-row mb-2 md:mb-0">
+                <div class="flex justify-between gap-3 flex-col md:flex-row mb-3">
 
                   <span class="w-2/2 md:w-1/2">
-                    <label for="name" class="block text-xs font-semibold text-gray-600 uppercase">Name @error('name') <small class="text-red">({{$message}})</small>@enderror</label>
+                    <label for="name" class="block text-xs font-semibold text-gray-600 uppercase">Name <span class="text-red">*</span> @error('name') <small class="text-red">({{$message}})</small>@enderror</label>
                     <input id="name" type="text" name="name" placeholder="Your Name" autocomplete="off" value="{{old('name')}}" class="block w-full px-3 py-3 mt-2 text-black bg-gray-200 px-2 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner border border-bluetext rounded-lg">
 
                   </span>
@@ -53,7 +53,7 @@
                   <span class="w-2/2 md:w-1/2">
 
                     <div class="mb-2">
-                        <label for="email" class="block text-xs font-semibold text-gray-600 uppercase">Email @error('email') <small class="text-red">({{$message}})</small>@enderror</label>
+                        <label for="email" class="block text-xs font-semibold text-gray-600 uppercase">Email <span class="text-red">*</span> @error('email') <small class="text-red">({{$message}})</small>@enderror</label>
                         <input id="email" type="email" name="email" placeholder="john.doe@company.com" autocomplete="off" value="{{ old('email') }}" class="block w-full px-3 py-3 mt-2 text-black bg-gray-200 px-2 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner border border-bluetext rounded-lg">
                     </div>
 
@@ -61,8 +61,18 @@
                   
                 </div>
 
+                <div class="flex justify-between gap-3 flex-col md:flex-row mb-6">
+
+                    <span class="w-2/2 md:w-1/2">
+                      <label for="name" class="block text-xs font-semibold text-gray-600 uppercase">Phone <span class="text-red">*</span> @error('phone') <small class="text-red">({{$message}})</small>@enderror</label>
+                      <input id="phone" type="text" name="phone" placeholder="Your phone" autocomplete="off" value="{{old('phone')}}" class="block w-full px-3 py-3 mt-2 text-black bg-gray-200 px-2 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner border border-bluetext rounded-lg">
+  
+                    </span>
+                    
+                </div>
+
                 <div class="mb-2">
-                    <label for="message" class="block mt-2 text-xs font-semibold text-gray-600 uppercase">Message @error('message') <small class="text-red">({{$message}})</small>@enderror</label>
+                    <label for="message" class="block mt-2 text-xs font-semibold text-gray-600 uppercase">Message <span class="text-red">*</span> @error('message') <small class="text-red">({{$message}})</small>@enderror</label>
                     <textarea cols="30" rows="8" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner border border-bluetext rounded-md" id="message" name="message" placeholder="Your message" spellcheck="false" data-gramm="false" maxlength="2000">{{ old('message') }}</textarea>
                 </div>
 

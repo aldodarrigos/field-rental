@@ -47,37 +47,37 @@
                 
                 <br>
 
+                <div class="table-responsive">
+                    <table class="table-auto border-collapse w-full">
 
-                <table class="table-auto border-collapse w-full">
-
-                    <thead>
-                      <tr class="rounded-lg text-sm font-medium text-gray-700 text-left" style="font-size: 0.9674rem">
-                        <th class="px-4 py-2 bg-gray-200 " style="background-color:#f8f8f8">Player Name</th>
-                        <th class="px-4 py-2 " style="background-color:#f8f8f8">Age</th>
-                        <th class="px-4 py-2 " style="background-color:#f8f8f8">Gender</th>
-                        <th class="px-4 py-2 " style="background-color:#f8f8f8">Category</th>
-                        <th class="px-4 py-2 " style="background-color:#f8f8f8">Tshirt Size</th>
-                      </tr>
-                    </thead>
-
-                    <tbody class="text-sm font-normal text-gray-700">
-
-                        @foreach ($players as $player)
-                        @php
-                            $gender = ($player->gender == 1)?'Female':'Male';
-                        @endphp
-                        <tr class="hover:bg-gray-100 border-b border-graylines py-10">
-                            <td class="px-4 py-4 font-bold">{{$player->name}}</td>
-                            <td class="px-4 py-4">{{$player->age}}</td>
-                            <td class="px-4 py-4">{{$gender}}</td>
-                            <td class="px-4 py-4">{{$player->obs}}</td>
-                            <td class="px-4 py-4">{{$player->tshirt_size}}</td>
-                        </tr>
-
-                        @endforeach
-                    </tbody>
-                  </table>
-
+                        <thead>
+                          <tr class="rounded-lg text-sm font-medium text-gray-700 text-left" style="font-size: 0.9674rem">
+                            <th class="px-4 py-2 bg-gray-200 " style="background-color:#f8f8f8">Player Name</th>
+                            <th class="px-4 py-2 " style="background-color:#f8f8f8">Age</th>
+                            <th class="px-4 py-2 " style="background-color:#f8f8f8">Gender</th>
+                            <th class="px-4 py-2 " style="background-color:#f8f8f8">Category</th>
+                            <th class="px-4 py-2 " style="background-color:#f8f8f8">Tshirt Size</th>
+                          </tr>
+                        </thead>
+    
+                        <tbody class="text-sm font-normal text-gray-700">
+    
+                            @foreach ($players as $player)
+                            @php
+                                $gender = ($player->gender == 1)?'Female':'Male';
+                            @endphp
+                            <tr class="hover:bg-gray-100 border-b border-graylines py-10">
+                                <td class="px-4 py-4 font-bold">{{$player->name}}</td>
+                                <td class="px-4 py-4">{{$player->age}}</td>
+                                <td class="px-4 py-4">{{$gender}}</td>
+                                <td class="px-4 py-4">{{$player->obs}}</td>
+                                <td class="px-4 py-4">{{$player->tshirt_size}}</td>
+                            </tr>
+    
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
 
                 <br>
 
@@ -97,11 +97,11 @@
                             <input type="hidden" name="user_name" id='user_name' value="{{$registration->user_name}}">
                             <input type="hidden" name="user_email" id='user_email' value="{{$registration->user_email}}">
             
-                            <button class="font-roboto text-black font-bold rounded py-3 px-8 uppercase text-lg hover:bg-deepblue hover:text-warning ease-in-out duration-300 bg-warning button_link"><i class="far fa-credit-card"></i> Pay Now</button>
+                            <button class="font-roboto text-black font-bold rounded py-3 px-3 uppercase text-lg hover:bg-deepblue hover:text-warning ease-in-out duration-300 bg-warning button_link mb-4"><i class="far fa-credit-card"></i> Pay Now</button>
             
                         </form>
 
-                        <a href='/profile/dashboard' class="font-roboto text-gray font-bold rounded py-3 px-8 uppercase text-lg hover:bg-deepblue ease-in-out duration-300 bg-red"><i class="fas fa-sign-in-alt"></i> Pay Later</a>
+                        <a href='/profile/dashboard' class="font-roboto text-gray font-bold rounded py-3 px-3 uppercase text-lg hover:bg-deepblue ease-in-out duration-300 bg-red truncate"><i class="fas fa-sign-in-alt"></i> Pay Later</a>
 
                     </div>
 

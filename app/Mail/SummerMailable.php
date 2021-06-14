@@ -13,7 +13,7 @@ class SummerMailable extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $subject = 'Succesfull Reservation';
+    public $subject = 'Soccer Clinic Succesfull Reservation';
     public $contact;
     public $bookId;
     /**

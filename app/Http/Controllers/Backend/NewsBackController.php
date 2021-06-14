@@ -134,7 +134,10 @@ class NewsBackController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $record = Post::find($id);
+        $record->delete();
+
+        return redirect('backend-news')->with('success','Record deleted.');
     }
 
 

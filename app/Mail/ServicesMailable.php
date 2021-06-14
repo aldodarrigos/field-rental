@@ -13,7 +13,7 @@ class ServicesMailable extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $subject = 'Succesfull Reservation';
+    public $subject = 'Service Succesfull Reservation';
     public $contact;
     public $bookId;
     /**

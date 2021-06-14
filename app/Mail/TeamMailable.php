@@ -12,7 +12,7 @@ class TeamMailable extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $subject = 'Succesfull Reservation';
+    public $subject = 'Tournament Succesfull Reservation';
     public $contact;
     public $bookId;
     /**

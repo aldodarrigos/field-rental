@@ -70,11 +70,11 @@
                             <input type="hidden" name="user_name" id='user_name' value="{{$registration->user_name}}">
                             <input type="hidden" name="user_id" id='user_id' value="{{$registration->manager}}">
             
-                            <button class="font-roboto text-black font-bold rounded py-3 px-8 uppercase text-lg hover:bg-deepblue hover:text-warning ease-in-out duration-300 bg-warning button_link"><i class="far fa-credit-card"></i> Pay Now</button>
+                            <button class="font-roboto text-black font-bold rounded py-3 px-3 uppercase text-lg hover:bg-deepblue hover:text-warning ease-in-out duration-300 bg-warning button_link mb-4"><i class="far fa-credit-card"></i> Pay Now</button>
             
                         </form>
 
-                        <a href='/profile/dashboard' class="font-roboto text-gray font-bold rounded py-3 px-8 uppercase text-lg hover:bg-deepblue ease-in-out duration-300 bg-red"><i class="fas fa-sign-in-alt"></i> Pay Later</a>
+                        <a href='/profile/dashboard' class="font-roboto text-gray font-bold rounded py-3 px-3 uppercase text-lg hover:bg-deepblue ease-in-out duration-300 bg-red truncate"><i class="fas fa-sign-in-alt"></i> Pay Later</a>
 
                         @endif
                     @endif

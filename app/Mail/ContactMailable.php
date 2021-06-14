@@ -14,16 +14,18 @@ class ContactMailable extends Mailable
     public $subject = 'Contact Form';
     public $name;
     public $email;
+    public $phone;
     public $text;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($name, $email, $text)
+    public function __construct($name, $email, $phone, $text)
     {
         $this->name = $name;
         $this->email = $email;
+        $this->phone = $phone;
         $this->text = $text;
     }
 

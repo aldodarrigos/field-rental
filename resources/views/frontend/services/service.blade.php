@@ -47,7 +47,7 @@
                 <br>
 
             </div>
-            {{$service->id }}
+
             <!-- Summer clinics, Soccer Clinics, Soccer Skill training -->
             @if ($service->id == 5)
                 
@@ -191,12 +191,12 @@
                     <span class="w-2/2 md:w-1/2">
                         <x-frontend.forms.input_text>
                             <x-slot name='type'>text</x-slot>
-                            <x-slot name='label'>Name</x-slot>
+                            <x-slot name='label'>Name <span class="text-red">*</span> @error('f_name') <small class="text-red">({{$message}})</small>@enderror</x-slot>
                             <x-slot name='id'>f_name</x-slot>
-                            <x-slot name='default'></x-slot>
+                            <x-slot name='default'>{{old('f_name')}}</x-slot>
                             <x-slot name='placeholder'>Your Name</x-slot>
                             <x-slot name='autocomplete'>off</x-slot>
-                            <x-slot name='required'>on</x-slot>
+                            <x-slot name='required'>off</x-slot>
                             <x-slot name='height'>big</x-slot>
                             <x-slot name='bg'>light</x-slot>
                             <x-slot name='label_on_off'>on</x-slot>
@@ -207,12 +207,12 @@
                     <span class="w-2/2 md:w-1/2">
                         <x-frontend.forms.input_text>
                             <x-slot name='type'>email</x-slot>
-                            <x-slot name='label'>Email</x-slot>
+                            <x-slot name='label'>Email <span class="text-red">*</span> @error('email') <small class="text-red">({{$message}})</small>@enderror</x-slot>
                             <x-slot name='id'>email</x-slot>
-                            <x-slot name='default'></x-slot>
+                            <x-slot name='default'>{{old('email')}}</x-slot>
                             <x-slot name='placeholder'>john.doe@company.com</x-slot>
                             <x-slot name='autocomplete'>off</x-slot>
-                            <x-slot name='required'>on</x-slot>
+                            <x-slot name='required'>off</x-slot>
                             <x-slot name='height'>big</x-slot>
                             <x-slot name='bg'>light</x-slot>
                             <x-slot name='label_on_off'>on</x-slot>
@@ -223,9 +223,9 @@
                     <span class="w-2/2 md:w-1/2">
                         <x-frontend.forms.input_text>
                             <x-slot name='type'>text</x-slot>
-                            <x-slot name='label'>Phone</x-slot>
+                            <x-slot name='label'>Phone <span class="text-red">*</span> @error('phone') <small class="text-red">({{$message}})</small>@enderror</x-slot>
                             <x-slot name='id'>phone</x-slot>
-                            <x-slot name='default'></x-slot>
+                            <x-slot name='default'>{{old('phone')}}</x-slot>
                             <x-slot name='placeholder'>Your phone</x-slot>
                             <x-slot name='autocomplete'>off</x-slot>
                             <x-slot name='required'>off</x-slot>
@@ -239,14 +239,44 @@
                     </div>
                 
                     <x-frontend.forms.textarea>
-                        <x-slot name='label'>Message</x-slot>
+                        <x-slot name='label'>Message <span class="text-red">*</span> @error('message') <small class="text-red">({{$message}})</small>@enderror</x-slot>
                         <x-slot name='id'>message</x-slot>
                         <x-slot name='placeholder'>Your message</x-slot>
                         <x-slot name='autocomplete'>on</x-slot>
-                        <x-slot name='required'>on</x-slot>
+                        <x-slot name='required'>off</x-slot>
                         <x-slot name='max'></x-slot>
+                        {{old('message')}}
                     </x-frontend.forms.textarea>
 
+                    <div class="px-3">Please solve the following math challenge to send this message</div>
+                    <div class="flex justify-between gap-3 flex-col md:flex-row mb-2 md:mb-0 px-2">
+                        <span class="w-2/2 md:w-1/6">
+                            
+                            <div class="mt-3" id='captcha-img' >{!! Captcha::img(); !!}</div>
+                            <div class="mt-2 ">
+                                <span class="cursor-pointer" id="reload" class="">Reload</span>
+                            </div>
+                        </span>
+                        <span class="w-2/2 md:w-1/6">
+                            <x-frontend.forms.input_text>
+                                <x-slot name='type'>text</x-slot>
+                                <x-slot name='label'>Captcha</x-slot>
+                                <x-slot name='id'>captcha</x-slot>
+                                <x-slot name='default'></x-slot>
+                                <x-slot name='placeholder'></x-slot>
+                                <x-slot name='autocomplete'>off</x-slot>
+                                <x-slot name='required'>off</x-slot>
+                                <x-slot name='height'>big</x-slot>
+                                <x-slot name='bg'>light</x-slot>
+                                <x-slot name='label_on_off'>off</x-slot>
+                                <x-slot name='disable'>off</x-slot>
+                            </x-frontend.forms.input_text>
+                        </span>
+                        <span class="w-2/2 md:w-4/5">
+                            @error('captcha') <small class="text-red">({{$message}})</small>@enderror
+                        </span>
+
+                    </div>
 
                     <button type="submit" class="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-red shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none rounded-md">
                     SEND

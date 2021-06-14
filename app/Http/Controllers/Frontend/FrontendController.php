@@ -132,15 +132,17 @@ class FrontendController extends Controller
             $validator = $request->validate([
                 'name'  =>  'required',
                 'email' =>  'required',
+                'phone' =>  'required',
                 'message' =>  'required',
                 'captcha' =>  'required|captcha',
             ]);
 
             $name = $request->input('name');
             $email = $request->input('email');
+            $phone = $request->input('phone');
             $text = $request->input('message');
 
-            $send = $this->send_contact($name, $email, $text);
+            $send = $this->send_contact($name, $email, $phone, $text);
             return redirect('/contact')->with('success', 'Message sent');
 
         }else{
@@ -157,9 +159,9 @@ class FrontendController extends Controller
         
     }
 
-    public function send_contact($name = null, $email = null, $message = null)
+    public function send_contact($name = null, $email = null, $phone = null, $message = null)
     {
-        $vars = new ContactMailable($name, $email, $message);
+        $vars = new ContactMailable($name, $email, $phone, $message);
         Mail::to('info@katyisc.com')->send($vars);
     }
 

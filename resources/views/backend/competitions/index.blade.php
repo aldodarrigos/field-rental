@@ -59,7 +59,6 @@
 
     </script>
     
-
 @endsection
 
 <div class="row wrapper border-bottom white-bg page-heading">
@@ -115,10 +114,12 @@
 
                                     $type = 'Tournament';
                                     $slug = 'tournaments';
+                                    $dashboard_slug = 'team-competition-registration';
 
                                     if($record->is_league == 1){
                                         $type = 'League';
                                         $slug = 'leagues';
+                                        $dashboard_slug = 'tryout-competition-registration';
                                     }
 
                                     foreach ($status as $item) {
@@ -143,9 +144,14 @@
                                         <td>{{$modality}}</td>
 
                                         <td><strong>{{date('M d, Y', strtotime($record->created_at))}}</strong></td>
-                                        
+                                       
+                                        <!--
                                         <td> 
                                             <a href="/{{$registration_link}}/{{$record->id}}/{{$record->slug}}" class="text-info" target='_blank'> Test view</a>
+                                        </td>
+                                        -->
+                                        <td> 
+                                            <a href="/{{$dashboard_slug}}/{{$record->id}}" class="text-info">Registation</a>
                                         </td>
 
                                         <td class="center"><span class="btn btn-{{$status_color}} btn-xs">{{$statustxt}}</span></td>

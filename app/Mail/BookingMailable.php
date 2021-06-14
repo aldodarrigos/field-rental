@@ -12,7 +12,7 @@ class BookingMailable extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $subject = 'Succesfull Booking';
+    public $subject = 'Field Succesfull Booking';
     public $contact;
     public $code;
     public $field_id;
