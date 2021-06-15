@@ -65,7 +65,7 @@
             <div class="ibox-title">
                 <h5>Content</h5>
                 <div class="ibox-tools">
-                    <a href="/content/create" class="btn btn-primary btn-xs">New Content</a>
+                    <!--<a href="/content/create" class="btn btn-primary btn-xs">New Content</a>-->
                 </div>
             </div>
             <div class="ibox-content">
@@ -90,11 +90,11 @@
 
                     @php
 
-                    $status = 'UnPublish';
+                    $status = 'Unpublished';
                     $status_color = 'default';
                     $flag = ($record->flag == 1)?'Flagged':'';
                     if($record->content_status == 1) {
-                        $status = 'Publish';
+                        $status = 'Published';
                         $status_color = 'info';
                     }
 

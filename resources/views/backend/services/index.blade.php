@@ -128,10 +128,10 @@
 
                                     @php
 
-                                    $status = 'UnPublish';
+                                    $status = 'UnPublished';
                                     $status_color = 'default';
                                     if($record->status == 1) {
-                                        $status = 'Publish';
+                                        $status = 'Published';
                                         $status_color = 'info';
                                     }
                                     $flag = ($record->flag == 1)?'In Cover':'';

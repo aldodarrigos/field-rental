@@ -104,7 +104,7 @@
 
                                     @php
                                         $gender = ($record->gender == 1)?'Female':'Male';  
-                                        $status = ($record->registration_status == 1)?'Paid':'Pending payment';  
+                                        $status = ($record->registration_status == 1)?'Paid':'Unpaid';  
                                         $status_color = ($record->registration_status == 1)?'btn-info':'btn-default';  
                                     @endphp
 

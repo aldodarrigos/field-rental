@@ -27,8 +27,8 @@
 
         <main class="col-span-12 md:col-span-8 bg-white rounded-lg">
             
-            <div class="h-400p">
-                <img class="object-cover w-full h-full rounded-t-lg" src="{{$competition->img}}" alt="">
+            <div class="">
+                <img class="rounded-t-lg" src="{{$competition->img}}" alt="">
             </div>
 
             <div class="p-8">
@@ -75,6 +75,10 @@
                     </table>
                 </div>
 
+                <div class="mt-3 block md:hidden">
+                    <small><i class="fas fa-caret-right"></i> Swipe right for more information </small>
+                </div>
+
                 <br>
 
                 @if ($registration->registration_status == 0)
@@ -93,11 +97,11 @@
                             <input type="hidden" name="user_name" id='user_name' value="{{$registration->user_name}}">
                             <input type="hidden" name="user_id" id='user_id' value="{{$registration->manager_id}}">
             
-                            <button class="font-roboto text-black font-bold rounded py-3 px-3 uppercase text-lg hover:bg-deepblue hover:text-warning ease-in-out duration-300 bg-warning button_link mb-4"><i class="far fa-credit-card"></i> Pay Now</button>
+                            <button class="font-roboto text-gray font-bold rounded py-3 px-3 uppercase text-lg hover:bg-deepblue hover:text-warning ease-in-out duration-300 bg-red button_link mb-4"><i class="far fa-credit-card"></i> Pay Now</button>
             
                         </form>
 
-                        <a href='/profile/dashboard' class="font-roboto text-gray font-bold rounded py-3 px-3 uppercase text-lg hover:bg-deepblue ease-in-out duration-300 bg-red truncate"><i class="fas fa-sign-in-alt"></i> Pay Later</a>
+                        <a href='/profile/dashboard' class="font-roboto text-black font-bold rounded py-3 px-3 uppercase text-lg hover:bg-deepblue ease-in-out duration-300 bg-warning truncate"><i class="fas fa-sign-in-alt"></i> Pay Later</a>
 
                     </div>
 

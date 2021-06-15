@@ -16,7 +16,24 @@
                 pageLength: 25,
                 responsive: true,
                 dom: '<"html5buttons"B>lTfgitp',
-                "order": [[ 0, "DESC" ]],
+                "order": [[ 12, "DESC" ]],
+                "columnDefs": [
+                    {
+                        "targets": [ 12 ],
+                        "visible": false,
+                        "searchable": false
+                    },
+                    {
+                        "targets": [ 11 ],
+                        "searchable": false,
+                        "sortable": false
+                    },
+                    {
+                        "targets": [ 9 ],
+                        "searchable": true,
+                        "sortable": false
+                    }
+                ],
                 buttons: [
                     { extend: 'copy'},
                     {extend: 'csv'},
@@ -85,6 +102,7 @@
                                     <th>Date</th>
                                     <th>Status</th>
                                     <th>Read</th>
+                                    <th>HideDate</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -117,9 +135,10 @@
                                         <td>{{$record->obs}}</td>
                                         <td>{{$record->service_name}}</td>
                                         <td>{{$record->reg_user}}</td>
-                                        <td>{{date('M d, Y h:i:s A', strtotime($record->updated_at))}}</td>
+                                        <td>{{date('M d, Y', strtotime($record->updated_at))}}</td>
                                         <td class="center"><span class="btn btn-{{$status_color}} btn-xs">{{$status}}</span></td>
                                         <td><span class="btn btn-{{$read}} btn-xs">{{$read_txt}}</span></td>
+                                        <td>{{date('Y-m-d', strtotime($record->updated_at))}}</td>
                                     </tr>
 
                                 @endforeach

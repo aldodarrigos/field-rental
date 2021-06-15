@@ -107,7 +107,7 @@
 
                                     @php
                                         $gender = ($record->player_gender == 1)?'Female':'Male';  
-                                        $status = ($record->registration_status == 1)?'Paid':'Pending payment';  
+                                        $status = ($record->registration_status == 1)?'Paid':'Unpaid';  
                                         $status_color = ($record->registration_status == 1)?'btn-info':'btn-default';  
                                         $read = ($record->read == 1)?'Read':'unread';  
                                         $read_color = ($record->read == 0)?'btn-info':'btn-default';  
@@ -115,7 +115,7 @@
 
                                     <tr class="gradeX">
                                         <td><a href="/tryouts-detail/{{$record->registration_id}}">{{$record->trial_id}}</a></td>
-                                        <td>{{$record->player_name}}</td>
+                                        <td><a href="/tryouts-detail/{{$record->registration_id}}">{{$record->player_name}}</a></td>
                                         <td><strong>{{$record->player_age}}</strong></td>
                                         <td><strong>{{$gender}}</strong></td>
                                         <td><strong>{{$record->category}}</strong></td>

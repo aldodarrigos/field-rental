@@ -68,10 +68,10 @@
 
                                 @php
 
-                                $status = 'UnPublish';
+                                $status = 'Unpublished';
                                 $status_color = 'default';
                                 if($record->status == 1) {
-                                    $status = 'Publish';
+                                    $status = 'Published';
                                     $status_color = 'info';
                                 }
 

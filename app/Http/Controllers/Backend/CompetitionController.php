@@ -318,7 +318,7 @@ class CompetitionController extends Controller
         ->first();
 
         $players = DB::table('trials')
-        ->select(DB::raw('trials.id, trials.name, trials.age, trials.gender, categories.name as category'))
+        ->select(DB::raw('trials.id, trials.name, trials.age, trials.gender, trials.tshirt, categories.name as category'))
         ->leftJoin('categories', 'trials.category_id', '=', 'categories.id')
         ->where('trials.registration_id', $id)
         ->get();

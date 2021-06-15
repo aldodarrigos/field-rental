@@ -79,8 +79,8 @@
                                     <th>Name</th>
                                     <th>Phone</th>
                                     <th>Email</th>
+                                    <th>Birthday</th>
                                     <th>Role</th>
-                                    <th>Member</th>
                                     <th>Registered</th>
                                     <th>Status</th>
                                 </tr>
@@ -107,8 +107,8 @@
                                         <td><a href="/users/{{$record->id}}/edit">{{$record->name}}</a></td>
                                         <td><strong>{{$record->phone}}</strong></td>
                                         <td><strong>{{$record->email}}</strong></td>
+                                        <td>{{$record->born}}</td>
                                         <td>{{$role}}</td>
-                                        <td>{{$member}}</td>
                                         <td>{{$record->created_at}}</td>
                                         <td class="center"><span class="btn btn-{{$status_color}} btn-xs">{{$status}}</span></td>
                                     </tr>

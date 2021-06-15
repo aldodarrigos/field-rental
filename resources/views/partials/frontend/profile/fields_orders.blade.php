@@ -49,7 +49,7 @@
                 </td>
     
                 <td class="px-6 py-4 whitespace-no-wrap border-b border-bluetext">
-                    <span class="px-2 inline-flex text-xs uppercase leading-5 font-semibold rounded-md bg-danger text-white py-1">{{$status}}</span>
+                    <span class="px-2 inline-flex text-xs uppercase leading-5 font-semibold rounded-md bg-grayhard text-white py-1">{{$status}}</span>
                 </td>
     
                 <td class="px-6 py-4 whitespace-no-wrap border-b border-bluetext text-sm leading-5 text-gray-500">

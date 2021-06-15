@@ -124,6 +124,7 @@
                             <th>Age</th>
                             <th>Gender</th>
                             <th>Category</th>
+                            <th>Tshirt Size</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -139,6 +140,7 @@
                                 <td><strong>{{$player->age}}</strong></td>
                                 <td><strong>{{$gender}}</strong></td>
                                 <td><strong>{{$player->category}}</strong></td>
+                                <td><strong>{{$player->tshirt}}</strong></td>
                             </tr>
 
                         @endforeach

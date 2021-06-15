@@ -158,6 +158,10 @@
             <div id="fields" class="tabcontent bg-white px-4 py-4" style='display:block;'>
 
                 @include('partials.frontend.profile.fields_orders')
+                
+                <div class="mt-3 block md:hidden">
+                    <small><i class="fas fa-caret-right"></i> Swipe right for more information </small>
+                </div>
 
             </div>
 
@@ -165,17 +169,29 @@
 
                 @include('partials.frontend.profile.services_orders')
 
+                <div class="mt-3 block md:hidden">
+                    <small><i class="fas fa-caret-right"></i> Swipe right for more information </small>
+                </div>
+
             </div>
 
             <div id="tournaments" class="tabcontent bg-white p-4">
 
                 @include('partials.frontend.profile.tournaments_orders')
 
+                <div class="mt-3 block md:hidden">
+                    <small><i class="fas fa-caret-right"></i> Swipe right for more information </small>
+                </div>
+
             </div>
 
             <div id="leagues" class="tabcontent bg-white p-4">
 
                 @include('partials.frontend.profile.leagues_orders')
+
+                <div class="mt-3 block md:hidden">
+                    <small><i class="fas fa-caret-right"></i> Swipe right for more information </small>
+                </div>
 
             </div>
 
@@ -185,12 +201,17 @@
 
                 @include('partials.frontend.profile.soccer_clinics')
 
+                <div class="mt-3 block md:hidden">
+                    <small><i class="fas fa-caret-right"></i> Swipe right for more information </small>
+                </div>
+
             </div>
 
             <!--
             <div id="products" class="tabcontent bg-white p-4">
 
                 @include('partials.frontend.profile.soccer_clinics')
+                
 
             </div>
             -->

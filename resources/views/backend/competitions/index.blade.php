@@ -151,7 +151,7 @@
                                         </td>
                                         -->
                                         <td> 
-                                            <a href="/{{$dashboard_slug}}/{{$record->id}}" class="text-info">Registation</a>
+                                            <a href="/{{$dashboard_slug}}/{{$record->id}}" class="text-info">Registration</a>
                                         </td>
 
                                         <td class="center"><span class="btn btn-{{$status_color}} btn-xs">{{$statustxt}}</span></td>

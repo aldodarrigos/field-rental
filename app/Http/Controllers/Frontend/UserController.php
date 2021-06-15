@@ -65,7 +65,7 @@ class UserController extends Controller
         ->get();
 
         $services = DB::table('service_registration')
-        ->select(DB::raw('service_registration.id as registration_id, services.name as service_name, service_registration.price as service_price, service_registration.status as registration_status, service_registration.payment_code as payment_code, service_registration.updated_at as registration_date'))
+        ->select(DB::raw('service_registration.id as registration_id, services.name as service_name, services.slug as service_slug, service_registration.price as service_price, service_registration.status as registration_status, service_registration.payment_code as payment_code, service_registration.updated_at as registration_date'))
 
         ->leftJoin('users', 'service_registration.responsible_user', '=', 'users.id')
         ->leftJoin('services', 'service_registration.service_id', '=', 'services.id')
@@ -78,6 +78,7 @@ class UserController extends Controller
         crews.name as team_name, 
         categories.name as category,
         competitions.name as competition_name,
+        competitions.slug as competition_slug,
 
         users.name as registrant,
         competition_crews.id as registration_id,
@@ -104,6 +105,7 @@ class UserController extends Controller
         categories.name as category,
 
         competitions.name as competition_name,
+        competitions.slug as competition_slug,
 
         users.name as registrant,
 
@@ -122,6 +124,7 @@ class UserController extends Controller
         $soccer_clinic = DB::table('summerclinic_players')
         ->select(DB::raw('summerclinic_players.registration_id as registration_id, 
         summerclinic.name as event_name,
+        summerclinic.slug as event_slug,
         summerclinic_players.name as player_name, 
         summerclinic_players.age as player_age,
         summerclinic_players.gender as player_gender,

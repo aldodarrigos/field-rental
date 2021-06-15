@@ -21,8 +21,6 @@
         });
     </script>
 
-    
-
 @endsection
 
 @php
@@ -190,7 +188,7 @@
                                         <x-slot name='disable'>on</x-slot>
                                     </x-frontend.forms.input_text>
                                 </div>
-                                <div class="col-span-12 md:col-span-9">
+                                <div class="col-span-12 md:col-span-7">
                                     <x-frontend.forms.input_text>
                                         <x-slot name='type'>text</x-slot>
                                         <x-slot name='label'>Name</x-slot>
@@ -210,6 +208,21 @@
                                         <x-slot name='type'>text</x-slot>
                                         <x-slot name='label'>Age</x-slot>
                                         <x-slot name='id'>age_{{$i}}</x-slot>
+                                        <x-slot name='default'></x-slot>
+                                        <x-slot name='placeholder'></x-slot>
+                                        <x-slot name='autocomplete'>off</x-slot>
+                                        <x-slot name='required'>off</x-slot>
+                                        <x-slot name='height'>big</x-slot>
+                                        <x-slot name='bg'>light</x-slot>
+                                        <x-slot name='label_on_off'>{{$label_on_off}}</x-slot>
+                                        <x-slot name='disable'>off</x-slot>
+                                    </x-frontend.forms.input_text>
+                                </div>
+                                <div class="col-span-12 md:col-span-2">
+                                    <x-frontend.forms.input_text>
+                                        <x-slot name='type'>text</x-slot>
+                                        <x-slot name='label'>T-Shirt Size</x-slot>
+                                        <x-slot name='id'>tshirt_{{$i}}</x-slot>
                                         <x-slot name='default'></x-slot>
                                         <x-slot name='placeholder'></x-slot>
                                         <x-slot name='autocomplete'>off</x-slot>

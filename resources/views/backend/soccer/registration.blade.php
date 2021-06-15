@@ -16,7 +16,24 @@
                 pageLength: 25,
                 responsive: true,
                 dom: '<"html5buttons"B>lTfgitp',
-                "order": [[ 0, "desc" ]],
+                "order": [[ 10, "desc" ]],
+                "columnDefs": [
+                    {
+                        "targets": [ 10 ],
+                        "visible": false,
+                        "searchable": false
+                    },
+                    {
+                        "targets": [ 9 ],
+                        "searchable": false,
+                        "sortable": false
+                    },
+                    {
+                        "targets": [ 7 ],
+                        "searchable": true,
+                        "sortable": false
+                    }
+                ],
                 buttons: [
                     { extend: 'copy'},
                     {extend: 'csv'},
@@ -84,6 +101,7 @@
                                     <th>Date</th>
                                     <th>Detail</th>
                                     <th>Read</th>
+                                    <th>DateHide</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -95,7 +113,7 @@
                                         $gender = ($record->player_gender == 1)?'Female':'Male';
                                         $read = ($record->read == 1)?'default':'info';
                                         $read_txt = ($record->read == 1)?'Read':'Unread';
-                                        $registration_status = ($record->status_registration ==1)?"<span class='text-info'>Paid</span>":"<span class='text-danger'>Unpaid</span>";
+                                        $registration_status = ($record->status_registration ==1)?"<span class='btn btn-xs btn-info'>Paid</span>":"<span class='btn btn-xs btn-danger'>Unpaid</span>";
                                     @endphp
 
                                     <tr class="gradeX">
@@ -109,6 +127,7 @@
                                         <td><strong>{{date('M d, Y', strtotime($record->player_date))}}</strong></td>
                                         <td>{!!$registration_status!!}</td>
                                         <td><span class="btn btn-{{$read}} btn-xs">{{$read_txt}}</span></td>
+                                        <td>{{date('Y-m-d', strtotime($record->player_date))}}</td>
                                     </tr>
 
                                 @endforeach

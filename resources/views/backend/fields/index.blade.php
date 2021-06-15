@@ -91,10 +91,10 @@
 
                     @php
 
-                    $status = 'UnPublish';
+                    $status = 'Unpublished';
                     $status_color = 'default';
                     if($record->status == 1) {
-                        $status = 'Publish';
+                        $status = 'Published';
                         $status_color = 'info';
                     }
                     $players_number = ($record->tag_id == 1)?'5 vs 5 players (6 vs 6)':'7 vs 7 players (9 vs 9)';

@@ -43,7 +43,7 @@
                 </td>
     
                 <td class="px-6 py-4 whitespace-no-wrap border-b border-bluetext">
-                    <div class="text-sm leading-5 text-gray-900"><a href="/service/confirmation/{{$item->registration_id}}">{{$item->service_name}}</a></div>
+                    <div class="text-sm leading-5 text-gray-900"><a class="text-trueblue" href="/services/{{$item->service_slug}}">{{$item->service_name}}</a></div>
                     <div class="text-sm leading-5 text-gray-500"></div>
                 </td>
     

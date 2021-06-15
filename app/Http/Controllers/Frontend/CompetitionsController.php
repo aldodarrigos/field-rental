@@ -203,6 +203,7 @@ class CompetitionsController extends Controller
                 $crewPlayer->crew_id = $crew->id;
                 $crewPlayer->name = $request->input('player_name_'.$i);
                 $crewPlayer->age = $request->input('age_'.$i);
+                $crewPlayer->tshirt = $request->input('tshirt_'.$i);
                 $crewPlayer->save();
             }
 

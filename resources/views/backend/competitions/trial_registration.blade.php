@@ -104,7 +104,7 @@
                                 @foreach ($records as $record)
 
                                     @php 
-                                        $status = ($record->registration_status == 1)?'Paid':'Pending payment';  
+                                        $status = ($record->registration_status == 1)?'Paid':'Unpaid';  
                                         $status_color = ($record->registration_status == 1)?'btn-info':'btn-default';  
                                         $read = ($record->read == 1)?'Read':'unread';  
                                         $read_color = ($record->read == 0)?'btn-info':'btn-default';  

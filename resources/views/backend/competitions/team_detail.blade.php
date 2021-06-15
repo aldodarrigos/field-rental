@@ -149,6 +149,7 @@
                         <tr>
                             <th>Name</th>
                             <th>Age</th>
+                            <th>T-Shirt</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -158,6 +159,7 @@
                             <tr class="gradeX">
                                 <td>{{$player->name}}</td>
                                 <td><strong>{{$player->age}}</strong></td>
+                                <td><strong>{{$player->tshirt}}</strong></td>
                             </tr>
 
                         @endforeach

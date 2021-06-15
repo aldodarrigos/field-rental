@@ -27,8 +27,8 @@
 
         <main class="col-span-12 md:col-span-8 bg-white rounded-lg">
             
-            <div class="h-400p">
-                <img class="object-cover w-full h-full rounded-t-lg" src="{{$competition->img}}" alt="">
+            <div class="">
+                <img class="rounded-t-lg" src="{{$competition->img}}" alt="">
             </div>
 
             <div class="p-8">
@@ -49,6 +49,32 @@
                 <div class="mb-2"><span class="font-bold">Uniform colors</span>: {{$registration->uniforms}}</div>
                 <div class="mb-2"><span class="font-bold">Price</span>: ${{$registration->registration_price}}</div>
                 
+                <br>
+
+                <div class="table-responsive">
+                    <table class="table-auto border-collapse w-full">
+
+                        <thead>
+                          <tr class="rounded-lg text-sm font-medium text-gray-700 text-left" style="font-size: 0.9674rem">
+                            <th class="px-4 py-2 bg-gray-200 " style="background-color:#f8f8f8">Player Name</th>
+                            <th class="px-4 py-2 " style="background-color:#f8f8f8">Age</th>
+                            <th class="px-4 py-2 " style="background-color:#f8f8f8">T-Shirt Size</th>
+                          </tr>
+                        </thead>
+    
+                        <tbody class="text-sm font-normal text-gray-700">
+    
+                            @foreach ($team as $player)
+                            <tr class="hover:bg-gray-100 border-b border-graylines py-10">
+                                <td class="px-4 py-4 font-bold">{{$player->name}}</td>
+                                <td class="px-4 py-4">{{$player->age}}</td>
+                                <td class="px-4 py-4">{{$player->tshirt}}</td>
+                            </tr>
+    
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
 
                 <br>
 
@@ -70,11 +96,11 @@
                             <input type="hidden" name="user_name" id='user_name' value="{{$registration->user_name}}">
                             <input type="hidden" name="user_id" id='user_id' value="{{$registration->manager}}">
             
-                            <button class="font-roboto text-black font-bold rounded py-3 px-3 uppercase text-lg hover:bg-deepblue hover:text-warning ease-in-out duration-300 bg-warning button_link mb-4"><i class="far fa-credit-card"></i> Pay Now</button>
+                            <button class="font-roboto text-gray font-bold rounded py-3 px-3 uppercase text-lg hover:bg-deepblue hover:text-warning ease-in-out duration-300 bg-red button_link mb-4"><i class="far fa-credit-card"></i> Pay Now</button>
             
                         </form>
 
-                        <a href='/profile/dashboard' class="font-roboto text-gray font-bold rounded py-3 px-3 uppercase text-lg hover:bg-deepblue ease-in-out duration-300 bg-red truncate"><i class="fas fa-sign-in-alt"></i> Pay Later</a>
+                        <a href='/profile/dashboard' class="font-roboto text-black font-bold rounded py-3 px-3 uppercase text-lg hover:bg-deepblue ease-in-out duration-300 bg-warning truncate"><i class="fas fa-sign-in-alt"></i> Pay Later</a>
 
                         @endif
                     @endif
