@@ -56,7 +56,7 @@ class ContentController extends Controller
     {
         $content = new Content();
 
-        $flag = ($request->input('flag'))?1:0;
+        //$flag = ($request->input('flag'))?1:0;
         $order = ($request->input('order') != null)?$request->input('order'):1;
 
         $content->title = $request->input('title');
@@ -72,7 +72,7 @@ class ContentController extends Controller
         $content->order = $order;
         $content->icon = $request->input('icon');
 
-        $content->flag = $flag;
+        //$content->flag = $flag;
         $content->status = $request->input('status');
         $content->save();
 
@@ -111,7 +111,7 @@ class ContentController extends Controller
 
         $content = Content::find($id);
 
-        $flag = ($request->input('flag'))?1:0;
+        //$flag = ($request->input('flag'))?1:0;
 
         $content->title = $request->input('title');
         $content->subtitle = $request->input('subtitle');
@@ -126,7 +126,7 @@ class ContentController extends Controller
         $content->order = $request->input('order');
         $content->icon = $request->input('icon');
 
-        $content->flag = $flag;
+        //$content->flag = $flag;
         $content->status = $request->input('status');
         $content->save();
 

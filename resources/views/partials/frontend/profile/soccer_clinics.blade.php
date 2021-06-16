@@ -26,11 +26,16 @@
             @foreach ($soccer_clinic as $item)
     
             @php
-                $status = 'Pay Now Here';
-                $status_bg = 'danger';
-                if($item->registration_status == 1) {
-                    $status = 'Paid';
-                    $status_bg = 'info';
+                $status = 'Unavailable';
+                $status_bg = 'grayhard';
+
+                if($item->event_status == 2){
+                    $status = 'Pay Now Here';
+                    $status_bg = 'danger';
+                    if($item->registration_status == 1) {
+                        $status = 'Paid';
+                        $status_bg = 'info';
+                    }
                 }
             @endphp
                 

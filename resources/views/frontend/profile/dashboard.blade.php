@@ -110,19 +110,19 @@
                 $pending_payment = 0;
 
                 foreach ($tournaments as $item) {
-                    if($item->registration_status != 1){
+                    if($item->registration_status != 1 && $item->competition_status == 2){
                         $pending_payment++;
                     }
                 }
 
                 foreach ($leagues as $item) {
-                    if($item->registration_status != 1){
+                    if($item->registration_status != 1 && $item->competition_status == 2){
                         $pending_payment++;
                     }
                 }
 
                 foreach ($soccer_clinic as $item) {
-                    if($item->registration_status != 1){
+                    if($item->registration_status != 1 && $item->event_status == 2){
                         $pending_payment++;
                     }
                 }

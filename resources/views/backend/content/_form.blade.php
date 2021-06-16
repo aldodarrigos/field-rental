@@ -38,12 +38,13 @@
         <div class="col-md-6">
             
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-12">
                     <div class="form-group ">
                         <label >Image</label>
                         <input type="text" name='img' class="form-control" @if(!empty($content->img)) value="{{$content->img}}" @endif>
                     </div>
                 </div>
+                <!--
                 <div class="col-md-4">
                     <div class="i-checks mt-4">
                         @if ($form == 'new')
@@ -54,6 +55,7 @@
                         @endif
                     </div>
                 </div>
+                -->
             </div>
 
 

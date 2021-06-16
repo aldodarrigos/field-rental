@@ -250,9 +250,7 @@
 
                 @else
 
-                    <div class="text-center mb-6">
-                        Do you want to register? <a class="font-bold text-red" href="/signin">login</a> to your account or <a class="font-bold text-red" href="/signup">create</a> a new account.
-                    </div>
+                    @include('partials.frontend.sign_in_up')
 
                 @endif
 

@@ -79,7 +79,8 @@ class UserController extends Controller
         categories.name as category,
         competitions.name as competition_name,
         competitions.slug as competition_slug,
-
+        competitions.status as competition_status,
+        
         users.name as registrant,
         competition_crews.id as registration_id,
         competition_crews.updated_at as registration_date,
@@ -106,6 +107,7 @@ class UserController extends Controller
 
         competitions.name as competition_name,
         competitions.slug as competition_slug,
+        competitions.status as competition_status,
 
         users.name as registrant,
 
@@ -124,6 +126,7 @@ class UserController extends Controller
         $soccer_clinic = DB::table('summerclinic_players')
         ->select(DB::raw('summerclinic_players.registration_id as registration_id, 
         summerclinic.name as event_name,
+        summerclinic.status as event_status,
         summerclinic.slug as event_slug,
         summerclinic_players.name as player_name, 
         summerclinic_players.age as player_age,

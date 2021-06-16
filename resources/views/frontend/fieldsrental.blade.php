@@ -482,7 +482,7 @@
 
                         @else
 
-                            <div>Please <a href="/signin" class="font-bold text-red">login</a> to your account to complete booking or <a href="/signup" class="font-bold text-red">create</a> a new account</div>
+                            @include('partials.frontend.sign_in_up')
                             
                         @endif
 
