@@ -114,7 +114,7 @@
 
                                     <tr class="gradeX">
                                         <td><a href="/teams-detail/{{$record->registration_id}}">{{$record->team_id}}</a></td>
-                                        <td>{{$record->team_name}}</td>
+                                        <td><a href="/teams-detail/{{$record->registration_id}}">{{$record->team_name}}</a></td>
                                         <td><strong>{{$record->uniforms}}</strong></td>
                                         <td><strong>{{$gender}}</strong></td>
                                         <td><strong>{{$record->category}}</strong></td>

@@ -72,125 +72,42 @@
                                         <x-slot name='disable'>on</x-slot>
                                     </x-frontend.forms.input_text>
                                 </div>
+                                <div class="col-span-12 md:col-span-6">
+                                    <x-frontend.forms.input_text>
+                                        <x-slot name='type'>text</x-slot>
+                                        <x-slot name='label'>Email</x-slot>
+                                        <x-slot name='id'>email</x-slot>
+                                        <x-slot name='default'>{{Auth::user()->email}}</x-slot>
+                                        <x-slot name='placeholder'></x-slot>
+                                        <x-slot name='autocomplete'>off</x-slot>
+                                        <x-slot name='required'>on</x-slot>
+                                        <x-slot name='height'>big</x-slot>
+                                        <x-slot name='bg'>light</x-slot>
+                                        <x-slot name='label_on_off'>on</x-slot>
+                                        <x-slot name='disable'>on</x-slot>
+                                    </x-frontend.forms.input_text>
+                                </div>
+
+
                             </div>
 
                             <div class="grid grid-cols-12 gap-6 mb-2">
                                 <div class="col-span-12 md:col-span-6">
                                     <x-frontend.forms.input_text>
                                         <x-slot name='type'>text</x-slot>
-                                        <x-slot name='label'>Address</x-slot>
-                                        <x-slot name='id'>address</x-slot>
-                                        <x-slot name='default'></x-slot>
-                                        <x-slot name='placeholder'>Address</x-slot>
+                                        <x-slot name='label'>Contact Phone</x-slot>
+                                        <x-slot name='id'>phone</x-slot>
+                                        <x-slot name='default'>{{Auth::user()->phone}}</x-slot>
+                                        <x-slot name='placeholder'></x-slot>
                                         <x-slot name='autocomplete'>off</x-slot>
                                         <x-slot name='required'>on</x-slot>
                                         <x-slot name='height'>big</x-slot>
                                         <x-slot name='bg'>light</x-slot>
                                         <x-slot name='label_on_off'>on</x-slot>
-                                        <x-slot name='disable'>off</x-slot>
+                                        <x-slot name='disable'>on</x-slot>
                                     </x-frontend.forms.input_text>
                                 </div>
-                                <div class="col-span-12 md:col-span-3">
-                                    <x-frontend.forms.input_text>
-                                        <x-slot name='type'>text</x-slot>
-                                        <x-slot name='label'>City</x-slot>
-                                        <x-slot name='id'>city</x-slot>
-                                        <x-slot name='default'></x-slot>
-                                        <x-slot name='placeholder'>City</x-slot>
-                                        <x-slot name='autocomplete'>off</x-slot>
-                                        <x-slot name='required'>on</x-slot>
-                                        <x-slot name='height'>big</x-slot>
-                                        <x-slot name='bg'>light</x-slot>
-                                        <x-slot name='label_on_off'>on</x-slot>
-                                        <x-slot name='disable'>off</x-slot>
-                                    </x-frontend.forms.input_text>
-                                </div>
-
-                                <div class="col-span-12 md:col-span-3">
-                                    <x-frontend.forms.input_text>
-                                        <x-slot name='type'>text</x-slot>
-                                        <x-slot name='label'>Zip Code</x-slot>
-                                        <x-slot name='id'>zip</x-slot>
-                                        <x-slot name='default'></x-slot>
-                                        <x-slot name='placeholder'>Zip Code</x-slot>
-                                        <x-slot name='autocomplete'>off</x-slot>
-                                        <x-slot name='required'>on</x-slot>
-                                        <x-slot name='height'>big</x-slot>
-                                        <x-slot name='bg'>light</x-slot>
-                                        <x-slot name='label_on_off'>on</x-slot>
-                                        <x-slot name='disable'>off</x-slot>
-                                    </x-frontend.forms.input_text>
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-12 gap-6 mb-2">
-
-                                <div class="col-span-12 md:col-span-6">
-                                    <x-frontend.forms.input_text>
-                                        <x-slot name='type'>number</x-slot>
-                                        <x-slot name='label'>Phone Home</x-slot>
-                                        <x-slot name='id'>phone_home</x-slot>
-                                        <x-slot name='default'></x-slot>
-                                        <x-slot name='placeholder'>Phone Home</x-slot>
-                                        <x-slot name='autocomplete'>off</x-slot>
-                                        <x-slot name='required'>on</x-slot>
-                                        <x-slot name='height'>big</x-slot>
-                                        <x-slot name='bg'>light</x-slot>
-                                        <x-slot name='label_on_off'>on</x-slot>
-                                        <x-slot name='disable'>off</x-slot>
-                                    </x-frontend.forms.input_text>
-                                </div>
-                                <div class="col-span-12 md:col-span-6">
-                                    <x-frontend.forms.input_text>
-                                        <x-slot name='type'>number</x-slot>
-                                        <x-slot name='label'>Cell</x-slot>
-                                        <x-slot name='id'>phone_cell</x-slot>
-                                        <x-slot name='default'></x-slot>
-                                        <x-slot name='placeholder'>Cell</x-slot>
-                                        <x-slot name='autocomplete'>off</x-slot>
-                                        <x-slot name='required'>on</x-slot>
-                                        <x-slot name='height'>big</x-slot>
-                                        <x-slot name='bg'>light</x-slot>
-                                        <x-slot name='label_on_off'>on</x-slot>
-                                        <x-slot name='disable'>off</x-slot>
-                                    </x-frontend.forms.input_text>
-                                </div>
-        
-                            </div>
-
-                            <div class="grid grid-cols-12 gap-6 mb-2">
-
-                                <div class="col-span-12 md:col-span-6">
-                                    <x-frontend.forms.input_text>
-                                        <x-slot name='type'>text</x-slot>
-                                        <x-slot name='label'>Emergency contact</x-slot>
-                                        <x-slot name='id'>emergency_contact</x-slot>
-                                        <x-slot name='default'></x-slot>
-                                        <x-slot name='placeholder'>Emergency contact</x-slot>
-                                        <x-slot name='autocomplete'>off</x-slot>
-                                        <x-slot name='required'>on</x-slot>
-                                        <x-slot name='height'>big</x-slot>
-                                        <x-slot name='bg'>light</x-slot>
-                                        <x-slot name='label_on_off'>on</x-slot>
-                                        <x-slot name='disable'>off</x-slot>
-                                    </x-frontend.forms.input_text>
-                                </div>
-                                <div class="col-span-12 md:col-span-6">
-                                    <x-frontend.forms.input_text>
-                                        <x-slot name='type'>number</x-slot>
-                                        <x-slot name='label'>Emergency Phone</x-slot>
-                                        <x-slot name='id'>emergency_phone</x-slot>
-                                        <x-slot name='default'></x-slot>
-                                        <x-slot name='placeholder'>Emergency Phone</x-slot>
-                                        <x-slot name='autocomplete'>off</x-slot>
-                                        <x-slot name='required'>on</x-slot>
-                                        <x-slot name='height'>big</x-slot>
-                                        <x-slot name='bg'>light</x-slot>
-                                        <x-slot name='label_on_off'>on</x-slot>
-                                        <x-slot name='disable'>off</x-slot>
-                                    </x-frontend.forms.input_text>
-                                </div>
-
+                                
                             </div>
 
                             <div class="line-dashed"></div>

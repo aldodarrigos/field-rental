@@ -77,63 +77,8 @@
 
                     <div class="col-md-4">
                         <div class="form-group ">
-                            <label>Phone</label>
+                            <label>Contact Phone</label>
                             <input type="text" name='phone' class="form-control" value="{{$record->phone}}">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-
-                    <div class="col-md-4">
-                        <div class="form-group ">
-                            <label>Address</label>
-                            <input type="text" name='fullname' class="form-control" value="{{$record->address}}">
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="form-group ">
-                            <label>City</label>
-                            <input type="text" name='email' class="form-control" value="{{$record->city}}">
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="form-group ">
-                            <label>Zip</label>
-                            <input type="text" name='phone' class="form-control" value="{{$record->zip}}">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-
-                    <div class="col-md-3">
-                        <div class="form-group ">
-                            <label>Phone Home</label>
-                            <input type="text" name='fullname' class="form-control" value="{{$record->phone_home}}">
-                        </div>
-                    </div>
-
-                    <div class="col-md-3">
-                        <div class="form-group ">
-                            <label>Phone Cell</label>
-                            <input type="text" name='fullname' class="form-control" value="{{$record->phone_cell}}">
-                        </div>
-                    </div>
-
-                    <div class="col-md-3">
-                        <div class="form-group ">
-                            <label>Emergency Contact</label>
-                            <input type="text" name='email' class="form-control" value="{{$record->emergency_contact}}">
-                        </div>
-                    </div>
-
-                    <div class="col-md-3">
-                        <div class="form-group ">
-                            <label>Emergency Phone</label>
-                            <input type="text" name='phone' class="form-control" value="{{$record->emergency_phone}}">
                         </div>
                     </div>
                 </div>

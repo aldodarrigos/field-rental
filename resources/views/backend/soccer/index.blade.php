@@ -17,6 +17,13 @@
                 responsive: true,
                 dom: '<"html5buttons"B>lTfgitp',
                 "order": [[ 0, "desc" ]],
+                "columnDefs": [
+                    {
+                        "targets": [ 4 ],
+                        "searchable": false,
+                        "sortable": false
+                    }
+                ],
                 buttons: [
                     { extend: 'copy'},
                     {extend: 'csv'},

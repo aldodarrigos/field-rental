@@ -150,14 +150,6 @@ class SoccerController extends Controller
         summerclinic.name as event_name, 
         
         users.name as registrant, users.email as email, users.phone as phone,
-
-        summerclinic_registration.address, 
-        summerclinic_registration.city, 
-        summerclinic_registration.zip, 
-        summerclinic_registration.phone_home, 
-        summerclinic_registration.phone_cell, 
-        summerclinic_registration.emergency_contact, 
-        summerclinic_registration.emergency_phone, 
         summerclinic_registration.price, 
         summerclinic_registration.payment_code, 
         summerclinic_registration.status, 

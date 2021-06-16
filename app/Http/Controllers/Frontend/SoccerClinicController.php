@@ -37,13 +37,6 @@ class SoccerClinicController extends Controller
         $user_id = $request->input('user_id');
         $event_price = $request->input('event_price');
         $event_price_alt = $request->input('event_price_alt');
-        $address = $request->input('address');
-        $city = $request->input('city');
-        $zip = $request->input('zip');
-        $phone_home = $request->input('phone_home');
-        $phone_cell = $request->input('phone_cell');
-        $emergency_contact = $request->input('emergency_contact');
-        $emergency_phone = $request->input('emergency_phone');
         
 
         $acumulative_price = 0;
@@ -76,13 +69,6 @@ class SoccerClinicController extends Controller
         $summerclinicreg->event_id = $event_id;
         $summerclinicreg->user_id = $user_id;
         $summerclinicreg->price = $final_price;
-        $summerclinicreg->address = $address;
-        $summerclinicreg->city = $city;
-        $summerclinicreg->zip = $zip;
-        $summerclinicreg->phone_home = $phone_home;
-        $summerclinicreg->phone_cell = $phone_cell;
-        $summerclinicreg->emergency_contact = $emergency_contact;
-        $summerclinicreg->emergency_phone = $emergency_phone;
         $summerclinicreg->status = 0;
         $summerclinicreg->save();
 
@@ -123,19 +109,12 @@ class SoccerClinicController extends Controller
         summerclinic.status as event_status,
 
         summerclinic_registration.user_id, 
-        summerclinic_registration.address, 
-        summerclinic_registration.city, 
-        summerclinic_registration.zip, 
-        summerclinic_registration.phone_home, 
-        summerclinic_registration.phone_cell,
-        summerclinic_registration.emergency_contact,
-        summerclinic_registration.emergency_phone,
         summerclinic_registration.price as final_price,
         summerclinic_registration.payment_code,
         summerclinic_registration.status as registration_status,
         summerclinic_registration.updated_at as registration_updated_at,
 
-        users.name as user_name, users.email as user_email'))
+        users.name as user_name, users.email as user_email, users.phone as user_phone'))
 
         ->leftJoin('users', 'summerclinic_registration.user_id', '=', 'users.id')
         ->leftJoin('summerclinic', 'summerclinic_registration.event_id', '=', 'summerclinic.id')

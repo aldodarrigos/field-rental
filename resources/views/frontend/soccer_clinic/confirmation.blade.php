@@ -39,6 +39,7 @@
                 
                 <div class="mb-2"><span class="font-bold">Registrant User</span>: {{$registration->user_name}}</div>
                 <div class="mb-2"><span class="font-bold">Email</span>: {{$registration->user_email}}</div>
+                <div class="mb-2"><span class="font-bold">Contact Phone</span>: {{$registration->user_phone}}</div>
                 <div class="mb-2"><span class="font-bold">Price</span>: ${{$registration->final_price}}</div>
                 <div class="mb-2"><span class="font-bold">Date</span>: {{date('M d, Y h:m:s A', strtotime($registration->registration_updated_at))}}</div>
                 @if ($registration->registration_status == 1)
