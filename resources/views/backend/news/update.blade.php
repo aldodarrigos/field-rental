@@ -25,7 +25,7 @@
                     ['font', ['bold', 'underline', 'clear']],
                     ['para', ['ul', 'ol', 'paragraph']],
                     ['table', ['table']],
-                    ['insert', ['link', 'picture']
+                    ['insert', ['link']
                 ],
                 ]
             });

@@ -9,19 +9,23 @@
     <script>
         $(document).ready(function(){
 
-            $('#post_content').each(function(){
-                // Get the content
-                var str = $(this).html();
-                // Set the regex string
+            getyoutubelinks()
+            getlinks()
 
-
+            function getyoutubelinks(){
+                var str = $('#post_content').html();
                 var regex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|].(?:jpg|gif|png|webp))/ig;
-
-                // Replace plain text links by hyperlinks
                 var replaced_text = str.replace(regex, "<img src='$1' class='max-w-full border-8 border-gray mx-auto'>");
-                // Echo link
-                $(this).html(replaced_text);
-            });
+                $('#post_content').html(replaced_text);
+            }
+
+            function getlinks(){
+                var str = $('#post_content').html();
+                var regex = /(?:https:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?.*v=)?(\w+)/g;
+                var replaced_text = str.replace(regex, "<div class='video-responsive'> <iframe src='https://www.youtube.com/embed/$1' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe></div>");
+                $('#post_content').html(replaced_text);
+            }
+
         });
     </script>
 

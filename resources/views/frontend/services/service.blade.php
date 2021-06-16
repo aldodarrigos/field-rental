@@ -7,8 +7,25 @@
     @parent
     <script>
         $(document).ready(function(){
-            $( "iframe" ).wrap( "<div class='video-responsive'></div>" );
-       });
+
+            getyoutubelinks()
+            getlinks()
+
+            function getyoutubelinks(){
+                var str = $('#post_content').html();
+                var regex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|].(?:jpg|gif|png|webp))/ig;
+                var replaced_text = str.replace(regex, "<img src='$1' class='max-w-full border-8 border-gray mx-auto'>");
+                $('#post_content').html(replaced_text);
+            }
+
+            function getlinks(){
+                var str = $('#post_content').html();
+                var regex = /(?:https:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?.*v=)?(\w+)/g;
+                var replaced_text = str.replace(regex, "<div class='video-responsive'> <iframe src='https://www.youtube.com/embed/$1' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe></div>");
+                $('#post_content').html(replaced_text);
+            }
+
+        });
     </script>
 
 @endsection
