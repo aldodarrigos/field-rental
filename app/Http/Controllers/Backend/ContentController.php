@@ -56,23 +56,19 @@ class ContentController extends Controller
     {
         $content = new Content();
 
-        //$flag = ($request->input('flag'))?1:0;
         $order = ($request->input('order') != null)?$request->input('order'):1;
 
         $content->title = $request->input('title');
         $content->subtitle = $request->input('subtitle');
-        $content->shortcut = $request->input('shortcut');
         $content->content = $request->input('content');
         $content->img = $request->input('img');
         
         $content->link = $request->input('link');
         $content->video = $request->input('video');
-        $content->group_id = $request->input('group_id');
 
         $content->order = $order;
         $content->icon = $request->input('icon');
 
-        //$content->flag = $flag;
         $content->status = $request->input('status');
         $content->save();
 
@@ -115,13 +111,11 @@ class ContentController extends Controller
 
         $content->title = $request->input('title');
         $content->subtitle = $request->input('subtitle');
-        $content->shortcut = $request->input('shortcut');
         $content->content = $request->input('content');
         $content->img = $request->input('img');
         
         $content->link = $request->input('link');
         $content->video = $request->input('video');
-        $content->group_id = $request->input('group_id');
 
         $content->order = $request->input('order');
         $content->icon = $request->input('icon');

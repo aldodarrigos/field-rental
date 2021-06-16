@@ -16,7 +16,19 @@
                 pageLength: 25,
                 responsive: true,
                 dom: '<"html5buttons"B>lTfgitp',
-                "order": [[ 6, "desc" ]],
+                "order": [[ 5, "desc" ]],
+                "columnDefs": [
+                    {
+                        "targets": [ 5 ],
+                        "visible": false,
+                        "searchable": false
+                    },
+                    {
+                        "targets": [ 3 ],
+                        "searchable": true,
+                        "sortable": false
+                    }
+                ],
                 buttons: [
                     { extend: 'copy'},
                     {extend: 'csv'},
@@ -74,14 +86,12 @@
             <table class="table table-striped table-bordered table-hover dataTables-example" >
             <thead>
             <tr>
-                <th>Shortcut</th>
                 <th>Title</th>
                 <th>Subtitle</th>
                 <th>Link</th>
-                <th>Flag</th>
-                <th>Group</th>
                 <th>Update</th>
                 <th>Status</th>
+                <th>HideDate</th>
             </tr>
             </thead>
             <tbody>
@@ -92,7 +102,6 @@
 
                     $status = 'Unpublished';
                     $status_color = 'default';
-                    $flag = ($record->flag == 1)?'Flagged':'';
                     if($record->content_status == 1) {
                         $status = 'Published';
                         $status_color = 'info';
@@ -101,14 +110,12 @@
                     @endphp
 
                     <tr class="gradeX">
-                        <td><a href="/content/{{$record->id}}/edit">{{$record->shortcut}}</a></td>
-                        <td><strong>{{$record->title}}</strong></td>
+                        <td><a href="/content/{{$record->id}}/edit">{{$record->title}}</a></td>
                         <td>{{$record->subtitle}}</td>
                         <td>{{$record->link}}</td>
-                        <td>{{$flag}}</td>
-                        <td>{{$record->group_name}}</td>
                         <td class="center">{{date('M d, Y', strtotime($record->updated_at))}}</td>
                         <td class="center"><span class="btn btn-{{$status_color}} btn-xs">{{$status}}</span></td>
+                        <td>{{date('Y-m-d', strtotime($record->updated_at))}}</td>
                     </tr>
 
                 @endforeach

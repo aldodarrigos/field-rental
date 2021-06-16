@@ -52,11 +52,7 @@
             </li>
 
             <li class="{{$content_active}}">
-                <a href="/content"><i class="fas fa-feather-alt"></i> <span class="nav-label">Content</span><span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse">
-                    <li><a href="/content">Dashboard</a></li>
-                    <li><a href="/content-groups">Groups</a></li>
-                </ul>
+                <a href="/content"><i class="fas fa-feather-alt"></i> <span class="nav-label">Content</span></a>
             </li>
 
             <li class="{{$fields_active}}">

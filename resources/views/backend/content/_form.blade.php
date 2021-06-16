@@ -12,11 +12,6 @@
     <div class="row">
 
         <div class="col-md-6">
-
-            <div class="form-group ">
-                <label >Shortcut</label>
-                <input type="text" name='shortcut' class="form-control" required @if(!empty($content->shortcut)) value="{{$content->shortcut}}" @endif>
-            </div>
             
             <div class="form-group ">
                 <label >Title</label>
@@ -75,28 +70,6 @@
             </div>
 
             <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group ">
-                        <label for='group'>Group</label>
-                        <select class="form-control m-b" name="group_id">
-
-                            <option value='0'>--SELECT--</option>
-                            @foreach ($groups as $group)
-
-                                @php
-                                    if($form == 'update'){
-                                        $group_selected = ($content->group_id == $group->id)?'selected':'';
-                                    }else{
-                                        $group_selected = '';
-                                    }
-                                @endphp
-                
-                                <option value='{{$group->id}}' {{$group_selected}}>{{$group->name}}</option>
-                            @endforeach
-                            
-                        </select>
-                    </div>
-                </div>
 
                 <div class="col-md-6">
                     <div class="form-group ">
@@ -119,16 +92,19 @@
                         </select>
                     </div>
                 </div>
-            </div>
 
-            
-            <div class="row">
                 <div class="col-md-6">
                     <div class="form-group ">
                         <label>Icon</label>
                         <input type="text" name='icon' class="form-control" @if(!empty($content->icon)) value="{{$content->icon}}" @endif>
                     </div>
                 </div>
+                
+            </div>
+
+            
+            <div class="row">
+
                 <div class="col-md-6">
                     <div class="form-group ">
                         <label for='video'>Order</label>
