@@ -57,7 +57,7 @@
                             <input type="hidden" name="event_price_alt" value='{{$event->price_alt}}'>
 
                             <div class="grid grid-cols-12 gap-6 mb-2">
-                                <div class="col-span-12 md:col-span-6">
+                                <div class="col-span-12 md:col-span-4">
                                     <x-frontend.forms.input_text>
                                         <x-slot name='type'>text</x-slot>
                                         <x-slot name='label'>Registrant</x-slot>
@@ -65,14 +65,14 @@
                                         <x-slot name='default'>{{Auth::user()->name}}</x-slot>
                                         <x-slot name='placeholder'>Your Name</x-slot>
                                         <x-slot name='autocomplete'>off</x-slot>
-                                        <x-slot name='required'>on</x-slot>
+                                        <x-slot name='required'>off</x-slot>
                                         <x-slot name='height'>big</x-slot>
                                         <x-slot name='bg'>light</x-slot>
                                         <x-slot name='label_on_off'>on</x-slot>
                                         <x-slot name='disable'>on</x-slot>
                                     </x-frontend.forms.input_text>
                                 </div>
-                                <div class="col-span-12 md:col-span-6">
+                                <div class="col-span-12 md:col-span-5">
                                     <x-frontend.forms.input_text>
                                         <x-slot name='type'>text</x-slot>
                                         <x-slot name='label'>Email</x-slot>
@@ -80,19 +80,14 @@
                                         <x-slot name='default'>{{Auth::user()->email}}</x-slot>
                                         <x-slot name='placeholder'></x-slot>
                                         <x-slot name='autocomplete'>off</x-slot>
-                                        <x-slot name='required'>on</x-slot>
+                                        <x-slot name='required'>off</x-slot>
                                         <x-slot name='height'>big</x-slot>
                                         <x-slot name='bg'>light</x-slot>
                                         <x-slot name='label_on_off'>on</x-slot>
                                         <x-slot name='disable'>on</x-slot>
                                     </x-frontend.forms.input_text>
                                 </div>
-
-
-                            </div>
-
-                            <div class="grid grid-cols-12 gap-6 mb-2">
-                                <div class="col-span-12 md:col-span-6">
+                                <div class="col-span-12 md:col-span-3">
                                     <x-frontend.forms.input_text>
                                         <x-slot name='type'>text</x-slot>
                                         <x-slot name='label'>Contact Phone</x-slot>
@@ -100,14 +95,13 @@
                                         <x-slot name='default'>{{Auth::user()->phone}}</x-slot>
                                         <x-slot name='placeholder'></x-slot>
                                         <x-slot name='autocomplete'>off</x-slot>
-                                        <x-slot name='required'>on</x-slot>
+                                        <x-slot name='required'>off</x-slot>
                                         <x-slot name='height'>big</x-slot>
                                         <x-slot name='bg'>light</x-slot>
                                         <x-slot name='label_on_off'>on</x-slot>
                                         <x-slot name='disable'>on</x-slot>
                                     </x-frontend.forms.input_text>
                                 </div>
-                                
                             </div>
 
                             <div class="line-dashed"></div>
