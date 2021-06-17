@@ -64,7 +64,6 @@ class UsersController extends Controller
         $user->email = $request->input('mailtext');
         $user->password = $password;
         $user->role = $request->input('role');
-        $user->born = $request->input('born');
         $user->phone = $request->input('phone');
         $user->status = $request->input('status');
         $user->save();
@@ -108,21 +107,19 @@ class UsersController extends Controller
 
         if($password != null){
 
-            $user->name = $request->input('nome');
+            $user->name = $request->input('name');
             $user->email = $request->input('mailtext');
             $user->password = Hash::make($password);
             $user->role = $request->input('role');
-            $user->born = $request->input('pub_date');
             $user->phone = $request->input('phone');
             $user->status = $request->input('status');
             $user->save();
 
         }else{
 
-            $user->name = $request->input('nome');
+            $user->name = $request->input('name');
             $user->email = $request->input('mailtext');
             $user->role = $request->input('role');
-            $user->born = $request->input('pub_date');
             $user->phone = $request->input('phone');
             $user->status = $request->input('status');
             $user->save();

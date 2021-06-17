@@ -85,32 +85,10 @@
         </div>
 
         <div class="col-md-6">
-
-            <div class="form-group ">
-                <label>Date of birth</label>
-                <div class="input-group date">
-                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" name='pub_date' 
-                    @if (!empty($content->born))
-                        value="{{$content->born}}"
-                    @else
-                        value="{{date('Y-m-d')}}"
-                    @endif
-                    >
-                </div>
-            </div>
-            
-        </div>
-    </div>
-
-    <div class="row">
-        
-        <div class="col-md-6">
-
             <div class="form-group ">
                 <label >Phone</label>
                 <input type="text" name='phone' class="form-control" @if(!empty($content->phone)) value="{{$content->phone}}" @endif autocomplete='off'>
             </div>
-
         </div>
     </div>
 

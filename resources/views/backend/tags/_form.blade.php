@@ -30,14 +30,14 @@
                     @if ($form == 'update')
                         @if ($content->status == 1)
                             <option value='1' selected>Published</option>
-                            <option value='0'>Unpublish</option>
+                            <option value='0'>Unpublished</option>
                         @else
                             <option value='1'>Published</option>
-                            <option value='0' selected>Unpublish</option>
+                            <option value='0' selected>Unpublished</option>
                         @endif
                     @else
                         <option value='1'>Published</option>
-                        <option value='0'>Unpublish</option>
+                        <option value='0'>Unpublished</option>
                     @endif
 
                 </select>

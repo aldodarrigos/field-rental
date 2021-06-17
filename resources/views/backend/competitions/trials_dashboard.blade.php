@@ -108,7 +108,7 @@
                                     @php
                                         $gender = ($record->player_gender == 1)?'Female':'Male';  
                                         $status = ($record->registration_status == 1)?'Paid':'Unpaid';  
-                                        $status_color = ($record->registration_status == 1)?'btn-info':'btn-default';  
+                                        $status_color = ($record->registration_status == 1)?'btn-info':'btn-danger';  
                                         $read = ($record->read == 1)?'Read':'unread';  
                                         $read_color = ($record->read == 0)?'btn-info':'btn-default';  
                                     @endphp

@@ -6,18 +6,6 @@
 
     @parent
 
-    <link href="{{asset('inspinia/css/plugins/summernote/summernote-bs4.css')}}" rel="stylesheet">
-    <script src="{{asset('inspinia/js/plugins/summernote/summernote-bs4.js')}}"></script>
-
-    <script>
-        $(document).ready(function () {
-
-            $('.summernote').summernote({
-                height: 300
-            });
-        });
-    </script>
-
 @endsection
 
 <div class="row wrapper border-bottom white-bg page-heading">
@@ -79,9 +67,6 @@
                             <input type="text" name='phone' class="form-control" value="{{$record->phone}}">
                         </div>
                     </div>
-                </div>
-
-                <div class="row">
 
                     <div class="col-md-4">
                         <div class="form-group ">
@@ -105,9 +90,13 @@
                             <input type="text" name='team' class="form-control" value="{{$record->category}}" >
                         </div>
                     </div>
-                </div>
 
-                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group ">
+                            <label>Uniform Color</label>
+                            <input type="text" name='uniform' class="form-control" value="{{$record->uniforms}}" >
+                        </div>
+                    </div>
 
                     <div class="col-md-4">
                         <div class="form-group ">
@@ -130,6 +119,7 @@
                             <input type="text" name='player_number' class="form-control" value="{{$status}}">
                         </div>
                     </div>
+                    
                 </div>
                
                 <div class="row">
