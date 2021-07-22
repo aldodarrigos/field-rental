@@ -25,7 +25,7 @@
             <li class="nav-header">
                 <div class="dropdown profile-element" >
                     <div style="display: flex; grid-gap: .5rem;">
-                        <img alt="image" class="" src="https://xava.pro/storage/offtopic/kisc-logo-200.webp" style='width: 40px; height: 40px;'>
+                        <img alt="image" class="" src="https://katyisc.com/storage/files/kisc-logo-200.webp" style='width: 40px; height: 40px;'>
                         <span style='display: inline-block;'>
                             <span class="block m-t-xs font-bold text-white">{{Auth::user()->name}}</span>
                             <span class="text-muted text-xs block">Admin</span>
