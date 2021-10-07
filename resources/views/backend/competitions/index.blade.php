@@ -117,9 +117,17 @@
                                     $dashboard_slug = 'team-competition-registration';
 
                                     if($record->is_league == 1){
-                                        $type = 'League';
-                                        $slug = 'leagues';
-                                        $dashboard_slug = 'tryout-competition-registration';
+
+                                        if($record->trials == 1){
+                                            $type = 'League';
+                                            $slug = 'leagues';
+                                            $dashboard_slug = 'tryout-competition-registration';
+                                        }else{
+                                            $type = 'League';
+                                            $slug = 'leagues';
+                                            $dashboard_slug = 'team-competition-registration';
+                                        }
+
                                     }
 
                                     foreach ($status as $item) {
