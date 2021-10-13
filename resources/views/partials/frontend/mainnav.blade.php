@@ -19,11 +19,11 @@
                 <x-frontend.buttons.link>
                     <x-slot name='link'>/fieldsrental</x-slot>
                     <x-slot name='size'>regular</x-slot>
-                    Book now <i class="far fa-calendar-alt text-md pl-1"></i>
+                    Rent now <i class="far fa-calendar-alt text-md pl-1"></i>
                 </x-frontend.buttons.link>
             </div>
             <div class="block md:hidden flex gap-2">
-                <a href="/fieldsrental" class="bg-red font-roboto text-gray font-bold rounded py-2 px-4 uppercase text-sm hover:bg-deepblue ease-in-out duration-300">Book now <i class="far fa-calendar-alt text-md pl-1"></i></a>
+                <a href="/fieldsrental" class="bg-red font-roboto text-gray font-bold rounded py-2 px-4 uppercase text-sm hover:bg-deepblue ease-in-out duration-300">Rent now <i class="far fa-calendar-alt text-md pl-1"></i></a>
 
                 <span id='trigger_button' class="font-roboto bg-red font-semibold uppercase text-white text-xl px-4 py-1 hover:bg-blue hover:text-white rounded ease-in-out duration-300"><i class="fas fa-bars"></i></span>
             </div>
