@@ -19,7 +19,7 @@
                 <x-frontend.buttons.link>
                     <x-slot name='link'>/fieldsrental</x-slot>
                     <x-slot name='size'>regular</x-slot>
-                    Book now <i class="far fa-calendar-alt text-md pl-1"></i>
+                    Rent now <i class="far fa-calendar-alt text-md pl-1"></i>
                 </x-frontend.buttons.link>
             </div>
         </div>

@@ -39,7 +39,7 @@
         
 @endsection
 
-<x-frontend.pieces.section_header title='Booking' bread='Book Now'></x-frontend.pieces.section_header>
+<x-frontend.pieces.section_header title='Fields Rental' bread='Rent Now'></x-frontend.pieces.section_header>
 
 
 <main class="w-11/12 md:w-boxed mx-auto">

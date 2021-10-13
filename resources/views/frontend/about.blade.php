@@ -34,7 +34,7 @@
 
             {!!$fields->content!!}
 
-            <a href="/fieldsrental" class="bg-red font-roboto text-gray font-bold rounded py-2 px-4 uppercase text-sm hover:bg-deepblue ease-in-out duration-300">Book now <i class="far fa-calendar-alt text-md pl-1 mt-6"></i></a>
+            <a href="/fieldsrental" class="bg-red font-roboto text-gray font-bold rounded py-2 px-4 uppercase text-sm hover:bg-deepblue ease-in-out duration-300">Rent now <i class="far fa-calendar-alt text-md pl-1 mt-6"></i></a>
         </div>
     </div>
 </div>
