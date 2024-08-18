@@ -26,7 +26,7 @@
                 $user = session()->get('user');
                 $paypal_code = session()->get('paypal_code');
                 $code = session()->get('code');
-                $field_players_number = ($field->tag_id == 1)?'5 vs 5 players (6 vs 6)':'7 vs 7 players (9 vs 9)';
+                $field_players_number = ($field->tag_id == 1)?'5 vs 5 players':'7 vs 7 players';
                 
             @endphp
 

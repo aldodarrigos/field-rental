@@ -2,11 +2,7 @@
     <div class="w-full md:w-boxed mx-auto flex items-center h-70p md:h-90p px-2 sm:px-0 ">
         <div class="logo w-2/5 md:w-1/4">
             <a href="/" class="flex gap-1">
-                <div class="logo"><img class="w-11" src="https://katyisc.com/storage/files/kisc-logo-200.webp" alt=""></div>
-                <div class="font-roboto">
-                    <div class="text-2x5 font-extrabold leading-none text-blue uppercase">Kisc</div>
-                    <div class="subtitle text-red font-bold text-sm leading-none">Sports Complex</div>
-                </div>
+                <div class="logo"><img class="w-24 sm:w-32" src="{{\App\Models\Setting::first()->logo}}" alt=""></div>
             </a>
         </div>
         <div class="w-3/5 md:w-3/4 flex gap-2 justify-end">

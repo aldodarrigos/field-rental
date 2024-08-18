@@ -46,7 +46,7 @@
         </main>
         
         <aside class="col-span-12 md:col-span-4">
-
+{{-- 
             <x-frontend.pieces.ad_frame title='Location'>
                 <x-slot name='frame_icon'><i class="fas fa-map-marker-alt"></i></x-slot>
                 <x-slot name='bg'>blue</x-slot>
@@ -92,7 +92,9 @@
                         
                 </script>
                 
-            </x-frontend.pieces.ad_frame>
+            </x-frontend.pieces.ad_frame> --}}
+            <livewire:frontend.location-info></livewire:frontend.location-info>
+            <livewire:frontend.location-map></livewire:frontend.location-map>
             
         </aside>
     </div>

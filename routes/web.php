@@ -62,11 +62,17 @@ Route::get('/', function () {
 });
 */
 
-Route::get('/', [FrontendController::class, 'index']);
 Route::get('/testing', [FrontendController::class, 'test']);
-Route::get('about', [FrontendController::class, 'about']);
+
+
+
+
+Route::get('/', [FrontendController::class, 'index'])->name('index');
+Route::get('about', [FrontendController::class, 'about'])->name('about');
+
+
 Route::get('services', [ServicesController::class, 'services'])->name('frontend.services');
-Route::get('services/{slug?}', [ServicesController::class, 'service'])->name('frontend.service');
+Route::get('services/{slug?}', [ServicesController::class, 'service'])->name('frontend.service'); // IMAGE SEO BD
 Route::get('service/registration/{id?}', [ServicesController::class, 'registration'])->name('service.registration');
 Route::get('soccer-tv', [FrontendController::class, 'soccer']);
 
@@ -80,7 +86,7 @@ Route::get('service-payment-fail', [ServicePaymentController::class, 'fail'])->n
 Route::post('service/contact', [ServicesController::class, 'contact'])->name('service.contact');
 
 //SUMMER CLINICS
-Route::get('soccer-clinic/{id?}', [SoccerClinicController::class, 'event']);
+Route::get('soccer-clinic/{id?}', [SoccerClinicController::class, 'event']); // IMAGE SEO BD
 Route::post('soccer-clinic-registration', [SoccerClinicController::class, 'registration']);
 Route::get('soccer-clinic-confirmation/{id?}', [SoccerClinicController::class, 'confirmation']);
 Route::post('soccer-clinic-payment', [SoccerClinicPaymentController::class, 'payment']);
@@ -89,8 +95,8 @@ Route::get('soccer-clinic-payment-fail', [SoccerClinicPaymentController::class, 
 
 //Route::get('fields', [FrontendController::class, 'fields'])->name('frontend.fields');
 Route::get('news', [FrontendController::class, 'news'])->name('frontend.news');
-Route::get('post/{slug?}', [FrontendController::class, 'post'])->name('frontend.post');
-Route::get('tags/{slug?}', [FrontendController::class, 'tags'])->name('frontend.tags');
+Route::get('post/{slug?}', [FrontendController::class, 'post'])->name('frontend.post'); // IMAGE SEO BD
+Route::get('tags/{slug?}', [FrontendController::class, 'tags'])->name('frontend.tags'); // IMAGE SEO BD
 Route::get('contact', [FrontendController::class, 'contact'])->name('frontend.contact');
 Route::post('contact', [FrontendController::class, 'contact'])->name('frontend.contact.send');
 Route::get('covid-19-protocol', [FrontendController::class, 'covid'])->name('frontend.covid');
@@ -105,8 +111,8 @@ Route::get('profile/dashboard', [UserController::class, 'dashboard'])->name('fro
 // COMPETITIONS
 Route::get('tournaments', [CompetitionsController::class, 'tournaments'])->name('frontend.tournaments');
 Route::get('leagues', [CompetitionsController::class, 'leagues'])->name('frontend.leagues');
-Route::get('tournaments/{slug?}', [CompetitionsController::class, 'competition'])->name('frontend.tournament');
-Route::get('leagues/{slug?}', [CompetitionsController::class, 'competition'])->name('frontend.league');
+Route::get('tournaments/{slug?}', [CompetitionsController::class, 'competition'])->name('frontend.tournament'); // IMAGE SEO BD
+Route::get('leagues/{slug?}', [CompetitionsController::class, 'competition'])->name('frontend.league'); // IMAGE SEO BD
 //Route::get('registration/{id?}/{slug?}', [CompetitionsController::class, 'registration'])->name('frontend.competitions.registration');
 Route::post('registration/submit', [CompetitionsController::class, 'submit'])->name('competitions.registration.submit');
 Route::post('competition/contact', [CompetitionsController::class, 'contact'])->name('competitions.contact');
@@ -178,7 +184,7 @@ Route::middleware(['admin'])->group(function () {
     //CONTENT
     Route::resource('content', ContentController::class);
     Route::resource('content-groups', ContentGroupsController::class);
-    
+
     //FIELDS
     Route::resource('backend-fields', FieldsBackController::class);
 
@@ -247,7 +253,7 @@ Route::middleware(['admin'])->group(function () {
     Route::resource('soccer-clinics', SoccerController::class);
     Route::get('soccer-clinics-registration/{id?}', [SoccerController::class, 'registration']);
     Route::get('soccer-clinics-registration-detail/{id?}', [SoccerController::class, 'registration_detail']);
-    
+
     //STORE
     Route::resource('store', StoreController::class);
     Route::resource('product-sizes', ProductSizeController::class);

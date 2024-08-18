@@ -24,11 +24,11 @@
             });
 
             var updateOutput = function (e) {
-                var list = e.length ? e : $(e.target),
+
+                var list = e.length ? e : $('#nestable'),
                         output = list.data('order');
                         let order = JSON.stringify(list.nestable('serialize'));
                         console.log(order);
-
                         const token = $('#token').val();
 
                         console.log(token);
@@ -41,6 +41,7 @@
                             },
                             success:function(response){
                                 console.log(response);
+                                location.reload();
     
                             }//Response
 
@@ -56,11 +57,32 @@
             };
             // activate Nestable for list 1
             $('#nestable').nestable({
-                group: 1
-            }).on('change', updateOutput);
-            
+                group: 1,
+                maxDepth: 2,
+                reject: [{
+                    rule: function () {
+                        // The this object refers to dragRootEl i.e. the dragged element.
+                        // The drag action is cancelled if this function returns true
+                        var ils = $(this).find('>ol.dd-list > li.dd-item');
+                        for (var i = 0; i < ils.length; i++) {
+                            var datatype = $(ils[i]).data('type');
+                            if (datatype === 'child')
+                                return true;
+                        }
+                        return false;
+                    },
+                    action: function (nestable) {
+                        // This optional function defines what to do when such a rule applies. The this object still refers to the dragged element,
+                        // and nestable is, well, the nestable root element
+                        alert('Can not move this item to the root');
+                    }
+                }]
+            })
+            // .on('change', updateOutput);
+
+            $('#saveOrder').on('click',updateOutput);
             // output initial serialised data
-            updateOutput($('#nestable').data('output', $('#nestable-output')));
+            // updateOutput($('#nestable').data('output', $('#nestable-output')));
 
         });
 
@@ -150,12 +172,26 @@
                     <div class="dd" id="nestable">
                         <ol class="dd-list">
                             @foreach ($records_active as $record)
+                                @if($record->parent_id == 0)
                                 <li class="dd-item" data-id='{{$record->id}}'>
                                     <div class="dd-handle">{{$record->id}} - {{$record->name}}</div>
+                                    @if($record->children)
+                                        <ol class="dd-list">
+                                            @foreach($record->children as $child)
+                                                <li class="dd-item" data-id="{{$child->id}}">
+                                                    <div class="dd-handle">{{$child->id}} - {{$child->name}}</div>
+                                                </li>
+                                            @endforeach
+                                        </ol>
+                                    @endif
                                 </li>
+                                @endif
                             @endforeach
-        
+                            <div class="text-right mt-4">
+                                <button id="saveOrder" class="btn btn-primary btn-xs" data-id=''>Guardar</button>
+                            </div>
                         </ol>
+
                     </div>
                 </div>
             </div>

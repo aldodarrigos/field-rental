@@ -56,9 +56,28 @@
                             <textarea name="sumary" class="form-control" rows="5">{{$settings->sumary}}</textarea>
                         </div>
 
-                        <div class="form-group ">
-                            <label >Logo</label>
+                        <div class="form-group tooltip-wrap">
+                            <label >
+                                Fav Icon 
+                                <i class="fas fa-question-circle text-muted" data-toggle="tooltip" data-placement="top" title="" data-original-title="Dimension: 255px - 155px"></i>
+                            </label>
+                            <input type="text" name='icon' class="form-control" value="{{$settings->icon}}" autocomplete="off">
+                        </div>
+
+                        <div class="form-group tooltip-wrap">
+                            <label >
+                                Logo Black
+                                <i class="fas fa-question-circle text-muted" data-toggle="tooltip" data-placement="top" title="" data-original-title="Dimension: 255px - 155px"></i>
+                            </label>
                             <input type="text" name='logo' class="form-control" value="{{$settings->logo}}" autocomplete="off">
+                        </div>
+
+                        <div class="form-group tooltip-wrap">
+                            <label >
+                                Logo White 
+                                <i class="fas fa-question-circle text-muted" data-toggle="tooltip" data-placement="top" title="" data-original-title="Dimension: 255px - 155px"></i>
+                            </label>
+                            <input type="text" name='logo_white' class="form-control" value="{{$settings->logo_white}}" autocomplete="off">
                         </div>
 
                         <div class="form-group ">

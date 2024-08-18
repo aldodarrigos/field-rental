@@ -254,7 +254,7 @@ table{
                                 <td>
                                     <div class="text" style="padding: 0 2.5em; text-align: center;">
                                         @php
-                                            $field_type = ($field->tag_id == 1)?'5 vs 5 players (6 vs 6)':'7 vs 7 players (9 vs 9)';
+                                            $field_type = ($field->tag_id == 1)?'5 vs 5 players':'7 vs 7 players';
                                         @endphp
                                         <h1>Successful Booking</h1>
                                         <p><Strong>Email:</Strong> {{$contact}}</p>

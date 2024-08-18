@@ -60,8 +60,8 @@
                                 <x-slot name='label_on_off'>off</x-slot>
         
                                 <option value="0" selected>Players number --</option>
-                                <option value="1">5 vs 5 players (6 vs 6)</option>
-                                <option value="2">7 vs 7 players (9 vs 9)</option>
+                                <option value="1">5 vs 5 players</option>
+                                <option value="2">7 vs 7 players</option>
                             </x-frontend.forms.input_select>
                         </div>
                     </div>

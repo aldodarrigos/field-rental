@@ -16,18 +16,22 @@ class ReservationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $reservations = DB::table('reservations')
-        ->select(DB::raw('reservations.id, reservations.code, users.name as user_name, users.email as user_email, fields.name as field_name, fields.number as field_number, reservations.hour as hour, reservations.res_date as res_date, reservations.price as price, reservations.conf_code as res_code, reservations.created_at as created_at, reservations.note, reservations.user_rel'))
-        ->leftJoin('users', 'reservations.user_id', '=', 'users.id')
-        ->leftJoin('fields', 'reservations.field_id', '=', 'fields.id')
-        ->orderBy('reservations.created_at', 'desc')
-        ->get();
+            ->select(DB::raw('reservations.id, reservations.code, users.name as user_name, users.email as user_email, fields.name as field_name, fields.number as field_number, reservations.hour as hour, reservations.res_date as res_date, reservations.price as price, reservations.conf_code as res_code, reservations.created_at as created_at, reservations.note, reservations.user_rel'))
+            ->leftJoin('users', 'reservations.user_id', '=', 'users.id')
+            ->leftJoin('fields', 'reservations.field_id', '=', 'fields.id')
+            ->orderBy('reservations.created_at', 'desc')
+            ->get();
 
         $url = "reservations";
-        
-        return view('backend/reservations/index', ['reservations' => $reservations, 'url' => $url]);
+
+        return $this->fields($request);
+        // return view('backend/reservations/index', ['reservations' => $reservations, 'url' => $url]);
+
+
+
 
     }
 
@@ -46,18 +50,18 @@ class ReservationController extends Controller
 
         $season = $setting->season;
         $hot_hours = ['18:00', '19:00', '20:00', '21:00'];
-        if($season == 1){
+        if ($season == 1) {
             $hot_hours = ['20:00', '21:00'];
         }
-        
-        $hours = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00'];
+
+        $hours = ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'];
         $hoursarray = array();
-        
+
         $players_number = '';
         $field_id = '';
         $date = '';
 
-        if($request->input('field')){
+        if ($request->input('field')) {
 
             $field_id = $request->input('field');
             $players_number = $request->input('players_number');
@@ -68,48 +72,51 @@ class ReservationController extends Controller
                 ['field_id', $field->id],
                 ['res_date', $date]
             ])->get();
+            //echo $hours;
+            foreach ($hours as $item) {
 
-            foreach($hours as $item){
-
-                if((date('N', strtotime($date)) >= 6)){
+                if ((date('N', strtotime($date)) >= 6)) {
                     $price = $field->price_weekend;
                     $price_alt = $field->price_weekend_alt;
                     $mark = 'w';
-                }else{
-                    if(in_array($item, $hot_hours)){
+                } else {
+                    if (in_array($item, $hot_hours)) {
                         $price = $field->price_night;
                         $price_alt = $field->price_night_alt;
                         $mark = 'h';
-                    }else{
+                    } else {
                         $price = $field->price_regular;
                         $price_alt = $field->price_regular_alt;
                         $mark = 'r';
                     }
                 }
 
-                if($this->check_hours($item, $field->id, $date)){
-                    array_push($hoursarray, 
-                    ['hour' => $item, 
-                    'class' => 'taken',
-                    'price' => $price,
-                    'price_alt' => $price_alt,
-                    'mark' => $mark
-                    ]);
-                }else{
+                if ($this->check_hours($item, $field->id, $date)) {
+                    array_push(
+                        $hoursarray,
+                        [
+                            'hour' => $item,
+                            'class' => 'taken',
+                            'price' => $price,
+                            'price_alt' => $price_alt,
+                            'mark' => $mark
+                        ]
+                    );
+                } else {
                     array_push($hoursarray, [
-                        'hour' => $item, 
+                        'hour' => $item,
                         'class' => 'noselect',
                         'price' => $price,
                         'price_alt' => $price_alt,
                         'mark' => $mark
-                        ]);
+                    ]);
                 }
             }
 
             $result = 1;
 
 
-        }else{
+        } else {
             $field = 0;
             $reservations = 0;
             $date = 0;
@@ -120,21 +127,22 @@ class ReservationController extends Controller
         return view('backend/reservations/create', ['action' => $action, 'url' => $url, 'result' => $result, 'field' => $field, 'field_id' => $field_id, 'date' => $date, 'fields' => $fields, 'reservations' => $reservations, 'hoursarray' => $hoursarray, 'players_number' => $players_number]);
     }
 
-    public function check_hours($hour, $field, $date){
+    public function check_hours($hour, $field, $date)
+    {
 
         $reservations = Reservation::where([
             ['field_id', $field],
             ['res_date', $date]
         ])->get();
 
-        foreach($reservations as $item){
-            if($hour == $item->hour){
+        foreach ($reservations as $item) {
+            if ($hour == $item->hour) {
                 return true;
                 break;
             }
         }
     }
-    
+
     /**
      * Store a newly created resource in storage.
      *
@@ -142,7 +150,7 @@ class ReservationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
+    {
 
         $short_name = $request->input('fieldShortName');
         $field_id = $request->input('fieldIdSelected');
@@ -151,12 +159,12 @@ class ReservationController extends Controller
         $note = $request->input('note');
         $user_rel = $request->input('user_rel');
         $booking_array = json_decode($request->input('bookingArray'));
-        $code = str_replace( array( '-', ':' ), '', $short_name.$date.rand(1000,9999)); 
+        $code = str_replace(array('-', ':'), '', $short_name . $date . rand(1000, 9999));
 
         //$alt_price = $request->input('alt_price');
         //$final_price = ($alt_price > 0.00)?$alt_price:$price;
 
-        for ($i=0; $i < count($booking_array) ; $i++) { 
+        for ($i = 0; $i < count($booking_array); $i++) {
 
             $reservation = new Reservation();
             $reservation->user_id = $user_id;
@@ -182,10 +190,10 @@ class ReservationController extends Controller
      */
     public function edit($id)
     {
-        
+
         $action = route('booking.update', $id);
         $reservation = DB::table('reservations')
-        ->select(DB::raw('reservations.id, 
+            ->select(DB::raw('reservations.id, 
         reservations.code, 
         users.name as user_name, users.email as user_email, users.phone as user_phone,
         
@@ -201,11 +209,11 @@ class ReservationController extends Controller
         reservations.note,
         reservations.user_rel'))
 
-        ->leftJoin('users', 'reservations.user_id', '=', 'users.id')
-        ->leftJoin('fields', 'reservations.field_id', '=', 'fields.id')
-        ->where('reservations.id', $id)
-        ->orderBy('reservations.created_at', 'desc')
-        ->first();
+            ->leftJoin('users', 'reservations.user_id', '=', 'users.id')
+            ->leftJoin('fields', 'reservations.field_id', '=', 'fields.id')
+            ->where('reservations.id', $id)
+            ->orderBy('reservations.created_at', 'desc')
+            ->first();
 
         $fields = Field::where('status', 1)->orderBy('name', 'ASC')->get();
 
@@ -233,7 +241,7 @@ class ReservationController extends Controller
         $booking->user_rel = $request->input('user_rel');
         $booking->save();
 
-        return redirect('booking/'.$id.'/edit')->with('success', 'Successful update!');
+        return redirect('booking/' . $id . '/edit')->with('success', 'Successful update!');
 
     }
 
@@ -241,12 +249,12 @@ class ReservationController extends Controller
     {
 
         $reservation = DB::table('reservations')
-        ->select(DB::raw('reservations.id, reservations.code, reservations.code, users.name as user_name, users.email as user_email, fields.name as field_name, reservations.hour as hour, reservations.res_date as res_date, reservations.price as price, reservations.conf_code as res_code, reservations.created_at as created_at, reservations.note, reservations.user_rel'))
-        ->leftJoin('users', 'reservations.user_id', '=', 'users.id')
-        ->leftJoin('fields', 'reservations.field_id', '=', 'fields.id')
-        ->where('reservations.id', $id)
-        ->orderBy('reservations.created_at', 'desc')
-        ->first();
+            ->select(DB::raw('reservations.id, reservations.code, reservations.code, users.name as user_name, users.email as user_email, fields.name as field_name, reservations.hour as hour, reservations.res_date as res_date, reservations.price as price, reservations.conf_code as res_code, reservations.created_at as created_at, reservations.note, reservations.user_rel'))
+            ->leftJoin('users', 'reservations.user_id', '=', 'users.id')
+            ->leftJoin('fields', 'reservations.field_id', '=', 'fields.id')
+            ->where('reservations.id', $id)
+            ->orderBy('reservations.created_at', 'desc')
+            ->first();
 
         $url = "reservations";
 
@@ -264,10 +272,11 @@ class ReservationController extends Controller
         $record = Reservation::find($id);
         $record->delete();
 
-        return redirect('booking')->with('success','Reservation deleted.');
+        return redirect('booking')->with('success', 'Reservation deleted.');
     }
 
-    public function calendar(){
+    public function calendar()
+    {
 
         $reservations = Reservation::all();
         $url = 'reservations';
@@ -281,32 +290,36 @@ class ReservationController extends Controller
         //$reservations = Reservation::orderBy('res_date', 'DESC')->get();
 
         $reservations = DB::table('reservations')
-        ->select(DB::raw('reservations.id, reservations.code, users.name as user_name, fields.name as field_name, fields.short_name as field_short_name, fields.number as field_number, reservations.hour, reservations.res_date, reservations.note as note, reservations.user_rel as user_rel'))
-        ->leftJoin('users', 'reservations.user_id', '=', 'users.id')
-        ->leftJoin('fields', 'reservations.field_id', '=', 'fields.id')
-        ->orderBy('reservations.res_date', 'desc')
-        ->get();
-        
+            ->select(DB::raw('reservations.id, reservations.code, users.name as user_name, fields.name as field_name, fields.short_name as field_short_name, fields.number as field_number, reservations.hour, reservations.res_date, reservations.note as note, reservations.user_rel as user_rel'))
+            ->leftJoin('users', 'reservations.user_id', '=', 'users.id')
+            ->leftJoin('fields', 'reservations.field_id', '=', 'fields.id')
+            ->orderBy('reservations.res_date', 'desc')
+            ->get();
+
         $options = '<option value="0" selected="">Pick a Field --</option>';
-        foreach($reservations as $item){
+        foreach ($reservations as $item) {
 
-            $name = ($item->user_rel != '')?$item->user_rel:$item->user_name;
+            $name = ($item->user_rel != '') ? $item->user_rel : $item->user_name;
 
-            array_push($array, array(
-                'title' => $name.' - '.$item->field_short_name.' ('.$item->field_number.')', 
-                'start' => $item->res_date.' '.$item->hour,
-                'url' => '/booking/'.$item->id,
-                'note' => $item->field_name.' ('.$item->field_number.')'.' / '.$item->res_date.' / '.date('h A', strtotime($item->hour)),            ));
+            array_push(
+                $array,
+                array(
+                    'title' => $name . ' - ' . $item->field_short_name . ' (' . $item->field_number . ')',
+                    'start' => $item->res_date . ' ' . $item->hour,
+                    'url' => '/booking/' . $item->id,
+                    'note' => $item->field_name . ' (' . $item->field_number . ')' . ' / ' . $item->res_date . ' / ' . date('h A', strtotime($item->hour)),
+                )
+            );
         }
         return $array;
-        
+
     }
 
     public function get_detail($id)
     {
 
         $reservation = DB::table('reservations')
-        ->select(DB::raw('reservations.id, 
+            ->select(DB::raw('reservations.id, 
         reservations.code, 
         
         users.name as user_name, users.email as user_email, users.phone as user_phone,
@@ -322,26 +335,27 @@ class ReservationController extends Controller
         reservations.note,
         reservations.user_rel'))
 
-        ->leftJoin('users', 'reservations.user_id', '=', 'users.id')
-        ->leftJoin('fields', 'reservations.field_id', '=', 'fields.id')
-        ->where('reservations.id', $id)
-        ->limit(1)
-        ->get();
-        
+            ->leftJoin('users', 'reservations.user_id', '=', 'users.id')
+            ->leftJoin('fields', 'reservations.field_id', '=', 'fields.id')
+            ->where('reservations.id', $id)
+            ->limit(1)
+            ->get();
+
 
         return $reservation;
-        
+
     }
 
 
-    public function fields(Request $request){
-
+    public function fields(Request $request)
+    {
         $now = date('Y-m-d');
 
-        $date = ($request->input('date'))?$request->input('date'):$now;
+        $date = ($request->input('date')) ? $request->input('date') : $now;
 
-        $hours = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00'];
+        $hours = ['8:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'];
 
+        $hour_8am = $this->hour_reservation('08:00', $date);
         $hour_9am = $this->hour_reservation('09:00', $date);
         $hour_10am = $this->hour_reservation('10:00', $date);
         $hour_11am = $this->hour_reservation('11:00', $date);
@@ -355,51 +369,65 @@ class ReservationController extends Controller
         $hour_7pm = $this->hour_reservation('19:00', $date);
         $hour_8pm = $this->hour_reservation('20:00', $date);
         $hour_9pm = $this->hour_reservation('21:00', $date);
+        $hour_10pm = $this->hour_reservation('22:00', $date);
+        $hour_11pm = $this->hour_reservation('23:00', $date);
 
         $url = 'reservations';
 
         $fields = Field::where('status', 1)->orderBy('number', 'ASC')->get();
 
-        return view('backend/reservations/fields', [
-            'url' => $url, 
-            'fields' => $fields, 
-            'date' => $date, 
-            'hour_9am' => $hour_9am, 
-            'hour_10am' => $hour_10am, 
-            'hour_11am' => $hour_11am,
-            'hour_12pm' => $hour_12pm,
-            'hour_1pm' => $hour_1pm,
-            'hour_2pm' => $hour_2pm,
-            'hour_3pm' => $hour_3pm,
-            'hour_4pm' => $hour_4pm,
-            'hour_5pm' => $hour_5pm,
-            'hour_6pm' => $hour_6pm,
-            'hour_7pm' => $hour_7pm,
-            'hour_8pm' => $hour_8pm,
-            'hour_9pm' => $hour_9pm,
+        return view(
+            'backend/reservations/fields',
+            [
+                'url' => $url,
+                'fields' => $fields,
+                'date' => $date,
+                'hour_8am' => $hour_8am,
+                'hour_9am' => $hour_9am,
+                'hour_10am' => $hour_10am,
+                'hour_11am' => $hour_11am,
+                'hour_12pm' => $hour_12pm,
+                'hour_1pm' => $hour_1pm,
+                'hour_2pm' => $hour_2pm,
+                'hour_3pm' => $hour_3pm,
+                'hour_4pm' => $hour_4pm,
+                'hour_5pm' => $hour_5pm,
+                'hour_6pm' => $hour_6pm,
+                'hour_7pm' => $hour_7pm,
+                'hour_8pm' => $hour_8pm,
+                'hour_9pm' => $hour_9pm,
+                'hour_10pm' => $hour_10pm,
+                'hour_11pm' => $hour_11pm,
             ],
-    
+
         );
     }
 
-    public function hour_reservation($hour, $date){
+    public function hour_reservation($hour, $date)
+    {
 
         $fields = Field::where('status', 1)->orderBy('number', 'ASC')->get();
         $hoursarray = array();
 
         foreach ($fields as $field) {
             $result = $this->check_hours_calendar($hour, $field->id, $date);
-            if( $result != 'fail'){
-                $user_name = ($result->user_rel != '')?$result->user_rel:$result->user_name;
-                array_push($hoursarray, 
-                ['res_id' => $result->res_id, 
-                'user' => $user_name
-                ]);
-            }else{
-                array_push($hoursarray, 
-                    ['res_id' => '000', 
-                    'user' => 'Available'
-                    ]);
+            if ($result != 'fail') {
+                $user_name = ($result->user_rel != '') ? $result->user_rel : $result->user_name;
+                array_push(
+                    $hoursarray,
+                    [
+                        'res_id' => $result->res_id,
+                        'user' => $user_name
+                    ]
+                );
+            } else {
+                array_push(
+                    $hoursarray,
+                    [
+                        'res_id' => '000',
+                        'user' => 'Available'
+                    ]
+                );
             }
 
         }
@@ -407,19 +435,20 @@ class ReservationController extends Controller
         return $hoursarray;
 
     }
-    public function check_hours_calendar($hour, $field, $date){
+    public function check_hours_calendar($hour, $field, $date)
+    {
 
         $reservations = DB::table('reservations')
-        ->select(DB::raw('reservations.id AS res_id, users.name AS user_name, fields.id as field_id, fields.name AS field_name, reservations.res_date, reservations.hour, reservations.note as note, reservations.user_rel as user_rel'))
-        ->leftJoin('users', 'reservations.user_id', '=', 'users.id')
-        ->leftJoin('fields', 'reservations.field_id', '=', 'fields.id')
-        ->where('reservations.res_date', $date)
-        ->where('reservations.field_id', $field)
-        ->where('reservations.hour', $hour)
-        ->limit(1)
-        ->first();
+            ->select(DB::raw('reservations.id AS res_id, users.name AS user_name, fields.id as field_id, fields.name AS field_name, reservations.res_date, reservations.hour, reservations.note as note, reservations.user_rel as user_rel'))
+            ->leftJoin('users', 'reservations.user_id', '=', 'users.id')
+            ->leftJoin('fields', 'reservations.field_id', '=', 'fields.id')
+            ->where('reservations.res_date', $date)
+            ->where('reservations.field_id', $field)
+            ->where('reservations.hour', $hour)
+            ->limit(1)
+            ->first();
 
-        $return = ($reservations)?$reservations:'fail';
+        $return = ($reservations) ? $reservations : 'fail';
 
         return $return;
 

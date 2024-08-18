@@ -122,7 +122,10 @@
                     <div class="ibox-tools">
                         <a href="/calendar" class="btn btn-xs btn-success text-white" style='color: #fff!Important;'>Calendar <i class="far fa-calendar-alt"></i></a>
 
-                        <a href="/booking/create" class="btn btn-primary btn-xs">New Booking</a>
+                        @if (Auth::user()->role == 2)
+                            <a href="/booking/create" class="btn btn-primary btn-xs">New Booking</a>
+                            <p>Estás conectado como {{ Auth::user()->name }}.</p>
+                        @endif
                     </div>
                 </div>
                 <div class="ibox-content">
@@ -139,6 +142,20 @@
                             </tr>
                             </thead>
                             <tbody>
+                            <tr>
+                                <td class="font-weight-bold">8 AM</td>
+                                @for ($i = 0; $i < count($hour_8am); $i++)
+                                    @if ($hour_8am[$i]['res_id']!='000')
+                                        <td>
+                                            <div class="capsule">
+                                                <span class="show_card" data-id='{{$hour_8am[$i]['res_id']}}' data-toggle="modal" data-target="#myModal">{{$hour_8am[$i]['user']}}</span>
+                                            </div>
+                                        </td>
+                                    @else
+                                        <td>{{$hour_8am[$i]['user']}}</td>
+                                    @endif
+                                @endfor
+                            </tr>
                             <tr>
                                 <td class="font-weight-bold">9 AM</td>
                                 @for ($i = 0; $i < count($hour_9am); $i++)
@@ -324,7 +341,34 @@
                                     @endif
                                 @endfor
                             </tr>
-            
+                            <tr>
+                                <td class="font-weight-bold">10 PM</td>
+                                @for ($i = 0; $i < count($hour_10pm); $i++)
+                                    @if ($hour_10pm[$i]['res_id']!='000')
+                                        <td>
+                                            <div class="capsule">
+                                                <span class="show_card" data-id='{{$hour_10pm[$i]['res_id']}}' data-toggle="modal" data-target="#myModal">{{$hour_10pm[$i]['user']}}</span>
+                                            </div>
+                                        </td>
+                                    @else
+                                        <td>{{$hour_10pm[$i]['user']}}</td>
+                                    @endif
+                                @endfor
+                            </tr>
+                            <tr>
+                                <td class="font-weight-bold">11 PM</td>
+                                @for ($i = 0; $i < count($hour_11pm); $i++)
+                                    @if ($hour_11pm[$i]['res_id']!='000')
+                                        <td>
+                                            <div class="capsule">
+                                                <span class="show_card" data-id='{{$hour_11pm[$i]['res_id']}}' data-toggle="modal" data-target="#myModal">{{$hour_11pm[$i]['user']}}</span>
+                                            </div>
+                                        </td>
+                                    @else
+                                        <td>{{$hour_11pm[$i]['user']}}</td>
+                                    @endif
+                                @endfor
+                            </tr>
             
                             </tbody>
                         </table>
@@ -449,7 +493,9 @@
                 
             </div>
             <div class="modal-footer">
-                <a id='edit_link' target='_blank' href='' type="button" class="btn btn-primary text-white">Edit reservation</a>
+                @if (Auth::user()->role == 2)
+                    <a id='edit_link' target='_blank' href='' type="button" class="btn btn-primary text-white">Edit reservation</a>
+                @endif
                 <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
             </div>
 

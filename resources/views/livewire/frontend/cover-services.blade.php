@@ -10,7 +10,7 @@
         @foreach ($services as $service)
 
             <div class="flex gap-4 bg-white px-4 py-4 rounded-lg shadow">
-                <div class="w-1/4 text-right"><i class="{{$service->icon}} text-4x5 text-black"></i></div>
+                <div class="w-1/4 text-center"><i class="{{$service->icon}} text-4x5 text-black"></i></div>
                 <div class="w-3/4">
                     <div class="text-red uppercase text-base font-bold"><a href="/services/{{$service->slug}}">{{$service->name}}</a></div>
                     <div class="text-black">{{$service->sumary}}</div>

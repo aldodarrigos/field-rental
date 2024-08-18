@@ -23,6 +23,31 @@
                 <input type="text" name='slug' class="form-control" @if(!empty($content->slug)) value="{{$content->slug}}" @endif>
             </div>
 
+            <div class="form-group tooltip-wrap">
+                <label >Parent Menu  <i class="fas fa-question-circle text-muted" data-toggle="tooltip" data-placement="top" title="Choose an option only if you want the option to belong to a parent list."></i></label>
+                <select class="form-control m-b" name="parent_id">
+                    @if($form == 'create')
+                        <option value='0' selected>This is a Parent Menu</option>
+                        @foreach($menus as $menu)
+                            @if($menu->parent_id === 0 )
+                            <option value='{{$menu->id}}' >{{$menu->name}}</option>
+                            @endif
+                        @endforeach
+                    @else()
+                        <option value='0' >This is a Parent Menu</option>
+                        @foreach($menus as $menu)
+                            @if(!empty($content) && $menu->id === $content->parent_id )
+                                <option selected value='{{$menu->id}}' >{{$menu->name}}</option>
+                            @else
+                                <option  value='{{$menu->id}}' >{{$menu->name}}</option>
+                            @endif
+                        @endforeach
+                    @endif
+
+                </select>
+
+            </div>
+
             <div class="form-group ">
 
                 <label for='group'>Status</label>

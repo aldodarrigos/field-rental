@@ -1,3 +1,3 @@
-require('./bootstrap');
-
-require('alpinejs');
+require("./bootstrap");
+require("./mapkick");
+require("alpinejs");

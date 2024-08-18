@@ -21,7 +21,7 @@ class SettingsController extends Controller
         $settings = Setting::first();
         $action = route('settings.update', $id);
         $url = "settings";
-        
+
         return view('backend/settings/index', ['settings' => $settings, 'url' => $url, 'action' => $action]);
 
     }
@@ -41,7 +41,7 @@ class SettingsController extends Controller
 
         return view('backend/settings/create', ['action' => $action, 'url' => $url, 'groups' => $groups, 'form' => $form]);
     }
-    
+
     /**
      * Store a newly created resource in storage.
      *
@@ -80,7 +80,7 @@ class SettingsController extends Controller
      */
     public function edit($id)
     {
-        
+
         $action = route('settings.update', $id);
         $settings = Setting::find($id);
         $put = True;
@@ -88,7 +88,7 @@ class SettingsController extends Controller
 
         $url = "settings";
 
-        return view('backend/settings/update', ['settings' => $settings, 'action' => $action, 'url' => $url, 'put' => $put,  'form' => $form]);
+        return view('backend/settings/update', ['settings' => $settings, 'action' => $action, 'url' => $url, 'put' => $put, 'form' => $form]);
     }
 
     /**
@@ -106,6 +106,8 @@ class SettingsController extends Controller
         $setting->site_name = $request->input('site_name');
         $setting->sumary = $request->input('sumary');
         $setting->logo = $request->input('logo');
+        $setting->logo_white = $request->input('logo_white');
+        $setting->icon = $request->input('icon');
         $setting->img = $request->input('img');
         $setting->facebook = $request->input('facebook');
         $setting->instagram = $request->input('instagram');
@@ -121,7 +123,7 @@ class SettingsController extends Controller
         $setting->longitude = $request->input('longitude');
         $setting->save();
 
-        return redirect('settings/'.$id.'/edit')->with('success', 'Successful update!');
+        return redirect('settings/' . $id . '/edit')->with('success', 'Successful update!');
 
     }
 
@@ -162,7 +164,7 @@ class SettingsController extends Controller
         return view('backend/settings/field_rules', ['settings' => $settings, 'action' => $action, 'url' => $url, 'put' => $put]);
     }
 
-    
+
     public function update_field_rules(Request $request)
     {
 

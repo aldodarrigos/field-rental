@@ -25,7 +25,7 @@
             <li class="nav-header">
                 <div class="dropdown profile-element" >
                     <div style="display: flex; grid-gap: .5rem;">
-                        <img alt="image" class="" src="https://katyisc.com/storage/files/kisc-logo-200.webp" style='width: 40px; height: 40px;'>
+                        <img alt="image" class="" src="https://katyisc.com/storage/files/KatyISC-logo-White-big.png" style='width: 60px; height: 45px;'>
                         <span style='display: inline-block;'>
                             <span class="block m-t-xs font-bold text-white">{{Auth::user()->name}}</span>
                             <span class="text-muted text-xs block">Admin</span>
@@ -45,12 +45,15 @@
             <li class='{{$reservations_active}}'>
                 <a href="/booking"><i class="fas fa-book"></i> <span class="nav-label">Booking</span> </a>
                 <ul class="nav nav-second-level collapse">
+                    @if(Auth::user()->role == 2)
                     <li><a href="/booking">Dashboard</a></li>
                     <li><a href="/calendar">Calendar</a></li>
+                    @endif
                     <li><a href="/calendar-fields">Fields Calendar</a></li>
                 </ul>
             </li>
 
+            @if(Auth::user()->role == 2)
             <li class="{{$content_active}}">
                 <a href="/content"><i class="fas fa-feather-alt"></i> <span class="nav-label">Content</span></a>
             </li>
@@ -118,6 +121,7 @@
                     <li><a href="/field-rules">Field Rules</a></li>
                 </ul>
             </li>
+            @endif
 
         </ul>
 

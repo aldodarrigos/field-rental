@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\{Field};
 use DB;
 use Illuminate\Support\Str;
+
 //use GuzzleHttp\Client;
 
 class FieldsBackController extends Controller
@@ -19,9 +20,8 @@ class FieldsBackController extends Controller
     public function index()
     {
         $records = Field::orderBy('number', 'asc')->get();
-
         $url = "fields";
-        
+
         return view('backend/fields/index', ['records' => $records, 'url' => $url]);
 
     }
@@ -40,7 +40,7 @@ class FieldsBackController extends Controller
 
         return view('backend/fields/create', ['action' => $action, 'url' => $url, 'form' => $form]);
     }
-    
+
     /**
      * Store a newly created resource in storage.
      *
@@ -54,13 +54,13 @@ class FieldsBackController extends Controller
         $name = $request->input('name');
         $slug_input = Str::of($name)->slug('-');
 
-        $price_regular_alt = ($request->input('price_regular_alt') == null)?'0.00':$request->input('price_regular_alt');
-        $price_night_alt = ($request->input('price_night_alt') == null)?'0.00':$request->input('price_night_alt');
-        $price_weekend_alt = ($request->input('price_weekend_alt') == null)?'0.00':$request->input('price_weekend_alt');
+        $price_regular_alt = ($request->input('price_regular_alt') == null) ? '0.00' : $request->input('price_regular_alt');
+        $price_night_alt = ($request->input('price_night_alt') == null) ? '0.00' : $request->input('price_night_alt');
+        $price_weekend_alt = ($request->input('price_weekend_alt') == null) ? '0.00' : $request->input('price_weekend_alt');
 
         $content->name = $name;
         $content->slug = $slug_input;
-        
+
         $content->short_name = $request->input('short_name');
         $content->sumary = $request->input('sumary');
         $content->content = $request->input('content');
@@ -91,7 +91,7 @@ class FieldsBackController extends Controller
      */
     public function edit($id)
     {
-        
+
         $action = route('backend-fields.update', $id);
         $content = Field::find($id);
         $put = True;
@@ -99,7 +99,7 @@ class FieldsBackController extends Controller
 
         $url = "fields";
 
-        return view('backend/fields/update', ['content' => $content, 'action' => $action, 'url' => $url, 'put' => $put,  'form' => $form]);
+        return view('backend/fields/update', ['content' => $content, 'action' => $action, 'url' => $url, 'put' => $put, 'form' => $form]);
     }
 
     /**
@@ -117,9 +117,9 @@ class FieldsBackController extends Controller
         $name = $request->input('name');
         $slug_input = Str::of($name)->slug('-');
 
-        $price_regular_alt = ($request->input('price_regular_alt') == null)?'0.00':$request->input('price_regular_alt');
-        $price_night_alt = ($request->input('price_night_alt') == null)?'0.00':$request->input('price_night_alt');
-        $price_weekend_alt = ($request->input('price_weekend_alt') == null)?'0.00':$request->input('price_weekend_alt');
+        $price_regular_alt = ($request->input('price_regular_alt') == null) ? '0.00' : $request->input('price_regular_alt');
+        $price_night_alt = ($request->input('price_night_alt') == null) ? '0.00' : $request->input('price_night_alt');
+        $price_weekend_alt = ($request->input('price_weekend_alt') == null) ? '0.00' : $request->input('price_weekend_alt');
 
 
         $content->name = $name;
@@ -137,14 +137,14 @@ class FieldsBackController extends Controller
 
         $content->price_weekend = $request->input('price_weekend');
         $content->price_weekend_alt = $price_weekend_alt;
-        
+
         $content->number = $request->input('number');
 
         $content->tag_id = $request->input('tag_id');
         $content->status = $request->input('status');
         $content->save();
 
-        return redirect('backend-fields/'.$id.'/edit')->with('success', 'Successful update!');
+        return redirect('backend-fields/' . $id . '/edit')->with('success', 'Successful update!');
 
     }
 

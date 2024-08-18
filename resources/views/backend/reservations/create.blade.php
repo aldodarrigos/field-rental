@@ -88,14 +88,12 @@
             let mod_price_regular = $('#alt_price_regular').val()
             let mod_price_hot = $('#alt_price_hot').val()
 
-            for (let i = 21; i > 8; i--) {
+            for (let i = 23; i > 7; i--) {
                 let indexhour = $('#hour-'+i)
                 if(indexhour.attr('data-active') == '1'){
                     matrix.push([indexhour.val(), indexhour.attr('data-price'), indexhour.attr('data-pricealt'), indexhour.attr('data-mark'), indexhour.attr('data-houralt')])
                 }
             }//endfor
-            console.log(matrix)
-
 
             if(matrix.length == 1){
                 let mark = matrix[0][3]//Get if hour is regular or hot
@@ -283,8 +281,8 @@
                             <label for='players_number'>Field type</label>
                             <select class="form-control m-b" name="players_number" id='players_number'>
                                 <option value="0">All fields --</option>
-                                <option value="1">5 vs 5 players (6 vs 6)</option>
-                                <option value="2">7 vs 7 players (9 vs 9)</option>
+                                <option value="1">5 vs 5 players</option>
+                                <option value="2">7 vs 7 players</option>
                             </select>
                         </div>
     
@@ -332,7 +330,7 @@
                 <input type="hidden" id="totalPrice" name='totalPrice' value='0.00'>
 
                 @csrf
-
+                <input type="hidden" id="hour-8" value='08:00' data-price='' data-pricealt='' data-mark='' data-active='0'>
                 <input type="hidden" id="hour-9" value='09:00' data-price='' data-pricealt='' data-mark='' data-active='0'>
                 <input type="hidden" id="hour-10" value='10:00' data-price='' data-pricealt='' data-mark='' data-active='0'>
                 <input type="hidden" id="hour-11" value='11:00' data-price='' data-pricealt='' data-mark='' data-active='0'>
@@ -346,6 +344,8 @@
                 <input type="hidden" id="hour-19" value='19:00' data-price='' data-pricealt='' data-mark='' data-active='0'>
                 <input type="hidden" id="hour-20" value='20:00' data-price='' data-pricealt='' data-mark='' data-active='0'>
                 <input type="hidden" id="hour-21" value='21:00' data-price='' data-pricealt='' data-mark='' data-active='0'>
+                <input type="hidden" id="hour-22" value='22:00' data-price='' data-pricealt='' data-mark='' data-active='0'>
+                <input type="hidden" id="hour-23" value='23:00' data-price='' data-pricealt='' data-mark='' data-active='0'>
                 
                 <div class="ibox ">
                     <div class="ibox-title">
@@ -358,9 +358,9 @@
     
                         @php
                             if($field->tag_id == 1){
-                                $field_players_number = '5 vs 5 Players (6 vs 6)';
+                                $field_players_number = '5 vs 5 Players';
                             }else if($field->tag_id == 2){
-                                $field_players_number = '7 vs 7 Players (9 vs 9)';
+                                $field_players_number = '7 vs 7 Players';
                             }
                         @endphp
                         
@@ -383,7 +383,6 @@
                                 </tbody>
                             </table>
                         </div>
-                        
                         @for ($i = 0; $i < count($hoursarray); $i++)
                             @php
                                 if($hoursarray[$i]['class'] == 'noselect'){
@@ -396,7 +395,8 @@
                                     $decoration = 'line-through';
                                 }
 
-                                if ($hoursarray[$i]['hour'] == '09:00'){ $hour_fix = '9 AM'; }
+                                if ($hoursarray[$i]['hour'] == '08:00'){ $hour_fix = '8 AM'; }
+                                else if ($hoursarray[$i]['hour'] == '09:00'){ $hour_fix = '9 AM'; }
                                 else if ($hoursarray[$i]['hour'] == '10:00'){ $hour_fix = '10 AM'; }
                                 else if ($hoursarray[$i]['hour'] == '11:00'){ $hour_fix = '11 AM'; }
                                 else if ($hoursarray[$i]['hour'] == '12:00'){ $hour_fix = '12 AM'; }
@@ -409,7 +409,8 @@
                                 else if ($hoursarray[$i]['hour'] == '19:00'){ $hour_fix = '7 PM'; }
                                 else if ($hoursarray[$i]['hour'] == '20:00'){ $hour_fix = '8 PM'; }
                                 else if ($hoursarray[$i]['hour'] == '21:00'){ $hour_fix = '9 PM'; }
-        
+                                else if ($hoursarray[$i]['hour'] == '22:00'){ $hour_fix = '10 PM'; }
+                                else if ($hoursarray[$i]['hour'] == '23:00'){ $hour_fix = '11 PM'; }
                             @endphp
                             <span class='{{$hoursarray[$i]['class']}} btn btn-{{$color}} btn-sm mb-2 {{$decoration}} {{$pointer}}' id='{{$hoursarray[$i]['class']}}' data-hour='{{$hoursarray[$i]['hour']}}' data-houralt='{{$hour_fix}}' data-price='{{$hoursarray[$i]['price']}}' data-pricealt='{{$hoursarray[$i]['price_alt']}}' data-mark='{{$hoursarray[$i]['mark']}}' style="width:60px;">{{$hour_fix}}</span>
                         @endfor

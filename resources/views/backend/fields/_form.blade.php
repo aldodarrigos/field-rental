@@ -107,15 +107,15 @@
                             <option value='0'>--SELECT--</option>
                             @if ($form == 'update')
                                 @if ($content->tag_id == 1)
-                                    <option value='1' selected>5 vs 5 players (6 vs 6)</option>
-                                    <option value='2'>7 vs 7 players (9 vs 9)</option>
+                                    <option value='1' selected>5 vs 5 players</option>
+                                    <option value='2'>7 vs 7 players</option>
                                 @else
-                                    <option value='1'>5 vs 5 players (6 vs 6)</option>
-                                    <option value='2' selected>7 vs 7 players (9 vs 9)</option>
+                                    <option value='1'>5 vs 5 players</option>
+                                    <option value='2' selected>7 vs 7 players</option>
                                 @endif
                             @else
-                                <option value='1'>5 vs 5 players (6 vs 6)</option>
-                                <option value='2'>7 vs 7 players (9 vs 9)</option>
+                                <option value='1'>5 vs 5 players</option>
+                                <option value='2'>7 vs 7 players</option>
                             @endif
                             
                         </select>

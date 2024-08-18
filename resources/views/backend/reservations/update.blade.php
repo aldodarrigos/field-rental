@@ -27,7 +27,7 @@
         <h2>Booking</h2>
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="/backend-booking">Dashboard</a>
+                <a href="/booking">Dashboard</a>
             </li>
             <li class="breadcrumb-item active">
                 <strong>Booking Detail</strong>
@@ -116,6 +116,7 @@
 
                             @php
                                 $hoursArray = [
+                                    ['hour' => '08:00', 'alt' => '8 AM'],
                                     ['hour' => '09:00', 'alt' => '9 AM'],
                                     ['hour' => '10:00', 'alt' => '10 AM'],
                                     ['hour' => '11:00', 'alt' => '11 AM'],
@@ -129,6 +130,8 @@
                                     ['hour' => '19:00', 'alt' => '7 PM'],
                                     ['hour' => '20:00', 'alt' => '8 PM'],
                                     ['hour' => '21:00', 'alt' => '9 PM'],
+                                    ['hour' => '22:00', 'alt' => '10 PM'],
+                                    ['hour' => '23:00', 'alt' => '11 PM'],
                                 ];
 
                                 /*
