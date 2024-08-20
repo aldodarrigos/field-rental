@@ -22,11 +22,11 @@
            @endforeach
        </div>
    </div>
-    <div class="hidden dropdownMenu md:absolute text-center right-0 top-14 z-10 mt-2  w-52 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none " 
+    <div class="hidden dropdownMenu md:absolute rounded-md text-center right-0 top-5 z-10 mt-2  w-52 origin-top-right bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none " 
      role="menu" aria-orientation="vertical" aria-labelledby="dropdownButton">
-        <div class="w-full relative divide-y divide-gray-700" role="none">
+        <div class="w-full relative divide-y divide-cool-gray-300 " role="none">
             @foreach($submenu as $item)
-            <a href="{{$item->slug}}" class="z-10 block px-4 py-2 font-roboto text-graytext text-base uppercase hover:bg-blue hover:text-white" role="menuitem" tabindex="-1" id="menu-item-0">{{$item->name}}</a>
+            <a href="{{$item->slug}}" class="z-10 block px-4 py-2  font-bold font-roboto text-graytext text-base uppercase hover:bg-blue hover:text-white" role="menuitem" tabindex="-1" id="menu-item-0">{{$item->name}}</a>
             @endforeach
         </div>
     </div>

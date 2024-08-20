@@ -11,8 +11,7 @@
     <div class="caption absolute w-full h-full top-0 left-0 z-20">
 
         <div class="w-boxed  mx-auto ">
-            <div class="bigtext absolute bottom-3/6 sm:bottom-1/6 md:bottom-1/6 w-full md:w-boxed z-20 px-4 sm:px-20 text-center md:text-center">
-                
+            <div class="bigtext absolute bottom-3/6 sm:bottom-36 md:bottom-36 w-full md:w-boxed z-20 px-4 sm:px-20 text-center md:text-center">
                 @if ($no_title == '1')
                 <div class="text-white shadow-title-banner font-black text-2x5 md:text-6x uppercase leading-none mb-3 md:mb-6 font-monserrat">{{$title}}</div>
                 @endif

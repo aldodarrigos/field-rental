@@ -115,29 +115,29 @@
 	jQuery(document).on("mouseenter", '.dropdownButton',function(e)
 	{
 		e.preventDefault();
-		jQuery(this).next().next().css("display", "flex").hide().fadeIn();
+		jQuery(this).next().next().css("display", "flex").hide().fadeIn(0);
 		jQuery(this).next().next().next().css("display", "flex");
 	});
 
 	jQuery(document).on("mouseleave",".dropdownButton" ,function(e)
 	{
 		e.preventDefault();
-		jQuery(this).next().next().fadeOut(1200);
-		jQuery(this).next().next().next().fadeOut(1200);
+		jQuery(this).next().next().fadeOut(0);
+		jQuery(this).next().next().next().fadeOut(0);
 	});
 
 	jQuery(document).on("mouseenter",".dropdownMenu" ,function(e)
 	{
 		e.preventDefault();
-		jQuery(this).next().stop(true,true).show();
-		jQuery(this).stop(true,true).css("display", "flex").show();
+		jQuery(this).next().stop(true,true).show(0);
+		jQuery(this).stop(true,true).css("display", "flex").show(0);
 	});
 
 	jQuery(document).on("mouseleave",".dropdownMenu" ,function(e)
 	{
 		e.preventDefault();
-		jQuery(this).fadeOut(1200);
-		jQuery(this).next().fadeOut(1200);
+		jQuery(this).fadeOut(0);
+		jQuery(this).next().fadeOut(0);
 	});
 </script>
 </body>
