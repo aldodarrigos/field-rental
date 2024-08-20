@@ -30,7 +30,7 @@
             @endforeach
         </div>
     </div>
-    <div class="layerFull_Overlay w-full h-full  fixed top-32 left-0  bg-blue opacity-50" style="display: none;"></div>
+    {{-- <div class="layerFull_Overlay w-full h-full  fixed top-32 left-0  bg-blue opacity-50" style="display: none;"></div> --}}
 </li>
 
 {{-- <div class="relative">
