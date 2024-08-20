@@ -37,21 +37,21 @@
                         @if ($content->role == 1)
                             <option value='1' selected>Regular user</option>
                             <option value='2'>Admin</option>
-                            <option value='3'>Supervisor</option>
+                            <option value='3'>Staff</option>
                         @elseif ($content->role == 2)
                             <option value='1'>Regular user</option>
                             <option value='2' selected>Admin</option>
-                            <option value='3'>Supervisor</option>
+                            <option value='3'>Staff</option>
                         @else
                             <option value='1'>Regular user</option>
                             <option value='2'>Admin</option>
-                            <option value='3' selected>Supervisor</option>
+                            <option value='3' selected>Staff</option>
                         @endif
 
                     @else
                         <option value='1'>Regular</option>
                         <option value='2'>Admin</option>
-                        <option value='3'>Supervisor</option>
+                        <option value='3'>Staff</option>
                     @endif
                     
                 </select>

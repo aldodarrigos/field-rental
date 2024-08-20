@@ -15,4 +15,4 @@
     }
 @endphp
 
-<a href="{{$link}}" class='bg-red font-roboto text-gray font-bold rounded py-{{$height}} px-{{$px}} uppercase text-{{$fontSize}} hover:bg-deepblue ease-in-out duration-300'>{{$slot}}</a>
+<a href="{{$link}}" class='bg-red font-roboto text-gray font-bold rounded py-{{$height}} px-{{$px}} uppercase text-sm md:text-{{$fontSize}} hover:bg-deepblue ease-in-out duration-300'>{{$slot}}</a>

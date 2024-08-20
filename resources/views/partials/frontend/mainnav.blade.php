@@ -37,13 +37,10 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-
-    let nav = document.querySelector('.nav_mobile');
-    let btn = document.getElementById('trigger_button')
-
-    btn.addEventListener('click', function () {
-        nav.classList.toggle('hidden');
-    });
-
+        let nav = document.querySelector('.nav_mobile');
+        let btn = document.getElementById('trigger_button')
+        btn.addEventListener('click', function () {
+            nav.classList.toggle('hidden');
+        });
     });
 </script>

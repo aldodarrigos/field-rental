@@ -28,7 +28,13 @@
                         <img alt="image" class="" src="https://katyisc.com/storage/files/KatyISC-logo-White-big.png" style='width: 60px; height: 45px;'>
                         <span style='display: inline-block;'>
                             <span class="block m-t-xs font-bold text-white">{{Auth::user()->name}}</span>
-                            <span class="text-muted text-xs block">Admin</span>
+                            <span class="text-muted text-xs block">
+                                @if(Auth::user()->role == 2)
+                                    Admin
+                                @else
+                                    Staff
+                                @endif
+                                </span>
                         </span>
                     </div>
 
@@ -45,11 +51,11 @@
             <li class='{{$reservations_active}}'>
                 <a href="/booking"><i class="fas fa-book"></i> <span class="nav-label">Booking</span> </a>
                 <ul class="nav nav-second-level collapse">
+                    <li><a href="/calendar-fields">Fields Calendar</a></li>
                     @if(Auth::user()->role == 2)
                     <li><a href="/booking">Dashboard</a></li>
                     <li><a href="/calendar">Calendar</a></li>
                     @endif
-                    <li><a href="/calendar-fields">Fields Calendar</a></li>
                 </ul>
             </li>
 

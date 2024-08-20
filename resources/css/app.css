@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800;900&family=Roboto+Condensed:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
@@ -70,3 +71,7 @@ p{ margin-bottom: 1rem;}
     overflow-x: auto;
 }
 
+
+.shadow-title-banner{
+    text-shadow: 4px 4px 6px rgba(0,0,0,0.39);
+}

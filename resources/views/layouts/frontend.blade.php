@@ -36,9 +36,9 @@
     <meta property='og:image' content='{{$seo_image_generic === true ? \App\Models\Setting::first()->img : $seo['image']}}' />
   
 
-    <link rel="apple-touch-icon" sizes="180x180" href="{{\App\Models\Setting::first()->logo}}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{\App\Models\Setting::first()->logo}}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{\App\Models\Setting::first()->logo}}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{\App\Models\Setting::first()->icon}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{\App\Models\Setting::first()->icon}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{\App\Models\Setting::first()->icon}}">
     <link rel="manifest" href="{{asset('favicon/site.webmanifest')}}">
     <link rel="mask-icon" href="{{asset('favicon/safari-pinned-tab.svg')}}" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#da532c">
@@ -92,11 +92,7 @@
     @include('partials.frontend.footer')
 
     <script src="{{ mix('js/app.js') }}"></script> 
-    <script>
-      Mapkick.options = {style: "https://demotiles.maplibre.org/style.json"}
-    </script>
     @livewireScripts
-
     
     @section('assets_down') @show
         
@@ -117,6 +113,12 @@
 		jQuery(this).next().next().css("display", "flex").hide().fadeIn();
 		jQuery(this).next().next().next().css("display", "flex");
 	});
+
+  jQuery(document).on("click", '.dropdownButton',function(e)
+	{
+		e.preventDefault();
+	});
+
 	jQuery(document).on("mouseleave",".dropdownButton" ,function(e)
 	{
 		e.preventDefault();
@@ -137,9 +139,6 @@
 		jQuery(this).fadeOut();
 		jQuery(this).next().fadeOut();
 	});
-
-
-	
 </script>
 </body>
 

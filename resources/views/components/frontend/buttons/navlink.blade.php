@@ -41,10 +41,6 @@
     </div> --}}
 @else
 <li class="mb-2 md:mb-0">
-    {{-- <a href="{{$link}}" class="{{$active}} hidden dropdownButton sm:block font-roboto font-bold uppercase  text-base px-2 py-2 hover:bg-blue hover:text-white rounded ease-in-out duration-300">
-        {{$slot}}
-        <i class="fa fa-caret-down pl-1"></i>
-    </a> --}}
     <a href="{{$link}}" class='{{$active}} font-roboto font-bold uppercase  text-base px-2 py-2 hover:bg-blue hover:text-white rounded ease-in-out duration-300'>{{$slot}}</a>
 </li>
 @endif
