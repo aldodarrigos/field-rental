@@ -19,13 +19,14 @@ use App\Models\{Product, Sale, User};
 
 use App\Mail\BookingMailable;
 use Illuminate\Support\Facades\Mail;
- 
+
 class ProductsController extends Controller
 {
 
     private $apiContext;
 
-    public function __construct(){
+    public function __construct()
+    {
 
         $payPalConfig = Config::get('paypal');
 
@@ -53,7 +54,7 @@ class ProductsController extends Controller
         $product_quantity = $request->input('product_quantity');
         $user_id = $request->input('user_id');
 
-        $description = $product_name.' / '.$final_price.' / '.$product_size_text.' / '.$product_quantity;
+        $description = $product_name . ' / ' . $final_price . ' / ' . $product_size_text . ' / ' . $product_quantity;
 
         // After Step 2
         $payer = new Payer();
@@ -68,14 +69,14 @@ class ProductsController extends Controller
         $transaction->setDescription($description);
 
         $shop_data = json_encode(array(
-            'user_id' => $user_id, 
-            'product_id' => $product_id, 
-            'product_name' => $product_name, 
-            'static_price' => $static_price, 
-            'final_price' => $final_price, 
-            'product_size_id' => $product_size_id, 
-            'product_size_text' => $product_size_text, 
-            'product_status' => $product_status, 
+            'user_id' => $user_id,
+            'product_id' => $product_id,
+            'product_name' => $product_name,
+            'static_price' => $static_price,
+            'final_price' => $final_price,
+            'product_size_id' => $product_size_id,
+            'product_size_text' => $product_size_text,
+            'product_status' => $product_status,
             'product_quantity' => $product_quantity
         ));
         $transaction->setCustom($shop_data);
@@ -92,7 +93,7 @@ class ProductsController extends Controller
             ->setTransactions(array($transaction))
             ->setRedirectUrls($redirectUrls);
 
-            
+
         // After Step 3
 
         try {
@@ -100,8 +101,7 @@ class ProductsController extends Controller
             //echo $payment;
 
             return redirect()->away($payment->getApprovalLink());
-        }
-        catch (PayPalConnectionException $ex) {
+        } catch (PayPalConnectionException $ex) {
             // This will print the detailed information on the exception.
             //REALLY HELPFUL FOR DEBUGGING
             echo $ex->getData();
@@ -116,7 +116,7 @@ class ProductsController extends Controller
         $payerId = $request->input('PayerID');
         $token = $request->input('token');
 
-        if(!$paymentId or !$payerId or !$token){
+        if (!$paymentId or !$payerId or !$token) {
             $status = 'No se pudo procesar el pago a través de Paypal.';
             return redirect('product-payment-fail');
         }
@@ -129,8 +129,8 @@ class ProductsController extends Controller
         //Execute the payment
         $result = $payment->execute($execution, $this->apiContext);
         //dd($result);
-        
-        if($result->getState()==='approved'){
+
+        if ($result->getState() === 'approved') {
 
             $response = json_decode($result);
             $custom = json_decode($response->transactions[0]->custom);
@@ -145,9 +145,9 @@ class ProductsController extends Controller
             'product_status' => $product_status, 
             'product_quantity' => $product_quantity
             */
-            
+
             $sale = new Sale();
-            $sale_code = str_replace( array( '-', ':' ), '', $custom->user_id.'-'.$custom->product_id.'-'.date('Y-m-d')); 
+            $sale_code = str_replace(array('-', ':'), '', $custom->user_id . '-' . $custom->product_id . '-' . date('Y-m-d'));
 
             $sale->user_id = $custom->user_id;
             $sale->product_id = $custom->product_id;
@@ -168,7 +168,7 @@ class ProductsController extends Controller
 
             return redirect('product-payment-success')->with(['sale' => $sale, 'product' => $product, 'user' => $user]);
         }
-        
+
     }
 
 
@@ -186,12 +186,13 @@ class ProductsController extends Controller
         $user = User::where('id', $reservation->user_id)->first();
         */
 
-        
-        $seo = ['title' => 'Successful purchase | KISC, Sports complex', 
-        'sumary' => '', 
-        'image' => 'https://katyisc.com/storage/files/katyisc-sports-complex-share.webp'
+
+        $seo = [
+            'title' => 'Successful purchase | ' . Setting::first()->site_name,
+            'sumary' => '',
+            'image' => 'https://katyisc.com/storage/files/katyisc-sports-complex-share.webp'
         ];
-        
+
         return view('frontend/success/product', ['seo' => $seo]);
     }
 
@@ -200,7 +201,7 @@ class ProductsController extends Controller
 
         $correo = new BookingMailable($contact, $sale_id);
         Mail::to($contact)->send($correo);
-        
+
     }
 
 

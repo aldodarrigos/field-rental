@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 use App\Models\{Reservation, User, Service, Content};
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +17,7 @@ class UserController extends Controller
     public function login()
     {
         $seo = [
-            'title' => 'Sign In | KISC, Sports complex',
+            'title' => 'Sign In | ' . Setting::first()->site_name,
             'sumary' => '',
             'image' => 'https://katyisc.com/storage/files/katyisc-sports-complex-share.webp'
         ];
@@ -146,7 +147,7 @@ class UserController extends Controller
         $user = User::where('id', Auth::user()->id)->first();
 
         $seo = [
-            'title' => 'User Dashboard | KISC, Sports complex',
+            'title' => 'User Dashboard | ' . Setting::first()->site_name,
             'sumary' => '',
             'image' => 'https://katyisc.com/storage/files/katyisc-sports-complex-share.webp'
         ];
@@ -160,7 +161,7 @@ class UserController extends Controller
         $top_text = Content::where('shortcut', 'signup.text')->first();
 
         $seo = [
-            'title' => 'Sign Up | KISC, Sports complex',
+            'title' => 'Sign Up | ' . Setting::first()->site_name,
             'sumary' => '',
             'image' => 'https://katyisc.com/storage/files/katyisc-sports-complex-share.webp'
         ];

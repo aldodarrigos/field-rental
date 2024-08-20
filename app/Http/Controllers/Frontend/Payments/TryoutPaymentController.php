@@ -26,7 +26,8 @@ class TryoutPaymentController extends Controller
 
     private $apiContext;
 
-    public function __construct(){
+    public function __construct()
+    {
 
         $payPalConfig = Config::get('paypal');
 
@@ -51,7 +52,7 @@ class TryoutPaymentController extends Controller
         $user_id = $request->input('user_id');
         $user_name = $request->input('user_name');
 
-        $description = $competition_name.' / '.$user_name;
+        $description = $competition_name . ' / ' . $user_name;
 
         // After Step 2
         $payer = new Payer();
@@ -66,9 +67,9 @@ class TryoutPaymentController extends Controller
         $transaction->setDescription($description);
 
         $registration_data = json_encode(array(
-            'registration_id' => $registration_id, 
-            'competition_id' => $competition_id, 
-            'user_id' => $user_id, 
+            'registration_id' => $registration_id,
+            'competition_id' => $competition_id,
+            'user_id' => $user_id,
         ));
         $transaction->setCustom($registration_data);
 
@@ -90,8 +91,7 @@ class TryoutPaymentController extends Controller
             //echo $payment;
 
             return redirect()->away($payment->getApprovalLink());
-        }
-        catch (PayPalConnectionException $ex) {
+        } catch (PayPalConnectionException $ex) {
             // This will print the detailed information on the exception.
             //REALLY HELPFUL FOR DEBUGGING
             echo $ex->getData();
@@ -106,7 +106,7 @@ class TryoutPaymentController extends Controller
         $payerId = $request->input('PayerID');
         $token = $request->input('token');
 
-        if(!$paymentId or !$payerId or !$token){
+        if (!$paymentId or !$payerId or !$token) {
             $status = 'No se pudo procesar el pago a través de Paypal.';
             return redirect('product-payment-fail');
         }
@@ -119,12 +119,12 @@ class TryoutPaymentController extends Controller
         //Execute the payment
         $result = $payment->execute($execution, $this->apiContext);
         //dd($result);
-        
-        if($result->getState()==='approved'){
+
+        if ($result->getState() === 'approved') {
 
             $response = json_decode($result);
             $custom = json_decode($response->transactions[0]->custom);
-            
+
             $registration = CompetitionTrial::find($custom->registration_id);
 
             $registration->payment_code = $response->id;
@@ -132,7 +132,7 @@ class TryoutPaymentController extends Controller
             $registration->save();
 
             $registration = DB::table('competition_trials')
-            ->select(DB::raw('competition_trials.id as registration_id, 
+                ->select(DB::raw('competition_trials.id as registration_id, 
             competition_trials.competition_id as competition_id, 
             competitions.name as competition_name, 
             competition_trials.price as registration_price, 
@@ -142,17 +142,17 @@ class TryoutPaymentController extends Controller
             competition_trials.payment_code as payment_code, 
     
             users.name as user_name, users.email as user_email, users.phone as user_phone'))
-    
-            ->leftJoin('users', 'competition_trials.manager_id', '=', 'users.id')
-            ->leftJoin('competitions', 'competition_trials.competition_id', '=', 'competitions.id')
-            ->where('competition_trials.id', $custom->registration_id)
-            ->first();
+
+                ->leftJoin('users', 'competition_trials.manager_id', '=', 'users.id')
+                ->leftJoin('competitions', 'competition_trials.competition_id', '=', 'competitions.id')
+                ->where('competition_trials.id', $custom->registration_id)
+                ->first();
 
             $success = $this->successbooking($registration->user_email, $registration->registration_id);
 
             return redirect('tryout-payment-success')->with(['registration' => $registration]);
         }
-        
+
     }
 
 
@@ -163,12 +163,13 @@ class TryoutPaymentController extends Controller
 
     public function success()
     {
-        
-        $seo = ['title' => 'Successful reservation | KISC, Sports complex', 
-        'sumary' => '', 
-        'image' => 'https://katyisc.com/storage/files/katyisc-sports-complex-share.webp'
+
+        $seo = [
+            'title' => 'Successful reservation | ' . Setting::first()->site_name,
+            'sumary' => '',
+            'image' => 'https://katyisc.com/storage/files/katyisc-sports-complex-share.webp'
         ];
-        
+
         return view('frontend/success/tryout', ['seo' => $seo]);
     }
 
@@ -183,7 +184,7 @@ class TryoutPaymentController extends Controller
         $copy = new TryoutsMailable($contact, $sale_id);
         Mail::to($admin_email)->send($copy);
 
-        
+
     }
 
 

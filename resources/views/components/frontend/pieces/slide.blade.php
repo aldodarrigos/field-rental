@@ -11,14 +11,14 @@
     <div class="caption absolute w-full h-full top-0 left-0 z-20">
 
         <div class="w-boxed  mx-auto ">
-            <div class="bigtext absolute top-16 md:top-1/6 w-full md:w-boxed z-20 px-4 sm:px-20 text-center md:text-center">
+            <div class="bigtext absolute bottom-3/6 sm:bottom-1/6 md:bottom-1/6 w-full md:w-boxed z-20 px-4 sm:px-20 text-center md:text-center">
                 
                 @if ($no_title == '1')
-                <div class="text-white shadow-title-banner font-black text-2x md:text-6x uppercase leading-none mb-3 md:mb-6 font-monserrat">{{$title}}</div>
+                <div class="text-white shadow-title-banner font-black text-2x5 md:text-6x uppercase leading-none mb-3 md:mb-6 font-monserrat">{{$title}}</div>
                 @endif
                 @if ($no_title == '1')
                 <div class="text-white bg-gradient-to-r from-blueStart to-blueEnd  p-3 rounded-md font-bold text-sm sm:mx-20  md:text-1x5 uppercase leading-none md:leading-1 font-monserrat">
-                    {{$subtitle}}.
+                    {{$subtitle}}
                 </div>
                 @endif
                 <div class="calltoaction mt-5 md:mt-8">

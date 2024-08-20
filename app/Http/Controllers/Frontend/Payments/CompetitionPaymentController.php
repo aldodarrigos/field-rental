@@ -26,7 +26,8 @@ class CompetitionPaymentController extends Controller
 
     private $apiContext;
 
-    public function __construct(){
+    public function __construct()
+    {
 
         $payPalConfig = Config::get('paypal');
 
@@ -53,7 +54,7 @@ class CompetitionPaymentController extends Controller
         $user_id = $request->input('user_id');
         $user_name = $request->input('user_name');
 
-        $description = $competition_name.' / '.$team_name.' / '.$user_name;
+        $description = $competition_name . ' / ' . $team_name . ' / ' . $user_name;
 
         // After Step 2
         $payer = new Payer();
@@ -68,10 +69,10 @@ class CompetitionPaymentController extends Controller
         $transaction->setDescription($description);
 
         $registration_data = json_encode(array(
-            'registration_id' => $registration_id, 
-            'competition_id' => $competition_id, 
-            'team_id' => $team_id, 
-            'user_id' => $user_id, 
+            'registration_id' => $registration_id,
+            'competition_id' => $competition_id,
+            'team_id' => $team_id,
+            'user_id' => $user_id,
         ));
         $transaction->setCustom($registration_data);
 
@@ -93,8 +94,7 @@ class CompetitionPaymentController extends Controller
             //echo $payment;
 
             return redirect()->away($payment->getApprovalLink());
-        }
-        catch (PayPalConnectionException $ex) {
+        } catch (PayPalConnectionException $ex) {
             // This will print the detailed information on the exception.
             //REALLY HELPFUL FOR DEBUGGING
             echo $ex->getData();
@@ -109,7 +109,7 @@ class CompetitionPaymentController extends Controller
         $payerId = $request->input('PayerID');
         $token = $request->input('token');
 
-        if(!$paymentId or !$payerId or !$token){
+        if (!$paymentId or !$payerId or !$token) {
             $status = 'No se pudo procesar el pago a través de Paypal.';
             return redirect('product-payment-fail');
         }
@@ -122,12 +122,12 @@ class CompetitionPaymentController extends Controller
         //Execute the payment
         $result = $payment->execute($execution, $this->apiContext);
         //dd($result);
-        
-        if($result->getState()==='approved'){
+
+        if ($result->getState() === 'approved') {
 
             $response = json_decode($result);
             $custom = json_decode($response->transactions[0]->custom);
-            
+
             $registration = CompetitionCrew::find($custom->registration_id);
 
             $registration->payment_code = $response->id;
@@ -135,7 +135,7 @@ class CompetitionPaymentController extends Controller
             $registration->save();
 
             $registration = DB::table('competition_crews')
-            ->select(DB::raw('
+                ->select(DB::raw('
             competition_crews.id as registration_id, 
             competition_crews.competition_id as competition_id, 
             competition_crews.price as registration_price, 
@@ -151,20 +151,20 @@ class CompetitionPaymentController extends Controller
             crews.uniform_colors as uniforms, crews.gender as gender,
 
             categories.name as category'))
-    
-            ->leftJoin('users', 'competition_crews.user_id', '=', 'users.id')
-            ->leftJoin('crews', 'competition_crews.crew_id', '=', 'crews.id')
-            ->leftJoin('categories', 'crews.category_id', '=', 'categories.id')
-            ->leftJoin('competitions', 'competition_crews.competition_id', '=', 'competitions.id')
-            ->where('competition_crews.id', $custom->registration_id)
-            ->first();
+
+                ->leftJoin('users', 'competition_crews.user_id', '=', 'users.id')
+                ->leftJoin('crews', 'competition_crews.crew_id', '=', 'crews.id')
+                ->leftJoin('categories', 'crews.category_id', '=', 'categories.id')
+                ->leftJoin('competitions', 'competition_crews.competition_id', '=', 'competitions.id')
+                ->where('competition_crews.id', $custom->registration_id)
+                ->first();
 
             $success = $this->successbooking($registration->user_email, $registration->registration_id);
 
 
             return redirect('competition-payment-success')->with(['registration' => $registration]);
         }
-        
+
     }
 
 
@@ -175,12 +175,13 @@ class CompetitionPaymentController extends Controller
 
     public function success()
     {
-        
-        $seo = ['title' => 'Successful reservation | KISC, Sports complex', 
-        'sumary' => '', 
-        'image' => 'https://katyisc.com/storage/files/katyisc-sports-complex-share.webp'
+
+        $seo = [
+            'title' => 'Successful reservation | ' . Setting::first()->site_name,
+            'sumary' => '',
+            'image' => 'https://katyisc.com/storage/files/katyisc-sports-complex-share.webp'
         ];
-        
+
         return view('frontend/success/competition', ['seo' => $seo]);
     }
 
@@ -194,7 +195,7 @@ class CompetitionPaymentController extends Controller
 
         $copy = new TeamMailable($contact, $sale_id);
         Mail::to($admin_email)->send($copy);
-        
+
     }
 
 

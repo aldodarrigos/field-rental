@@ -106,6 +106,11 @@
 		var menu = jQuery(this).next().next().toggleClass('hidden');
 		
 	});
+  
+  jQuery(document).on("click", '.dropdownButton',function(e)
+	{
+		e.preventDefault();
+	});
 
 	jQuery(document).on("mouseenter", '.dropdownButton',function(e)
 	{
@@ -114,16 +119,11 @@
 		jQuery(this).next().next().next().css("display", "flex");
 	});
 
-  jQuery(document).on("click", '.dropdownButton',function(e)
-	{
-		e.preventDefault();
-	});
-
 	jQuery(document).on("mouseleave",".dropdownButton" ,function(e)
 	{
 		e.preventDefault();
-		jQuery(this).next().next().fadeOut();
-		jQuery(this).next().next().next().fadeOut();
+		jQuery(this).next().next().fadeOut(1200);
+		jQuery(this).next().next().next().fadeOut(1200);
 	});
 
 	jQuery(document).on("mouseenter",".dropdownMenu" ,function(e)
@@ -136,8 +136,8 @@
 	jQuery(document).on("mouseleave",".dropdownMenu" ,function(e)
 	{
 		e.preventDefault();
-		jQuery(this).fadeOut();
-		jQuery(this).next().fadeOut();
+		jQuery(this).fadeOut(1200);
+		jQuery(this).next().fadeOut(1200);
 	});
 </script>
 </body>

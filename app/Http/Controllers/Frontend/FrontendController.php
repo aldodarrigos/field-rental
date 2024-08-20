@@ -35,7 +35,7 @@ class FrontendController extends Controller
 
 
         $seo = [
-            'title' => 'About | KISC, Sports complex',
+            'title' => 'About | ' . Setting::first()->site_name,
             'sumary' => '',
             'image' => 'https://katyisc.com/storage/files/katyisc-sports-complex-share.webp',
         ];
@@ -58,7 +58,7 @@ class FrontendController extends Controller
             ->get();
 
         $seo = [
-            'title' => 'News | KISC, Sports complex',
+            'title' => 'News | ' . Setting::first()->site_name,
             'sumary' => '',
             'image' => 'https://katyisc.com/storage/files/katyisc-sports-complex-share.webp',
         ];
@@ -82,7 +82,7 @@ class FrontendController extends Controller
             ->get();
 
         $seo = [
-            'title' => $tag->name . ' | KISC, Sports complex',
+            'title' => $tag->name . ' | ' . Setting::first()->site_name,
             'sumary' => '',
             'image' => 'https://katyisc.com/storage/files/katyisc-sports-complex-share.webp',
         ];
@@ -103,7 +103,7 @@ class FrontendController extends Controller
             ->first();
 
         $seo = [
-            'title' => $post->title . ' | KISC, Sports complex',
+            'title' => $post->title . ' | ' . Setting::first()->site_name,
             'sumary' => $post->sumary,
             'image' => $post->img,
         ];
@@ -118,7 +118,7 @@ class FrontendController extends Controller
         $setting = Setting::first();
 
         $seo = [
-            'title' => 'Covid-19 Protocols | KISC, Sports complex',
+            'title' => 'Covid-19 Protocols | ' . Setting::first()->site_name,
             'sumary' => '',
             'image' => 'https://katyisc.com/storage/files/katyisc-sports-complex-share.webp',
         ];
@@ -151,7 +151,7 @@ class FrontendController extends Controller
 
 
             $seo = [
-                'title' => 'Contact | KISC, Sports complex',
+                'title' => 'Contact | ' . Setting::first()->site_name,
                 'sumary' => '',
                 'image' => 'https://katyisc.com/storage/files/katyisc-sports-complex-share.webp',
             ];
@@ -192,7 +192,7 @@ class FrontendController extends Controller
     {
 
         $seo = [
-            'title' => 'Soccer TV | KISC, Sports complex',
+            'title' => 'Soccer TV | ' . Setting::first()->site_name,
             'sumary' => '',
             'image' => '',
         ];
