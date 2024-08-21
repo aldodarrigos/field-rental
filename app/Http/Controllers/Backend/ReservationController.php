@@ -27,8 +27,8 @@ class ReservationController extends Controller
 
         $url = "reservations";
 
-        return $this->fields($request);
-        // return view('backend/reservations/index', ['reservations' => $reservations, 'url' => $url]);
+        // return $this->fields($request);
+        return view('backend/reservations/index', ['reservations' => $reservations, 'url' => $url]);
 
 
 

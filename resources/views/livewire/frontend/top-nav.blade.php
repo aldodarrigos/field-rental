@@ -18,7 +18,7 @@
                     @if(Auth::user()->role == '1')
                     <span class="border-r border-graytext pr-3 text-white"><a href="/profile/dashboard">My Account</a></span>
                     @else
-                    <span class="border-r border-graytext pr-3 text-white"><a href="/booking">Settings</a></span>
+                    <span class="border-r border-graytext pr-3 text-white"><a href="/calendar-fields">Settings</a></span>
                     @endif
                     <span class="pl-2 text-graytext">
                         <form method="POST" action="/logout" class="inline-block">
