@@ -21,7 +21,6 @@
             <ul class="slider overflow-hidden" id='slider'>
 
                 @foreach ($slides as $slide)
-
                     <x-frontend.pieces.slide>
                         <x-slot name='img'>{{$slide->img}}</x-slot>
                         <x-slot name='img_mob'>{{$slide->img_mob}}</x-slot>
@@ -34,14 +33,12 @@
                         <x-slot name='no_shadow'>{{$slide->shadow}}</x-slot>
                         <x-slot name='bottom'>{{$slide->bottom}}</x-slot>
                     </x-frontend.forms.slide> 
-
                 @endforeach
         
             </ul>
         
         </div>
 
-        
         <form action="/fieldsrental" id='auto-submit'>
 
             <div class="w-11/12 md:w-boxed flex flex-col md:flex-row gap1 md:gap-4 absolute z-20 bottom-0 left-0 right-0 ml-auto mr-auto mx-auto bg-deepblue text-white py-1 md:py-4 px-4 border-lines border-b-0 md:border-b-8 rounded-t-lg">
@@ -114,8 +111,6 @@
             </div>
     
         </form>
-
-
     </div>
 </div>
 

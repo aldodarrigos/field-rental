@@ -26,7 +26,7 @@
      role="menu" aria-orientation="vertical" aria-labelledby="dropdownButton">
         <div class="w-full relative divide-y divide-cool-gray-300 " role="none">
             @foreach($submenu as $item)
-            <a href="{{$item->slug}}" class="z-10 block px-4 py-2  font-bold font-roboto text-graytext text-base uppercase hover:bg-blue hover:text-white" role="menuitem" tabindex="-1" id="menu-item-0">{{$item->name}}</a>
+            <a href="{{$item->slug}}" class="z-10 block px-4 py-2  font-bold font-roboto text-graytext text-sm uppercase hover:bg-blue hover:text-white" role="menuitem" tabindex="-1" id="menu-item-0">{{$item->name}}</a>
             @endforeach
         </div>
     </div>
