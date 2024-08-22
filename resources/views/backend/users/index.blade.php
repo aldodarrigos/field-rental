@@ -92,7 +92,11 @@
 
                                     $status = 'Inactive';
                                     $status_color = 'default';
-                                    $role = ($record->role == 2) ?'Admin': ($record->role == 3) ? 'Staff' :'Regular';
+                                    $roles = [
+                                        2 => 'Admin',
+                                        3 => 'Staff',
+                                    ];
+                                    $role = $roles[$record->role] ?? 'Regular';
                                     $member = ($record->member == 1)?'Yes':'No';
                                     if($record->status == 1) {
                                         $status = 'Active';
