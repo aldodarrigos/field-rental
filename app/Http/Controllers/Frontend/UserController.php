@@ -35,9 +35,9 @@ class UserController extends Controller
             if (Auth::user()->role == 1) {
                 return redirect('/profile/dashboard');
             } else if (Auth::user()->role == 2) {
-                return redirect('/booking');
+                return redirect('/calendar-fields');
             } else if (Auth::user()->role == 3) {
-                return redirect('/booking');
+                return redirect('/calendar-fields');
             } else {
                 return redirect('/');
             }
