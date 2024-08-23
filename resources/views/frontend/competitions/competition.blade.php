@@ -187,7 +187,7 @@
                     <div class="flex justify-between gap-3 flex-col md:flex-row mb-2 md:mb-0 px-2">
                         <span class="w-2/2 md:w-1/6">
                             
-                            <div class="mt-3" id='captcha-img' >{!! Captcha::img(); !!}</div>
+                            <div class="mt-3" id='captcha-img' >{!! Captcha::img() !!}</div>
                             <div class="mt-2 ">
                                 <span class="cursor-pointer" id="reload" class="">Reload</span>
                             </div>

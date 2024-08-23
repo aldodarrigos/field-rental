@@ -8,7 +8,7 @@
     
 
 @endsection
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.9/jquery.inputmask.min.js" integrity="sha512-F5Ul1uuyFlGnIT1dk2c4kB4DBdi5wnBJjVhL7gQlGh46Xn0VhvD8kgxLtjdZ5YN83gybk/aASUAlpdoWUjRR3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <x-frontend.pieces.section_header title='Sign Up' bread='Registration'></x-frontend.pieces.section_header>
 
 
@@ -34,8 +34,16 @@
                 @csrf
     
                 <div>
-                    <x-jet-label for="name" value="{{ __('Name') }}" />
+                    <x-jet-label for="name" value="{{ __('First Name') }}" />
                     <x-jet-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+                    @if ($errors->has('name'))
+                    <span class="text-danger">{{ $errors->first('name') }}</span>
+                    @endif
+                </div>
+
+                <div>
+                    <x-jet-label for="name" value="{{ __('Surname') }}" />
+                    <x-jet-input id="last_name" class="block mt-1 w-full" type="text" name="last_name" :value="old('last_name')" required autofocus autocomplete="name" />
                     @if ($errors->has('name'))
                     <span class="text-danger">{{ $errors->first('name') }}</span>
                     @endif
@@ -95,6 +103,12 @@
     <div class="separation h-50p"></div>
 
 </main>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        Inputmask({"mask": "(999) 999-9999"}).mask("#phone");
+    });
+</script>
 
 @endsection
 
