@@ -179,7 +179,7 @@ class ReservationController extends Controller
 
         }
 
-        return redirect('booking');
+        return redirect('calendar-fields');
     }
 
     /**
