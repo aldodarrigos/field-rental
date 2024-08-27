@@ -137,6 +137,7 @@ Route::get('tryout-payment-fail', [TryoutPaymentController::class, 'fail']);
 //FIELDS RENTAL
 Route::get('fieldsrental', [FieldsPaymentController::class, 'fieldsrental'])->name('frontend.fieldsrental');
 Route::post('fieldsrental', [FieldsPaymentController::class, 'fieldsrental'])->name('frontend.fieldsrental');
+Route::post('session/fieldsrental', [FieldsPaymentController::class, 'generate_session_fieldsrental'])->name('session.fieldsrental');
 Route::get('payment', [FieldsPaymentController::class, 'payment'])->name('payment');
 Route::post('payment', [FieldsPaymentController::class, 'payment'])->name('payment');
 Route::get('paypal/failed', [FieldsPaymentController::class, 'paypalFailed'])->name('payment.failed');

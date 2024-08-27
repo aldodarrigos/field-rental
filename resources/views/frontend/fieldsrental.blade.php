@@ -99,6 +99,8 @@
                         $selected = ($_GET['field'] == $item->id)?'selected':'';
                     }else if($field_id != ''){
                         $selected = ($field_id == $item->id)?'selected':'';
+                    }else if(isset($session_field) && $session_field['fieldIdSelected'] != ''){
+                        $selected = ($session_field['fieldIdSelected'] == $item->id)?'selected':'';
                     }else{
                         $selected = '';
                     }
@@ -113,6 +115,8 @@
                     $default_date = ($_GET['field']!=null)?$_GET['date']:date('Y-m-d');
                 }else if($date != ''){
                     $default_date = $date;
+                }else if(isset($session_field) && $session_field['dateSelected']){
+                    $default_date = date($session_field['dateSelected']);
                 }else{
                     $default_date = date('Y-m-d');
                 }
@@ -149,7 +153,6 @@
             
         </div>
         <div class="col-span-6">
-  
             <form action="/payment" method="POST" id='bookform'>
 
                 {{ csrf_field() }}
@@ -244,7 +247,11 @@
                                 @for ($i = 0; $i < count($hoursarray); $i++)
                                     @php
                                         if($hoursarray[$i]['class'] == 'noselect'){
-                                            $color = 'bg-green button_hour noselect';
+                                            $color = 'bg-green button_hour text-gray';
+                                            $pointer = 'cursor-pointer';
+                                            $decoration = '';
+                                        }else if($hoursarray[$i]['class'] == 'selected'){
+                                            $color = 'bg-warning button_hour text-black';
                                             $pointer = 'cursor-pointer';
                                             $decoration = '';
                                         }else{
@@ -253,22 +260,29 @@
                                             $decoration = 'line-through';
                                         }
 
-                                        if ($hoursarray[$i]['hour'] == '08:00'){ $hour_fix = '8 AM'; }
-                                        else if ($hoursarray[$i]['hour'] == '09:00'){ $hour_fix = '9 AM'; }
-                                        else if ($hoursarray[$i]['hour'] == '10:00'){ $hour_fix = '10 AM'; }
-                                        else if ($hoursarray[$i]['hour'] == '11:00'){ $hour_fix = '11 AM'; }
-                                        else if ($hoursarray[$i]['hour'] == '12:00'){ $hour_fix = '12 PM'; }
-                                        else if ($hoursarray[$i]['hour'] == '13:00'){ $hour_fix = '1 PM'; }
-                                        else if ($hoursarray[$i]['hour'] == '14:00'){ $hour_fix = '2 PM'; }
-                                        else if ($hoursarray[$i]['hour'] == '15:00'){ $hour_fix = '3 PM'; }
-                                        else if ($hoursarray[$i]['hour'] == '16:00'){ $hour_fix = '4 PM'; }
-                                        else if ($hoursarray[$i]['hour'] == '17:00'){ $hour_fix = '5 PM'; }
-                                        else if ($hoursarray[$i]['hour'] == '18:00'){ $hour_fix = '6 PM'; }
-                                        else if ($hoursarray[$i]['hour'] == '19:00'){ $hour_fix = '7 PM'; }
-                                        else if ($hoursarray[$i]['hour'] == '20:00'){ $hour_fix = '8 PM'; }
-                                        else if ($hoursarray[$i]['hour'] == '21:00'){ $hour_fix = '9 PM'; }
-                                        else if ($hoursarray[$i]['hour'] == '22:00'){ $hour_fix = '10 PM'; }
-                                        else if ($hoursarray[$i]['hour'] == '23:00'){ $hour_fix = '11 PM'; }
+                                        $hour_map = [
+                                            '08:00' => '8 AM',
+                                            '09:00' => '9 AM',
+                                            '10:00' => '10 AM',
+                                            '11:00' => '11 AM',
+                                            '12:00' => '12 PM',
+                                            '13:00' => '1 PM',
+                                            '14:00' => '2 PM',
+                                            '15:00' => '3 PM',
+                                            '16:00' => '4 PM',
+                                            '17:00' => '5 PM',
+                                            '18:00' => '6 PM',
+                                            '19:00' => '7 PM',
+                                            '20:00' => '8 PM',
+                                            '21:00' => '9 PM',
+                                            '22:00' => '10 PM',
+                                            '23:00' => '11 PM',
+                                        ];
+
+                                        // Obtener la hora actual del array
+                                        $current_hour = $hoursarray[$i]['hour'];
+                                        // Asignar el formato AM/PM usando el array asociativo
+                                        $hour_fix = isset($hour_map[$current_hour]) ? $hour_map[$current_hour] : 'Unknown';
 
                                     @endphp
                                     <x-frontend.buttons.hour>
@@ -300,7 +314,13 @@
 
                                 $(document).ready(function() {
                                     $('#buttonrental').prop('disabled', true);
-                                    
+                                    var hoursSelected = $('.button_hour.selected');
+                                    if (hoursSelected.length > 0) {
+                                        hoursSelected.each(function(index, element) {
+                                            sethour($(element));
+                                        });    
+                                        xsa();
+                                    }
                                 });
         
                                 $(".button_hour").click(function(){
@@ -329,7 +349,6 @@
                                 });
 
                                 function sethour(thisHour){
-                                    console.log(thisHour)
                                     let hour_text = thisHour.text();
                                     let price = thisHour.data("price")
                                     let price_alt = thisHour.data("pricealt")
@@ -369,8 +388,8 @@
                                     matrixFinale = []
                                     for (let i = 23; i > 7; i--) {
                                         let indexhour = $('#hour-'+i)
-                                        console.log(indexhour)
-                                        console.log(indexhour.attr('data-active') == '1')
+                                        // console.log(indexhour)
+                                        // console.log(indexhour.attr('data-active') == '1')
                                         if(indexhour.attr('data-active') == '1'){
                                             matrix.push([indexhour.attr('data-althour'), indexhour.attr('data-price'), indexhour.attr('data-pricealt'), indexhour.val()])
                                         }
@@ -429,7 +448,7 @@
                                         $('#totalPrice').val('0.00')//reset hidden value
                                     }
 
-                                    console.log(matrixFinale)
+                                    // console.log(matrixFinale)
 
                                 }
 
@@ -441,6 +460,7 @@
                                 });
 
                                 function hour_button_switch(thisObj, signal){
+                                    console.log(signal)
                                     if(signal == '1'){
                                         thisObj.addClass("bg-warning");
                                         thisObj.removeClass("bg-green");
@@ -510,8 +530,6 @@
 
                 
             </form>
-
-
         </div>
 
 

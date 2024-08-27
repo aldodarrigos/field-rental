@@ -41,8 +41,16 @@ class FieldsPaymentController extends Controller
 
     }
 
+    public function generate_session_fieldsrental(Request $request)
+    {
+        $request->session()->put('fields_rental', $request->all());
+        return response()->json(['success' => true], 200);
+    }
+
     public function fieldsrental(Request $request)
     {
+
+        $session_field = session('fields_rental');
         $map = Content::where('id', 11)->first();
         $fields_select = Field::where('status', 1)->orderBy('number', 'ASC')->get();
         $setting = Setting::first();
@@ -62,16 +70,31 @@ class FieldsPaymentController extends Controller
         $field_id = '';
         $date = '';
 
-        if ($request->input('field')) {
+
+        if ($request->input('field') || isset($session_field)) {
+
+            $dataFixed = [
+                'field_id' => !empty($request->input('field')) ? $request->input('field') : $session_field['fieldIdSelected'],
+                'players_number' => !empty($request->input('players_number')) ? $request->input('players_number') : '',
+                'date' => !empty($request->input('date')) ? $request->input('date') : $session_field['dateSelected']
+            ];
+
             $field_id = $request->input('field');
             $players_number = $request->input('players_number');
             $date = $request->input('date');
+
+
+            $field_id = $dataFixed['field_id'];
+            $players_number = $dataFixed['field_id'];
+            $date = $dataFixed['date'];
             $field = Field::where('id', $field_id)->first();
             $reservations = Reservation::where([
                 ['field_id', $field->id],
                 ['res_date', $date]
             ])->get();
 
+
+            // dd(date('N', strtotime($date)));
 
             foreach ($hours as $item) {
 
@@ -99,14 +122,32 @@ class FieldsPaymentController extends Controller
                         ]
                     );
                 } else {
+                    // dd($session_field);
+                    $classSelected = 'noselect';
+                    if (isset($session_field['bookingArray']) && $session_field['bookingArray'] !== '0') {
+                        $bookingArray = json_decode($session_field['bookingArray'], true);
+                        if (count($bookingArray) > 0) {
+                            foreach ($bookingArray as $keySession => $hourSelected) {
+                                $hourSelected = $hourSelected[0]; // En el primer elemento se obtiene la hora
+                                if ($hourSelected == $item) {
+                                    $classSelected = 'selected';
+                                }
+                            }
+                        }
+
+                    }
+
                     array_push($hoursarray, [
                         'hour' => $item,
-                        'class' => 'noselect',
+                        'class' => $classSelected,
                         'price' => $price,
                         'price_alt' => $price_alt
                     ]);
                 }
             }
+
+
+            // dd($hoursarray);
 
             $result = 1;
 
@@ -125,7 +166,10 @@ class FieldsPaymentController extends Controller
             'image' => 'https://katyisc.com/storage/files/katyisc-sports-complex-share.webp'
         ];
 
-        return view('frontend/fieldsrental', ['seo' => $seo, 'result' => $result, 'field' => $field, 'field_id' => $field_id, 'date' => $date, 'fields_select' => $fields_select, 'reservations' => $reservations, 'hoursarray' => $hoursarray, 'players_number' => $players_number, 'map' => $map, 'setting' => $setting]);
+        // dd(session('fields_rental'));
+
+
+        return view('frontend/fieldsrental', ['session_field' => session('fields_rental'), 'seo' => $seo, 'result' => $result, 'field' => $field, 'field_id' => $field_id, 'date' => $date, 'fields_select' => $fields_select, 'reservations' => $reservations, 'hoursarray' => $hoursarray, 'players_number' => $players_number, 'map' => $map, 'setting' => $setting]);
 
     }
 
