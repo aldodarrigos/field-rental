@@ -61,8 +61,17 @@ return [
     |
     */
 
-    //'home' => RouteServiceProvider::HOME,
-    'home' => '/profile/dashboard',
+    // 'home' => RouteServiceProvider::HOME,
+    'home' => function () {
+        //Esto solo funciona cuando se registra el usuario y lo redirige, cuando inicia sesión usa la clase UserController
+        if (isset(session('fields_rental')['redirect'])) {
+            //Se lo redirige a la pasarela en caso de haber hecho el paso de seleccionar canchas en rent
+            return '/fieldsrental';
+        } else {
+            return '/profile/dashboard';
+        }
+    },
+    // 'home' => '/profile/dashboard',
 
     /*
     |--------------------------------------------------------------------------

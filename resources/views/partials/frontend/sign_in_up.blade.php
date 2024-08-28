@@ -17,11 +17,15 @@
         $('.signup').on('click',function(e){
             e.preventDefault();
             const el = $(this);
-            const form = el.closest('#bookform').serialize();
+            const formElement = el.closest('#bookform')[0];
+            const formData = new FormData(formElement);
+            formData.append('redirect', 'frontend.fieldsrental')
             $.ajax({
                 url: "{{ route('session.fieldsrental') }}",
                 type:'POST',
-                data: form,
+                data: formData,
+                processData: false,
+                contentType: false,
                 success:function(response){
                     if(response.success){
                         window.location.href = el.attr('href');

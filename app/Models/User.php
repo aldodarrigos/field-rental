@@ -19,13 +19,39 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
 
+    public function getRedirectRoute()
+    {
+        dd($this);
+        // switch ((int) $this->role_id) {
+        //     case 1:
+        //         return 'student.dashboard';
+        //     case 2:
+        //         return 'teacher.dashboard';
+        //     // Agrega más casos según sea necesario
+        //     default:
+        //         return 'default.route'; // Ruta por defecto si no se cumple ninguna condición
+        // }
+    }
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','role', 'ide', 'born', 'address', 'phone', 'member', 'member_start', 'member_finish',  'status'
+        'name',
+        'last_name',
+        'email',
+        'password',
+        'role',
+        'ide',
+        'born',
+        'address',
+        'phone',
+        'member',
+        'member_start',
+        'member_finish',
+        'status'
     ];
 
     /**
