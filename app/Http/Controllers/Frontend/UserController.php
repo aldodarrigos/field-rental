@@ -30,11 +30,10 @@ class UserController extends Controller
 
         // Retrive Input
         $credentials = $request->only('email', 'password');
-
         if (Auth::attempt($credentials)) {
             // Redirigimos a la persona luego de autenticarse
             if (isset(session('fields_rental')['redirect'])) {
-                return view(session('fields_rental')['redirect']);
+                return redirect(session('fields_rental')['redirect']);
             } else if (Auth::user()->role == 1) {
                 return redirect('/profile/dashboard');
             } else if (Auth::user()->role == 2) {

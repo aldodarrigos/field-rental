@@ -32,22 +32,25 @@
 
             <form method="POST" action="{{ route('register') }}">
                 @csrf
+                
+                <div class=" md:flex md:gap-4">
+                    <div class="w-2/2 md:w-1/2">
+                        <x-jet-label for="name" value="{{ __('First Name') }}" />
+                        <x-jet-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+                        @if ($errors->has('name'))
+                        <span class="text-danger">{{ $errors->first('name') }}</span>
+                        @endif
+                    </div>
     
-                <div>
-                    <x-jet-label for="name" value="{{ __('First Name') }}" />
-                    <x-jet-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-                    @if ($errors->has('name'))
-                    <span class="text-danger">{{ $errors->first('name') }}</span>
-                    @endif
+                    <div class="w-2/2 md:w-1/2">
+                        <x-jet-label for="name" value="{{ __('Last Name') }}" />
+                        <x-jet-input id="last_name" class="block mt-1 w-full" type="text" name="last_name" :value="old('last_name')" required autofocus autocomplete="name" />
+                        @if ($errors->has('name'))
+                        <span class="text-danger">{{ $errors->first('name') }}</span>
+                        @endif
+                    </div>
                 </div>
-
-                <div>
-                    <x-jet-label for="name" value="{{ __('Surname') }}" />
-                    <x-jet-input id="last_name" class="block mt-1 w-full" type="text" name="last_name" :value="old('last_name')" required autofocus autocomplete="name" />
-                    @if ($errors->has('name'))
-                    <span class="text-danger">{{ $errors->first('name') }}</span>
-                    @endif
-                </div>
+                
     
                 <div class="mt-4">
                     <x-jet-label for="email" value="{{ __('Email') }}" />

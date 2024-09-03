@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use Auth;
 use Illuminate\Http\Request;
 use App\Models\{Reservation, Field, Setting};
 use DB;
@@ -11,6 +12,15 @@ use GuzzleHttp\Client;
 
 class ReservationController extends Controller
 {
+
+    private $hot_hours;
+    private $hours;
+    public function __construct()
+    {
+        $APP_LOCK_BOOKING = env('APP_LOCK_BOOKING', 10);
+        $this->hours = ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'];
+        $this->hot_hours = ['18:00', '19:00', '20:00', '21:00'];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -22,6 +32,7 @@ class ReservationController extends Controller
             ->select(DB::raw('reservations.id, reservations.code, users.name as user_name, users.email as user_email, fields.name as field_name, fields.number as field_number, reservations.hour as hour, reservations.res_date as res_date, reservations.price as price, reservations.conf_code as res_code, reservations.created_at as created_at, reservations.note, reservations.user_rel'))
             ->leftJoin('users', 'reservations.user_id', '=', 'users.id')
             ->leftJoin('fields', 'reservations.field_id', '=', 'fields.id')
+            ->where('reservations.paid', '=', '1')
             ->orderBy('reservations.created_at', 'desc')
             ->get();
 
@@ -29,9 +40,6 @@ class ReservationController extends Controller
 
         // return $this->fields($request);
         return view('backend/reservations/index', ['reservations' => $reservations, 'url' => $url]);
-
-
-
 
     }
 
@@ -49,14 +57,11 @@ class ReservationController extends Controller
         $setting = Setting::first();
 
         $season = $setting->season;
-        $hot_hours = ['18:00', '19:00', '20:00', '21:00'];
         if ($season == 1) {
-            $hot_hours = ['20:00', '21:00'];
+            $this->hot_hours = ['20:00', '21:00'];
         }
 
-        $hours = ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'];
         $hoursarray = array();
-
         $players_number = '';
         $field_id = '';
         $date = '';
@@ -72,15 +77,17 @@ class ReservationController extends Controller
                 ['field_id', $field->id],
                 ['res_date', $date]
             ])->get();
+
+
             //echo $hours;
-            foreach ($hours as $item) {
+            foreach ($this->hours as $item) {
 
                 if ((date('N', strtotime($date)) >= 6)) {
                     $price = $field->price_weekend;
                     $price_alt = $field->price_weekend_alt;
                     $mark = 'w';
                 } else {
-                    if (in_array($item, $hot_hours)) {
+                    if (in_array($item, $this->hot_hours)) {
                         $price = $field->price_night;
                         $price_alt = $field->price_night_alt;
                         $mark = 'h';
@@ -91,7 +98,7 @@ class ReservationController extends Controller
                     }
                 }
 
-                if ($this->check_hours($item, $field->id, $date)) {
+                if (is_booked($item, $field->id, $date)) {
                     array_push(
                         $hoursarray,
                         [
@@ -127,21 +134,21 @@ class ReservationController extends Controller
         return view('backend/reservations/create', ['action' => $action, 'url' => $url, 'result' => $result, 'field' => $field, 'field_id' => $field_id, 'date' => $date, 'fields' => $fields, 'reservations' => $reservations, 'hoursarray' => $hoursarray, 'players_number' => $players_number]);
     }
 
-    public function check_hours($hour, $field, $date)
-    {
+    // public function check_hours($hour, $field, $date)
+    // {
 
-        $reservations = Reservation::where([
-            ['field_id', $field],
-            ['res_date', $date]
-        ])->get();
+    //     $reservations = Reservation::where([
+    //         ['field_id', $field],
+    //         ['res_date', $date]
+    //     ])->get();
 
-        foreach ($reservations as $item) {
-            if ($hour == $item->hour) {
-                return true;
-                break;
-            }
-        }
-    }
+    //     foreach ($reservations as $item) {
+    //         if ($hour == $item->hour) {
+    //             return true;
+    //             break;
+    //         }
+    //     }
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -160,11 +167,14 @@ class ReservationController extends Controller
         $user_rel = $request->input('user_rel');
         $booking_array = json_decode($request->input('bookingArray'));
         $code = str_replace(array('-', ':'), '', $short_name . $date . rand(1000, 9999));
-
         //$alt_price = $request->input('alt_price');
         //$final_price = ($alt_price > 0.00)?$alt_price:$price;
 
         for ($i = 0; $i < count($booking_array); $i++) {
+            if (is_booked($booking_array[$i][0], $field_id, $date)) {
+                // if this hour is locked by someone
+                return redirect()->action([self::class, 'create']);
+            }
 
             $reservation = new Reservation();
             $reservation->user_id = $user_id;
@@ -175,8 +185,8 @@ class ReservationController extends Controller
             $reservation->price = $booking_array[$i][1];
             $reservation->note = $note;
             $reservation->user_rel = $user_rel;
+            $reservation->paid = 1;
             $reservation->save();
-
         }
 
         return redirect('calendar-fields');
@@ -232,16 +242,39 @@ class ReservationController extends Controller
     public function update(Request $request, $id)
     {
 
-        $booking = Reservation::find($id);
-        $booking->field_id = $request->input('field_id');
-        $booking->hour = $request->input('hour');
-        $booking->price = $request->input('price');
-        $booking->res_date = $request->input('date');
-        $booking->note = $request->input('note');
-        $booking->user_rel = $request->input('user_rel');
-        $booking->save();
+        $hour = $request->input('hour');
+        $field_id = $request->input('field_id');
+        $date = $request->input('date');
+        $user = Auth::user();
 
-        return redirect('booking/' . $id . '/edit')->with('success', 'Successful update!');
+        $response = [
+            'alert' => 'danger',
+            'message' => 'The registration was not successful',
+        ];
+
+        $booking = Reservation::find($id);
+
+        if (!$booking) {
+            $response['message'] = 'Reservation not found';
+        } else if (
+            is_booked($hour, $field_id, $date) &&
+            ($booking->res_date !== $request->input('date') ||
+                $booking->hour !== $request->input('hour'))
+        ) {
+            $response['message'] = 'The reservation with the selected date and hour exists';
+        } else {
+            $booking->field_id = $request->input('field_id');
+            $booking->hour = $request->input('hour');
+            $booking->price = $request->input('price');
+            $booking->res_date = $request->input('date');
+            $booking->note = $request->input('note');
+            $booking->user_rel = $request->input('user_rel');
+            $booking->save();
+            $response['message'] = 'Successfully registered';
+            $response['alert'] = 'success';
+        }
+
+        return redirect('booking/' . $id . '/edit')->with('response', $response);
 
     }
 
@@ -277,30 +310,24 @@ class ReservationController extends Controller
 
     public function calendar()
     {
-
-        $reservations = Reservation::all();
-        $url = 'reservations';
-
-        return view('backend/reservations/calendar', ['reservations' => $reservations, 'url' => $url]);
+        // This view return data of get_reservations() method.
+        return view('backend/reservations/calendar', ['url' => 'reservations']);
     }
 
     public function get_reservations()
     {
         $array = [];
-        //$reservations = Reservation::orderBy('res_date', 'DESC')->get();
-
         $reservations = DB::table('reservations')
             ->select(DB::raw('reservations.id, reservations.code, users.name as user_name, fields.name as field_name, fields.short_name as field_short_name, fields.number as field_number, reservations.hour, reservations.res_date, reservations.note as note, reservations.user_rel as user_rel'))
             ->leftJoin('users', 'reservations.user_id', '=', 'users.id')
             ->leftJoin('fields', 'reservations.field_id', '=', 'fields.id')
+            ->where('reservations.paid', '=', '1')
             ->orderBy('reservations.res_date', 'desc')
             ->get();
 
         $options = '<option value="0" selected="">Pick a Field --</option>';
         foreach ($reservations as $item) {
-
             $name = ($item->user_rel != '') ? $item->user_rel : $item->user_name;
-
             array_push(
                 $array,
                 array(
@@ -312,7 +339,6 @@ class ReservationController extends Controller
             );
         }
         return $array;
-
     }
 
     public function get_detail($id)
@@ -345,7 +371,6 @@ class ReservationController extends Controller
         return $reservation;
 
     }
-
 
     public function fields(Request $request)
     {
@@ -445,6 +470,7 @@ class ReservationController extends Controller
             ->where('reservations.res_date', $date)
             ->where('reservations.field_id', $field)
             ->where('reservations.hour', $hour)
+            ->where('reservations.paid', 1)
             ->limit(1)
             ->first();
 

@@ -60,7 +60,6 @@
                 <x-slot name='label_on_off'>on</x-slot>
                 
                 @php
-                
                 if(isset($_GET['players_number'])){
                     if($_GET['players_number']!=0){
                         $x5selected = ($_GET['players_number'] == 1)?'selected':'';

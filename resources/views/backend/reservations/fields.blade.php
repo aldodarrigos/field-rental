@@ -124,7 +124,6 @@
 
                         @if (Auth::user()->role == 2)
                             <a href="/booking/create" class="btn btn-primary btn-xs">New Booking</a>
-                            <p>Estás conectado como {{ Auth::user()->name }}.</p>
                         @endif
                     </div>
                 </div>
