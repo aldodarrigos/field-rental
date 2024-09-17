@@ -70,7 +70,10 @@
         <h2>Booking</h2>
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="/booking">Dashboard</a>
+                <a href="/coupons">Coupons</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="/coupons/history/{{$coupon_id}}">Coupons History</a>
             </li>
         </ol>
     </div>
@@ -101,8 +104,8 @@
                                     <th>User</th>
                                     <th>Email</th>
                                     <th>Price</th>
-                                    {{-- <th>Final Price</th> --}}
-                                    {{-- <th>Discount</th> --}}
+                                    <th>Final Price</th>
+                                    <th>Discount</th>
                                     <th>Booking</th>
                                     <th>Obs</th>
                                     <th>Note</th>
@@ -111,7 +114,6 @@
                             <tbody>
 
                                 @foreach ($reservations as $reservation)
-
                                     @php
                                     $date = new DateTime($reservation->res_date);
                                     $now = new DateTime();
@@ -122,10 +124,10 @@
                                         $status_color = 'default';
                                     }
                                     $user_name = ($reservation->user_rel != null)?$reservation->user_rel:$reservation->user_name;
-                                    // $discount_check = 'X';
-                                    // if($reservation->discount === true){
-                                    //     $discount_check = '✔️';
-                                    // }
+                                    $discount_check = 'X';
+                                    if($reservation->discount === true){
+                                        $discount_check = '✔️';
+                                    }
                                     @endphp
 
                                     <tr class="gradeX">                        
@@ -133,14 +135,14 @@
                                         <td><strong>{{$user_name}}</strong></td>
                                         <td>{{$reservation->user_email}}</td>
                                         <td>${{$reservation->price}}</td>
-                                        {{-- <td>
+                                        <td>
                                         @if(!is_null($reservation->final_price))
                                             ${{$reservation->final_price}}
                                         @endif
-                                        </td> --}}
-                                        {{-- <td>
+                                        </td>
+                                        <td>
                                             {{$discount_check}}
-                                        </td> --}}
+                                        </td>
                                         <td class="center text-{{$status_color}}">{!!date('M d, Y', strtotime($reservation->res_date)).' <strong>'.date('h:i A', strtotime($reservation->hour)).'</strong>'!!}</td>
                                         <td>{{$reservation->note}}</td>
                                         <td class="center"><a href="/booking/{{$reservation->id}}/edit" class="btn btn-success btn-xs">Details</a></td>

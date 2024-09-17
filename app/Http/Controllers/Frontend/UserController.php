@@ -27,12 +27,13 @@ class UserController extends Controller
 
     public function authenticate(Request $request)
     {
-
         // Retrive Input
         $credentials = $request->only('email', 'password');
-
         if (Auth::attempt($credentials)) {
-            if (Auth::user()->role == 1) {
+            // Redirigimos a la persona luego de autenticarse
+            if (isset(session('fields_rental')['redirect'])) {
+                return redirect(session('fields_rental')['redirect']);
+            } else if (Auth::user()->role == 1) {
                 return redirect('/profile/dashboard');
             } else if (Auth::user()->role == 2) {
                 return redirect('/calendar-fields');
@@ -44,7 +45,6 @@ class UserController extends Controller
         }
         // if failed login
         return redirect('signin')->with('status', 'Incorrect email or password.');
-
     }
 
     public function dashboard()
@@ -55,6 +55,7 @@ class UserController extends Controller
             ->leftJoin('users', 'reservations.user_id', '=', 'users.id')
             ->leftJoin('fields', 'reservations.field_id', '=', 'fields.id')
             ->where('reservations.user_id', Auth::user()->id)
+            ->where('reservations.paid', '1')
             ->orderBy('reservations.created_at', 'desc')
             ->get();
 

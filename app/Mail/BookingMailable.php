@@ -18,18 +18,20 @@ class BookingMailable extends Mailable
     public $field_id;
     public $user_id;
     public $paypal_code;
+    public $coupon;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($contact, $code, $field_id, $user_id, $paypal_code)
+    public function __construct($contact, $code, $field_id, $user_id, $paypal_code, $coupon)
     {
         $this->contact = $contact;
         $this->code = $code;
         $this->field_id = $field_id;
         $this->user_id = $user_id;
         $this->paypal_code = $paypal_code;
+        $this->coupon = $coupon;
     }
 
     /**
@@ -42,6 +44,6 @@ class BookingMailable extends Mailable
         $reservation = Reservation::where('code', $this->code)->get();
         $field = Field::where('id', $this->field_id)->first();
         $user = User::where('id', $this->user_id)->first();
-        return $this->view('frontend.emails.successbooking', ['reservation' => $reservation, 'field' => $field, 'user' => $user, 'code' => $this->code, $this->paypal_code]);
+        return $this->view('frontend.emails.successbooking', ['reservation' => $reservation, 'coupon' => $this->coupon, 'field' => $field, 'user' => $user, 'code' => $this->code, $this->paypal_code]);
     }
 }

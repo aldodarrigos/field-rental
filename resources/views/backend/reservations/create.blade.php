@@ -262,7 +262,24 @@
 
     </div>
 </div>
+
+
 <div class="wrapper wrapper-content animated fadeInRight">
+
+    {{-- Alert Response --}}
+    @php
+        $response = session()->get('response');
+    @endphp
+     @if($response)
+     <div class="row">
+         <div class="col-lg-6 col-sm-12">
+         <div class="alert alert-{{$response['alert']}}" role="alert">
+             {{$response['message']}}
+           </div>
+         </div>
+     </div>
+     @endif
+     {{-- Alert Response --}}
 
     <div class="row">
         <div class="col-lg-6">

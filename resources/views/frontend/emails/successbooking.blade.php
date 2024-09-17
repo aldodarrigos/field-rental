@@ -244,7 +244,7 @@ table{
                 </tr>
                 <tr>
                     <td valign="middle" class="hero bg_white" style="padding: 3em 0 0 0;">
-                        <img src="https://katyisc.com/storage/files/kisc-logo-200.webp" alt="" style="width: 200px; height: auto; margin: auto; display: block;">
+                        <img src="https://katyisc.com/storage/files/KatyISC-logo-Black-big.png" alt="" style="width: 200px; height: auto; margin: auto; display: block;">
                     </td>
                 </tr>
                 <tr>
@@ -259,6 +259,9 @@ table{
                                         <h1>Successful Booking</h1>
                                         <p><Strong>Email:</Strong> {{$contact}}</p>
                                         <p><Strong>Booking Code:</Strong> {{$code}}</p>
+                                        @if($coupon !== null)
+                                            <p><Strong>Coupon Code:</Strong> {{$coupon}}</p>
+                                        @endif
                                         <p><Strong>Field:</Strong> {{$field->number.'. '.$field->name}}</p>
                                         <p><Strong>Field type:</Strong> {{$field_type}}</p>
 
@@ -277,7 +280,13 @@ table{
                                                 <tr>
                                                     <td style='padding: 5px 10px'>{{date('M d, Y', strtotime($item->res_date))}}</td>
                                                     <td style='padding: 5px 10px'>{{date('g A', strtotime($item->hour))}}</td>
-                                                    <td style='padding: 5px 10px'>${{$item->price}}</td>
+                                                    <td style='padding: 5px 10px'>
+                                                        @if($item->final_price !== null)
+                                                        ${{$item->final_price}}
+                                                        @else
+                                                        ${{$item->price}}
+                                                        @endif
+                                                    </td>
                                                 </tr>
                                                 @endforeach
                                             </tbody>

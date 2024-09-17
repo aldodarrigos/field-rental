@@ -10,14 +10,16 @@ class Reservation extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 
-        'field_id', 
+        'user_id',
+        'field_id',
         'res_date',
         'hour',
-        'price', 
-        'conf_code', 
+        'price',
+        'conf_code',
         'note',
-        'user_rel'
+        'user_rel',
+        'paid',
+        'booked_until'
     ];
 
 }

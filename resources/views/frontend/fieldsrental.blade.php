@@ -9,9 +9,111 @@
     <!-- jQuery Modal -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-
+    <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
     <script>
         $(document).ready(function() {
+
+            function conffetiCoupon(){
+                const count = 200,
+                defaults = {
+                    origin: { y: 0.7 },
+                };
+
+                function fire(particleRatio, opts) {
+                confetti(
+                    Object.assign({}, defaults, opts, {
+                    particleCount: Math.floor(count * particleRatio),
+                    })
+                );
+                }
+
+                fire(0.25, {
+                spread: 26,
+                startVelocity: 55,
+                });
+
+                fire(0.2, {
+                spread: 60,
+                });
+
+                fire(0.35, {
+                spread: 100,
+                decay: 0.91,
+                scalar: 0.8,
+                });
+
+                fire(0.1, {
+                spread: 120,
+                startVelocity: 25,
+                decay: 0.92,
+                scalar: 1.2,
+                });
+
+                fire(0.1, {
+                spread: 120,
+                startVelocity: 45,
+                });
+            }
+
+            $("#coupon_btn").click(function(e){
+                e.preventDefault();
+                const couponBtn = $(this);
+                const couponInput = $('#coupon_input');
+                const code = $('#coupon_input').val();
+                const form = $('#bookform').serializeArray();
+                const field = $('#fieldIdSelected').val();
+                const date = $('#dateSelected').val();
+                $.ajax({
+                    url: `/check-coupon/${code}/${field}/${date}`,
+                    type: "GET",
+                    success: function(data){
+                        var response = data;
+                        var typeDiscount = response.type
+                        var discount =response.amount;
+                        var hoursToDiscount =response.hours;
+                        var response = data;
+
+                        if(response.success){
+                            conffetiCoupon();
+                            couponBtn.prop('disabled',true);
+                            couponBtn.removeClass('bg-red').addClass('bg-black').html('APPLIED <i class="fas fa-check text-md pl-1"></i>');
+                            $('#coupon_input').prop('readonly',true);
+                            const btnHours = $('.button_hour');
+                            $.each(btnHours, function(key, btnHour){
+                                let selected = $(btnHour).hasClass('selected');
+                                let hour = $(btnHour).data('hour');
+                                let price = $(btnHour).data('price');
+                                let priceAlt = $(btnHour).data('pricealt');
+                                if(hoursToDiscount.find(el => el === hour)){
+                                    if (typeDiscount == 'percentage') {
+                                        price = (price - (price * (discount / 100))).toFixed(2);
+                                        priceAlt = (priceAlt - (priceAlt * (discount / 100))).toFixed(2);
+                                    } else if (typeDiscount == 'fixed') {
+                                        price = (price - discount).toFixed(2);
+                                        priceAlt = (priceAlt - discount).toFixed(2);
+                                    }
+                                    $(btnHour).data('price', price);
+                                    $(btnHour).data('pricealt', priceAlt);
+                                    $(btnHour).removeClass('bg-green')
+                                    $(btnHour).addClass('bg-green-active');
+                                    if(selected){
+                                        // Set price to hidden fields
+                                        sethour($(btnHour));
+                                    }
+                                }
+                            });
+                            xsa();
+                        }else{
+                            console.log(couponInput);
+                            couponInput.val('');
+                            couponInput.attr('placeholder','IS NOT VALID 😪');
+                            setTimeout(() => {
+                                couponInput.attr('placeholder','COUPON CODE');
+                            }, 3000);
+                        }
+                    }
+                });
+            });
 
             $("#fadelink").click(function(event){
                 event.preventDefault();
@@ -47,9 +149,12 @@
     <div class="separation h-50p"></div>
 
     <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
-
         <div class="col-span-6">
-            
+            @if(!is_null($error))
+            <div class="error mb-4 bg-red text-sm text-white font-bold p-3 rounded-md">
+                {{$error}}
+            </div>
+            @endif
             <form action="/fieldsrental" method="POST" id='bookform'>
             {{ csrf_field() }}
             <x-frontend.forms.input_select>
@@ -60,7 +165,6 @@
                 <x-slot name='label_on_off'>on</x-slot>
                 
                 @php
-                
                 if(isset($_GET['players_number'])){
                     if($_GET['players_number']!=0){
                         $x5selected = ($_GET['players_number'] == 1)?'selected':'';
@@ -99,6 +203,8 @@
                         $selected = ($_GET['field'] == $item->id)?'selected':'';
                     }else if($field_id != ''){
                         $selected = ($field_id == $item->id)?'selected':'';
+                    }else if(isset($session_field) && $session_field['fieldIdSelected'] != ''){
+                        $selected = ($session_field['fieldIdSelected'] == $item->id)?'selected':'';
                     }else{
                         $selected = '';
                     }
@@ -113,6 +219,8 @@
                     $default_date = ($_GET['field']!=null)?$_GET['date']:date('Y-m-d');
                 }else if($date != ''){
                     $default_date = $date;
+                }else if(isset($session_field) && $session_field['dateSelected']){
+                    $default_date = date($session_field['dateSelected']);
                 }else{
                     $default_date = date('Y-m-d');
                 }
@@ -121,6 +229,7 @@
 
             <x-frontend.forms.input_text>
                 <x-slot name='type'>date</x-slot>
+                <x-slot name='min'>{{date('Y-m-d')}}</x-slot>
                 <x-slot name='label'>Pick a Date</x-slot>
                 <x-slot name='id'>date</x-slot>
                 <x-slot name='default'>{{$default_date}}</x-slot>
@@ -149,7 +258,6 @@
             
         </div>
         <div class="col-span-6">
-  
             <form action="/payment" method="POST" id='bookform'>
 
                 {{ csrf_field() }}
@@ -244,7 +352,11 @@
                                 @for ($i = 0; $i < count($hoursarray); $i++)
                                     @php
                                         if($hoursarray[$i]['class'] == 'noselect'){
-                                            $color = 'bg-green button_hour noselect';
+                                            $color = 'bg-green button_hour text-gray';
+                                            $pointer = 'cursor-pointer';
+                                            $decoration = '';
+                                        }else if($hoursarray[$i]['class'] == 'selected'){
+                                            $color = 'bg-warning button_hour text-black';
                                             $pointer = 'cursor-pointer';
                                             $decoration = '';
                                         }else{
@@ -253,22 +365,29 @@
                                             $decoration = 'line-through';
                                         }
 
-                                        if ($hoursarray[$i]['hour'] == '08:00'){ $hour_fix = '8 AM'; }
-                                        else if ($hoursarray[$i]['hour'] == '09:00'){ $hour_fix = '9 AM'; }
-                                        else if ($hoursarray[$i]['hour'] == '10:00'){ $hour_fix = '10 AM'; }
-                                        else if ($hoursarray[$i]['hour'] == '11:00'){ $hour_fix = '11 AM'; }
-                                        else if ($hoursarray[$i]['hour'] == '12:00'){ $hour_fix = '12 PM'; }
-                                        else if ($hoursarray[$i]['hour'] == '13:00'){ $hour_fix = '1 PM'; }
-                                        else if ($hoursarray[$i]['hour'] == '14:00'){ $hour_fix = '2 PM'; }
-                                        else if ($hoursarray[$i]['hour'] == '15:00'){ $hour_fix = '3 PM'; }
-                                        else if ($hoursarray[$i]['hour'] == '16:00'){ $hour_fix = '4 PM'; }
-                                        else if ($hoursarray[$i]['hour'] == '17:00'){ $hour_fix = '5 PM'; }
-                                        else if ($hoursarray[$i]['hour'] == '18:00'){ $hour_fix = '6 PM'; }
-                                        else if ($hoursarray[$i]['hour'] == '19:00'){ $hour_fix = '7 PM'; }
-                                        else if ($hoursarray[$i]['hour'] == '20:00'){ $hour_fix = '8 PM'; }
-                                        else if ($hoursarray[$i]['hour'] == '21:00'){ $hour_fix = '9 PM'; }
-                                        else if ($hoursarray[$i]['hour'] == '22:00'){ $hour_fix = '10 PM'; }
-                                        else if ($hoursarray[$i]['hour'] == '23:00'){ $hour_fix = '11 PM'; }
+                                        $hour_map = [
+                                            '08:00' => '8 AM',
+                                            '09:00' => '9 AM',
+                                            '10:00' => '10 AM',
+                                            '11:00' => '11 AM',
+                                            '12:00' => '12 PM',
+                                            '13:00' => '1 PM',
+                                            '14:00' => '2 PM',
+                                            '15:00' => '3 PM',
+                                            '16:00' => '4 PM',
+                                            '17:00' => '5 PM',
+                                            '18:00' => '6 PM',
+                                            '19:00' => '7 PM',
+                                            '20:00' => '8 PM',
+                                            '21:00' => '9 PM',
+                                            '22:00' => '10 PM',
+                                            '23:00' => '11 PM',
+                                        ];
+
+                                        // Obtener la hora actual del array
+                                        $current_hour = $hoursarray[$i]['hour'];
+                                        // Asignar el formato AM/PM usando el array asociativo
+                                        $hour_fix = isset($hour_map[$current_hour]) ? $hour_map[$current_hour] : 'Unknown';
 
                                     @endphp
                                     <x-frontend.buttons.hour>
@@ -291,8 +410,18 @@
     
                             <div class="flex gap-x-4 text-xs mb-2">
                                 <div><span><i class="fas fa-circle text-green"></i></span> Available</div>
+                                <div><span><i class="fas fa-circle text-green-active"></i></span> Discount</div>
                                 <div><span><i class="fas fa-circle text-warning"></i></span> Selected</div>
                                 <div><span><i class="fas fa-circle text-red"></i></span> Not available</div>
+                            </div>
+
+                            <div class="sm:w-2/3 mt-5"> 
+                                <div class="flex">
+                                    <input type="text" name="coupon_code" id="coupon_input" class="block w-full py-3 px-2 text-black bg-gray-200 focus:outline-none focus:bg-gray-300 focus:shadow-inner border border-bluetext  rounded-l-md" placeholder="COUPON CODE" aria-label="Coupon Code" aria-describedby="basic-addon2">
+                                    <button type="button" id="coupon_btn" class="bg-red flex  items-center gap-1 px-3 text-md font-roboto font-bold  rounded-r-md">
+                                        APPLY <i class="fas fa-ticket-alt text-md pl-1"></i>
+                                    </button>
+                                  </div>
                             </div>
         
                             <script>
@@ -300,7 +429,13 @@
 
                                 $(document).ready(function() {
                                     $('#buttonrental').prop('disabled', true);
-                                    
+                                    var hoursSelected = $('.button_hour.selected');
+                                    if (hoursSelected.length > 0) {
+                                        hoursSelected.each(function(index, element) {
+                                            sethour($(element));
+                                        });    
+                                        xsa();
+                                    }
                                 });
         
                                 $(".button_hour").click(function(){
@@ -329,12 +464,13 @@
                                 });
 
                                 function sethour(thisHour){
-                                    console.log(thisHour)
                                     let hour_text = thisHour.text();
                                     let price = thisHour.data("price")
                                     let price_alt = thisHour.data("pricealt")
                                     let hour = thisHour.data("hour")
                                     let althour = thisHour.data("althour")
+
+                                    console.log(price,price_alt);
                                     
                                     let hourInt = parseInt(hour.replace(':00', ''))
                                     
@@ -368,11 +504,13 @@
                                     matrix = []
                                     matrixFinale = []
                                     for (let i = 23; i > 7; i--) {
-                                        let indexhour = $('#hour-'+i)
-                                        console.log(indexhour)
-                                        console.log(indexhour.attr('data-active') == '1')
+                                        let indexhour = $('#hour-'+i);
+                                        // console.log(indexhour)
+                                        // console.log(indexhour.attr('data-active') == '1')
                                         if(indexhour.attr('data-active') == '1'){
+                                            console.log(indexhour);
                                             matrix.push([indexhour.attr('data-althour'), indexhour.attr('data-price'), indexhour.attr('data-pricealt'), indexhour.val()])
+                                            // console.log(matrix);
                                         }
                                     }//endfor
 
@@ -382,6 +520,8 @@
 
                                         matrixFinale = []
                                         $('#sumary').html('')
+                                        // console.log([matrix[0][3], matrix[0][1]]);
+                                        // console.log([matrix[0][0], matrix[0][1]]);
                                         matrixFinale.push([matrix[0][3], matrix[0][1]])
 
                                         $('#sumary').append('<tr class="hover:bg-gray-100 border border-dotted border-softblue text-base text-center text-warning"><td class="font-roboto py-1 font-bold">'+matrix[0][0]+'</td><td class="font-roboto py-1 font-bold border-l border-dotted border-softblue">$ '+matrix[0][1]+'</td></tr>')
@@ -399,8 +539,8 @@
                                         for (let x = 0; x < matrix.length; x++) {
 
                                             if(x == 0){
-
                                                 matrixFinale.push([matrix[x][3], matrix[x][1]])
+                                                // console.log(matrixFinale);
                                                 $('#sumary').append('<tr class="hover:bg-gray-100 border border-dotted border-softblue text-base text-center text-warning"><td class="font-roboto py-1 font-bold">'+matrix[x][0]+'</td><td class="font-roboto py-1 font-bold border-l border-dotted border-softblue">$ '+matrix[x][1]+'</td></tr>')
                                                 
                                                 sumTotal += parseFloat(matrix[x][1])
@@ -409,6 +549,7 @@
                                                 $('#bookingArray').val(JSON.stringify(matrixFinale))
                                             }else{
 
+                                                // Determina si es que hay un precio alternativo, sino toma el precio real
                                                 let finalPrice = (matrix[x][2] > 0)?matrix[x][2]:matrix[x][1]
                                                 matrixFinale.push([matrix[x][3], finalPrice])
                                                 $('#sumary').append('<tr class="hover:bg-gray-100 border border-dotted border-softblue text-base text-center text-warning"><td class="font-roboto py-1 font-bold">'+matrix[x][0]+'</td><td class="font-roboto py-1 font-bold border-l border-dotted border-softblue">$ '+finalPrice+'</td></tr>')
@@ -429,8 +570,7 @@
                                         $('#totalPrice').val('0.00')//reset hidden value
                                     }
 
-                                    console.log(matrixFinale)
-
+                                    // console.log(matrixFinale)
                                 }
 
 
@@ -510,8 +650,6 @@
 
                 
             </form>
-
-
         </div>
 
 

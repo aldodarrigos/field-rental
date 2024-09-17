@@ -5,6 +5,7 @@
 /public/error_log
 /public/favicon/back/
 /storage/logs/paypal/log
+storage/\logs\paypal\log
 /storage/*.key
 /vendor
 .env

@@ -14,18 +14,15 @@
     
         <tbody class="bg-white">
             @foreach ($reservations as $item)
-    
             @php
-                //$date = new DateTime($item->res_date);
-                //$now = new DateTime();
-                $status = 'Finished';
-                $status_bg = 'info';
-                /*
-                if($date < $now) {
+                $status = 'Pending';
+                $status_bg = 'bg-primary';
+                $now = \Carbon\Carbon::now();
+                $reservation_date = \Carbon\Carbon::parse($item->res_date . ' ' . $item->hour);
+                if ($now->greaterThan($reservation_date)) {
                     $status = 'Finished';
-                    $status_bg = 'graytext';
+                    $status_bg = 'bg-grayhard';   
                 }
-                */
             @endphp
                 
             <tr>
@@ -49,7 +46,7 @@
                 </td>
     
                 <td class="px-6 py-4 whitespace-no-wrap border-b border-bluetext">
-                    <span class="px-2 inline-flex text-xs uppercase leading-5 font-semibold rounded-md bg-grayhard text-white py-1">{{$status}}</span>
+                    <span class="px-2 inline-flex text-xs uppercase leading-5 font-semibold rounded-md  {{$status_bg}} text-white py-1">{{$status}}</span>
                 </td>
     
                 <td class="px-6 py-4 whitespace-no-wrap border-b border-bluetext text-sm leading-5 text-gray-500">

@@ -22,6 +22,10 @@
 
 @endsection
 
+@php
+    $response = session()->get('response');
+@endphp
+
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
         <h2>Booking</h2>
@@ -39,6 +43,18 @@
     </div>
 </div>
 <div class="wrapper wrapper-content animated fadeInRight">
+    
+    {{-- Alert Response --}}
+    @if($response)
+    <div class="row">
+        <div class="col-lg-6 col-sm-12">
+        <div class="alert alert-{{$response['alert']}}" role="alert">
+            {{$response['message']}}
+          </div>
+        </div>
+    </div>
+    @endif
+    {{-- Alert Response --}}
 
     <div class="row">
         <div class="col-lg-6">
