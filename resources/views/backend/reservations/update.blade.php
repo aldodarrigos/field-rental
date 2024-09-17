@@ -23,9 +23,7 @@
 @endsection
 
 @php
-            
     $response = session()->get('response');
-
 @endphp
 
 <div class="row wrapper border-bottom white-bg page-heading">
@@ -46,9 +44,6 @@
 </div>
 <div class="wrapper wrapper-content animated fadeInRight">
     
-    {{-- @php
-        dd($response);
-    @endphp --}}
     {{-- Alert Response --}}
     @if($response)
     <div class="row">

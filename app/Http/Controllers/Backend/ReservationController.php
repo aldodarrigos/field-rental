@@ -28,18 +28,35 @@ class ReservationController extends Controller
      */
     public function index(Request $request)
     {
+        $url = "reservations";
+
         $reservations = DB::table('reservations')
-            ->select(DB::raw('reservations.id, reservations.code, users.name as user_name, users.email as user_email, fields.name as field_name, fields.number as field_number, reservations.hour as hour, reservations.res_date as res_date, reservations.price as price, reservations.conf_code as res_code, reservations.created_at as created_at, reservations.note, reservations.user_rel'))
+            ->select(DB::raw('reservations.id, reservations.code, users.name as user_name, users.email as user_email, fields.name as field_name, fields.number as field_number, reservations.hour as hour, reservations.res_date as res_date, reservations.price as price, reservations.final_price as final_price, reservations.discount as discount, reservations.conf_code as res_code, reservations.created_at as created_at, reservations.note, reservations.user_rel'))
             ->leftJoin('users', 'reservations.user_id', '=', 'users.id')
             ->leftJoin('fields', 'reservations.field_id', '=', 'fields.id')
             ->where('reservations.paid', '=', '1')
             ->orderBy('reservations.created_at', 'desc')
             ->get();
 
+        return view('backend/reservations/index', ['reservations' => $reservations, 'url' => $url]);
+    }
+
+
+    public function booking_coupons($code = null, $coupon_id = null)
+    {
         $url = "reservations";
 
-        // return $this->fields($request);
-        return view('backend/reservations/index', ['reservations' => $reservations, 'url' => $url]);
+        if (!is_null($code) && !is_null($coupon_id)) {
+            $reservations = DB::table('reservations')
+                ->select(DB::raw('reservations.id, reservations.code, users.name as user_name, users.email as user_email, fields.name as field_name, fields.number as field_number, reservations.hour as hour, reservations.res_date as res_date, reservations.price as price, reservations.final_price as final_price, reservations.discount as discount, reservations.conf_code as res_code, reservations.created_at as created_at, reservations.note, reservations.user_rel'))
+                ->leftJoin('users', 'reservations.user_id', '=', 'users.id')
+                ->leftJoin('fields', 'reservations.field_id', '=', 'fields.id')
+                ->where('reservations.code', '=', $code)
+                ->where('reservations.paid', '=', '1')
+                ->orderBy('reservations.created_at', 'desc')
+                ->get();
+            return view('backend/reservations/booking-coupons', ['reservations' => $reservations, 'url' => $url, 'coupon_id' => $coupon_id]);
+        }
 
     }
 
@@ -170,10 +187,16 @@ class ReservationController extends Controller
         //$alt_price = $request->input('alt_price');
         //$final_price = ($alt_price > 0.00)?$alt_price:$price;
 
+        $response = [
+            'alert' => 'danger',
+            'message' => 'The registration was not successful',
+        ];
+
         for ($i = 0; $i < count($booking_array); $i++) {
             if (is_booked($booking_array[$i][0], $field_id, $date)) {
                 // if this hour is locked by someone
-                return redirect()->action([self::class, 'create']);
+                $response['message'] = 'The reservation with the selected date and hour exists';
+                return redirect('booking/create')->with('response', $response);
             }
 
             $reservation = new Reservation();

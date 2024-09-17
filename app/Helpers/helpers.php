@@ -1,5 +1,6 @@
 <?php
 use App\Models\Reservation;
+use Codeboxr\CouponDiscount\Facades\Coupon;
 
 
 
@@ -53,3 +54,68 @@ if (!function_exists('get_price_field')) {
     }
 }
 
+
+if (!function_exists('verify_coupon')) {
+    function verify_coupon($coupon_code, $field_id, $date)
+    {
+
+        $coupon = \App\Models\Coupon::where('code', $coupon_code)->where('status', '1')->first();
+        try {
+            $coupon_validity = Coupon::validity($coupon_code, 1000, "406");
+        } catch (\Throwable $th) {
+            return null;
+        }
+
+        if (!$coupon || !$coupon_validity) {
+            return null;
+        }
+        // Validate if exists the field
+        $existField = $coupon->fields()->where('field_id', $field_id)->first();
+        if (!$existField) {
+            return null;
+        }
+        // Validate if exists the date
+        $existDate = $coupon->reservation_dates()->where('date', $date)->first();
+        if (!$existDate) {
+            return null;
+        }
+
+        if ($coupon && $existField && $existDate) {
+            return $coupon;
+        }
+
+        return null;
+    }
+
+
+    if (!function_exists('range_dates_to_array')) {
+        function range_dates_to_array($range)
+        {
+
+            // Dividimos el rango en dos fechas
+            list($start_date, $end_date) = explode(" to ", $range);
+
+            // Creamos objetos DateTime para las fechas de inicio y fin
+            $start = new DateTime($start_date);
+            $end = new DateTime($end_date);
+
+            // Añadimos un día extra al final porque DatePeriod no incluye el último día
+            $end->modify('+1 day');
+
+            // Creamos un intervalo de 1 día
+            $interval = new DateInterval('P1D');
+
+            // Usamos DatePeriod para generar cada día entre las fechas de inicio y fin
+            $period = new DatePeriod($start, $interval, $end);
+
+            // Convertimos el DatePeriod en un array de fechas
+            $dates = [];
+            foreach ($period as $date) {
+                $dates[] = $date->format('Y-m-d'); // Formato de fecha: Año-mes-día
+            }
+            return $dates;
+        }
+    }
+
+
+}

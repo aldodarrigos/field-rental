@@ -9,9 +9,111 @@
     <!-- jQuery Modal -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-
+    <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
     <script>
         $(document).ready(function() {
+
+            function conffetiCoupon(){
+                const count = 200,
+                defaults = {
+                    origin: { y: 0.7 },
+                };
+
+                function fire(particleRatio, opts) {
+                confetti(
+                    Object.assign({}, defaults, opts, {
+                    particleCount: Math.floor(count * particleRatio),
+                    })
+                );
+                }
+
+                fire(0.25, {
+                spread: 26,
+                startVelocity: 55,
+                });
+
+                fire(0.2, {
+                spread: 60,
+                });
+
+                fire(0.35, {
+                spread: 100,
+                decay: 0.91,
+                scalar: 0.8,
+                });
+
+                fire(0.1, {
+                spread: 120,
+                startVelocity: 25,
+                decay: 0.92,
+                scalar: 1.2,
+                });
+
+                fire(0.1, {
+                spread: 120,
+                startVelocity: 45,
+                });
+            }
+
+            $("#coupon_btn").click(function(e){
+                e.preventDefault();
+                const couponBtn = $(this);
+                const couponInput = $('#coupon_input');
+                const code = $('#coupon_input').val();
+                const form = $('#bookform').serializeArray();
+                const field = $('#fieldIdSelected').val();
+                const date = $('#dateSelected').val();
+                $.ajax({
+                    url: `/check-coupon/${code}/${field}/${date}`,
+                    type: "GET",
+                    success: function(data){
+                        var response = data;
+                        var typeDiscount = response.type
+                        var discount =response.amount;
+                        var hoursToDiscount =response.hours;
+                        var response = data;
+
+                        if(response.success){
+                            conffetiCoupon();
+                            couponBtn.prop('disabled',true);
+                            couponBtn.removeClass('bg-red').addClass('bg-black').html('APPLIED <i class="fas fa-check text-md pl-1"></i>');
+                            $('#coupon_input').prop('readonly',true);
+                            const btnHours = $('.button_hour');
+                            $.each(btnHours, function(key, btnHour){
+                                let selected = $(btnHour).hasClass('selected');
+                                let hour = $(btnHour).data('hour');
+                                let price = $(btnHour).data('price');
+                                let priceAlt = $(btnHour).data('pricealt');
+                                if(hoursToDiscount.find(el => el === hour)){
+                                    if (typeDiscount == 'percentage') {
+                                        price = (price - (price * (discount / 100))).toFixed(2);
+                                        priceAlt = (priceAlt - (priceAlt * (discount / 100))).toFixed(2);
+                                    } else if (typeDiscount == 'fixed') {
+                                        price = (price - discount).toFixed(2);
+                                        priceAlt = (priceAlt - discount).toFixed(2);
+                                    }
+                                    $(btnHour).data('price', price);
+                                    $(btnHour).data('pricealt', priceAlt);
+                                    $(btnHour).removeClass('bg-green')
+                                    $(btnHour).addClass('bg-green-active');
+                                    if(selected){
+                                        // Set price to hidden fields
+                                        sethour($(btnHour));
+                                    }
+                                }
+                            });
+                            xsa();
+                        }else{
+                            console.log(couponInput);
+                            couponInput.val('');
+                            couponInput.attr('placeholder','IS NOT VALID 😪');
+                            setTimeout(() => {
+                                couponInput.attr('placeholder','COUPON CODE');
+                            }, 3000);
+                        }
+                    }
+                });
+            });
 
             $("#fadelink").click(function(event){
                 event.preventDefault();
@@ -47,9 +149,12 @@
     <div class="separation h-50p"></div>
 
     <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
-
         <div class="col-span-6">
-            
+            @if(!is_null($error))
+            <div class="error mb-4 bg-red text-sm text-white font-bold p-3 rounded-md">
+                {{$error}}
+            </div>
+            @endif
             <form action="/fieldsrental" method="POST" id='bookform'>
             {{ csrf_field() }}
             <x-frontend.forms.input_select>
@@ -124,6 +229,7 @@
 
             <x-frontend.forms.input_text>
                 <x-slot name='type'>date</x-slot>
+                <x-slot name='min'>{{date('Y-m-d')}}</x-slot>
                 <x-slot name='label'>Pick a Date</x-slot>
                 <x-slot name='id'>date</x-slot>
                 <x-slot name='default'>{{$default_date}}</x-slot>
@@ -304,8 +410,18 @@
     
                             <div class="flex gap-x-4 text-xs mb-2">
                                 <div><span><i class="fas fa-circle text-green"></i></span> Available</div>
+                                <div><span><i class="fas fa-circle text-green-active"></i></span> Discount</div>
                                 <div><span><i class="fas fa-circle text-warning"></i></span> Selected</div>
                                 <div><span><i class="fas fa-circle text-red"></i></span> Not available</div>
+                            </div>
+
+                            <div class="sm:w-2/3 mt-5"> 
+                                <div class="flex">
+                                    <input type="text" name="coupon_code" id="coupon_input" class="block w-full py-3 px-2 text-black bg-gray-200 focus:outline-none focus:bg-gray-300 focus:shadow-inner border border-bluetext  rounded-l-md" placeholder="COUPON CODE" aria-label="Coupon Code" aria-describedby="basic-addon2">
+                                    <button type="button" id="coupon_btn" class="bg-red flex  items-center gap-1 px-3 text-md font-roboto font-bold  rounded-r-md">
+                                        APPLY <i class="fas fa-ticket-alt text-md pl-1"></i>
+                                    </button>
+                                  </div>
                             </div>
         
                             <script>
@@ -353,6 +469,8 @@
                                     let price_alt = thisHour.data("pricealt")
                                     let hour = thisHour.data("hour")
                                     let althour = thisHour.data("althour")
+
+                                    console.log(price,price_alt);
                                     
                                     let hourInt = parseInt(hour.replace(':00', ''))
                                     
@@ -386,11 +504,13 @@
                                     matrix = []
                                     matrixFinale = []
                                     for (let i = 23; i > 7; i--) {
-                                        let indexhour = $('#hour-'+i)
+                                        let indexhour = $('#hour-'+i);
                                         // console.log(indexhour)
                                         // console.log(indexhour.attr('data-active') == '1')
                                         if(indexhour.attr('data-active') == '1'){
+                                            console.log(indexhour);
                                             matrix.push([indexhour.attr('data-althour'), indexhour.attr('data-price'), indexhour.attr('data-pricealt'), indexhour.val()])
+                                            // console.log(matrix);
                                         }
                                     }//endfor
 
@@ -400,6 +520,8 @@
 
                                         matrixFinale = []
                                         $('#sumary').html('')
+                                        // console.log([matrix[0][3], matrix[0][1]]);
+                                        // console.log([matrix[0][0], matrix[0][1]]);
                                         matrixFinale.push([matrix[0][3], matrix[0][1]])
 
                                         $('#sumary').append('<tr class="hover:bg-gray-100 border border-dotted border-softblue text-base text-center text-warning"><td class="font-roboto py-1 font-bold">'+matrix[0][0]+'</td><td class="font-roboto py-1 font-bold border-l border-dotted border-softblue">$ '+matrix[0][1]+'</td></tr>')
@@ -417,8 +539,8 @@
                                         for (let x = 0; x < matrix.length; x++) {
 
                                             if(x == 0){
-
                                                 matrixFinale.push([matrix[x][3], matrix[x][1]])
+                                                // console.log(matrixFinale);
                                                 $('#sumary').append('<tr class="hover:bg-gray-100 border border-dotted border-softblue text-base text-center text-warning"><td class="font-roboto py-1 font-bold">'+matrix[x][0]+'</td><td class="font-roboto py-1 font-bold border-l border-dotted border-softblue">$ '+matrix[x][1]+'</td></tr>')
                                                 
                                                 sumTotal += parseFloat(matrix[x][1])
@@ -427,6 +549,7 @@
                                                 $('#bookingArray').val(JSON.stringify(matrixFinale))
                                             }else{
 
+                                                // Determina si es que hay un precio alternativo, sino toma el precio real
                                                 let finalPrice = (matrix[x][2] > 0)?matrix[x][2]:matrix[x][1]
                                                 matrixFinale.push([matrix[x][3], finalPrice])
                                                 $('#sumary').append('<tr class="hover:bg-gray-100 border border-dotted border-softblue text-base text-center text-warning"><td class="font-roboto py-1 font-bold">'+matrix[x][0]+'</td><td class="font-roboto py-1 font-bold border-l border-dotted border-softblue">$ '+finalPrice+'</td></tr>')
@@ -448,7 +571,6 @@
                                     }
 
                                     // console.log(matrixFinale)
-
                                 }
 
 
@@ -459,7 +581,6 @@
                                 });
 
                                 function hour_button_switch(thisObj, signal){
-                                    console.log(signal)
                                     if(signal == '1'){
                                         thisObj.addClass("bg-warning");
                                         thisObj.removeClass("bg-green");

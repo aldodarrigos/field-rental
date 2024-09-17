@@ -67,8 +67,8 @@ return [
     |
     */
 
-    // 'timezone' => 'America/North_Dakota/Center',
-    'timezone' => 'Pacific/Auckland',
+    'timezone' => 'America/North_Dakota/Center',
+    // 'timezone' => 'Pacific/Auckland',
 
     /*
     |--------------------------------------------------------------------------

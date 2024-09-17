@@ -60,6 +60,10 @@
             </li>
 
             @if(Auth::user()->role == 2)
+
+            <li class="{{$content_active}}">
+                <a href="/coupons"><i class="fas fa-ticket-alt"></i> <span class="nav-label">Coupons</span></a>
+            </li>
             <li class="{{$content_active}}">
                 <a href="/content"><i class="fas fa-feather-alt"></i> <span class="nav-label">Content</span></a>
             </li>

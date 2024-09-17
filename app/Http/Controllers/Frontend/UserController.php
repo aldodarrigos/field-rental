@@ -27,7 +27,6 @@ class UserController extends Controller
 
     public function authenticate(Request $request)
     {
-
         // Retrive Input
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
@@ -46,7 +45,6 @@ class UserController extends Controller
         }
         // if failed login
         return redirect('signin')->with('status', 'Incorrect email or password.');
-
     }
 
     public function dashboard()
@@ -57,6 +55,7 @@ class UserController extends Controller
             ->leftJoin('users', 'reservations.user_id', '=', 'users.id')
             ->leftJoin('fields', 'reservations.field_id', '=', 'fields.id')
             ->where('reservations.user_id', Auth::user()->id)
+            ->where('reservations.paid', '1')
             ->orderBy('reservations.created_at', 'desc')
             ->get();
 

@@ -54,6 +54,10 @@ module.exports = {
                 "400p": "400px"
             },
             colors: {
+                green: {
+                    default: "green",
+                    active: "#00d400"
+                },
                 deepblue: "#1C2334",
                 blue: "#273147",
                 trueblue: "#007bff",
@@ -74,7 +78,7 @@ module.exports = {
                 info: "#23c6c8",
                 warning: "#f8ac59",
                 danger: "#ec4758",
-                green: "green",
+                // green: "green",
                 blueStart: "#00509a",
                 blueEnd: "#003c78"
             },

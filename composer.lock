@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bcecf70f2b609552e11c39180527e93e",
+    "content-hash": "c931c253d7cf45ea594bd190dfcea530",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -170,6 +170,54 @@
                 }
             ],
             "time": "2021-01-20T22:51:39+00:00"
+        },
+        {
+            "name": "codeboxr/coupondiscount",
+            "version": "v1.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/codeboxrcodehub/coupondiscount.git",
+                "reference": "047d10c062c336066112c0a7ea6846197afcc8c7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/codeboxrcodehub/coupondiscount/zipball/047d10c062c336066112c0a7ea6846197afcc8c7",
+                "reference": "047d10c062c336066112c0a7ea6846197afcc8c7",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^6.0|^7.0|^8.0|^9.0|^10.0",
+                "illuminate/pagination": "^6.0|^7.0|^8.0|^9.0|^10.0",
+                "php": "^7.4|^8.0|^8.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Codeboxr\\CouponDiscount\\CouponDiscountServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Codeboxr\\CouponDiscount\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Codeboxr"
+                }
+            ],
+            "description": "Coupon Discount",
+            "support": {
+                "issues": "https://github.com/codeboxrcodehub/coupondiscount/issues",
+                "source": "https://github.com/codeboxrcodehub/coupondiscount/tree/v1.0.5"
+            },
+            "time": "2024-05-07T04:13:50+00:00"
         },
         {
             "name": "composer/package-versions-deprecated",
@@ -8785,5 +8833,5 @@
         "php": "^7.3|^8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.6.0"
 }

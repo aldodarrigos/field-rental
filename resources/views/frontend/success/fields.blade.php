@@ -20,14 +20,13 @@
 
         <div class="col-span-6">
             @php
-            
                 $reservations = session()->get('reservation');
                 $field = session()->get('field');
+                $coupon = session()->get('coupon');
                 $user = session()->get('user');
                 $paypal_code = session()->get('paypal_code');
                 $code = session()->get('code');
                 $field_players_number = ($field->tag_id == 1)?'5 vs 5 players':'7 vs 7 players';
-                
             @endphp
 
 
@@ -46,7 +45,6 @@
                         </div>
                         
                         @foreach ($reservations as $item)
-
                         <div class="grid grid-cols-3">
                             <div class="">
                                 <div class="font-roboto text-lg uppercase font-bold leading-none mb-2 mt-2">Date</div>
@@ -58,12 +56,23 @@
                             </div>
                             <div class="">
                                 <div class="font-roboto text-lg uppercase font-bold leading-none mb-2 mt-2">Price</div>
-                                <div class="font-roboto text-xl uppercase font-bold leading-none mb-2 mt-2 text-warning">${{$item->price}}</div>
+                                <div class="font-roboto text-xl uppercase font-bold leading-none mb-2 mt-2 text-warning">
+                                    @if($item->final_price !== null)
+                                    ${{$item->final_price}}
+                                    @else
+                                    ${{$item->price}}
+                                    @endif
+                                </div>
                             </div>
                         </div>
-
                         @endforeach
 
+                        @if($coupon !== null)
+                        <div class="mt-4">
+                            <div class="font-roboto text-lg uppercase font-bold leading-none mb-2 mt-2">Coupon Code</div>
+                            <div class="font-roboto text-xl uppercase font-bold leading-none mb-2 mt-2 text-warning">{{$coupon}}</div>
+                        </div>
+                        @endif
                         <div class="mt-4">
                             <div class="font-roboto text-lg uppercase font-bold leading-none mb-2 mt-2">PayPal Code</div>
                             <div class="font-roboto text-xl uppercase font-bold leading-none mb-2 mt-2 text-warning">{{$paypal_code}}</div>
