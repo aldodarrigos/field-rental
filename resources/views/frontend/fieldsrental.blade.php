@@ -55,6 +55,14 @@
                 });
             }
 
+            function conffeti_v2(){
+                confetti({
+                    particleCount: 100,
+                    spread: 70,
+                    origin: { y: 0.6 },
+                });
+            }
+
             $("#coupon_btn").click(function(e){
                 e.preventDefault();
                 const couponBtn = $(this);
@@ -74,7 +82,7 @@
                         var response = data;
 
                         if(response.success){
-                            conffetiCoupon();
+                            conffeti_v2();
                             couponBtn.prop('disabled',true);
                             couponBtn.removeClass('bg-red').addClass('bg-black').html('APPLIED <i class="fas fa-check text-md pl-1"></i>');
                             $('#coupon_input').prop('readonly',true);
@@ -84,18 +92,20 @@
                                 let hour = $(btnHour).data('hour');
                                 let price = $(btnHour).data('price');
                                 let priceAlt = $(btnHour).data('pricealt');
+
                                 if(hoursToDiscount.find(el => el === hour)){
                                     if (typeDiscount == 'percentage') {
-                                        price = (price - (price * (discount / 100))).toFixed(2);
-                                        priceAlt = (priceAlt - (priceAlt * (discount / 100))).toFixed(2);
+                                        // price = (price - (price * (discount / 100))).toFixed(2);
+                                        priceAlt = (price - (price * (discount / 100))).toFixed(2);
                                     } else if (typeDiscount == 'fixed') {
-                                        price = (price - discount).toFixed(2);
-                                        priceAlt = (priceAlt - discount).toFixed(2);
+                                        // price = (price - discount).toFixed(2);
+                                        priceAlt = (price - discount).toFixed(2);
                                     }
-                                    $(btnHour).data('price', price);
+                                    // $(btnHour).data('price', price);
+                                    console.log(priceAlt);
                                     $(btnHour).data('pricealt', priceAlt);
-                                    $(btnHour).removeClass('bg-green')
-                                    $(btnHour).addClass('bg-green-active');
+                                    // $(btnHour).removeClass('bg-green')
+                                    $(btnHour).addClass('slot_discount');
                                     if(selected){
                                         // Set price to hidden fields
                                         sethour($(btnHour));
@@ -320,7 +330,7 @@
                                 <div class="text-center">
                                     <div class="font-roboto text-base uppercase font-bold leading-none px-2 py-2 border-t border-b border-l border-dotted border-softblue">Total</div>
 
-                                    <div class="font-roboto text-base uppercase font-bold leading-none mb-2 text-warning px-2 py-2  border-b border-l border-dotted border-softblue">$<span id="total">0.00</span></div>
+                                    <div class="font-roboto text-base uppercase font-bold leading-none mb-2 text-warning px-2 py-2  border-r border-b border-l border-dotted border-softblue flex flex-col gap-3" id="total">0.00</div>
                                 </div>
                                 <div class="col-span-2">
     
@@ -503,65 +513,56 @@
 
                                     matrix = []
                                     matrixFinale = []
+                                    // Obtiene los valores hidden
                                     for (let i = 23; i > 7; i--) {
                                         let indexhour = $('#hour-'+i);
-                                        // console.log(indexhour)
-                                        // console.log(indexhour.attr('data-active') == '1')
                                         if(indexhour.attr('data-active') == '1'){
                                             console.log(indexhour);
                                             matrix.push([indexhour.attr('data-althour'), indexhour.attr('data-price'), indexhour.attr('data-pricealt'), indexhour.val()])
                                             // console.log(matrix);
                                         }
-                                    }//endfor
+                                    }
 
-                                    
+                                    $('#sumary').html('')
+                                    let sumTotalRegularPrice = parseFloat('0.00');
+                                    let sumTotalFinalPrice = parseFloat('0.00');
+                                    let existDiscount = false;
 
-                                    if(matrix.length == 1){
-
+                                    if(matrix.length > 0){
                                         matrixFinale = []
-                                        $('#sumary').html('')
-                                        // console.log([matrix[0][3], matrix[0][1]]);
-                                        // console.log([matrix[0][0], matrix[0][1]]);
-                                        matrixFinale.push([matrix[0][3], matrix[0][1]])
-
-                                        $('#sumary').append('<tr class="hover:bg-gray-100 border border-dotted border-softblue text-base text-center text-warning"><td class="font-roboto py-1 font-bold">'+matrix[0][0]+'</td><td class="font-roboto py-1 font-bold border-l border-dotted border-softblue">$ '+matrix[0][1]+'</td></tr>')
-
-                                        $('#total').text(matrix[0][1])//Total Text
-                                        $('#totalPrice').val(matrix[0][1])//Total hidden value
-                                        $('#bookingArray').val(JSON.stringify(matrixFinale))
-
-                                    }else if(matrix.length > 1){
-
-                                        matrixFinale = []
-                                        $('#sumary').html('')
-                                        let sumTotal = parseFloat('0.00')
-
                                         for (let x = 0; x < matrix.length; x++) {
-
-                                            if(x == 0){
-                                                matrixFinale.push([matrix[x][3], matrix[x][1]])
-                                                // console.log(matrixFinale);
-                                                $('#sumary').append('<tr class="hover:bg-gray-100 border border-dotted border-softblue text-base text-center text-warning"><td class="font-roboto py-1 font-bold">'+matrix[x][0]+'</td><td class="font-roboto py-1 font-bold border-l border-dotted border-softblue">$ '+matrix[x][1]+'</td></tr>')
-                                                
-                                                sumTotal += parseFloat(matrix[x][1])
-                                                $('#total').text(sumTotal.toFixed(2))//Total Text
-                                                $('#totalPrice').val(sumTotal.toFixed(2))//Total hidden value
-                                                $('#bookingArray').val(JSON.stringify(matrixFinale))
+                                            let regularPrice = matrix[x][1];
+                                            let altPrice = matrix[x][2];
+                                            let hour = matrix[x][3];
+                                            let hasDiscount = (altPrice > 0 ) ? true : false;
+                                            let finalPrice = hasDiscount ? altPrice : regularPrice;
+                                        
+                                            if(hasDiscount){
+                                                existDiscount = true;
+                                                $('#sumary').append(`
+                                                <tr class="hover:bg-gray-100 border border-dotted border-softblue text-base text-center text-warning">
+                                                    <td class="font-roboto py-1 font-bold">${matrix[x][0]}</td>
+                                                    <td class="font-roboto py-1 font-bold border-l border-dotted border-softblue flex flex-col gap-1">
+                                                        <span class="line-through" >$ ${regularPrice}</span>
+                                                        <span class="text-white" >$ ${finalPrice}</span>
+                                                    </td>
+                                                </tr>`
+                                                );
                                             }else{
-
-                                                // Determina si es que hay un precio alternativo, sino toma el precio real
-                                                let finalPrice = (matrix[x][2] > 0)?matrix[x][2]:matrix[x][1]
-                                                matrixFinale.push([matrix[x][3], finalPrice])
-                                                $('#sumary').append('<tr class="hover:bg-gray-100 border border-dotted border-softblue text-base text-center text-warning"><td class="font-roboto py-1 font-bold">'+matrix[x][0]+'</td><td class="font-roboto py-1 font-bold border-l border-dotted border-softblue">$ '+finalPrice+'</td></tr>')
-
-                                                sumTotal += parseFloat(finalPrice)
-                                                $('#total').text(sumTotal.toFixed(2))//Total Text
-                                                $('#totalPrice').val(sumTotal.toFixed(2))//Total hidden value
-                                                $('#bookingArray').val(JSON.stringify(matrixFinale))
-
+                                                $('#sumary').append('<tr class="hover:bg-gray-100 border border-dotted border-softblue text-base text-center text-warning"><td class="font-roboto py-1 font-bold">'+matrix[x][0]+'</td><td class="font-roboto py-1 font-bold border-l border-dotted border-softblue">$ '+matrix[x][1]+'</td></tr>')
                                             }
-                                            
+                                            sumTotalRegularPrice += parseFloat(regularPrice);
+                                            sumTotalFinalPrice += parseFloat(finalPrice);
+                                            matrixFinale.push([hour, finalPrice]);
+
                                         }
+
+                                        let htmlTotal = existDiscount ? `<span class="line-through">$ ${sumTotalRegularPrice.toFixed(2)}</span><span class="text-white"> $ ${sumTotalFinalPrice.toFixed(2)}</span>` 
+                                        : `$ ${sumTotalRegularPrice.toFixed(2)}`;
+                                        $('#total').empty();
+                                        $('#total').append(htmlTotal);
+                                        $('#totalPrice').val(sumTotalFinalPrice.toFixed(2));//Total hidden value
+                                        $('#bookingArray').val(JSON.stringify(matrixFinale));                                            
 
                                     }else{
                                         $('#sumary').html('')//reset table booking
@@ -660,7 +661,41 @@
     <div class="separation h-50p"></div>
 
 </main>
+<style>
 
+<style>
+
+  
+    @-webkit-keyframes blinkingBorder { /* Para Safari/Chrome */
+        0%, 100% {
+            border: 2px solid #39FF14;
+            box-shadow: 0 0 5px #39FF14, 0 0 10px #39FF14, 0 0 15px #39FF14, 0 0 20px #39FF14;
+        }
+        50% {
+            border: 2px solid transparent;
+            box-shadow: none;
+        }
+    }
+
+    @keyframes blinkingBorder {
+        0%, 100% {
+            border: 2px solid #39FF14;
+            box-shadow: 0 0 5px #39FF14, 0 0 10px #39FF14, 0 0 15px #39FF14, 0 0 20px #39FF14;
+        }
+        50% {
+            border: 2px solid transparent;
+            box-shadow: none;
+        }
+    }
+
+    .slot_discount{
+        animation: 1s ease 0s infinite normal none running blinkingBorder;
+        -webkit-animation: 1s ease 0s infinite normal none running blinkingBorder;
+    }
+    
+
+    
+</style>
 <script>
 
     $('#players_number').change(function() {
