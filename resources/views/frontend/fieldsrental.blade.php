@@ -63,6 +63,15 @@
                 });
             }
 
+            $('#coupon_input').keydown(function(e){
+                if(e.keyCode == 13){
+                    e.preventDefault();
+                    $('#coupon_btn').click();
+                    return false;
+                }
+                return true;
+            })
+
             $("#coupon_btn").click(function(e){
                 e.preventDefault();
                 const couponBtn = $(this);
@@ -418,11 +427,11 @@
                  
                             </div>
     
-                            <div class="flex gap-x-4 text-xs mb-2">
-                                <div><span><i class="fas fa-circle text-green"></i></span> Available</div>
-                                <div><span><i class="fas fa-circle text-green-active"></i></span> Discount</div>
-                                <div><span><i class="fas fa-circle text-warning"></i></span> Selected</div>
-                                <div><span><i class="fas fa-circle text-red"></i></span> Not available</div>
+                            <div class="flex gap-x-4  mb-2">
+                                <div class="size9 sm:text-xs"><span><i class="fas fa-circle text-green"></i></span> Available</div>
+                                <div class="size9 sm:text-xs"><span><i class="fas fa-circle text-green-active"></i></span> Discount</div>
+                                <div class="size9 sm:text-xs"><span><i class="fas fa-circle text-warning"></i></span> Selected</div>
+                                <div class="size9 sm:text-xs"><span><i class="fas fa-circle text-red"></i></span> Not available</div>
                             </div>
 
                             <div class="sm:w-2/3 mt-5"> 
@@ -663,9 +672,12 @@
 </main>
 <style>
 
-<style>
-
-  
+    @media (max-width: 768px) {
+        .size9{
+            font-size: 9px;
+        }
+    }
+    
     @-webkit-keyframes blinkingBorder { /* Para Safari/Chrome */
         0%, 100% {
             border: 2px solid #39FF14;
