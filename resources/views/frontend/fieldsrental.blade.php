@@ -111,9 +111,10 @@
                                         priceAlt = (price - discount).toFixed(2);
                                     }
                                     // $(btnHour).data('price', price);
-                                    console.log(priceAlt);
                                     $(btnHour).data('pricealt', priceAlt);
+                                    $(btnHour).data('dscto', '1');        
                                     // $(btnHour).removeClass('bg-green')
+                                    console.log($(btnHour).data('dscto'));
                                     $(btnHour).addClass('slot_discount');
                                     if(selected){
                                         // Set price to hidden fields
@@ -123,8 +124,6 @@
                             });
                             xsa();
                         }else{
-                            console.log(couponInput);
-                            couponInput.val('');
                             couponInput.attr('placeholder','IS NOT VALID 😪');
                             setTimeout(() => {
                                 couponInput.attr('placeholder','COUPON CODE');
@@ -290,22 +289,22 @@
                 <input type="hidden" id="bookingArray" name='bookingArray' value='0'>
                 <input type="hidden" id="totalPrice" name='totalPrice' value='0.00'>
 
-                <input type="hidden" id="hour-8" value='08:00' data-price='' data-pricealt='' data-active='0' data-althour=''>
-                <input type="hidden" id="hour-9" value='09:00' data-price='' data-pricealt='' data-active='0' data-althour=''>
-                <input type="hidden" id="hour-10" value='10:00' data-price='' data-pricealt='' data-active='0' data-althour=''>
-                <input type="hidden" id="hour-11" value='11:00' data-price='' data-pricealt='' data-active='0' data-althour=''>
-                <input type="hidden" id="hour-12" value='12:00' data-price='' data-pricealt='' data-active='0' data-althour=''>
-                <input type="hidden" id="hour-13" value='13:00' data-price='' data-pricealt='' data-active='0' data-althour=''>
-                <input type="hidden" id="hour-14" value='14:00' data-price='' data-pricealt='' data-active='0' data-althour=''>
-                <input type="hidden" id="hour-15" value='15:00' data-price='' data-pricealt='' data-active='0' data-althour=''>
-                <input type="hidden" id="hour-16" value='16:00' data-price='' data-pricealt='' data-active='0' data-althour=''>
-                <input type="hidden" id="hour-17" value='17:00' data-price='' data-pricealt='' data-active='0' data-althour=''>
-                <input type="hidden" id="hour-18" value='18:00' data-price='' data-pricealt='' data-active='0' data-althour=''>
-                <input type="hidden" id="hour-19" value='19:00' data-price='' data-pricealt='' data-active='0' data-althour=''>
-                <input type="hidden" id="hour-20" value='20:00' data-price='' data-pricealt='' data-active='0' data-althour=''>
-                <input type="hidden" id="hour-21" value='21:00' data-price='' data-pricealt='' data-active='0' data-althour=''>
-                <input type="hidden" id="hour-22" value='22:00' data-price='' data-pricealt='' data-active='0' data-althour=''>
-                <input type="hidden" id="hour-23" value='23:00' data-price='' data-pricealt='' data-active='0' data-althour=''>
+                <input type="hidden" id="hour-8" value='08:00' data-price='' data-pricealt=''  data-dscto="0" data-active='0' data-althour=''>
+                <input type="hidden" id="hour-9" value='09:00' data-price='' data-pricealt=''  data-dscto="0" data-active='0' data-althour=''>
+                <input type="hidden" id="hour-10" value='10:00' data-price='' data-pricealt='' data-dscto="0"  data-active='0' data-althour=''>
+                <input type="hidden" id="hour-11" value='11:00' data-price='' data-pricealt='' data-dscto="0"  data-active='0' data-althour=''>
+                <input type="hidden" id="hour-12" value='12:00' data-price='' data-pricealt='' data-dscto="0"  data-active='0' data-althour=''>
+                <input type="hidden" id="hour-13" value='13:00' data-price='' data-pricealt='' data-dscto="0"  data-active='0' data-althour=''>
+                <input type="hidden" id="hour-14" value='14:00' data-price='' data-pricealt='' data-dscto="0"  data-active='0' data-althour=''>
+                <input type="hidden" id="hour-15" value='15:00' data-price='' data-pricealt='' data-dscto="0"  data-active='0' data-althour=''>
+                <input type="hidden" id="hour-16" value='16:00' data-price='' data-pricealt='' data-dscto="0"  data-active='0' data-althour=''>
+                <input type="hidden" id="hour-17" value='17:00' data-price='' data-pricealt='' data-dscto="0"  data-active='0' data-althour=''>
+                <input type="hidden" id="hour-18" value='18:00' data-price='' data-pricealt='' data-dscto="0"  data-active='0' data-althour=''>
+                <input type="hidden" id="hour-19" value='19:00' data-price='' data-pricealt='' data-dscto="0"  data-active='0' data-althour=''>
+                <input type="hidden" id="hour-20" value='20:00' data-price='' data-pricealt='' data-dscto="0"  data-active='0' data-althour=''>
+                <input type="hidden" id="hour-21" value='21:00' data-price='' data-pricealt='' data-dscto="0"  data-active='0' data-althour=''>
+                <input type="hidden" id="hour-22" value='22:00' data-price='' data-pricealt='' data-dscto="0"  data-active='0' data-althour=''>
+                <input type="hidden" id="hour-23" value='23:00' data-price='' data-pricealt='' data-dscto="0"  data-active='0' data-althour=''>
 
                 @if (isset(Auth::user()->name))
                     <input type="hidden" id="userIdLogin" name='userIdLogin' value='{{Auth::user()->id}}'>
@@ -488,33 +487,24 @@
                                     let price_alt = thisHour.data("pricealt")
                                     let hour = thisHour.data("hour")
                                     let althour = thisHour.data("althour")
-
-                                    console.log(price,price_alt);
-                                    
+                                    let discount = thisHour.data("dscto")
                                     let hourInt = parseInt(hour.replace(':00', ''))
                                     
                                     $('#hour-'+hourInt).attr('data-price', price)
                                     $('#hour-'+hourInt).attr('data-pricealt', price_alt)
                                     $('#hour-'+hourInt).attr('data-active', 1)
                                     $('#hour-'+hourInt).attr('data-althour', althour)
-                          
+                                    $('#hour-'+hourInt).attr('data-dscto', discount) // To set if discount is active
                                 }
                                 
                                 function unsethour(thisHour){
-
-                                    let hour_text = thisHour.text();
-                                    let price = thisHour.data("price")
-                                    let price_alt = thisHour.data("pricealt")
                                     let hour = thisHour.data("hour")
-
                                     let hourInt = parseInt(hour.replace(':00', ''))
-
                                     $('#hour-'+hourInt).attr('data-price', '')
                                     $('#hour-'+hourInt).attr('data-pricealt', '')
                                     $('#hour-'+hourInt).attr('data-active', 0)
+                                    $('#hour-'+hourInt).attr('data-dscto', 0)
                                     $('#hour-'+hourInt).attr('data-althour', '')
-    
-
                                 }
 
 
@@ -527,7 +517,7 @@
                                         let indexhour = $('#hour-'+i);
                                         if(indexhour.attr('data-active') == '1'){
                                             console.log(indexhour);
-                                            matrix.push([indexhour.attr('data-althour'), indexhour.attr('data-price'), indexhour.attr('data-pricealt'), indexhour.val()])
+                                            matrix.push([indexhour.attr('data-althour'), indexhour.attr('data-price'), indexhour.attr('data-pricealt'), indexhour.val(), indexhour.attr('data-dscto')])
                                             // console.log(matrix);
                                         }
                                     }
@@ -543,7 +533,8 @@
                                             let regularPrice = matrix[x][1];
                                             let altPrice = matrix[x][2];
                                             let hour = matrix[x][3];
-                                            let hasDiscount = (altPrice > 0 ) ? true : false;
+                                            let discount = matrix[x][4];
+                                            let hasDiscount = (discount == '1') ? true : false;
                                             let finalPrice = hasDiscount ? altPrice : regularPrice;
                                         
                                             if(hasDiscount){
@@ -563,7 +554,6 @@
                                             sumTotalRegularPrice += parseFloat(regularPrice);
                                             sumTotalFinalPrice += parseFloat(finalPrice);
                                             matrixFinale.push([hour, finalPrice]);
-
                                         }
 
                                         let htmlTotal = existDiscount ? `<span class="line-through">$ ${sumTotalRegularPrice.toFixed(2)}</span><span class="text-white"> $ ${sumTotalFinalPrice.toFixed(2)}</span>` 

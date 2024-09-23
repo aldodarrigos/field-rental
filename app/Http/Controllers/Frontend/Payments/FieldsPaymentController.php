@@ -261,23 +261,32 @@ class FieldsPaymentController extends Controller
                 $reservation->field_id = $field->id;
                 $reservation->res_date = $dateSelected;
                 $reservation->hour = $item[0];
-                $reservation->price = $pricing['price']; // sin dscto
-                $reservation->final_price = $pricing['price_dscto']; // sin dscto
+                $reservation->price = $pricing['price']; // without dscto
+                $reservation->final_price = $pricing['price_dscto']; // with dscto
                 $reservation->booked_until = $timePlusMinutes;
                 $reservation->paid = false;
-                if (isset($coupon_code) && $coupon_code !== null) {
+                if (isset($coupon_code) && $coupon_code !== null && $pricing['price_dscto'] !== null) {
                     $reservation->discount = 1;
+                }
+                if ($totalPrice <= 0) { // Significa que es un cupon con 100% dscto
+                    $reservation->paid = true;
                 }
                 $reservation->save();
                 array_push($reservations_pending, $reservation->id);
+            }
+
+
+            if ($totalPrice <= 0) { // Significa que es un cupon con 100% dscto
+                DB::commit();
+                return $this->paymentWithDiscount100($coupon_code, $code, $hoursDiscount, $amountToDiscount, $field_id, $userIdLogin);
             }
             // After Step 2
             $payer = new Payer();
             $payer->setPaymentMethod('paypal');
 
             $amount = new Amount();
-            $amount->setTotal($totalPrice);
-            // $amount->setTotal(0.01); // TESTING
+            // $amount->setTotal($totalPrice);
+            $amount->setTotal(0.01); // TESTING
             $amount->setCurrency('USD');
 
             $transaction = new Transaction();
@@ -410,10 +419,43 @@ class FieldsPaymentController extends Controller
 
             $success = $this->successbooking($user->email, $custom->code, $custom->field_id, $custom->user_id, $response->id, $custom->coupon);
             $reservation = Reservation::where('code', $custom->code)->get();
-
             return redirect('paypal/success')->with(['coupon' => $custom->coupon, 'reservation' => $reservation, 'field' => $field, 'user' => $user, 'code' => $custom->code, 'paypal_code' => $response->id]);
         }
 
+    }
+
+
+    public function paymentWithDiscount100($coupon_code, $order_id, $hours_discount, $amount_discount, $field_id, $user_id)
+    {
+        $coupon = \App\Models\Coupon::where('code', $coupon_code)->firstOrFail();
+        $discount_amount = 0;
+
+        if ($coupon->type == 'fixed') {
+            $discount_amount += $coupon->amount * $hours_discount;
+        } else {
+            $discount_percentage = floatval($coupon->amount);
+            $discount_amount += ($discount_percentage / 100) * floatval($amount_discount);
+        }
+
+        $couponHistory = CouponHistory::query()
+            ->create([
+                "user_id" => Auth::user()->id,
+                "coupon_id" => $coupon->id,
+                "order_id" => $order_id,
+                "object_type" => 'product',
+                "discount_amount" => $discount_amount,
+                "user_ip" => null
+            ]);
+        ;
+        $coupon->total_use = $coupon->total_use + 1;
+        $coupon->save();
+
+        $field = Field::where('id', $field_id)->first();
+        $user = User::where('id', $user_id)->first();
+
+        $success = $this->successbooking($user->email, $order_id, $field_id, $user_id, $order_id, $coupon_code);
+        $reservation = Reservation::where('code', $order_id)->get();
+        return redirect('paypal/success')->with(['coupon' => $coupon_code, 'reservation' => $reservation, 'field' => $field, 'user' => $user, 'code' => $order_id, 'paypal_code' => $order_id]);
     }
 
     public function paypalFailed(Request $request)

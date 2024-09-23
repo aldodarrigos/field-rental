@@ -251,7 +251,7 @@
         <h2>Booking</h2>
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="/backend/reservations">Dashboard</a>
+                <a href="/calendar-fields">Dashboard</a>
             </li>
             <li class="breadcrumb-item active">
                 <strong>New Booking</strong>

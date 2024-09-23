@@ -83,17 +83,15 @@
 <div class="wrapper wrapper-content  animated fadeInRight">
 
     <div class="row justify-content-between mb-2">
-        
-        <div class="col-md-2 text-center text-md-left mb-2 mb-md-0">
+        <div class=" col-md-2 text-center text-md-left mb-2 mb-md-0">
             <form action="" class="">
                 <input type="hidden" name="date" value="{{date("Y-m-d",strtotime($date."- 1 days"))}}">
                 <button class="btn btn-success btn-sm"><i class="fas fa-angle-double-left"></i> Prev day</button>
             </form>
-            
         </div>
-        <div class="col-md-3 mb-2 mb-md-0">
+        <div class=" col-md-3 mb-2 mb-md-0">
             <form action="">
-                <div class="d-flex flex-row-reverse">
+                <div class="d-flex flex-row-reverse justify-content-center">
                     <div class="">
                         <button type="submit" class="btn btn-md btn-success"><i class="fa fa-search"></i></button>
                     </div>
@@ -106,7 +104,7 @@
             </form>    
             
         </div>
-        <div class="col-md-2 text-center text-md-right">
+        <div class=" col-md-2 text-center text-md-right">
             <form action="">
                 <input type="hidden" name="date" value="{{date("Y-m-d",strtotime($date."+ 1 days"))}}">
                 <button class="btn btn-success btn-sm"><i class="fas fa-angle-double-right"></i> Next day</button>

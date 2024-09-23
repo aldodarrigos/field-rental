@@ -260,7 +260,7 @@ table{
                                         <p><Strong>Email:</Strong> {{$contact}}</p>
                                         <p><Strong>Booking Code:</Strong> {{$code}}</p>
                                         @if($coupon !== null)
-                                            <p><Strong>Coupon Code:</Strong> {{$coupon}}</p>
+                                            <p><Strong>Coupon Code:</Strong> {{strtoupper($coupon)}}</p>
                                         @endif
                                         <p><Strong>Field:</Strong> {{$field->number.'. '.$field->name}}</p>
                                         <p><Strong>Field type:</Strong> {{$field_type}}</p>

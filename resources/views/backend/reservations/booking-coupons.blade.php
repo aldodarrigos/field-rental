@@ -125,7 +125,7 @@
                                     }
                                     $user_name = ($reservation->user_rel != null)?$reservation->user_rel:$reservation->user_name;
                                     $discount_check = 'X';
-                                    if($reservation->discount === true){
+                                    if($reservation->discount == 1){
                                         $discount_check = '✔️';
                                     }
                                     @endphp
