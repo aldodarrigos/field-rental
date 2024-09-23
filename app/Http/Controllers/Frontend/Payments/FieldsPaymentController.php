@@ -285,8 +285,8 @@ class FieldsPaymentController extends Controller
             $payer->setPaymentMethod('paypal');
 
             $amount = new Amount();
-            // $amount->setTotal($totalPrice);
-            $amount->setTotal(0.01); // TESTING
+            $amount->setTotal($totalPrice);
+            // $amount->setTotal(0.01); // TESTING
             $amount->setCurrency('USD');
 
             $transaction = new Transaction();
