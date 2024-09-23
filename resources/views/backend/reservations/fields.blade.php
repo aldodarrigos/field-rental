@@ -118,7 +118,7 @@
                 <div class="ibox-title">
                     <h5>Fields Reservations (<strong>{{$date}}</strong>)</h5>
                     <div class="ibox-tools">
-                        <a href="/calendar" class="btn btn-xs btn-success text-white" style='color: #fff!Important;'>Calendar <i class="far fa-calendar-alt"></i></a>
+                        {{-- <a href="/calendar" class="btn btn-xs btn-success text-white" style='color: #fff!Important;'>Calendar <i class="far fa-calendar-alt"></i></a> --}}
 
                         @if (Auth::user()->role == 2)
                             <a href="/booking/create" class="btn btn-primary btn-xs">New Booking</a>
