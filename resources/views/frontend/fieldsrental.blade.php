@@ -76,14 +76,21 @@
                 e.preventDefault();
                 const couponBtn = $(this);
                 const couponInput = $('#coupon_input');
-                const code = $('#coupon_input').val();
+                const code =$('#coupon_input').val();
                 const form = $('#bookform').serializeArray();
                 const field = $('#fieldIdSelected').val();
                 const date = $('#dateSelected').val();
                 $.ajax({
-                    url: `/check-coupon/${code}/${field}/${date}`,
-                    type: "GET",
+                    url: `/check-coupon`,
+                    type: "POST",
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        code: code,
+                        field: field,
+                        date: date
+                    },
                     success: function(data){
+                        console.log(data)
                         var response = data;
                         var typeDiscount = response.type
                         var discount =response.amount;
@@ -124,6 +131,8 @@
                             });
                             xsa();
                         }else{
+                            console.log('no valido')
+                            couponInput.val('');
                             couponInput.attr('placeholder','IS NOT VALID 😪');
                             setTimeout(() => {
                                 couponInput.attr('placeholder','COUPON CODE');

@@ -106,6 +106,7 @@
                                     <th>Booking</th>
                                     <th>Obs</th>
                                     <th>Note</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -144,7 +145,7 @@
                                         <td class="center text-{{$status_color}}">{!!date('M d, Y', strtotime($reservation->res_date)).' <strong>'.date('h:i A', strtotime($reservation->hour)).'</strong>'!!}</td>
                                         <td>{{$reservation->note}}</td>
                                         <td class="center"><a href="/booking/{{$reservation->id}}/edit" class="btn btn-success btn-xs">Details</a></td>
-                                        {{-- <td>{!!date('Y-m-d', strtotime($reservation->res_date)).' '.date('h:i A', strtotime($reservation->hour))!!}</td> --}}
+                                        <td>{!!date('Y-m-d', strtotime($reservation->res_date)).' '.date('h:i A', strtotime($reservation->hour))!!}</td>
                                     </tr>
 
                                 @endforeach

@@ -33,8 +33,12 @@ class CouponsController extends Controller
      */
 
 
-    public function validateCoupon($code, $field_id, $date)
+    public function validateCoupon(Request $request)
     {
+        $code = $request->code;
+        $field_id = $request->field;
+        $date = $request->date;
+
         $url = "coupons";
         $response = [
             'success' => false,

@@ -8,7 +8,9 @@
 
     <link href="{{asset('inspinia/css/plugins/summernote/summernote-bs4.css')}}" rel="stylesheet">
     <link href="{{asset('inspinia/css/plugins/datapicker/datepicker3.css')}}" rel="stylesheet">
-    <script src="https://code.jquery.com/ui/1.14.0-beta.2/jquery-ui.min.js" integrity="sha256-E7PeZTkHU61hmvmEMwtUMgm9Aff574wswy5F1Y0oIRA=" crossorigin="anonymous"></script>
+
+    <!-- Data picker -->
+    <script src="{{asset('inspinia/js/plugins/datapicker/bootstrap-datepicker.js')}}"></script>
     <!-- Data picker -->
     
     {{-- Datepicker multiple --}}
@@ -31,15 +33,14 @@
         });
     
         $(document).ready(function(){
-
-            // var mem = $('.input-group.date').datepicker({
-            //     todayBtn: "linked",
-            //     keyboardNavigation: false,
-            //     forceParse: false,
-            //     calendarWeeks: true,
-            //     autoclose: true,
-            //     format: 'yyyy-mm-dd'
-            // });
+            var mem = $('.input-group.date').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                autoclose: true,
+                format: 'yyyy-mm-dd'
+            });
 
             $('#amount').inputmask({
                 alias: 'numeric',
@@ -134,6 +135,7 @@
 
 
             });
+          
 
         });
 
@@ -241,7 +243,10 @@
                                     <div class="form-group col ">
                                         <label for='start_date'>Start Date</label>
                                         <div class="input-group date">
-                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" name='start_date' value="{{date('Y-m-d')}}" >
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </span>
+                                            <input type="text" class="form-control" name='start_date' value="{{date('Y-m-d')}}" >
                                         </div>
                                     </div>
                                     <div class="form-group col ">

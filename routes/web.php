@@ -164,7 +164,7 @@ Route::get('registration', [FrontendController::class, 'registration'])->name('f
 Route::get('kidsleague', [FrontendController::class, 'kidsleague'])->name('frontend.kidsleague');
 Route::get('friendshipcup', [FrontendController::class, 'friendshipcup'])->name('frontend.friendshipcup');
 
-Route::get('check-coupon/{code?}/{field?}/{date?}', [CouponsController::class, 'validateCoupon']);
+Route::post('check-coupon', [CouponsController::class, 'validateCoupon']);
 
 /*
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {

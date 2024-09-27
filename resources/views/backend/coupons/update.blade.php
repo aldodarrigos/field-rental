@@ -9,6 +9,10 @@
     <link href="{{asset('inspinia/css/plugins/iCheck/custom.css')}}" rel="stylesheet">
     <link href="{{asset('inspinia/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css')}}" rel="stylesheet">
 
+    <link href="{{asset('inspinia/css/plugins/summernote/summernote-bs4.css')}}" rel="stylesheet">
+    <link href="{{asset('inspinia/css/plugins/datapicker/datepicker3.css')}}" rel="stylesheet">
+    <script src="{{asset('inspinia/js/plugins/datapicker/bootstrap-datepicker.js')}}"></script>
+    
     <script src="{{asset('inspinia/js/plugins/iCheck/icheck.min.js')}}"></script>
 
      {{-- Datepicker multiple --}}
@@ -117,6 +121,15 @@
                     
                 }
             ).open();
+
+            var mem = $('.input-group.date').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                autoclose: true,
+                format: 'yyyy-mm-dd'
+            });
         });
     </script>
 
@@ -206,7 +219,10 @@
                                     <div class="form-group col ">
                                         <label for='start_date'>Start Date</label>
                                         <div class="input-group date">
-                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" name='start_date' value="{{$coupon->start_date}}" >
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </span>
+                                            <input type="text" class="form-control" name='start_date' value="{{$coupon->start_date}}" >
                                         </div>
                                     </div>
                                     <div class="form-group col ">
